@@ -1,6 +1,7 @@
 package cz.cvut.fel.pjv.object;
 
 import cz.cvut.fel.pjv.GamePanel;
+import cz.cvut.fel.pjv.UtilityTool;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -19,6 +20,8 @@ public class SuperObject {
 
     public int solidAreaDefaultX = 0;
     public int solidAreaDefaultY = 0;
+
+    UtilityTool uTool = new UtilityTool();
 
     public void draw(Graphics2D g2, GamePanel gp) {
 
