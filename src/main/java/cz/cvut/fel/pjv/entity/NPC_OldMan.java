@@ -14,6 +14,7 @@ public class NPC_OldMan extends  Entity {
         speed = 1;
 
         getImage();
+        setDialogue();
     }
 
     public void getImage() {
@@ -27,6 +28,15 @@ public class NPC_OldMan extends  Entity {
         right2 = setup("/npc/oldman_right_2");
         left1 = setup("/npc/oldman_left_1");
         left2 = setup("/npc/oldman_left_2");
+    }
+
+    public void setDialogue() {
+
+        dialogues[0] = "Hello, mister";
+        dialogues[1] = "Welcome to FELL (HELL)";
+        dialogues[2] = "I am so tired, man. \nI have semester project from PJV";
+        dialogues[3] = "Good luck, Iwan";
+
     }
 
     public void setAction() {
@@ -55,6 +65,34 @@ public class NPC_OldMan extends  Entity {
             }
 
             actionLockCounter = 0;
+        }
+    }
+
+    public void speak() {
+
+        if (dialogues[dialogueIndex] == null) {
+
+            dialogueIndex = 0;
+        }
+        gp.ui.currentDialogue = dialogues[dialogueIndex];
+        dialogueIndex++;
+
+        switch (gp.player.direction) {
+            case "up":
+                direction ="down";
+                break;
+
+            case "down":
+                direction ="up";
+                break;
+
+            case "left":
+                direction ="right";
+                break;
+
+            case "right":
+                direction ="left";
+                break;
         }
     }
 }
