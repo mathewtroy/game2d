@@ -2,6 +2,7 @@ package cz.cvut.fel.pjv.entity;
 
 import cz.cvut.fel.pjv.GamePanel;
 import cz.cvut.fel.pjv.KeyHandler;
+import cz.cvut.fel.pjv.UtilityTool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -10,17 +11,16 @@ import java.io.IOException;
 
 public class Player extends Entity {
 
-    GamePanel gp;
     KeyHandler keyH;
 
     public final int screenX;
     public final int screenY;
 
-    public int hasKey = 0;
+    int standCounter = 0;
 
     public Player(GamePanel gp, KeyHandler keyH) {
 
-        this.gp = gp;
+        super(gp);
         this.keyH = keyH;
 
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
@@ -51,23 +51,17 @@ public class Player extends Entity {
 
     public void getPlayerImage() {
 
-        try {
+        up1 = setup("/player/hero_up_1");
+        up2 = setup("/player/hero_up_2");
+        down1 = setup("/player/hero_down_1");
+        down2 = setup("/player/hero_down_2");
 
-            up1 = ImageIO.read(getClass().getResourceAsStream("/player/hero_up_1.png")) ;
-            up2 = ImageIO.read(getClass().getResourceAsStream("/player/hero_up_2.png")) ;
-            down1 = ImageIO.read(getClass().getResourceAsStream("/player/hero_down_1.png")) ;
-            down2 = ImageIO.read(getClass().getResourceAsStream("/player/hero_down_2.png")) ;
-            right1 = ImageIO.read(getClass().getResourceAsStream("/player/hero_right_1.png")) ;
-            right2 = ImageIO.read(getClass().getResourceAsStream("/player/hero_right_2.png")) ;
-            left1 = ImageIO.read(getClass().getResourceAsStream("/player/hero_left_1.png")) ;
-            left2 = ImageIO.read(getClass().getResourceAsStream("/player/hero_left_2.png")) ;
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Failed to load images.");
-        }
+        right1 = setup("/player/hero_right_1");
+        right2 = setup("/player/hero_right_2");
+        left1 = setup("/player/hero_left_1");
+        left2 = setup("/player/hero_left_2");
     }
+
 
     public void update() {
 
@@ -96,6 +90,13 @@ public class Player extends Entity {
 //  CHECK OBJECT COLLISION
             int objIndex = gp.cChecker.checkObject(this, true);
             pickUpObject(objIndex);
+
+
+
+//  CHECK NPC COLLISION
+            int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+            interactNPC (npcIndex);
+
 
 
 //  IF COLLISION IS FALSE, PLAYER CAN MOVE
@@ -146,54 +147,18 @@ public class Player extends Entity {
 
         if (i != 999) {
 
-            String objectName = gp.obj[i].name;
 
-            switch (objectName) {
-
-                case "Key":
-                    gp.playSE(1);
-                    hasKey++;
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("You got a key!");
-
-                    break;
-
-                case "Door":
-                    if (hasKey > 0) {
-
-                        gp.playSE(4);
-                        gp.obj[i] = null;
-                        hasKey--;
-                        gp.ui.showMessage("You opened the Door!");
-
-                    } else {
-                        gp.ui.showMessage("You need a key!!!");
-                    }
-
-
-
-                    break;
-
-                case "Boots":
-                    gp.playSE(3);
-                    speed +=2;
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("SPEED UP!");
-
-                    break;
-
-                case "Chest":
-                    gp.ui.gameFinished = true;
-                    gp.stopMusic();
-                    gp.playSE(2);
-
-                    break;
-
-
-            }
         }
     }
 
+
+    public void interactNPC(int i) {
+        if (i != 999) {
+
+            System.out.println("u are hitting an npc !");
+        }
+
+    }
 
     public void draw (Graphics2D g2) {
 
@@ -245,7 +210,7 @@ public class Player extends Entity {
                 break;
         }
 
-        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, screenX, screenY,null);
 
     }
 

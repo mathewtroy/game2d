@@ -1,5 +1,6 @@
 package cz.cvut.fel.pjv;
 
+import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.entity.Player;
 import cz.cvut.fel.pjv.object.SuperObject;
 import cz.cvut.fel.pjv.tile.TileManager;
@@ -38,8 +39,9 @@ public class GamePanel extends JPanel implements Runnable {
     //    FPS
     int FPS = 60;
 
+//    SYSTEM
     TileManager tileM = new TileManager(this);
-    KeyHandler keyH = new KeyHandler();
+    KeyHandler keyH = new KeyHandler(this);
 
     Sound music = new Sound();
     Sound se = new Sound();
@@ -53,6 +55,12 @@ public class GamePanel extends JPanel implements Runnable {
 //    ENTITY and OBJECT
     public Player player = new Player(this, keyH);
     public SuperObject obj[] = new SuperObject[10];
+    public Entity npc[] = new Entity[10];
+
+//    GAME STATE
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
 
 
     public GamePanel(){
@@ -68,8 +76,12 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
 
         aSetter.setObject();
+        aSetter.setNPC();
 
         playMusic(0);
+        stopMusic();
+
+        gameState = playState;
     }
 
     public void startGameThread() {
@@ -118,7 +130,25 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
 
-        player.update();
+        if (gameState == playState) {
+
+//            PLAYER
+            player.update();
+
+//            NPS
+            for (int i = 0; i < npc.length; i++) {
+                if (npc[i] != null) {
+                    npc[i].update();
+                }
+            }
+        }
+
+        if (gameState == pauseState) {
+
+            //TODO nothong
+        }
+
+
     }
 
     public void paintComponent (Graphics g) {
@@ -126,6 +156,15 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
+
+//  DEBUG
+        long drawStart = 0;
+        if (keyH.checkDrawTime == true) {
+            drawStart = System.nanoTime();
+
+        }
+
+
 //  TILE
         tileM.draw(g2);
 
@@ -138,6 +177,14 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
+//  NPC
+        for (int i = 0; i < npc.length; i++) {
+
+            if (npc[i] != null) {
+
+                npc[i].draw(g2);
+            }
+        }
 
 
 //  PLAYER
@@ -145,6 +192,17 @@ public class GamePanel extends JPanel implements Runnable {
 
 //  UI
         ui.draw(g2);
+
+//  DEBUG
+        if (keyH.checkDrawTime == true ) {
+
+            long drawEnd = System.nanoTime();
+            long passed = drawEnd - drawStart;
+            g2.setColor(Color.white);
+            g2.drawString("Draw Time: " + passed, 10, 400);
+            System.out.println("Draw Time: " + passed);
+        }
+
 
         g2.dispose();
 
