@@ -2,11 +2,13 @@ package cz.cvut.fel.pjv;
 
 import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.entity.Player;
-import cz.cvut.fel.pjv.object.SuperObject;
 import cz.cvut.fel.pjv.tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -50,15 +52,19 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter aSetter = new AssetSetter(this);
 
     public UI ui = new UI(this);
+    public EventHandler eHandler = new EventHandler(this);
     Thread gameThread;
 
 //    ENTITY and OBJECT
     public Player player = new Player(this, keyH);
-    public SuperObject obj[] = new SuperObject[10];
+    public Entity obj[] = new Entity[10];
     public Entity npc[] = new Entity[10];
+    ArrayList<Entity> entityList = new ArrayList<>();
 
 //    GAME STATE
     public int gameState;
+
+    public final int titleState = 0;
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
@@ -79,10 +85,10 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setObject();
         aSetter.setNPC();
 
-        playMusic(0);
-        stopMusic();
+//        playMusic(0);
+//        stopMusic();
 
-        gameState = playState;
+        gameState = titleState;
     }
 
     public void startGameThread() {
@@ -162,37 +168,59 @@ public class GamePanel extends JPanel implements Runnable {
         long drawStart = 0;
         if (keyH.checkDrawTime == true) {
             drawStart = System.nanoTime();
-
         }
 
+//  TITLE SCREEN
+        if (gameState == titleState) {
+            ui.draw(g2);
+        }
 
-//  TILE
-        tileM.draw(g2);
+//  OTHERS
+        else {
+            //  TILE
+            tileM.draw(g2);
 
-//  OBJECT
-        for(int i=0; i< obj.length; i++) {
+            //  ADD ENTITES TO THE LIST
+            entityList.add(player);
 
-            if (obj[i] != null) {
-
-                obj[i].draw(g2, this);
+            for (int i = 0; i < npc.length; i++) {
+                if(npc[i] != null) {
+                    entityList.add(npc[i]);
+                }
             }
-        }
 
-//  NPC
-        for (int i = 0; i < npc.length; i++) {
-
-            if (npc[i] != null) {
-
-                npc[i].draw(g2);
+            for (int i = 0; i < obj.length; i++) {
+                if (obj[i] != null) {
+                    entityList.add(obj[i]);
+                }
             }
+
+            // SORT
+            Collections.sort(entityList, new Comparator<Entity>() {
+                @Override
+                public int compare(Entity e1, Entity e2) {
+                    int result = Integer.compare(e1.worldY, e2.worldY);
+                    return result;
+                }
+            });
+
+
+            // DRAW ENTITES
+            for (int i = 0; i < entityList.size(); i++) {
+                entityList.get(i).draw(g2);
+            }
+
+            // EMPTY ENTITY LIST
+            for (int i = 0; i < entityList.size(); i++) {
+                entityList.remove(i);
+            }
+
+            //  UI
+            ui.draw(g2);
+
         }
 
 
-//  PLAYER
-        player.draw(g2);
-
-//  UI
-        ui.draw(g2);
 
 //  DEBUG
         if (keyH.checkDrawTime == true ) {
