@@ -1,31 +1,18 @@
 package cz.cvut.fel.pjv.object;
 
 import cz.cvut.fel.pjv.GamePanel;
+import cz.cvut.fel.pjv.entity.Entity;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.io.IOException;
 
-public class OBJ_Key extends SuperObject {
+public class OBJ_Key extends Entity {
 
-    GamePanel gp;
     public OBJ_Key(GamePanel gp) {
 
-        this.gp = gp;
+        super(gp);
 
         name = "Key";
-        try {
+        down1 = setup("/objects/key");
 
-            image = ImageIO.read(getClass().getResourceAsStream("/objects/key.png"));
-            uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-        }
-        catch (IOException e) {
-
-            e.printStackTrace();
-        }
-
-        solidArea.x = 5;
     }
-
 
 }
