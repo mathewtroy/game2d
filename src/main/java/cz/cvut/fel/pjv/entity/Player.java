@@ -43,10 +43,14 @@ public class Player extends Entity {
     public void setDefaultValues () {
 
         // default start position
-        worldX = gp.tileSize * 24;
-        worldY = gp.tileSize * 21;
+        worldX = gp.tileSize * 25;
+        worldY = gp.tileSize * 25;
         speed = 4;
         direction = "down";
+
+//        PLAYER STATUS
+        maxLife = 6;
+        life = maxLife;
     }
 
     public void getPlayerImage() {
@@ -96,6 +100,12 @@ public class Player extends Entity {
 //  CHECK NPC COLLISION
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC (npcIndex);
+
+
+//  CHECK EVENT
+            gp.eHandler.checkEvent();
+
+            gp.keyH.enterPressed = false;
 
 
 
@@ -155,15 +165,12 @@ public class Player extends Entity {
     public void interactNPC(int i) {
         if (i != 999) {
 
-            if (i != 999) {
+            if (gp.keyH.enterPressed == true) {
 
-                if (gp.keyH.enterPressed == true) {
-
-                    gp.gameState = gp.dialogueState;
-                    gp.npc[i].speak();
-                }
+                gp.gameState = gp.dialogueState;
+                gp.npc[i].speak();
             }
-            gp.keyH.enterPressed = false;
+
         }
 
     }
