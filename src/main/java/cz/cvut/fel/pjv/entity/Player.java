@@ -8,6 +8,12 @@ import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
 
+    // CONSTANTS NUMBER
+    private static final int SIXTY_SIZE = 60;
+    private static final float TWENTY_FIVE_SIZE = 25;
+    private static final float TWENTY_SIZE = 20;
+    private static final float TEN_SIZE = 10;
+
     KeyHandler keyH;
 
     public final int screenX;
@@ -134,7 +140,7 @@ public class Player extends Entity {
             gp.keyH.enterPressed = false;
 
             spriteCounter++;
-            if (spriteCounter > 10) {
+            if (spriteCounter > TEN_SIZE) {
                 if (spriteNum == 1) { spriteNum = 2; }
                 else if (spriteNum == 2) { spriteNum = 1; }
                 spriteCounter = 0;
@@ -142,7 +148,7 @@ public class Player extends Entity {
         }
         else {
             standCounter++;
-            if (standCounter == 20) {
+            if (standCounter == TWENTY_SIZE) {
                 spriteNum = 1;
                 standCounter = 0;
             }
@@ -152,7 +158,7 @@ public class Player extends Entity {
         if (invisible == true ) {
             invisibleCounter++;
 
-            if (invisibleCounter > 60) {
+            if (invisibleCounter > SIXTY_SIZE) {
                 invisible = false;
                 invisibleCounter = 0;
             }
@@ -166,7 +172,7 @@ public class Player extends Entity {
 
         if (spriteCounter <=5) { spriteNum = 1; }
 
-        if (spriteCounter > 5 && spriteCounter <= 25) {
+        if (spriteCounter > 5 && spriteCounter <= TWENTY_FIVE_SIZE) {
             spriteNum = 2;
 
             // Save the current worldX, worldY, solidArea
@@ -201,7 +207,7 @@ public class Player extends Entity {
 
         }
 
-        if (spriteCounter > 25) {
+        if (spriteCounter > TWENTY_FIVE_SIZE) {
             spriteNum = 1;
             spriteCounter = 0;
             attacking = false;
@@ -224,6 +230,7 @@ public class Player extends Entity {
             }
 
             else {
+                gp.playSE(6);
                 attacking = true;
             }
         }
@@ -234,6 +241,7 @@ public class Player extends Entity {
         if (i != 999) {
 
             if (invisible == false ) {
+                gp.playSE(6);
                 life -= 1;
                 invisible = true;
             }
@@ -243,8 +251,10 @@ public class Player extends Entity {
     public void damageMonster(int i) {
         if (i != 999) {
             if (gp.monster[i].invisible == false) {
+                gp.playSE(5);
                 gp.monster[i].life -= 1;
                 gp.monster[i].invisible = true;
+                gp.monster[i].damageReaction();
 
                 if (gp.monster[i].life < 0) {
                     gp.monster[i] = null;
