@@ -2,10 +2,7 @@ package cz.cvut.fel.pjv;
 
 import cz.cvut.fel.pjv.entity.NPC_OldMan;
 import cz.cvut.fel.pjv.monster.MON_GreenSlime;
-import cz.cvut.fel.pjv.object.OBJ_Boots;
-import cz.cvut.fel.pjv.object.OBJ_Chest;
 import cz.cvut.fel.pjv.object.OBJ_Door;
-import cz.cvut.fel.pjv.object.OBJ_Key;
 
 public class AssetSetter {
 
@@ -32,8 +29,8 @@ public class AssetSetter {
     public void setNPC() {
 
         gp.npc[0] = new NPC_OldMan(gp);
-        gp.npc[0].worldX = gp.tileSize*11;
-        gp.npc[0].worldY = gp.tileSize*11;
+        gp.npc[0].worldX = gp.tileSize*24;
+        gp.npc[0].worldY = gp.tileSize*24;
 
 
 //        gp.npc[1] = new NPC_OldMan(gp);

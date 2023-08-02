@@ -24,7 +24,6 @@ public class Sound {
     public void setFile(int i) {
 
         try {
-
             AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
             clip = AudioSystem.getClip();
             clip.open(ais);
@@ -35,17 +34,14 @@ public class Sound {
     }
 
     public void play() {
-
         clip.start();
     }
 
     public void loop() {
-
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     public void stop() {
-
         clip.stop();
     }
 
