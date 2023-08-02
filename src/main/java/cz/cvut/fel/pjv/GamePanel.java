@@ -28,9 +28,14 @@ public class GamePanel extends JPanel implements Runnable {
 //    576 px
     public final int screenHeight = tileSize * maxScreenRow;
 
+// CONSTANTS NUMBER
+    private static final float BILLION_SIZE = 1000000000;
+    private static final float MILLION_SIZE = 1000000;
 
 
-//  WORLD SETTINGS
+
+
+    //  WORLD SETTINGS
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
     public final int worldWidth = tileSize * maxWorldCol;
@@ -103,7 +108,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void run() {
         //TODO add smth
 
-        double drawInterval = 1000000000 / FPS;
+        double drawInterval = BILLION_SIZE / FPS;
         //  0.01666 seconds
 
         double nextDrawTime = System.nanoTime() + drawInterval;
@@ -119,7 +124,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             try {
                 double remainingTime = nextDrawTime - System.nanoTime();
-                remainingTime = remainingTime/1000000;
+                remainingTime = remainingTime / MILLION_SIZE;
 
                 if (remainingTime < 0) {
                     remainingTime = 0;
@@ -154,7 +159,12 @@ public class GamePanel extends JPanel implements Runnable {
             // MONSTER
             for (int i = 0; i < monster.length; i++) {
                 if (monster[i] != null) {
-                    monster[i].update();
+                    if (monster[i].alive == true && monster[i].dying == false) {
+                        monster[i].update();
+                    }
+                    if (monster[i].alive == false) {
+                        monster[i] = null;
+                    }
                 }
             }
         }
