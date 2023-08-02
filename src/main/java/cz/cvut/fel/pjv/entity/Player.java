@@ -101,6 +101,10 @@ public class Player extends Entity {
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC (npcIndex);
 
+//  CHECK NPC COLLISION
+            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+            //interactMONSTER (monsterIndex);
+            contactMonster(monsterIndex);
 
 //  CHECK EVENT
             gp.eHandler.checkEvent();
@@ -112,27 +116,15 @@ public class Player extends Entity {
 //  IF COLLISION IS FALSE, PLAYER CAN MOVE
             if (collisionOn == false) {
                 switch (direction) {
-
-                    case "up":
-                        worldY -= speed;
-
-                        break;
-
-                    case "down":
-                        worldY += speed;
-                        break;
-
-                    case "left":
-                        worldX -= speed;
-                        break;
-
-                    case "right":
-                        worldX += speed;
-                        break;
-
+                    case "up": worldY -= speed; break;
+                    case "down": worldY += speed; break;
+                    case "left": worldX -= speed; break;
+                    case "right": worldX += speed; break;
                 }
             }
 
+
+            gp.keyH.enterPressed = false;
 
             spriteCounter++;
             if (spriteCounter > 10) {
@@ -144,11 +136,26 @@ public class Player extends Entity {
                 }
                 spriteCounter = 0;
             }
-
-
+        }
+        else {
+            standCounter++;
+            if (standCounter == 20) {
+                spriteNum = 1;
+                standCounter = 0;
+            }
         }
 
+        // This needs to be outside of key if statement
+        if (invisible == true ) {
 
+            invisibleCounter++;
+
+            if (invisibleCounter > 60) {
+
+                invisible = false;
+                invisibleCounter = 0;
+            }
+        }
 
     }
 
@@ -173,6 +180,19 @@ public class Player extends Entity {
 
         }
 
+    }
+
+    public void contactMonster(int i) {
+
+        if (i != 999) {
+
+            if (invisible == false ) {
+                life -= 1;
+                invisible = true;
+
+            }
+
+        }
     }
 
     public void draw (Graphics2D g2) {
@@ -225,7 +245,22 @@ public class Player extends Entity {
                 break;
         }
 
+        if (invisible == true) {
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.3f ));
+
+        }
+
         g2.drawImage(image, screenX, screenY,null);
+
+        // Reset alpha
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f ));
+
+
+        // DEBUG
+//        g2.setFont(new Font("Arial", Font.PLAIN, 26));
+//        g2.setColor(Color.white);
+//        g2.drawString("Invisible: "+invisibleCounter, 10, 400);
+
 
     }
 

@@ -22,7 +22,8 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
     public int actionLockCounter = 0;
-
+    public boolean invisible = false;
+    public int invisibleCounter = 0;
     String dialogues[] = new String[20];
     int dialogueIndex = 0;
 
@@ -30,12 +31,16 @@ public class Entity {
     public String name;
     public boolean collision = false;
 
+    public int type;
+    // 0 = player
+    // 1 = npc
+    // 2 = monster
+
 //    CHARACTER STATUS
     public int maxLife;
     public int life;
 
     public Entity(GamePanel gp) {
-
         this.gp = gp;
     }
 
@@ -47,28 +52,16 @@ public class Entity {
     public void speak() {
 
         if (dialogues[dialogueIndex] == null) {
-
             dialogueIndex = 0;
         }
         gp.ui.currentDialogue = dialogues[dialogueIndex];
         dialogueIndex++;
 
         switch (gp.player.direction) {
-            case "up":
-                direction ="down";
-                break;
-
-            case "down":
-                direction ="up";
-                break;
-
-            case "left":
-                direction ="right";
-                break;
-
-            case "right":
-                direction ="left";
-                break;
+            case "up": direction ="down"; break;
+            case "down": direction ="up"; break;
+            case "left": direction ="right"; break;
+            case "right": direction ="left"; break;
         }
     }
 
@@ -79,7 +72,19 @@ public class Entity {
         collisionOn = false;
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this, false);
-        gp.cChecker.checkPlayer(this);
+        gp.cChecker.checkEntity(this, gp.npc);
+        gp.cChecker.checkEntity(this, gp.monster);
+        boolean contactPlayer = gp.cChecker.checkPlayer(this);
+
+        if (this.type == 2 && contactPlayer == true) {
+
+            if (gp.player.invisible == false) {
+                // we can give damage
+                gp.player.life -= 1;
+                gp.player.invisible  = true;
+            }
+        }
+
 
         //  IF COLLISION IS FALSE, PLAYER CAN MOVE
         if (collisionOn == false) {
