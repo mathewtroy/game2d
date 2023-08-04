@@ -11,3 +11,9 @@ target/
 *.iws
 *.iml
 *.ipr
+
+# Ignore files or folders that start with "."
+.*
+
+# Ignore the target folder and its contents
+target/
