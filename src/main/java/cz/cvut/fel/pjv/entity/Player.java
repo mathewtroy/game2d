@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 public class Player extends Entity {
 
     // CONSTANTS NUMBER
-//    private static final int SIXTY_SIZE = 60;
+    private static final int SIXTY_SIZE = 60;
     private static final float TWENTY_FIVE_SIZE = 25;
     private static final float TWENTY_SIZE = 20;
     private static final float TEN_SIZE = 10;
@@ -111,19 +111,19 @@ public class Player extends Entity {
 
     public void update() {
 
-        if (attacking == true ) {
+        if (attacking) {
             attacking();
         }
         //  we want player move when we press button
-        else if (keyH.upPressed == true || keyH.downPressed == true ||
-                keyH.leftPressed == true || keyH.rightPressed == true ||
-                keyH.enterPressed == true ) {
+        else if (keyH.upPressed || keyH.downPressed ||
+                keyH.leftPressed || keyH.rightPressed ||
+                keyH.enterPressed) {
 
 
-            if (keyH.upPressed == true ) { direction = "up"; }
-            else if (keyH.downPressed == true ) { direction = "down"; }
-            else if (keyH.leftPressed == true ) { direction = "left"; }
-            else if (keyH.rightPressed == true ) { direction = "right"; }
+            if (keyH.upPressed) { direction = "up"; }
+            else if (keyH.downPressed) { direction = "down"; }
+            else if (keyH.leftPressed) { direction = "left"; }
+            else if (keyH.rightPressed) { direction = "right"; }
 
 //  CHECK TILE COLLISION
             collisionOn = false;
@@ -147,7 +147,7 @@ public class Player extends Entity {
 
 
 //  IF COLLISION IS FALSE, PLAYER CAN MOVE
-            if (collisionOn == false && (!keyH.enterPressed)) {
+            if (!collisionOn && (!keyH.enterPressed)) {
                 switch (direction) {
                     case "up": worldY -= speed; break;
                     case "down": worldY += speed; break;
@@ -157,7 +157,7 @@ public class Player extends Entity {
             }
 
 
-            if (keyH.enterPressed == true ) {
+            if (keyH.enterPressed) {
 
                 gp.playSE(5);
                 attacking = true;
@@ -169,7 +169,7 @@ public class Player extends Entity {
             gp.keyH.enterPressed = false;
 
             spriteCounter++;
-            if (spriteCounter > 10) {
+            if (spriteCounter > TEN_SIZE) {
                 if (spriteNum == 1) { spriteNum = 2; }
                 else if (spriteNum == 2) { spriteNum = 1; }
                 spriteCounter = 0;
@@ -177,17 +177,17 @@ public class Player extends Entity {
         }
         else {
             standCounter++;
-            if (standCounter == 20) {
+            if (standCounter == TWENTY_SIZE) {
                 spriteNum = 1;
                 standCounter = 0;
             }
         }
 
         // This needs to be outside of key if statement
-        if (invisible == true ) {
+        if (invisible) {
             invisibleCounter++;
 
-            if (invisibleCounter > 60) {
+            if (invisibleCounter > SIXTY_SIZE) {
                 invisible = false;
                 invisibleCounter = 0;
             }
@@ -201,7 +201,7 @@ public class Player extends Entity {
 
         if (spriteCounter <=5) { spriteNum = 1; }
 
-        if (spriteCounter > 5 && spriteCounter <= 25) {
+        if (spriteCounter > 5 && spriteCounter <= TWENTY_FIVE_SIZE) {
             spriteNum = 2;
 
             // Save the current worldX, worldY, solidArea
@@ -236,7 +236,7 @@ public class Player extends Entity {
 
         }
 
-        if (spriteCounter > 25) {
+        if (spriteCounter > TWENTY_FIVE_SIZE) {
             spriteNum = 1;
             spriteCounter = 0;
             attacking = false;
@@ -250,7 +250,7 @@ public class Player extends Entity {
     }
 
     public void interactNPC(int i) {
-        if (gp.keyH.enterPressed == true) {
+        if (gp.keyH.enterPressed) {
 
             if (i != 999) {
 
@@ -270,7 +270,7 @@ public class Player extends Entity {
 
         if (i != 999) {
 
-            if (invisible == false ) {
+            if (!invisible) {
                 gp.playSE(6);
 
                 int damage = gp.monster[i].attack - defense;
@@ -285,7 +285,7 @@ public class Player extends Entity {
 
     public void damageMonster(int i) {
         if (i != 999) {
-            if (gp.monster[i].invisible == false) {
+            if (!gp.monster[i].invisible) {
                 gp.playSE(5);
 
                 int damage = attack - gp.monster[i].defense;
@@ -294,14 +294,41 @@ public class Player extends Entity {
                 }
 
                 gp.monster[i].life -= damage;
+                gp.ui.addMessage(damage + " damage!");
+
+
                 gp.monster[i].invisible = true;
                 gp.monster[i].damageReaction();
 
-                if (gp.monster[i].life < 0) {
-                    gp.monster[i] = null;
+                if (gp.monster[i].life <= 0) {
+                    gp.monster[i].dying = true;
+                    gp.ui.addMessage("killed the" + gp.monster[i].name + "!");
+                    gp.ui.addMessage("EXP + " + gp.monster[i].exp);
+                    exp += gp.monster[i].exp;
+                    checkLevelUp();
+
                 }
             }
         }
+    }
+
+    public void checkLevelUp() {
+        if (exp >= nextLevelExp) {
+            level++;
+            nextLevelExp = nextLevelExp*2;
+            maxLife += 2;
+            strength++;
+            dexterity++;
+            attack = getAttack();
+            defense =getDefense();
+
+            gp.playSE(7);
+            gp.gameState = gp.dialogueState;
+            gp.ui.currentDialogue = "Cograts, PLAYER!\n" +
+                    "You are level " + level + "now!\n" +
+                    "You became stronger";
+        }
+
     }
 
     public void draw (Graphics2D g2) {
@@ -317,12 +344,12 @@ public class Player extends Entity {
 
         switch (direction) {
             case "up":
-                if (attacking == false) {
+                if (!attacking) {
                     if (spriteNum == 1) { image = up1; }
                     if (spriteNum == 2) { image = up2; }
                 }
 
-                if (attacking == true) {
+                if (attacking) {
                     tempScreenY = screenY - gp.tileSize;
                     if (spriteNum == 1) { image = attackUp1; }
                     if (spriteNum == 2) { image = attackUp2; }
@@ -331,12 +358,12 @@ public class Player extends Entity {
                 break;
 
             case "down":
-                if (attacking == false) {
+                if (!attacking) {
                     if (spriteNum == 1) { image = down1; }
                     if (spriteNum == 2) { image = down2; }
                 }
 
-                if (attacking == true) {
+                if (attacking) {
                     if (spriteNum == 1) { image = attackDown1; }
                     if (spriteNum == 2) { image = attackDown2; }
                 }
@@ -344,12 +371,12 @@ public class Player extends Entity {
                 break;
 
             case "left":
-                if (attacking == false) {
+                if (!attacking) {
                     if (spriteNum == 1) { image = left1; }
                     if (spriteNum == 2) { image = left2; }
                 }
 
-                if (attacking == true) {
+                if (attacking) {
                     tempScreenX = screenX - gp.tileSize;
                     if (spriteNum == 1) { image = attackLeft1; }
                     if (spriteNum == 2) { image = attackLeft2; }
@@ -358,12 +385,12 @@ public class Player extends Entity {
                 break;
 
             case "right":
-                if (attacking == false) {
+                if (!attacking) {
                     if (spriteNum == 1) { image = right1; }
                     if (spriteNum == 2) { image = right2; }
                 }
 
-                if (attacking == true) {
+                if (attacking) {
                     if (spriteNum == 1) { image = attackRight1; }
                     if (spriteNum == 2) { image = attackRight2; }
                 }
@@ -371,7 +398,7 @@ public class Player extends Entity {
                 break;
         }
 
-        if (invisible == true) {
+        if (invisible) {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.3f ));
         }
 
