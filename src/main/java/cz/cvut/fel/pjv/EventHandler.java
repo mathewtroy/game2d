@@ -121,6 +121,7 @@ public class EventHandler {
             gp.playSE(3);
             gp.ui.currentDialogue = "You drink the VODKA\nYour life has been recovered";
             gp.player.life = gp.player.maxLife;
+            gp.aSetter.setMonster();
         }
         //gp.keyH.enterPressed = false;
     }
