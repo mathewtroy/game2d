@@ -13,7 +13,6 @@ public class KeyHandler implements KeyListener {
     public boolean checkDrawTime = false;
 
     public KeyHandler(GamePanel gp) {
-
         this.gp = gp;
     }
 
@@ -123,7 +122,7 @@ public class KeyHandler implements KeyListener {
 
         if (code == KeyEvent.VK_ENTER) {
             if (gp.ui.commandNum == 0) { gp.ui.titleScreenState = 1;  }
-            if (gp.ui.commandNum == 1) { //TODO LATER
+            if (gp.ui.commandNum == 1) {
             }
             if (gp.ui.commandNum == 2) { System.exit(0); }
         }
@@ -181,6 +180,7 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_S) { downPressed = false; }
         if (code == KeyEvent.VK_A) { leftPressed = false; }
         if (code == KeyEvent.VK_D) { rightPressed = false; }
+        //if (code == KeyEvent.VK_ENTER) { enterPressed = false; }
 
         //  DEBUG
 //        if (code == KeyEvent.VK_T) {
