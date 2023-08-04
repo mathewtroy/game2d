@@ -109,7 +109,6 @@ public class Player extends Entity {
 
     }
 
-
     public void update() {
 
         if (attacking == true ) {
@@ -118,7 +117,7 @@ public class Player extends Entity {
         //  we want player move when we press button
         else if (keyH.upPressed == true || keyH.downPressed == true ||
                 keyH.leftPressed == true || keyH.rightPressed == true ||
-                keyH.enterPressed == true) {
+                keyH.enterPressed == true ) {
 
 
             if (keyH.upPressed == true ) { direction = "up"; }
@@ -138,19 +137,17 @@ public class Player extends Entity {
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC (npcIndex);
 
-//  CHECK NPC COLLISION
+//  CHECK MONSTER COLLISION
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             contactMonster(monsterIndex);
 
 //  CHECK EVENT
             gp.eHandler.checkEvent();
-
             gp.keyH.enterPressed = false;
 
 
-
 //  IF COLLISION IS FALSE, PLAYER CAN MOVE
-            if (collisionOn == false && keyH.enterPressed == false) {
+            if (collisionOn == false && (!keyH.enterPressed)) {
                 switch (direction) {
                     case "up": worldY -= speed; break;
                     case "down": worldY += speed; break;
@@ -159,7 +156,8 @@ public class Player extends Entity {
                 }
             }
 
-            if (keyH.enterPressed == true && attackCanceled == false) {
+
+            if (keyH.enterPressed == true ) {
 
                 gp.playSE(5);
                 attacking = true;
@@ -251,15 +249,18 @@ public class Player extends Entity {
         }
     }
 
-
     public void interactNPC(int i) {
         if (gp.keyH.enterPressed == true) {
 
             if (i != 999) {
 
                 attackCanceled = true;
+
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
+            }
+            else {
+                attacking = true;
             }
 
         }
@@ -271,7 +272,12 @@ public class Player extends Entity {
 
             if (invisible == false ) {
                 gp.playSE(6);
-                life -= 1;
+
+                int damage = gp.monster[i].attack - defense;
+                if (damage < 0) {
+                    damage = 0;
+                }
+                life -= damage;
                 invisible = true;
             }
         }
@@ -281,7 +287,13 @@ public class Player extends Entity {
         if (i != 999) {
             if (gp.monster[i].invisible == false) {
                 gp.playSE(5);
-                gp.monster[i].life -= 1;
+
+                int damage = attack - gp.monster[i].defense;
+                if (damage < 0) {
+                    damage = 0;
+                }
+
+                gp.monster[i].life -= damage;
                 gp.monster[i].invisible = true;
                 gp.monster[i].damageReaction();
 

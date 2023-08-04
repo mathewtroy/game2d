@@ -21,7 +21,7 @@ public class TileManager {
 
         this.gp = gp;
 
-        tile = new Tile[10];
+        tile = new Tile[15];
 
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
@@ -38,6 +38,11 @@ public class TileManager {
         setup(3, "earth", false);
         setup(4, "tree", true);
         setup(5, "sand", false);
+        setup(6, "tree2", true);
+        setup(7, "teleport", false);
+        setup(8, "sign", false);
+        setup(9, "danger", false);
+        setup(10, "fountain", true);
 
     }
 
