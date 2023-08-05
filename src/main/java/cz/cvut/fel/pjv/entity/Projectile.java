@@ -29,11 +29,15 @@ public class Projectile extends Entity {
                 gp.player.damageMonster(monsterIndex, attack);
                 alive = false;
             }
-
         }
 
         if (user != gp.player) {
+            boolean contactPlayer = gp.cChecker.checkPlayer(this);
+            if (!gp.player.invisible && contactPlayer) {
+                damagePlayer(attack );
+                alive = false;
 
+            }
 
         }
 
@@ -59,9 +63,15 @@ public class Projectile extends Entity {
                 spriteNum = 1;
             }
             spriteCounter = 0;
-
         }
+    }
 
+    public boolean haveResource(Entity user) {
+        boolean haveResource = false;
+        return haveResource;
+    }
+
+    public void subtractResource(Entity user) {
     }
 
 

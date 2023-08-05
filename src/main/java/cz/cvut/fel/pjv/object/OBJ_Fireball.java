@@ -1,6 +1,7 @@
 package cz.cvut.fel.pjv.object;
 
 import cz.cvut.fel.pjv.GamePanel;
+import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.entity.Projectile;
 
 public class OBJ_Fireball extends Projectile {
@@ -31,6 +32,18 @@ public class OBJ_Fireball extends Projectile {
         right1 = setup("/projectiles/fireball_right_1", gp.tileSize, gp.tileSize);
         right2 = setup("/projectiles/fireball_right_2", gp.tileSize, gp.tileSize);
 
+    }
+
+    public boolean haveResource(Entity user) {
+        boolean haveResource = false;
+        if (user.mana >= useCost) {
+            haveResource = true;
+        }
+        return haveResource;
+    }
+
+    public void subtractResource(Entity user) {
+        user.mana -= useCost;
     }
 
 }
