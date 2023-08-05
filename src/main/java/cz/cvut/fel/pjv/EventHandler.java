@@ -129,8 +129,9 @@ public class EventHandler {
             gp.gameState = gameState;
             gp.player.attackCanceled = true;
             gp.playSE(3);
-            gp.ui.currentDialogue = "You drink the VODKA\nYour life has been recovered";
+            gp.ui.currentDialogue = "You drink the Russian VODKA\nYour life and mana have been recovered";
             gp.player.life = gp.player.maxLife;
+            gp.player.mana = gp.player.maxMana;
             gp.aSetter.setMonster();
         }
         //gp.keyH.enterPressed = false;

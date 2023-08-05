@@ -2,10 +2,7 @@ package cz.cvut.fel.pjv.entity;
 
 import cz.cvut.fel.pjv.GamePanel;
 import cz.cvut.fel.pjv.KeyHandler;
-import cz.cvut.fel.pjv.object.OBJ_Fireball;
-import cz.cvut.fel.pjv.object.OBJ_Key;
-import cz.cvut.fel.pjv.object.OBJ_Shield_Wood;
-import cz.cvut.fel.pjv.object.OBJ_Sword_Normal;
+import cz.cvut.fel.pjv.object.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -68,6 +65,9 @@ public class Player extends Entity {
         level = 1;
         maxLife = 6;
         life = maxLife;
+        maxMana = 4;
+        mana = maxMana;
+        ammo = 10;
         strength = 1;   // more strength -> more damage he gives
         dexterity = 1;  // more dexterity -> less damage he receives
         exp = 0;
@@ -76,6 +76,8 @@ public class Player extends Entity {
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
         projectile = new OBJ_Fireball(gp);
+        // projectile = new OBJ_Rock(gp);
+        // attack type of bullet
         attack = getAttack();
         defense = getDefense();
 
@@ -212,10 +214,16 @@ public class Player extends Entity {
             }
         }
 
-        if (gp.keyH.shotKeyPressed && !projectile.alive && (shotAvailableCounter == 30) ) {
+        if (gp.keyH.shotKeyPressed && !projectile.alive && (shotAvailableCounter == 30) &&
+                projectile.haveResource(this)) {
 
             // SET DEFAULT COORDINATES, DIRECTION AND USER
             projectile.set(worldX, worldY, direction, true, this);
+
+
+            // SUBTRACT THE COST ( MANA )
+            projectile.subtractResource(this);
+
 
             // ADD IT TO THE LIST
             gp.projectileList.add(projectile);
