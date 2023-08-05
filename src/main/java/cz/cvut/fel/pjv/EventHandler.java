@@ -57,7 +57,9 @@ public class EventHandler {
             if (hit(29, 23, "right") == true) { damagePit(29,23,gp.dialogueState); }
             if (hit(27, 21, "any") == true) { damagePit(27,21,gp.dialogueState); }
 
-            if (hit(29, 27, "up") == true) { teleport(29, 27, gp.dialogueState); }
+            if (hit(29, 27, "up") == true) { teleportPJV(29, 27, gp.dialogueState); }
+            if (hit(44, 15, "up") == true) { teleportFEL(44, 15, gp.dialogueState); }
+
             if (hit(25, 24, "up") == true) { healingPool(25, 24, gp.dialogueState);}
         }
 
@@ -89,14 +91,22 @@ public class EventHandler {
         return hit;
     }
 
-    public void teleport(int col, int row, int gameState) {
+    public void teleportPJV(int col, int row, int gameState) {
 
         gp.gameState = gameState;
-        gp.ui.currentDialogue = "You use teleport to PJV!";
+        gp.ui.currentDialogue = "You used teleport to PJV!";
         gp.player.worldX = gp.tileSize*2;
         gp.player.worldY = gp.tileSize*45;
     }
 
+
+    public void teleportFEL(int col, int row, int gameState) {
+
+        gp.gameState = gameState;
+        gp.ui.currentDialogue = "You used teleport to FEL!";
+        gp.player.worldX = gp.tileSize*8;
+        gp.player.worldY = gp.tileSize*8;
+    }
 
     public void damagePit(int col, int row, int gameState) {
 
