@@ -2,7 +2,7 @@ package cz.cvut.fel.pjv;
 
 import cz.cvut.fel.pjv.entity.NPC_OldMan;
 import cz.cvut.fel.pjv.monster.MON_GreenSlime;
-import cz.cvut.fel.pjv.object.OBJ_Door;
+import cz.cvut.fel.pjv.object.*;
 
 public class AssetSetter {
 
@@ -14,14 +14,57 @@ public class AssetSetter {
     }
 
     public void setObject() {
-        gp.obj[0] = new OBJ_Door(gp);
-        gp.obj[0].worldX = gp.tileSize*33;
-        gp.obj[0].worldY = gp.tileSize*13;
+
+        int i = 0;
+
+        gp.obj[i] = new OBJ_Key(gp);
+        gp.obj[i].worldX = gp.tileSize*6;
+        gp.obj[i].worldY = gp.tileSize*22; // center of the map, grass tile (txt row: 23, txt col: 14)
+        i++;
+
+        gp.obj[i] = new OBJ_Key(gp);
+        gp.obj[i].worldX = gp.tileSize*46;
+        gp.obj[i].worldY = gp.tileSize*19; // east part of the map, grass tile (txt row: 20, txt col: 94)
+        i++;
+
+        gp.obj[i] = new OBJ_Key(gp);
+        gp.obj[i].worldX = gp.tileSize*24;
+        gp.obj[i].worldY = gp.tileSize*8; // corner at the top of forest, grass tile (txt row: 9, txt col: 50)
+        i++;
 
 
-        gp.obj[1] = new OBJ_Door(gp);
-        gp.obj[1].worldX = gp.tileSize*36;
-        gp.obj[1].worldY = gp.tileSize*10;
+        gp.obj[i] = new OBJ_Axe(gp);
+        gp.obj[i].worldX = gp.tileSize*23;
+        gp.obj[i].worldY = gp.tileSize*23; // corner at the top of forest, grass tile (txt row: 24, txt col: 48)
+        i++;
+
+
+        gp.obj[i] = new OBJ_Shield_Blue(gp);
+        gp.obj[i].worldX = gp.tileSize*28;
+        gp.obj[i].worldY = gp.tileSize*25; // corner at the top of forest, grass tile (txt row: 26, txt col: 56)
+        i++;
+
+        gp.obj[i] = new OBJ_Potion_Red(gp);
+        gp.obj[i].worldX = gp.tileSize*30;
+        gp.obj[i].worldY = gp.tileSize*25; // corner at the top of forest, grass tile (txt row: 26, txt col: 60)
+        i++;
+
+//  DOOR
+
+//        gp.obj[i] = new OBJ_Door(gp);
+//        gp.obj[i].worldX = gp.tileSize*33;
+//        gp.obj[i].worldY = gp.tileSize*13; // grass tile (txt row: 14, txt col: 68)
+//        i++;
+//
+//        gp.obj[i] = new OBJ_Door(gp);
+//        gp.obj[i].worldX = gp.tileSize*36;
+//        gp.obj[i].worldY = gp.tileSize*10; // grass tile (txt row: 11, txt col: 74)
+//        i++;
+//
+//        gp.obj[i] = new OBJ_Door(gp);
+//        gp.obj[i].worldX = gp.tileSize*38;
+//        gp.obj[i].worldY = gp.tileSize*13; // grass tile (txt row: 14, txt col: 76)
+//        i++;
 
 
     }
@@ -29,28 +72,9 @@ public class AssetSetter {
     public void setNPC() {
 
         gp.npc[0] = new NPC_OldMan(gp);
-        gp.npc[0].worldX = gp.tileSize*24;
-        gp.npc[0].worldY = gp.tileSize*24;
+        gp.npc[0].worldX = gp.tileSize*29;
+        gp.npc[0].worldY = gp.tileSize*20; // grass tile (txt row: 21, txt col: 60)
 
-
-//        gp.npc[1] = new NPC_OldMan(gp);
-//        gp.npc[1].worldX = gp.tileSize*21;
-//        gp.npc[1].worldY = gp.tileSize*21;
-//
-//
-//        gp.npc[2] = new NPC_OldMan(gp);
-//        gp.npc[2].worldX = gp.tileSize*31;
-//        gp.npc[2].worldY = gp.tileSize*31;
-//
-//
-//        gp.npc[3] = new NPC_OldMan(gp);
-//        gp.npc[3].worldX = gp.tileSize*11;
-//        gp.npc[3].worldY = gp.tileSize*21;
-//
-//
-//        gp.npc[4] = new NPC_OldMan(gp);
-//        gp.npc[4].worldX = gp.tileSize*11;
-//        gp.npc[4].worldY = gp.tileSize*31;
     }
 
     public void setMonster() {
@@ -64,7 +88,7 @@ public class AssetSetter {
 
         gp.monster[i] = new MON_GreenSlime(gp);
         gp.monster[i].worldX = gp.tileSize*21;
-        gp.monster[i].worldY = gp.tileSize*21;
+        gp.monster[i].worldY = gp.tileSize*21;  // grass tile (txt row: 22, txt col: 44)
         i++;
 
         gp.monster[i] = new MON_GreenSlime(gp);

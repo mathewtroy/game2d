@@ -43,11 +43,8 @@ public class Entity {
     int dyingCounter = 0;
     int hpBarCounter = 0;
 
-    // CHARACTER ATTRiBUTES
-    public int type;
-    // 0 = player
-    // 1 = npc
-    // 2 = monster
+    // CHARACTER ATTRIBUTES
+
 
     public String name;
     public int speed;
@@ -70,6 +67,18 @@ public class Entity {
     public int attackValue;
     public int defenseValue;
     public String description = "";
+
+    // TYPE
+    public int type;    // 0 = player, 1 = npc, 2 = monster
+    public final int type_player = 0;
+    public final int type_npc = 1;
+    public final int type_monster = 2;
+    public final int type_sword = 3;
+    public final int type_axe = 4;
+    public final int type_shield = 5;
+    public final int type_consumable = 6;
+
+
 
 
     public Entity(GamePanel gp) {
@@ -101,6 +110,9 @@ public class Entity {
         }
     }
 
+    public void use (Entity entity){
+
+    }
 
     public void update() {
 
@@ -113,9 +125,9 @@ public class Entity {
         gp.cChecker.checkEntity(this, gp.monster);
         boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
-        if (this.type == 2 && contactPlayer == true) {
+        if (this.type == type_monster && contactPlayer) {
 
-            if (gp.player.invisible == false) {
+            if (!gp.player.invisible) {
                 // we can give damage
                 gp.playSE(6);
 
@@ -131,7 +143,7 @@ public class Entity {
 
 
         //  IF COLLISION IS FALSE, PLAYER CAN MOVE
-        if (collisionOn == false) {
+        if (!collisionOn) {
             switch (direction) {
                 case "up": worldY -= speed; break;
                 case "down": worldY += speed; break;
@@ -149,7 +161,7 @@ public class Entity {
             spriteCounter = 0;
         }
 
-        if (invisible == true ) {
+        if (invisible) {
             invisibleCounter++;
 
             if (invisibleCounter > 40) {
@@ -196,7 +208,7 @@ public class Entity {
             }
 
             // Monster Health Bar
-            if (type == 2 && hpBarOn == true) {
+            if (type == type_monster && hpBarOn) {
 
                 double oneScale = (double)gp.tileSize/maxLife;
                 double hpBarValue = oneScale*life;
@@ -216,13 +228,13 @@ public class Entity {
             }
 
 
-            if (invisible == true) {
+            if (invisible) {
                 hpBarOn = true;
                 hpBarCounter = 0;
                 changeAlpha(g2, 0.4f);
             }
 
-            if (dying == true) {
+            if (dying) {
 //TODO
                 dyingAnimation(g2);
             }
