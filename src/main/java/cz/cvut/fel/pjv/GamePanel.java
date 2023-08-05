@@ -12,35 +12,31 @@ import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable {
 
-//  SCREEN Settings
-//    16x16 px
+    //  SCREEN Settings
+    //    16x16 px
     final int originalTileSize = 16;
     final int scale = 3;
 
-//    48x48 px
+    // 48x48 px
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 16;
     public final int maxScreenRow = 12;
 
-//    768 px
+    // 768 px
     public final int screenWidth = tileSize * maxScreenCol;
 
-//    576 px
+    // 576 px
     public final int screenHeight = tileSize * maxScreenRow;
 
-// CONSTANTS NUMBER
+    // CONSTANTS NUMBER
     private static final float BILLION_SIZE = 1000000000;
     private static final float MILLION_SIZE = 1000000;
 
-
-
-
-    //  WORLD SETTINGS
+    // WORLD SETTINGS
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
     public final int worldWidth = tileSize * maxWorldCol;
     public final int worldHeight = tileSize * maxWorldRow;
-
 
 
     //    FPS
@@ -49,13 +45,10 @@ public class GamePanel extends JPanel implements Runnable {
 //    SYSTEM
     TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
-
     Sound music = new Sound();
     Sound se = new Sound();
-
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
-
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
     Thread gameThread;
@@ -65,6 +58,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Entity obj[] = new Entity[10];
     public Entity npc[] = new Entity[10];
     public Entity monster[] = new Entity[20];
+    public ArrayList<Entity> projectileList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
 
 //    GAME STATE
@@ -160,11 +154,24 @@ public class GamePanel extends JPanel implements Runnable {
             // MONSTER
             for (int i = 0; i < monster.length; i++) {
                 if (monster[i] != null) {
-                    if (monster[i].alive == true && monster[i].dying == false) {
+                    if (monster[i].alive && !monster[i].dying) {
                         monster[i].update();
                     }
-                    if (monster[i].alive == false) {
+                    if (!monster[i].alive) {
                         monster[i] = null;
+                    }
+                }
+            }
+
+
+            // PROJECTILE
+            for (int i = 0; i < projectileList.size(); i++) {
+                if (projectileList.get(i) != null) {
+                    if (projectileList.get(i).alive) {
+                        projectileList.get(i).update();
+                    }
+                    if (!projectileList.get(i).alive) {
+                        projectileList.remove(i);
                     }
                 }
             }
@@ -186,7 +193,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 //  DEBUG
         long drawStart = 0;
-        if (keyH.checkDrawTime == true) {
+        if (keyH.checkDrawTime) {
             drawStart = System.nanoTime();
         }
 
@@ -218,6 +225,12 @@ public class GamePanel extends JPanel implements Runnable {
             for (int i = 0; i < monster.length; i++) {
                 if (monster[i] != null) {
                     entityList.add(monster[i]);
+                }
+            }
+
+            for (int i = 0; i < projectileList.size(); i++) {
+                if (projectileList.get(i) != null) {
+                    entityList.add(projectileList.get(i));
                 }
             }
 
