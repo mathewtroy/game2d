@@ -2,6 +2,7 @@ package cz.cvut.fel.pjv.entity;
 
 import cz.cvut.fel.pjv.GamePanel;
 import cz.cvut.fel.pjv.KeyHandler;
+import cz.cvut.fel.pjv.object.OBJ_Fireball;
 import cz.cvut.fel.pjv.object.OBJ_Key;
 import cz.cvut.fel.pjv.object.OBJ_Shield_Wood;
 import cz.cvut.fel.pjv.object.OBJ_Sword_Normal;
@@ -63,7 +64,7 @@ public class Player extends Entity {
         speed = 4;
         direction = "down";
 
-//        PLAYER STATUS
+        // PLAYER STATUS
         level = 1;
         maxLife = 6;
         life = maxLife;
@@ -74,6 +75,7 @@ public class Player extends Entity {
         coin = 0;
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
+        projectile = new OBJ_Fireball(gp);
         attack = getAttack();
         defense = getDefense();
 
@@ -168,12 +170,12 @@ public class Player extends Entity {
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             contactMonster(monsterIndex);
 
-//  CHECK EVENT
+            //  CHECK EVENT
             gp.eHandler.checkEvent();
             gp.keyH.enterPressed = false;
 
 
-//  IF COLLISION IS FALSE, PLAYER CAN MOVE
+            //  IF COLLISION IS FALSE, PLAYER CAN MOVE
             if (!collisionOn && (!keyH.enterPressed)) {
                 switch (direction) {
                     case "up": worldY -= speed; break;
@@ -210,6 +212,19 @@ public class Player extends Entity {
             }
         }
 
+        if (gp.keyH.shotKeyPressed && !projectile.alive && (shotAvailableCounter == 30) ) {
+
+            // SET DEFAULT COORDINATES, DIRECTION AND USER
+            projectile.set(worldX, worldY, direction, true, this);
+
+            // ADD IT TO THE LIST
+            gp.projectileList.add(projectile);
+
+            shotAvailableCounter = 0;
+
+            gp.playSE(9);
+        }
+
         // This needs to be outside of key if statement
         if (invisible) {
             invisibleCounter++;
@@ -218,6 +233,10 @@ public class Player extends Entity {
                 invisible = false;
                 invisibleCounter = 0;
             }
+        }
+
+        if (shotAvailableCounter < 30) {
+            shotAvailableCounter ++;
         }
 
     }
@@ -253,7 +272,7 @@ public class Player extends Entity {
 
             // Check monster collision with updated worldX, worldY and solidArea
             int monsterIndex  = gp.cChecker.checkEntity(this, gp.monster);
-            damageMonster(monsterIndex);
+            damageMonster(monsterIndex, attack);
 
             // After checking collision restore the original data
             worldX = currentWorldX;
@@ -310,7 +329,7 @@ public class Player extends Entity {
 
         if (i != 999) {
 
-            if (!invisible) {
+            if (!invisible && !gp.monster[i].dying) {
                 gp.playSE(6);
 
                 int damage = gp.monster[i].attack - defense;
@@ -323,7 +342,7 @@ public class Player extends Entity {
         }
     }
 
-    public void damageMonster(int i) {
+    public void damageMonster(int i, int attack) {
         if (i != 999) {
             if (!gp.monster[i].invisible) {
                 gp.playSE(5);
