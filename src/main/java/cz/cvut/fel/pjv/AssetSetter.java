@@ -17,6 +17,12 @@ public class AssetSetter {
 
         int i = 0;
 
+        gp.obj[i] = new OBJ_Coin_Bronze(gp);
+        gp.obj[i].worldX = gp.tileSize*24;
+        gp.obj[i].worldY = gp.tileSize*24; // center of the map, grass tile (txt row: 23, txt col: 14)
+        i++;
+
+
         gp.obj[i] = new OBJ_Key(gp);
         gp.obj[i].worldX = gp.tileSize*6;
         gp.obj[i].worldY = gp.tileSize*22; // center of the map, grass tile (txt row: 23, txt col: 14)
@@ -47,6 +53,23 @@ public class AssetSetter {
         gp.obj[i] = new OBJ_Potion_Red(gp);
         gp.obj[i].worldX = gp.tileSize*30;
         gp.obj[i].worldY = gp.tileSize*25; // corner at the top of forest, grass tile (txt row: 26, txt col: 60)
+        i++;
+
+        gp.obj[i] = new OBJ_Heart(gp);
+        gp.obj[i].worldX = gp.tileSize*43;
+        gp.obj[i].worldY = gp.tileSize*19; // corner at the top of forest, grass tile (txt row: , txt col: )
+        i++;
+
+
+        gp.obj[i] = new OBJ_ManaCrystal(gp);
+        gp.obj[i].worldX = gp.tileSize*28;
+        gp.obj[i].worldY = gp.tileSize*15; // corner at the top of forest, grass tile (txt row: 26, txt col: 60)
+        i++;
+
+
+        gp.obj[i] = new OBJ_ManaCrystal(gp);
+        gp.obj[i].worldX = gp.tileSize*43;
+        gp.obj[i].worldY = gp.tileSize*18; // corner at the top of forest, grass tile (txt row: 26, txt col: 60)
         i++;
 
 //  DOOR
