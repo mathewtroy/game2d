@@ -2,6 +2,7 @@ package cz.cvut.fel.pjv;
 
 import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.entity.Player;
+import cz.cvut.fel.pjv.tile.InteractiveTile;
 import cz.cvut.fel.pjv.tile.TileManager;
 
 import javax.swing.*;
@@ -58,6 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Entity obj[] = new Entity[20];
     public Entity npc[] = new Entity[10];
     public Entity monster[] = new Entity[20];
+    public InteractiveTile iTile[] = new InteractiveTile[50];
     public ArrayList<Entity> projectileList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
 
@@ -86,7 +88,7 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setObject();
         aSetter.setNPC();
         aSetter.setMonster();
-
+        aSetter.setInteractiveTile();
 //        playMusic(0);
 //        stopMusic();
 
@@ -176,6 +178,12 @@ public class GamePanel extends JPanel implements Runnable {
                     }
                 }
             }
+            for (int i = 0; i < iTile.length; i++)  {
+                if (iTile[i] != null) {
+                    iTile[i].update();
+                }
+
+            }
         }
 
         if (gameState == pauseState) {
@@ -207,6 +215,13 @@ public class GamePanel extends JPanel implements Runnable {
         else {
             //  TILE
             tileM.draw(g2);
+
+            // INTERACTIVE TILE
+            for (int i = 0; i < iTile.length ; i++) {
+                if (iTile[i] != null) {
+                    iTile[i].draw(g2);
+                }
+            }
 
             //  ADD ENTITES TO THE LIST
             entityList.add(player);

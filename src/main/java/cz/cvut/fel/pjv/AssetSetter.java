@@ -3,6 +3,7 @@ package cz.cvut.fel.pjv;
 import cz.cvut.fel.pjv.entity.NPC_OldMan;
 import cz.cvut.fel.pjv.monster.MON_GreenSlime;
 import cz.cvut.fel.pjv.object.*;
+import cz.cvut.fel.pjv.tile.IT_DryTree;
 
 public class AssetSetter {
 
@@ -72,6 +73,11 @@ public class AssetSetter {
         gp.obj[i].worldY = gp.tileSize*18; // corner at the top of forest, grass tile (txt row: 26, txt col: 60)
         i++;
 
+//        gp.obj[i] = new OBJ_ManaCrystal(gp);
+//        gp.obj[i].worldX = gp.tileSize*32;
+//        gp.obj[i].worldY = gp.tileSize*24; // corner at the top of forest, grass tile (txt row: 25, txt col: 56)
+//        i++;
+
 //  DOOR
 
 //        gp.obj[i] = new OBJ_Door(gp);
@@ -133,6 +139,23 @@ public class AssetSetter {
         gp.monster[i].worldX = gp.tileSize*41;
         gp.monster[i].worldY = gp.tileSize*31;
         i++;
+
+    }
+
+    public void setInteractiveTile() {
+        int i = 0;
+        gp.iTile[i] = new IT_DryTree(gp, 27,24); i++;
+        gp.iTile[i] = new IT_DryTree(gp,28,24); i++;
+        gp.iTile[i] = new IT_DryTree(gp,29,24); i++;
+        gp.iTile[i] = new IT_DryTree(gp,30,24); i++;
+        gp.iTile[i] = new IT_DryTree(gp,31,24); i++;
+        gp.iTile[i] = new IT_DryTree(gp,32,24); i++;
+
+//        gp.iTile[i] = new IT_DryTree(gp,29,21); i++;
+//        gp.iTile[i] = new IT_DryTree(gp,29,19); i++;
+//        gp.iTile[i] = new IT_DryTree(gp,30,21); i++;
+//        gp.iTile[i] = new IT_DryTree(gp,30,19); i++;
+//        gp.iTile[i] = new IT_DryTree(gp,30,20); i++;
 
 
     }

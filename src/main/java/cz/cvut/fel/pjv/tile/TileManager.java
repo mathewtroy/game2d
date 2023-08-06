@@ -43,6 +43,7 @@ public class TileManager {
         setup(8, "sign", false);
         setup(9, "danger", false);
         setup(10, "fountain", true);
+        setup(11, "drytree", true);
 
     }
 
