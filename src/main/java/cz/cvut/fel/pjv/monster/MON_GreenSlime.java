@@ -2,6 +2,9 @@ package cz.cvut.fel.pjv.monster;
 
 import cz.cvut.fel.pjv.GamePanel;
 import cz.cvut.fel.pjv.entity.Entity;
+import cz.cvut.fel.pjv.object.OBJ_Coin_Bronze;
+import cz.cvut.fel.pjv.object.OBJ_Heart;
+import cz.cvut.fel.pjv.object.OBJ_ManaCrystal;
 import cz.cvut.fel.pjv.object.OBJ_Rock;
 
 import java.util.Random;
@@ -74,5 +77,24 @@ public class MON_GreenSlime extends Entity {
 
         actionLockCounter = 0;
         direction = gp.player.direction;
+    }
+
+    public void checkDrop() {
+        // CAST A DIE
+        int i = new Random().nextInt(100)+1;
+
+        // SET THE MONSTER DROP
+        if (i < 50) {
+            dropItem(new OBJ_Coin_Bronze(gp));
+        }
+
+        if (i >= 50 && i < 75) {
+            dropItem(new OBJ_Heart(gp));
+        }
+
+        if (i >= 75 && i < 100) {
+            dropItem(new OBJ_ManaCrystal(gp));
+        }
+
     }
 }
