@@ -24,30 +24,31 @@ Herní engine musí být vybaven GUI.
 ## :label: Rules
 
 
-:standing_man:      main hero in the game <br>
-:older_man:	        old man
-:space_invader:	    monster
+:man:               main hero in the game <br>
+:older_man:	        old man <br>
+:space_invader:	    monster <br>
 
 
-:arrow_up_small:    **button W** <br>
-:arrow_down_small:  **button S** <br>
-:arrow_forward:	    **button A** <br>
-:arrow_backward:	**button D** <br>
+:arrow_up:	        go UP **button W** <br>
+:arrow_down:	    go DOWN **button S** <br>
+:arrow_left:	    go LEFT **button A** <br>
+:arrow_right:		go RIGHT **button D** <br>
 
 :pause_button:	    **button PAUSE** <br>
 :ok:	    	    action **button ENTER** <br>
 
 
 :gun:	            shooting **button F** <br>
-:luggage:	        inventory screen **button C** <br>
+:handbag:		    inventory screen **button C** <br>
 :heart:	            hit points (HP) <br>
 :large_blue_diamond:	mana points (MP) <br>
-:blue_square:		mana points (MP) <br>
+:gem:	    		mana points (MP) <br>
 
 :axe:	            axe item <br>
 :dagger:	        sword item <br>
 :shield:	        shield item <br>
 :key:	            key item <br>
+:coin:	            coin item <br>
 
 
 
