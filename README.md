@@ -39,6 +39,7 @@ Describe my experience.. Bla bla bla.
 
 **Cvičící:** Ladislav Serédi <br>
 **Zpracoval:** Aleksandr Kross  <br>
+:email: [krossale@fel.czut.cz](mailto:ваш_адрес_электронной_почты)
 
 <p align="center">
   <a href="mailto:krossale@fel.czut.cz">
