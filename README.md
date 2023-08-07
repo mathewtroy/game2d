@@ -12,7 +12,7 @@
 
 ## NEED TO FINISH
 ## Zadani
-<details><summary> hide/show </summary>
+<details><summary> Show more </summary>
 **Typická RPG hra, která je tímto tématem zamýšlena je například tato https://darkwalllke.itch.io/simple-rpg
 
 Nezapomínejte, že vaším cílem není vytvořit hru jako takovou (hodně levelů, příběh atd.), ale engine na spuštění a odehrání levelů popsaných externími soubory.
@@ -22,7 +22,7 @@ Pokud soubory s levely nejsou human-readable, musí být vytvořen editor těcht
 V rámci hry bude implementován způsob souboje s příšerami.
 Hrdina bude umět pomocí sebraných předmětů interagovat s dalšími předměty (otevře dveře klíčem, rozbije truhlu palicí atd.).
 Herní engine musí být vybaven GUI.**
-
+</details>
 
 ## Dokumentace
 ## NEED TO ADD
