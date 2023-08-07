@@ -42,13 +42,13 @@ Herní engine musí být vybaven GUI.
 :handbag:		    inventory screen **button C** <br>
 :heart:	            hit points (HP) <br>
 :large_blue_diamond:	mana points (MP) <br>
-:gem:	    		mana points (MP) <br>
 
-:axe:	            axe item <br>
+
+:hammer:	        axe item <br>
 :dagger:	        sword item <br>
 :shield:	        shield item <br>
 :key:	            key item <br>
-:coin:	            coin item <br>
+:moneybag:	        coin item <br>
 
 
 
