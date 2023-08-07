@@ -41,4 +41,9 @@ Describe my experience.. Bla bla bla.
 **Zpracoval:** Aleksandr Kross  <br>
 
 [**Email of Aleksandr Kross**](<krossale@fel.czut.cz>)
+<p align="center">
+  <a href="mailto:krossale@fel.czut.cz">
+    <img src="https://img.shields.io/badge/email-%40-ff69b4">
+  </a>
+</p>
 
