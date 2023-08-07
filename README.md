@@ -7,7 +7,8 @@
 
 ## Cvičící: Ladislav Serédi
 ## Zpracoval: Aleksandr Kross  
-[**Email of Aleksandr Kross**](<krossale@fel.czut.cz>) <br>
+<details><summary>[**Email of Aleksandr Kross**](<krossale@fel.czut.cz>) <br> </summary>
+
 
 ## NEED TO FINISH
 ## Zadani
