@@ -1,4 +1,4 @@
-# Semestrální projekt z předmětu Programování v JAVA  (PJV)
+# :label: Semestrální projekt z předmětu Programování v JAVA  (PJV)
 
 **Code**: B0B36PJV <br>
 **Name**: Programming in Java/ Programování v JAVA <br>
@@ -7,7 +7,7 @@
 
 
 ## NEED TO FINISH
-## Zadani
+## :label: Zadani
 <details><summary> Show more </summary>
 Typická RPG hra, která je tímto tématem zamýšlena je například tato https://darkwalllke.itch.io/simple-rpg
 
@@ -22,7 +22,7 @@ Herní engine musí být vybaven GUI.
 </details>
 
 
-## Zkušenosti získané během SP
+## :label: Zkušenosti získané během SP
 
 <details><summary> Show more </summary>
 
@@ -31,19 +31,15 @@ Describe my experience.. Bla bla bla.
 </details>
 
 
-## Dokumentace
+## :label: Dokumentace
 ## NEED TO ADD
 
 
-## Contacts
+## :label: Contacts
 
 **Cvičící:** Ladislav Serédi <br>
 **Zpracoval:** Aleksandr Kross  <br>
 :email: [krossale@fel.czut.cz](mailto:ваш_адрес_электронной_почты)
 
-<p align="center">
-  <a href="mailto:krossale@fel.czut.cz">
-    <img src="https://img.shields.io/badge/email-%40-ff69b4">
-  </a>
-</p>
+
 
