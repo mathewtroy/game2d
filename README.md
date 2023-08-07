@@ -21,6 +21,37 @@ Herní engine musí být vybaven GUI.
 
 </details>
 
+## :label: Rules
+
+
+:standing_man:      main hero in the game <br>
+:older_man:	        old man
+:space_invader:	    monster
+
+
+:arrow_up_small:    **button W** <br>
+:arrow_down_small:  **button S** <br>
+:arrow_forward:	    **button A** <br>
+:arrow_backward:	**button D** <br>
+
+:pause_button:	    **button PAUSE** <br>
+:ok:	    	    action **button ENTER** <br>
+
+
+:gun:	            shooting **button F** <br>
+:luggage:	        inventory screen **button C** <br>
+:heart:	            hit points (HP) <br>
+:large_blue_diamond:	mana points (MP) <br>
+:blue_square:		mana points (MP) <br>
+
+:axe:	            axe item <br>
+:dagger:	        sword item <br>
+:shield:	        shield item <br>
+:key:	            key item <br>
+
+
+
+
 
 ## :label: Zkušenosti získané během SP
 
