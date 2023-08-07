@@ -6,10 +6,6 @@
 **Department**: 13136 - Department of Computer Science/ Katedra počítačů <br>
 
 
-## Cvičící: Ladislav Serédi
-## Zpracoval: Aleksandr Kross  
-
-
 ## NEED TO FINISH
 ## Zadani
 <details><summary> Show more </summary>
@@ -40,6 +36,9 @@ Describe my experience.. Bla bla bla.
 
 
 ## Contacts
+
+**Cvičící:** Ladislav Serédi <br>
+**Zpracoval:** Aleksandr Kross  <br>
 
 [**Email of Aleksandr Kross**](<krossale@fel.czut.cz>)
 
