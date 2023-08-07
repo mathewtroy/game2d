@@ -7,11 +7,12 @@
 
 ## Cvičící: Ladislav Serédi
 ## Zpracoval: Aleksandr Kross  
-<details><summary>[**Email of Aleksandr Kross**](<krossale@fel.czut.cz>) <br> </summary>
 
+[**Email of Aleksandr Kross**](<krossale@fel.czut.cz>) <br>
 
 ## NEED TO FINISH
 ## Zadani
+<details><summary> hide/show </summary>
 **Typická RPG hra, která je tímto tématem zamýšlena je například tato https://darkwalllke.itch.io/simple-rpg
 
 Nezapomínejte, že vaším cílem není vytvořit hru jako takovou (hodně levelů, příběh atd.), ale engine na spuštění a odehrání levelů popsaných externími soubory.
