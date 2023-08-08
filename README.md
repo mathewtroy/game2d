@@ -45,7 +45,7 @@ Herní engine musí být vybaven GUI.
 
 :hammer:	        axe item <br>
 :dagger:	        sword item <br>
-:shield:	        shield item <br>
+:shield:            shield item <br>
 :key:	            key item <br>
 :moneybag:	        coin item <br>
 
