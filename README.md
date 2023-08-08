@@ -6,7 +6,6 @@
 **Department**: 13136 - Department of Computer Science/ Katedra počítačů <br>
 
 
-## NEED TO FINISH
 ## :label: Zadani
 <details><summary> Show more </summary>
 Typická RPG hra, která je tímto tématem zamýšlena je například tato https://darkwalllke.itch.io/simple-rpg
