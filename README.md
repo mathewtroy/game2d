@@ -70,7 +70,7 @@ Describe my experience.. Bla bla bla.
 
 **Cvičící:** Ladislav Serédi <br>
 **Zpracoval:** Aleksandr Kross  <br>
-:email: [Text me](mailto:krossale@fel.czut.cz)
+:email: [If you have questions text me](mailto:krossale@fel.czut.cz)
 
 
 
