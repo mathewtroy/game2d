@@ -20,10 +20,10 @@ public class GamePanel extends JPanel implements Runnable {
 
     // 48x48 px
     public final int tileSize = originalTileSize * scale;
-    public final int maxScreenCol = 16;
+    public final int maxScreenCol = 20;
     public final int maxScreenRow = 12;
 
-    // 768 px
+    // 960 px
     public final int screenWidth = tileSize * maxScreenCol;
 
     // 576 px
@@ -72,6 +72,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int pauseState = 2;
     public final int dialogueState = 3;
     public final int characterState = 4;
+    public final int optionState = 5;
 
 
     public GamePanel(){
@@ -104,7 +105,6 @@ public class GamePanel extends JPanel implements Runnable {
 //    @Override
     @Override
     public void run() {
-        //TODO add smth
 
         double drawInterval = BILLION_SIZE / FPS;
         //  0.01666 seconds
@@ -298,7 +298,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
 //  DEBUG
-        if (keyH.checkDrawTime == true ) {
+        if (keyH.checkDrawTime) {
             long drawEnd = System.nanoTime();
             long passed = drawEnd - drawStart;
             g2.setColor(Color.white);
