@@ -579,6 +579,10 @@ public class UI {
         g2.drawString("Go back", textX, textY);
         if (commandNum == STATE_FOUR) {
             g2.drawString(">", textX-TWENTY_FIVE, textY);
+            if (gp.keyH.enterPressed) {
+                gp.gameState = gp.playState;
+                commandNum = 0;
+            }
         }
 
 
@@ -597,9 +601,6 @@ public class UI {
         volumeWidth = 24 * gp.se.volumeScale;
         g2.fillRect(textX, textY, volumeWidth, 24);
 
-//        // CHECKBOX Controls
-//        textY += gp.tileSize;
-//        g2.drawRect(textX, textY, 120, 24);
 
 
     }
