@@ -14,7 +14,7 @@ public class Main {
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
 
-        gamePanel.config.loadConfig();
+        // gamePanel.config.loadConfig();
 
 
         window.pack();
