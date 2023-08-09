@@ -30,14 +30,10 @@ public class EventHandler {
             col++;
 
             if (col == gp.maxWorldCol) {
-
                 col = 0;
                 row++;
             }
-
         }
-
-
     }
 
     public void checkEvent() {
@@ -49,20 +45,18 @@ public class EventHandler {
         int yDistance = Math.abs(gp.player.worldY - previousEventY);
         int distance = Math.max(xDistance, yDistance);
         if (distance > gp.tileSize) {
-
             canTouchEvent = true;
         }
 
-        if (canTouchEvent == true) {
-            if (hit(29, 23, "right") == true) { damagePit(29,23,gp.dialogueState); }
-            if (hit(27, 21, "any") == true) { damagePit(27,21,gp.dialogueState); }
+        if (canTouchEvent) {
+            if (hit(29, 23, "right")) { damagePit(29,23,gp.dialogueState); }
+            if (hit(27, 21, "any")) { damagePit(27,21,gp.dialogueState); }
 
-            if (hit(29, 27, "up") == true) { teleportPJV(29, 27, gp.dialogueState); }
-            if (hit(44, 15, "up") == true) { teleportFEL(44, 15, gp.dialogueState); }
+            if (hit(29, 27, "up")) { teleportPJV(29, 27, gp.dialogueState); }
+            if (hit(44, 15, "up")) { teleportFEL(44, 15, gp.dialogueState); }
 
-            if (hit(25, 24, "up") == true) { healingPool(25, 24, gp.dialogueState);}
+            if (hit(25, 24, "up")) { healingPool(25, 24, gp.dialogueState);}
         }
-
     }
 
     public boolean hit (int col, int row, String reqDirection) {
@@ -74,10 +68,9 @@ public class EventHandler {
         eventRect[col][row].x = col*gp.tileSize + eventRect[col][row].x;
         eventRect[col][row].y = row*gp.tileSize + eventRect[col][row].y;
 
-        if (gp.player.solidArea.intersects(eventRect[col][row]) && eventRect[col][row].eventDone == false) {
+        if (gp.player.solidArea.intersects(eventRect[col][row]) && !eventRect[col][row].eventDone) {
             if (gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
                 hit = true;
-
                 previousEventX = gp.player.worldX;
                 previousEventY = gp.player.worldY;
             }
@@ -92,7 +85,6 @@ public class EventHandler {
     }
 
     public void teleportPJV(int col, int row, int gameState) {
-
         gp.gameState = gameState;
         gp.ui.currentDialogue = "You used teleport to PJV!";
         gp.player.worldX = gp.tileSize*2;
@@ -101,7 +93,6 @@ public class EventHandler {
 
 
     public void teleportFEL(int col, int row, int gameState) {
-
         gp.gameState = gameState;
         gp.ui.currentDialogue = "You used teleport to FEL!";
         gp.player.worldX = gp.tileSize*8;
@@ -109,7 +100,6 @@ public class EventHandler {
     }
 
     public void damagePit(int col, int row, int gameState) {
-
         gp.gameState = gameState;
         gp.playSE(6);
         gp.ui.currentDialogue = "You fall into a pit!";
@@ -124,8 +114,7 @@ public class EventHandler {
 
         //System.out.println("Healing");
 
-        if(gp.keyH.enterPressed == true) {
-
+        if(gp.keyH.enterPressed) {
             gp.gameState = gameState;
             gp.player.attackCanceled = true;
             gp.playSE(3);

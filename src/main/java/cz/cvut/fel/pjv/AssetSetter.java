@@ -10,14 +10,11 @@ public class AssetSetter {
     GamePanel gp;
 
     public AssetSetter (GamePanel gp) {
-
         this.gp = gp;
     }
 
     public void setObject() {
-
         int i = 0;
-
         gp.obj[i] = new OBJ_Coin_Bronze(gp);
         gp.obj[i].worldX = gp.tileSize*24;
         gp.obj[i].worldY = gp.tileSize*24; // center of the map, grass tile (txt row: 23, txt col: 14)
@@ -99,11 +96,9 @@ public class AssetSetter {
     }
 
     public void setNPC() {
-
         gp.npc[0] = new NPC_OldMan(gp);
         gp.npc[0].worldX = gp.tileSize*29;
         gp.npc[0].worldY = gp.tileSize*20; // grass tile (txt row: 21, txt col: 60)
-
     }
 
     public void setMonster() {
