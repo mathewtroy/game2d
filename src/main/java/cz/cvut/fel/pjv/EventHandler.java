@@ -3,7 +3,7 @@ package cz.cvut.fel.pjv;
 public class EventHandler {
 
     GamePanel gp;
-    EventRect eventRect[][];
+    EventRect[][][] eventRect;
 
     int previousEventX, previousEventY;
     boolean canTouchEvent = true;
@@ -12,26 +12,32 @@ public class EventHandler {
     public EventHandler (GamePanel gp) {
         this.gp = gp;
 
-        eventRect = new EventRect[gp.maxWorldCol][gp.maxWorldRow];
+        eventRect = new EventRect[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
 
+        int map = 0;
         int col = 0;
         int row = 0;
 
-        while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
+        while (map < gp.maxMap && col < gp.maxWorldCol && row < gp.maxWorldRow) {
 
-            eventRect[col][row] = new EventRect();
-            eventRect[col][row].x = 26;
-            eventRect[col][row].y = 24;
-            eventRect[col][row].width = 2;
-            eventRect[col][row].height = 2;
-            eventRect[col][row].eventRectDefaultX = eventRect[col][row].x;
-            eventRect[col][row].eventRectDefaultY = eventRect[col][row].y;
+            eventRect[map][col][row] = new EventRect();
+            eventRect[map][col][row].x = 26;
+            eventRect[map][col][row].y = 24;
+            eventRect[map][col][row].width = 2;
+            eventRect[map][col][row].height = 2;
+            eventRect[map][col][row].eventRectDefaultX = eventRect[map][col][row].x;
+            eventRect[map][col][row].eventRectDefaultY = eventRect[map][col][row].y;
 
             col++;
 
             if (col == gp.maxWorldCol) {
                 col = 0;
                 row++;
+
+                if (row == gp.maxWorldRow) {
+                    row = 0;
+                    map++;
+                }
             }
         }
     }
@@ -49,42 +55,53 @@ public class EventHandler {
         }
 
         if (canTouchEvent) {
-            if (hit(29, 23, "right")) { damagePit(29,23,gp.dialogueState); }
-            if (hit(27, 21, "any")) { damagePit(27,21,gp.dialogueState); }
+            if (hit(0,29, 23, "right")) { damagePit(gp.dialogueState); }
+            else if (hit(0,27, 21, "any")) { damagePit(gp.dialogueState); }
 
-            if (hit(29, 27, "up")) { teleportPJV(29, 27, gp.dialogueState); }
-            if (hit(44, 15, "up")) { teleportFEL(44, 15, gp.dialogueState); }
+            else if (hit(0,29, 27, "up")) { teleportPJV(gp.dialogueState); }
+            else if (hit(0,44, 15, "up")) { teleportFEL(gp.dialogueState); }
 
-            if (hit(25, 24, "up")) { healingPool(25, 24, gp.dialogueState);}
+            else if (hit(0,25, 24, "up")) { healingPool( gp.dialogueState);}
+
+            //  teleport to new map
+            //  map new.txt (txt row: 4, txt col: 40)
+            else if (hit(0,19, 3, "any")) { teleportHouse( 1, 12, 13);}
+            else if (hit(1,12, 13, "any")) { teleportHouse( 0, 19, 3);}
+
         }
     }
 
-    public boolean hit (int col, int row, String reqDirection) {
+    public boolean hit (int map, int col, int row, String reqDirection) {
 
         boolean hit = false;
 
-        gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;
-        gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;
-        eventRect[col][row].x = col*gp.tileSize + eventRect[col][row].x;
-        eventRect[col][row].y = row*gp.tileSize + eventRect[col][row].y;
+        if (map == gp.currentMap) {
+            gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;
+            gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;
+            eventRect[map][col][row].x = col*gp.tileSize + eventRect[map][col][row].x;
+            eventRect[map][col][row].y = row*gp.tileSize + eventRect[map][col][row].y;
 
-        if (gp.player.solidArea.intersects(eventRect[col][row]) && !eventRect[col][row].eventDone) {
-            if (gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
-                hit = true;
-                previousEventX = gp.player.worldX;
-                previousEventY = gp.player.worldY;
+            if (gp.player.solidArea.intersects(eventRect[map][col][row])
+                    && !eventRect[map][col][row].eventDone) {
+
+                if (gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
+                    hit = true;
+                    previousEventX = gp.player.worldX;
+                    previousEventY = gp.player.worldY;
+                }
             }
+
+            gp.player.solidArea.x =gp.player.solidAreaDefaultX;
+            gp.player.solidArea.y =gp.player.solidAreaDefaultY;
+            eventRect[map][col][row].x = eventRect[map][col][row].eventRectDefaultX;
+            eventRect[map][col][row].y = eventRect[map][col][row].eventRectDefaultY;
         }
 
-        gp.player.solidArea.x =gp.player.solidAreaDefaultX;
-        gp.player.solidArea.y =gp.player.solidAreaDefaultY;
-        eventRect[col][row].x = eventRect[col][row].eventRectDefaultX;
-        eventRect[col][row].y = eventRect[col][row].eventRectDefaultY;
 
         return hit;
     }
 
-    public void teleportPJV(int col, int row, int gameState) {
+    public void teleportPJV(int gameState) {
         gp.gameState = gameState;
         gp.ui.currentDialogue = "You used teleport to PJV!";
         gp.player.worldX = gp.tileSize*2;
@@ -92,14 +109,14 @@ public class EventHandler {
     }
 
 
-    public void teleportFEL(int col, int row, int gameState) {
+    public void teleportFEL(int gameState) {
         gp.gameState = gameState;
         gp.ui.currentDialogue = "You used teleport to FEL!";
         gp.player.worldX = gp.tileSize*8;
         gp.player.worldY = gp.tileSize*8;
     }
 
-    public void damagePit(int col, int row, int gameState) {
+    public void damagePit(int gameState) {
         gp.gameState = gameState;
         gp.playSE(6);
         gp.ui.currentDialogue = "You fall into a pit!";
@@ -110,7 +127,7 @@ public class EventHandler {
         canTouchEvent = false;
     }
 
-    public void healingPool (int col, int row, int gameState) {
+    public void healingPool (int gameState) {
 
         //System.out.println("Healing");
 
@@ -124,6 +141,16 @@ public class EventHandler {
             gp.aSetter.setMonster();
         }
         //gp.keyH.enterPressed = false;
+    }
+
+    public void teleportHouse(int map, int col, int row) {
+        gp.currentMap = map;
+        gp.player.worldX = gp.tileSize * col;
+        gp.player.worldY = gp.tileSize * row;
+        previousEventX = gp.player.worldX;
+        previousEventY = gp.player.worldY;
+        canTouchEvent = false;
+        gp.playSE(12);
     }
 
 }
