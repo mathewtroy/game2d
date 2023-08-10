@@ -164,7 +164,15 @@ public class KeyHandler implements KeyListener {
 //  DEBUG
         if (code == KeyEvent.VK_T) {
             if (!checkDrawTime) { checkDrawTime = true; }
-            else if (checkDrawTime) { checkDrawTime = false; }
+            else { checkDrawTime = false; }
+        }
+
+        if (code == KeyEvent.VK_E) {
+            switch (gp.currentMap) {
+                case 0: gp.tileM.loadMap("/maps/new.txt", 0); break;
+                case 1: gp.tileM.loadMap("/maps/interior.txt", 1); break;
+
+            }
         }
     }
 
@@ -302,6 +310,7 @@ public class KeyHandler implements KeyListener {
             if (gp.ui.commandNum == 0) {
                 gp.gameState = gp.playState;
                 gp.retryGame();
+                gp.playMusic(0);
             }
             else if (gp.ui.commandNum == 1) {
                 gp.gameState = gp.titleState;
