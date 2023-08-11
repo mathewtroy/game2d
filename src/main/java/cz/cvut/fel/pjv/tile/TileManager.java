@@ -26,7 +26,9 @@ public class TileManager {
 
         getTileImage();
         loadMap("/maps/new.txt", 0);
-        loadMap("/maps/interior.txt", 1);
+//        loadMap("/maps/interior.txt", 1);
+        loadMap("/maps/pjv.txt", 1);
+
 
     }
 
@@ -49,6 +51,16 @@ public class TileManager {
         setup(12, "hut", false);
         setup(13, "floor", false);
         setup(14, "table", true);
+        setup(15, "h130", false);
+        setup(16, "laptop", true);
+        setup(17, "stairs", false);
+        setup(18, "whiteboard", false);
+        setup(19, "bonbon", true);
+        setup(20, "bonbon2", true);
+        setup(21, "bonbon3", true);
+        setup(22, "umbrella", false);
+
+
 
     }
 
