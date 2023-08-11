@@ -16,6 +16,11 @@ public class TileManager {
     public Tile[] tile;
     public int[][][] mapTileNum;
 
+    /**
+     * Manages tiles for the game, initializing tile array, map tile numbers, and loading maps.
+     *
+     * @param gp The GamePanel instance associated with the tile manager.
+     */
     public TileManager(GamePanel gp) {
 
         this.gp = gp;
@@ -64,6 +69,13 @@ public class TileManager {
 
     }
 
+    /**
+     * Sets up a tile with the provided parameters such as index, image name, and collision flag.
+     *
+     * @param index The index of the tile in the tile array.
+     * @param imageName The name of the image file associated with the tile.
+     * @param collision A flag indicating whether the tile has collision.
+     */
     public void setup(int index, String imageName, boolean collision) {
 
         UtilityTool uTool = new UtilityTool();
@@ -81,6 +93,12 @@ public class TileManager {
         }
     }
 
+    /**
+     * Loads a map from the specified file path and populates the mapTileNum array with tile numbers.
+     *
+     * @param filePath The path to the map file to be loaded.
+     * @param map The index of the map in the mapTileNum array.
+     */
     public void loadMap(String filePath, int map) {
         try {
 
@@ -96,7 +114,7 @@ public class TileManager {
 
                 while (col < gp.maxWorldCol) {
 
-                    String numbers[] = line.split(" ");
+                    String[] numbers = line.split(" ");
 
                     int num = Integer.parseInt(numbers[col]);
 
@@ -108,16 +126,19 @@ public class TileManager {
                     col = 0;
                     row++;
                 }
-
             }
             br.close();
         }
         catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
-
+    /**
+     * Draws the visible map tiles on the screen, considering player's position for efficient rendering.
+     *
+     * @param g2 The Graphics2D object used for drawing.
+     */
     public void draw (Graphics2D g2) {
 
         int worldCol = 0;
@@ -139,7 +160,6 @@ public class TileManager {
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY ) {
 
                 g2.drawImage(tile[tileNum].image, screenX, screenY,null);
-
             }
 
             worldCol++;
@@ -150,8 +170,6 @@ public class TileManager {
             }
         }
 
-
     }
-
 
 }

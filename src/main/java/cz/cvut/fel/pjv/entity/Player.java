@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import static cz.cvut.fel.pjv.Sound.*;
+
 public class Player extends Entity {
 
     // CONSTANTS NUMBER
@@ -214,7 +216,7 @@ public class Player extends Entity {
 
             if (keyH.enterPressed) {
 
-                gp.playSE(5);
+                gp.playSE(SOUND_FIVE);
                 attacking = true;
                 spriteCounter = 0;
 
@@ -254,7 +256,7 @@ public class Player extends Entity {
 
             shotAvailableCounter = 0;
 
-            gp.playSE(9);
+            gp.playSE(SOUND_NINE);
         }
 
         // This needs to be outside of key if statement
@@ -283,7 +285,7 @@ public class Player extends Entity {
             gp.gameState = gp.gameOverState;
             gp.ui.commandNum = -1;
             gp.stopMusic();
-            gp.playSE(11);
+            gp.playSE(SOUND_ELEVEN);
         }
 
     }
@@ -354,7 +356,7 @@ public class Player extends Entity {
 
                 if (inventory.size() != maxInventorySize) {
                     inventory.add(gp.obj[gp.currentMap][i]);
-                    gp.playSE(1);
+                    gp.playSE(SOUND_ONE);
                     text = "Got a " + gp.obj[gp.currentMap][i].name + "!";
                 }
                 else {
@@ -391,7 +393,7 @@ public class Player extends Entity {
         if (i != 999) {
 
             if (!invisible && !gp.monster[gp.currentMap][i].dying) {
-                gp.playSE(6);
+                gp.playSE(SOUND_SIX);
 
                 int damage = gp.monster[gp.currentMap][i].attack - defense;
                 if (damage < 0) {
@@ -406,7 +408,7 @@ public class Player extends Entity {
     public void damageMonster(int i, int attack) {
         if (i != 999) {
             if (!gp.monster[gp.currentMap][i].invisible) {
-                gp.playSE(5);
+                gp.playSE(SOUND_FIVE);
 
                 int damage = attack - gp.monster[gp.currentMap][i].defense;
                 if (damage < 0) {
@@ -442,7 +444,7 @@ public class Player extends Entity {
             attack = getAttack();
             defense =getDefense();
 
-            gp.playSE(7);
+            gp.playSE(SOUND_SEVEN);
             gp.gameState = gp.dialogueState;
             gp.ui.currentDialogue = "Cograts, PLAYER!\n" +
                     "You are level " + level + "now!\n" +
