@@ -3,6 +3,8 @@ package cz.cvut.fel.pjv;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import static cz.cvut.fel.pjv.Sound.SOUND_EIGHT;
+
 public class KeyHandler implements KeyListener {
 
     GamePanel gp;
@@ -22,7 +24,7 @@ public class KeyHandler implements KeyListener {
      * See the class description for {@link KeyEvent} for a definition of
      * a key typed event.
      *
-     * @param e
+     * @param e Value of the button on keyboard
      */
     @Override
     public void keyTyped(KeyEvent e) {
@@ -34,7 +36,7 @@ public class KeyHandler implements KeyListener {
      * See the class description for {@link KeyEvent} for a definition of
      * a key pressed event.
      *
-     * @param e
+     * @param e Value of the button on keyboard
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -168,8 +170,7 @@ public class KeyHandler implements KeyListener {
 
 //  DEBUG
         if (code == KeyEvent.VK_T) {
-            if (!checkDrawTime) { checkDrawTime = true; }
-            else { checkDrawTime = false; }
+            checkDrawTime = !checkDrawTime;
         }
 
         if (code == KeyEvent.VK_E) {
@@ -223,7 +224,7 @@ public class KeyHandler implements KeyListener {
 
         if (code == KeyEvent.VK_W) {
             gp.ui.commandNum--;
-            gp.playSE(8);
+            gp.playSE(SOUND_EIGHT);
             if (gp.ui.commandNum < 0) {
                 gp.ui.commandNum = maxCommandNum;
             }
@@ -231,7 +232,7 @@ public class KeyHandler implements KeyListener {
 
         if (code == KeyEvent.VK_S) {
             gp.ui.commandNum++;
-            gp.playSE(8);
+            gp.playSE(SOUND_EIGHT);
             if (gp.ui.commandNum > maxCommandNum) {
                 gp.ui.commandNum = 0;
             }
@@ -242,11 +243,11 @@ public class KeyHandler implements KeyListener {
                 if (gp.ui.commandNum == 0 && gp.music.volumeScale > 0) {
                     gp.music.volumeScale--;
                     gp.music.checkVolume();
-                    gp.playSE(8);
+                    gp.playSE(SOUND_EIGHT);
                 }
                 if (gp.ui.commandNum == 1 && gp.se.volumeScale > 0) {
                     gp.se.volumeScale--;
-                    gp.playSE(8);
+                    gp.playSE(SOUND_EIGHT);
                 }
             }
         }
@@ -256,11 +257,11 @@ public class KeyHandler implements KeyListener {
                 if (gp.ui.commandNum == 0 && gp.music.volumeScale < 5) {
                     gp.music.volumeScale++;
                     gp.music.checkVolume();
-                    gp.playSE(8);
+                    gp.playSE(SOUND_EIGHT);
                 }
                 if (gp.ui.commandNum == 1 && gp.se.volumeScale < 5) {
                     gp.se.volumeScale++;
-                    gp.playSE(8);
+                    gp.playSE(SOUND_EIGHT);
                 }
             }
         }
@@ -274,7 +275,7 @@ public class KeyHandler implements KeyListener {
             if (gp.ui.commandNum < 0) {
                 gp.ui.commandNum = 1;
             }
-            gp.playSE(8);
+            gp.playSE(SOUND_EIGHT);
         }
 
         if (code == KeyEvent.VK_S) {
@@ -282,7 +283,7 @@ public class KeyHandler implements KeyListener {
             if (gp.ui.commandNum > 1) {
                 gp.ui.commandNum = 0;
             }
-            gp.playSE(8);
+            gp.playSE(SOUND_EIGHT);
         }
 
         if (code == KeyEvent.VK_ENTER) {
@@ -313,14 +314,14 @@ public class KeyHandler implements KeyListener {
                 if (gp.ui.commandNum < 0) {
                     gp.ui.commandNum = 2;
                 }
-                gp.playSE(8);
+                gp.playSE(SOUND_EIGHT);
             }
             if (code == KeyEvent.VK_S) {
                 gp.ui.commandNum++;
                 if (gp.ui.commandNum > 2) {
                     gp.ui.commandNum = 0;
                 }
-                gp.playSE(8);
+                gp.playSE(SOUND_EIGHT);
             }
         }
         if (gp.ui.subState == 1) {
@@ -346,28 +347,28 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_W) {
             if (gp.ui.playerSlotRow != 0) {
                 gp.ui.playerSlotRow--;
-                gp.playSE(8);
+                gp.playSE(SOUND_EIGHT);
             }
         }
 
         if (code == KeyEvent.VK_A) {
             if (gp.ui.playerSlotCol != 0) {
                 gp.ui.playerSlotCol--;
-                gp.playSE(8);
+                gp.playSE(SOUND_EIGHT);
             }
         }
 
         if (code == KeyEvent.VK_S) {
             if (gp.ui.playerSlotRow != 3) {
                 gp.ui.playerSlotRow++;
-                gp.playSE(8);
+                gp.playSE(SOUND_EIGHT);
             }
         }
 
         if (code == KeyEvent.VK_D) {
             if (gp.ui.playerSlotCol != 4) {
                 gp.ui.playerSlotCol++;
-                gp.playSE(8);
+                gp.playSE(SOUND_EIGHT);
             }
         }
     }
@@ -377,28 +378,28 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_W) {
             if (gp.ui.npcSlotRow != 0) {
                 gp.ui.npcSlotRow--;
-                gp.playSE(8);
+                gp.playSE(SOUND_EIGHT);
             }
         }
 
         if (code == KeyEvent.VK_A) {
             if (gp.ui.npcSlotCol != 0) {
                 gp.ui.npcSlotCol--;
-                gp.playSE(8);
+                gp.playSE(SOUND_EIGHT);
             }
         }
 
         if (code == KeyEvent.VK_S) {
             if (gp.ui.npcSlotRow != 3) {
                 gp.ui.npcSlotRow++;
-                gp.playSE(8);
+                gp.playSE(SOUND_EIGHT);
             }
         }
 
         if (code == KeyEvent.VK_D) {
             if (gp.ui.npcSlotCol != 4) {
                 gp.ui.npcSlotCol++;
-                gp.playSE(8);
+                gp.playSE(SOUND_EIGHT);
             }
         }
     }
@@ -409,7 +410,7 @@ public class KeyHandler implements KeyListener {
      * See the class description for {@link KeyEvent} for a definition of
      * a key released event.
      *
-     * @param e
+     * @param e Value of the button on keyboard
      */
     @Override
     public void keyReleased(KeyEvent e) {

@@ -8,38 +8,66 @@ import java.net.URL;
 
 public class Sound {
 
-    private static final int VOLUME_SCALE_ZERO = 0 ;
-    private static final int VOLUME_SCALE_ONE = 1 ;
-    private static final int VOLUME_SCALE_TWO = 2 ;
-    private static final int VOLUME_SCALE_THREE = 3 ;
-    private static final int VOLUME_SCALE_FOUR = 4 ;
-    private static final int VOLUME_SCALE_FIVE = 5 ;
+    private static final int VOLUME_SCALE_ZERO = 0;
+    private static final int VOLUME_SCALE_ONE = 1;
+    private static final int VOLUME_SCALE_TWO = 2;
+    private static final int VOLUME_SCALE_THREE = 3;
+    private static final int VOLUME_SCALE_FOUR = 4;
+    private static final int VOLUME_SCALE_FIVE = 5;
+
+    private static final float MUTE = -80;
+    private static final float FIRST_LEVEL = -20;
+    private static final float SECOND_LEVEL = -12;
+    private static final float THIRD_LEVEL = -5;
+    private static final float FOURTH_LEVEL = -1;
+    private static final float MAX_LEVEL = 6;
+
+    static final int SOUND_ZERO = 0;
+    public static final int SOUND_ONE = 1;
+    static final int SOUND_TWO = 2;
+    static final int SOUND_THREE = 3;
+    static final int SOUND_FOUR = 4;
+    public static final int SOUND_FIVE = 5;
+    public static final int SOUND_SIX = 6;
+    public static final int SOUND_SEVEN = 7;
+    static final int SOUND_EIGHT = 8;
+    public static final int SOUND_NINE = 9;
+    static final int SOUND_TEN = 10;
+    public static final int SOUND_ELEVEN = 11;
+    static final int SOUND_TWELVE = 12 ;
+
+
 
     Clip clip;
 
-    URL soundURL[] = new URL[30];
+    URL[] soundURL = new URL[30];
     FloatControl fc;
     int volumeScale = 3;
     float volume;
 
     public Sound() {
 
-        soundURL[0] = getClass().getResource("/sound/BlueBoyAdventure.wav");
-        soundURL[1] = getClass().getResource("/sound/coin.wav");
-        soundURL[2] = getClass().getResource("/sound/fanfare.wav");
-        soundURL[3] = getClass().getResource("/sound/powerup.wav");
-        soundURL[4] = getClass().getResource("/sound/unlock.wav");
-        soundURL[5] = getClass().getResource("/sound/hitmonster.wav");
-        soundURL[6] = getClass().getResource("/sound/receivedamage.wav");
-        soundURL[7] = getClass().getResource("/sound/levelup.wav");
-        soundURL[8] = getClass().getResource("/sound/cursor.wav");
-        soundURL[9] = getClass().getResource("/sound/burning.wav");
-        soundURL[10] = getClass().getResource("/sound/cuttree.wav");
-        soundURL[11] = getClass().getResource("/sound/gameover.wav");
-        soundURL[12] = getClass().getResource("/sound/stairs.wav");
+        soundURL[SOUND_ZERO] = getClass().getResource("/sound/adventure.wav");
+        soundURL[SOUND_ONE] = getClass().getResource("/sound/coin.wav");
+        soundURL[SOUND_TWO] = getClass().getResource("/sound/fanfare.wav");
+        soundURL[SOUND_THREE] = getClass().getResource("/sound/powerup.wav");
+        soundURL[SOUND_FOUR] = getClass().getResource("/sound/unlock.wav");
+        soundURL[SOUND_FIVE] = getClass().getResource("/sound/hitmonster.wav");
+        soundURL[SOUND_SIX] = getClass().getResource("/sound/receivedamage.wav");
+        soundURL[SOUND_SEVEN] = getClass().getResource("/sound/levelup.wav");
+        soundURL[SOUND_EIGHT] = getClass().getResource("/sound/cursor.wav");
+        soundURL[SOUND_NINE] = getClass().getResource("/sound/burning.wav");
+        soundURL[SOUND_TEN] = getClass().getResource("/sound/cuttree.wav");
+        soundURL[SOUND_ELEVEN] = getClass().getResource("/sound/gameover.wav");
+        soundURL[SOUND_TWELVE] = getClass().getResource("/sound/stairs.wav");
 
     }
 
+    /**
+     * Sets up an audio file at the specified index for playback.
+     *
+     * @param i The index of the audio file in the soundURL array.
+     */
     public void setFile(int i) {
 
         try {
@@ -50,7 +78,7 @@ public class Sound {
             checkVolume();
         }
         catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -68,12 +96,12 @@ public class Sound {
 
     public void checkVolume() {
         switch (volumeScale) {
-            case VOLUME_SCALE_ZERO: volume = -80f; break;
-            case VOLUME_SCALE_ONE: volume = -20f; break;
-            case VOLUME_SCALE_TWO: volume = -12f; break;
-            case VOLUME_SCALE_THREE: volume = -5f; break;
-            case VOLUME_SCALE_FOUR: volume = -1f; break;
-            case VOLUME_SCALE_FIVE: volume = 6f; break;
+            case VOLUME_SCALE_ZERO: volume = MUTE; break;
+            case VOLUME_SCALE_ONE: volume = FIRST_LEVEL; break;
+            case VOLUME_SCALE_TWO: volume = SECOND_LEVEL; break;
+            case VOLUME_SCALE_THREE: volume = THIRD_LEVEL; break;
+            case VOLUME_SCALE_FOUR: volume = FOURTH_LEVEL; break;
+            case VOLUME_SCALE_FIVE: volume = MAX_LEVEL; break;
 
         }
         fc.setValue(volume);

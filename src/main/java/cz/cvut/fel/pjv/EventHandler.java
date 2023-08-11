@@ -2,6 +2,9 @@ package cz.cvut.fel.pjv;
 
 import cz.cvut.fel.pjv.entity.Entity;
 
+import static cz.cvut.fel.pjv.Sound.SOUND_THREE;
+import static cz.cvut.fel.pjv.Sound.SOUND_TWELVE;
+
 public class EventHandler {
 
     GamePanel gp;
@@ -10,6 +13,11 @@ public class EventHandler {
     int previousEventX, previousEventY;
     boolean canTouchEvent = true;
     int tempMap, tempCol, tempRow;
+
+    private static final int MAP_ZERO = 0 ;
+    private static final int MAP_ONE = 1 ;
+
+
 
 
     public EventHandler (GamePanel gp) {
@@ -142,7 +150,7 @@ public class EventHandler {
         if(gp.keyH.enterPressed) {
             gp.gameState = gameState;
             gp.player.attackCanceled = true;
-            gp.playSE(3);
+            gp.playSE(SOUND_THREE);
             gp.ui.currentDialogue = "You drink the Russian VODKA\nYour life and mana have been recovered";
             gp.player.life = gp.player.maxLife;
             gp.player.mana = gp.player.maxMana;
@@ -159,7 +167,7 @@ public class EventHandler {
         tempRow = row;
 
         canTouchEvent = false;
-        gp.playSE(12);
+        gp.playSE(SOUND_TWELVE);
     }
 
     public void speak(Entity entity) {

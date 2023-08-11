@@ -161,6 +161,13 @@ public class CollisionChecker {
 
     }
 
+
+    /**
+     * Checks for collision between the specified entity and the player's solid area.
+     *
+     * @param entity The entity for which collision is being checked.
+     * @return True if there is collision between the entity and the player's solid area, otherwise false.
+     */
     public boolean checkPlayer(Entity entity) {
 
         boolean contactPlayer = false;

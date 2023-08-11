@@ -4,7 +4,6 @@ import cz.cvut.fel.pjv.GamePanel;
 import cz.cvut.fel.pjv.entity.Entity;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class InteractiveTile extends Entity {
 
@@ -44,8 +43,9 @@ public class InteractiveTile extends Entity {
     }
 
     /**
-     * this method delete transparent while cutting tree
-     * @param g2
+     * This method delete transparent while cutting tree.
+     *
+     * @param g2 The Graphics2D object used for drawing.
      */
     public void draw(Graphics2D g2) {
 

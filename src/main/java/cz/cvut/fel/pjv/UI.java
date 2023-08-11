@@ -964,7 +964,7 @@ public class UI {
             drawSubWindow(x, y, width, height);
             g2.drawImage(coin, x+10, y+10, 32, 32, null);
 
-            int price = npc.inventory.get(itemIndex).price/2;
+            int price = gp.player.inventory.get(itemIndex).price/2;
             String text = "" + price;
             x = getXForAlignToRightText(text, gp.tileSize*18-20);
             g2.drawString(text, x, y+34);

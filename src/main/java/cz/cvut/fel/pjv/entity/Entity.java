@@ -9,6 +9,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static cz.cvut.fel.pjv.Sound.SOUND_SIX;
+
 public class Entity {
 
     GamePanel gp;
@@ -20,7 +22,7 @@ public class Entity {
     public Rectangle solidArea = new Rectangle(0, 0, 48,48);
     public Rectangle attackArea = new Rectangle(0,0, 0,0);
     public int solidAreaDefaultX, solidAreaDefaultY;
-    String dialogues[] = new String[20];
+    String[] dialogues = new String[20];
 
 
     // STATE
@@ -232,7 +234,7 @@ public class Entity {
     public void damagePlayer(int attack) {
         if (!gp.player.invisible) {
             // we can give damage
-            gp.playSE(6);
+            gp.playSE(SOUND_SIX);
 
             int damage = attack - gp.player.defense;
             if (damage < 0) {
