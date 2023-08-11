@@ -1,5 +1,6 @@
 package cz.cvut.fel.pjv;
 
+import cz.cvut.fel.pjv.entity.NPC_Merchant;
 import cz.cvut.fel.pjv.entity.NPC_OldMan;
 import cz.cvut.fel.pjv.monster.MON_GreenSlime;
 import cz.cvut.fel.pjv.object.*;
@@ -110,7 +111,8 @@ public class AssetSetter {
 
         // MAP interior.txt
         mapNum = 1;
-        gp.npc[mapNum][i] = new NPC_OldMan(gp);
+        i = 0;
+        gp.npc[mapNum][i] = new NPC_Merchant(gp);
         gp.npc[mapNum][i].worldX = gp.tileSize*12;
         gp.npc[mapNum][i].worldY = gp.tileSize*8; //
         i++;

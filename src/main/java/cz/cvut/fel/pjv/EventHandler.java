@@ -1,5 +1,7 @@
 package cz.cvut.fel.pjv;
 
+import cz.cvut.fel.pjv.entity.Entity;
+
 public class EventHandler {
 
     GamePanel gp;
@@ -7,6 +9,7 @@ public class EventHandler {
 
     int previousEventX, previousEventY;
     boolean canTouchEvent = true;
+    int tempMap, tempCol, tempRow;
 
 
     public EventHandler (GamePanel gp) {
@@ -44,7 +47,7 @@ public class EventHandler {
 
     public void checkEvent() {
 
-        //  Check ifthe player character is more than
+        //  Check if the player character is more than
         //  one tile away from the last event
 
         int xDistance = Math.abs(gp.player.worldX - previousEventX);
@@ -63,10 +66,15 @@ public class EventHandler {
 
             else if (hit(0,25, 24, "up")) { healingPool( gp.dialogueState);}
 
-            //  teleport to new map
-            //  map new.txt (txt row: 4, txt col: 40)
+            /*
+              teleport to new map
+              Our map new.txt (txt row: 4, txt col: 40)
+            */
             else if (hit(0,19, 3, "any")) { teleportHouse( 1, 12, 13);}
             else if (hit(1,12, 13, "any")) { teleportHouse( 0, 19, 3);}
+
+            else if (hit(1,12, 9, "up")) { speak( gp.npc[1][0]);}
+
 
         }
     }
@@ -144,13 +152,22 @@ public class EventHandler {
     }
 
     public void teleportHouse(int map, int col, int row) {
-        gp.currentMap = map;
-        gp.player.worldX = gp.tileSize * col;
-        gp.player.worldY = gp.tileSize * row;
-        previousEventX = gp.player.worldX;
-        previousEventY = gp.player.worldY;
+        gp.gameState = gp.transitionState;
+
+        tempMap = map;
+        tempCol = col;
+        tempRow = row;
+
         canTouchEvent = false;
         gp.playSE(12);
     }
 
+    public void speak(Entity entity) {
+
+        if (gp.keyH.enterPressed) {
+            gp.gameState = gp.dialogueState;
+            gp.player.attackCanceled = true;
+            entity.speak();
+        }
+    }
 }
