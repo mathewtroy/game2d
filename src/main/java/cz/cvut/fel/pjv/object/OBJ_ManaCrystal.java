@@ -17,7 +17,7 @@ public class OBJ_ManaCrystal extends Entity {
         down1 = setup("/objects/manacrystal_full", gp.tileSize, gp.tileSize);
         image = setup("/objects/manacrystal_full", gp.tileSize, gp.tileSize);
         image2 = setup("/objects/manacrystal_blank", gp.tileSize, gp.tileSize);
-
+        price = 5;
     }
 
     public void use(Entity entity) {

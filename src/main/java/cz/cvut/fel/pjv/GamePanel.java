@@ -60,10 +60,10 @@ public class GamePanel extends JPanel implements Runnable {
 
 //    ENTITY and OBJECT
     public Player player = new Player(this, keyH);
-    public Entity obj[][] = new Entity[maxMap][20];
-    public Entity npc[][] = new Entity[maxMap][10];
-    public Entity monster[][] = new Entity[maxMap][20];
-    public InteractiveTile iTile[][] = new InteractiveTile[maxMap][50];
+    public Entity[][] obj = new Entity[maxMap][20];
+    public Entity[][] npc = new Entity[maxMap][10];
+    public Entity[][] monster = new Entity[maxMap][20];
+    public InteractiveTile[][] iTile = new InteractiveTile[maxMap][50];
     public ArrayList<Entity> projectileList = new ArrayList<>();
     public ArrayList<Entity> particleList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
@@ -78,6 +78,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int characterState = 4;
     public final int optionState = 5;
     public final int gameOverState = 6;
+    public final int transitionState = 7;
+    public final int tradeState = 8;
 
 
 
@@ -264,7 +266,7 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
 
-            //  ADD ENTITES TO THE LIST
+            //  ADD ENTITIES TO THE LIST
             entityList.add(player);
 
             for (int i = 0; i < npc[1].length; i++) {
@@ -301,13 +303,12 @@ public class GamePanel extends JPanel implements Runnable {
             Collections.sort(entityList, new Comparator<Entity>() {
                 @Override
                 public int compare(Entity e1, Entity e2) {
-                    int result = Integer.compare(e1.worldY, e2.worldY);
-                    return result;
+                    return Integer.compare(e1.worldY, e2.worldY);
                 }
             });
 
 
-            // DRAW ENTITES
+            // DRAW ENTITIES
             for (int i = 0; i < entityList.size(); i++) {
                 entityList.get(i).draw(g2);
             }
