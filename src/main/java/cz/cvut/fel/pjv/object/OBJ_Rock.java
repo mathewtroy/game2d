@@ -9,6 +9,8 @@ import java.awt.*;
 public class OBJ_Rock extends Projectile {
     GamePanel gp;
 
+    private static final Color particleColor = new Color(40, 50, 0);
+
     public OBJ_Rock (GamePanel gp) {
         super(gp);
         this.gp = gp;
@@ -46,9 +48,9 @@ public class OBJ_Rock extends Projectile {
     public void subtractResource(Entity user) {
         user.ammo -= useCost;
     }
+
     public Color getParticleColor() {
-        Color color = new Color(40,50,0);
-        return color;
+        return particleColor;
     }
 
     public int getParticleSize() {

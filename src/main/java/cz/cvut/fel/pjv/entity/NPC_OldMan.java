@@ -4,6 +4,8 @@ import cz.cvut.fel.pjv.GamePanel;
 
 import java.util.Random;
 
+import static cz.cvut.fel.pjv.monster.MON_GreenSlime.*;
+
 public class NPC_OldMan extends  Entity {
 
     public NPC_OldMan(GamePanel gp) {
@@ -41,13 +43,10 @@ public class NPC_OldMan extends  Entity {
 
     public void setAction() {
 
-        if (onPath == true) {
+        if (onPath) {
 
-            int goalCol = 25;
-            int goalRow = 25;
-
-//            int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
-//            int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
+            int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
+            int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
 
             searchPath(goalCol, goalRow);
         }
@@ -58,12 +57,12 @@ public class NPC_OldMan extends  Entity {
             if (actionLockCounter == 120) {
 
                 Random random = new Random();
-                int i = random.nextInt(100)+1 ; // pick up a number from 1 to 100
+                int i = random.nextInt(HIGH_PROBABILITY)+1 ; // pick up a number from 1 to 100
 
-                if (i <= 25) { direction = "up"; }
-                if (i > 25 && i <= 50) { direction = "down"; }
-                if (i > 50 && i <= 75) { direction = "left"; }
-                if (i > 75 && i <= 100) { direction = "right"; }
+                if (i <= LOW_PROBABILITY) { direction = "up"; }
+                if (i > LOW_PROBABILITY && i <= MEDIUM_LOW_PROBABILITY) { direction = "down"; }
+                if (i > MEDIUM_LOW_PROBABILITY && i <= MEDIUM_HIGH_PROBABILITY) { direction = "left"; }
+                if (i > MEDIUM_HIGH_PROBABILITY) { direction = "right"; }
 
                 actionLockCounter = 0;
             }

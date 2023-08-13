@@ -24,8 +24,8 @@ public class Sound {
 
     static final int SOUND_ZERO = 0;
     public static final int SOUND_ONE = 1;
-    static final int SOUND_TWO = 2;
-    static final int SOUND_THREE = 3;
+    public static final int SOUND_TWO = 2;
+    public static final int SOUND_THREE = 3;
     static final int SOUND_FOUR = 4;
     public static final int SOUND_FIVE = 5;
     public static final int SOUND_SIX = 6;

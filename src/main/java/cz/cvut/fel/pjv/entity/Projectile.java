@@ -28,7 +28,7 @@ public class Projectile extends Entity {
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 
             if (monsterIndex != MAX_COST) {
-                gp.player.damageMonster(monsterIndex, attack);
+                gp.player.damageMonster(monsterIndex, attack, knockBackPower);
                 generateParticle(user.projectile, gp.monster[gp.currentMap][monsterIndex]);
                 alive = false;
             }

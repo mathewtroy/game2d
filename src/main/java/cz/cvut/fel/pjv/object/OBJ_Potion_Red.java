@@ -3,6 +3,8 @@ package cz.cvut.fel.pjv.object;
 import cz.cvut.fel.pjv.GamePanel;
 import cz.cvut.fel.pjv.entity.Entity;
 
+import static cz.cvut.fel.pjv.Sound.SOUND_THREE;
+
 public class OBJ_Potion_Red extends Entity {
 
     GamePanel gp;
@@ -22,11 +24,12 @@ public class OBJ_Potion_Red extends Entity {
 
     public void use(Entity entity) {
         gp.gameState = gp.dialogueState;
+
         gp.ui.currentDialogue = "You drink the " + name + "!\n" +
-                "Your life has been recovered by " + value + "!";
+                "Life has been recovered by " + value + "!";
         entity.life += value;
 
-        gp.playSE(3);
+        gp.playSE(SOUND_THREE);
 
     }
 }
