@@ -10,6 +10,9 @@ public class OBJ_Fireball extends Projectile {
 
     GamePanel gp;
 
+    private static final Color particleColor = new Color(240,50,0);
+
+
     public OBJ_Fireball(GamePanel gp) {
         super(gp);
         this.gp = gp;
@@ -19,6 +22,7 @@ public class OBJ_Fireball extends Projectile {
         maxLife = 80;
         life = maxLife;
         attack = 5;
+        knockBackPower = 0;
         useCost = 1;
         alive = false;
         getImage();
@@ -49,8 +53,7 @@ public class OBJ_Fireball extends Projectile {
     }
 
     public Color getParticleColor() {
-        Color color = new Color(240,50,0);
-        return color;
+        return particleColor;
     }
 
     public int getParticleSize() {

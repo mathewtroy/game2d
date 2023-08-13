@@ -11,6 +11,20 @@ import java.util.Random;
 
 public class MON_GreenSlime extends Entity {
 
+    // Probability Constants
+    public static final int LOW_PROBABILITY = 25;
+    public static final int MEDIUM_LOW_PROBABILITY = 50;
+    public static final int MEDIUM_HIGH_PROBABILITY = 75;
+    public static final int HIGH_PROBABILITY = 100;
+
+    // Tile Distances
+    public static final int CLOSE_DISTANCE = 5;
+    public static final int FAR_DISTANCE = 7;
+
+    // Shot Probability
+    public static final int SHOT_PROBABILITY = 97;
+    public static final int SHOT_COUNTER_MAX = 30;
+
     GamePanel gp;
 
     public MON_GreenSlime (GamePanel gp) {
@@ -20,7 +34,8 @@ public class MON_GreenSlime extends Entity {
 
         type = type_monster;
         name = "Green Slime";
-        speed = 1;
+        defaultSpeed = 1;
+        speed = defaultSpeed;
         maxLife = 12;   // added more life
         life = maxLife;
         attack = 5;
@@ -56,31 +71,41 @@ public class MON_GreenSlime extends Entity {
         int yDistance = Math.abs(worldY - gp.player.worldY);
         int tileDistance = (xDistance + yDistance) / gp.tileSize;
 
-        if (onPath == false && tileDistance < 5) {
-            int i = new Random().nextInt(100)+1;
-            if (i > 50) {
+        if (!onPath && tileDistance < CLOSE_DISTANCE) {
+            int i = new Random().nextInt(HIGH_PROBABILITY)+1;
+            if (i > MEDIUM_LOW_PROBABILITY) {
                 onPath = true;
             }
         }
 
-        if (onPath && tileDistance > 7) {
-            onPath = true;
-        }
+        if (onPath && tileDistance > FAR_DISTANCE) { onPath = true; }
     }
 
     public void setAction () {
 
-        if (onPath == true) {
+        if (onPath) {
 
             int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
             int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
 
             searchPath(goalCol, goalRow);
 
-            int i = new Random().nextInt(100)+1;
-            if (i > 97 && (projectile.alive == false) && shotAvailableCounter == 30) {
+            int i = new Random().nextInt(HIGH_PROBABILITY)+1;
+            if (i > SHOT_PROBABILITY && (!projectile.alive)
+                    && shotAvailableCounter == SHOT_COUNTER_MAX) {
+
                 projectile.set(worldX, worldY, direction,true, this);
-                gp.projectileList.add(projectile);
+
+                //gp.projectileList.add(projectile);
+
+                // CHECK VACANCY
+//                for (int ii = 0; ii < gp.projectile[1].length; ii++) {
+//                    if (gp.projectile[gp.currentMap][ii] == null) {
+//                        gp.projectile[gp.currentMap][ii] = projectile;
+//                        break;
+//                    }
+//                }
+
                 shotAvailableCounter = 0;
             }
         }
@@ -91,12 +116,12 @@ public class MON_GreenSlime extends Entity {
             if (actionLockCounter == 120) {
 
                 Random random = new Random();
-                int i = random.nextInt(100)+1 ; // pick up a number from 1 to 100
+                int i = random.nextInt(HIGH_PROBABILITY)+1 ; // pick up a number from 1 to 100
 
-                if (i <= 25) { direction = "up"; }
-                if (i > 25 && i <= 50) { direction = "down"; }
-                if (i > 50 && i <= 75) { direction = "left"; }
-                if (i > 75 && i <= 100) { direction = "right"; }
+                if (i <= LOW_PROBABILITY) { direction = "up"; }
+                if (i > LOW_PROBABILITY && i <= MEDIUM_LOW_PROBABILITY) { direction = "down"; }
+                if (i > MEDIUM_LOW_PROBABILITY && i <= MEDIUM_HIGH_PROBABILITY) { direction = "left"; }
+                if (i > MEDIUM_HIGH_PROBABILITY) { direction = "right"; }
 
                 actionLockCounter = 0;
             }
@@ -105,7 +130,6 @@ public class MON_GreenSlime extends Entity {
     }
 
     public void damageReaction() {
-
         actionLockCounter = 0;
         direction = gp.player.direction;
         onPath = true;
@@ -113,20 +137,14 @@ public class MON_GreenSlime extends Entity {
 
     public void checkDrop() {
         // CAST A DIE
-        int i = new Random().nextInt(100)+1;
+        int i = new Random().nextInt(HIGH_PROBABILITY)+1;
 
         // SET THE MONSTER DROP
-        if (i < 50) {
-            dropItem(new OBJ_Coin_Bronze(gp));
-        }
+        if (i < MEDIUM_LOW_PROBABILITY) { dropItem(new OBJ_Coin_Bronze(gp)); }
 
-        if (i >= 50 && i < 75) {
-            dropItem(new OBJ_Heart(gp));
-        }
+        if (i >= MEDIUM_LOW_PROBABILITY && i < MEDIUM_HIGH_PROBABILITY) { dropItem(new OBJ_Heart(gp)); }
 
-        if (i >= 75 && i < 100) {
-            dropItem(new OBJ_ManaCrystal(gp));
-        }
+        if (i >= MEDIUM_HIGH_PROBABILITY && i < HIGH_PROBABILITY) { dropItem(new OBJ_ManaCrystal(gp)); }
 
     }
 }
