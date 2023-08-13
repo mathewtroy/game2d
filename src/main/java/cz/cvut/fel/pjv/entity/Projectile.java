@@ -2,6 +2,8 @@ package cz.cvut.fel.pjv.entity;
 
 import cz.cvut.fel.pjv.GamePanel;
 
+import static cz.cvut.fel.pjv.CollisionChecker.MAX_COST;
+
 public class Projectile extends Entity {
 
     Entity user;
@@ -25,7 +27,7 @@ public class Projectile extends Entity {
         if (user == gp.player) {
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 
-            if (monsterIndex !=999) {
+            if (monsterIndex != MAX_COST) {
                 gp.player.damageMonster(monsterIndex, attack);
                 generateParticle(user.projectile, gp.monster[gp.currentMap][monsterIndex]);
                 alive = false;

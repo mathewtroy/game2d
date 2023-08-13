@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import static cz.cvut.fel.pjv.CollisionChecker.MAX_COST;
 import static cz.cvut.fel.pjv.Sound.*;
 
 public class Player extends Entity {
@@ -342,7 +343,7 @@ public class Player extends Entity {
     }
 
     public void pickUpObject (int i) {
-        if (i != 999) {
+        if (i != MAX_COST) {
 
             // PICKUP ONLY ITEMS
             if (gp.obj[gp.currentMap][i].type == type_pickupOnly) {
@@ -374,7 +375,7 @@ public class Player extends Entity {
     public void interactNPC(int i) {
         if (gp.keyH.enterPressed) {
 
-            if (i != 999) {
+            if (i != MAX_COST) {
 
                 attackCanceled = true;
 
@@ -390,7 +391,7 @@ public class Player extends Entity {
 
     public void contactMonster(int i) {
 
-        if (i != 999) {
+        if (i != MAX_COST) {
 
             if (!invisible && !gp.monster[gp.currentMap][i].dying) {
                 gp.playSE(SOUND_SIX);
@@ -406,7 +407,7 @@ public class Player extends Entity {
     }
 
     public void damageMonster(int i, int attack) {
-        if (i != 999) {
+        if (i != MAX_COST) {
             if (!gp.monster[gp.currentMap][i].invisible) {
                 gp.playSE(SOUND_FIVE);
 
@@ -454,7 +455,7 @@ public class Player extends Entity {
     }
 
     public void damageInteractiveTile(int i) {
-        if (i != 999 && gp.iTile[gp.currentMap][i].destructible
+        if (i != MAX_COST && gp.iTile[gp.currentMap][i].destructible
                 && gp.iTile[gp.currentMap][i].isCorrectItem(this)
         && !gp.iTile[gp.currentMap][i].invisible) {
             gp.iTile[gp.currentMap][i].playSE();

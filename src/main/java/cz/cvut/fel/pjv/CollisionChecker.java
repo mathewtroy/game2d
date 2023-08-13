@@ -4,6 +4,7 @@ import cz.cvut.fel.pjv.entity.Entity;
 
 public class CollisionChecker {
 
+    public static final int MAX_COST = 999;
     GamePanel gp;
 
     public CollisionChecker(GamePanel gp) {
@@ -72,7 +73,7 @@ public class CollisionChecker {
 
     public int checkObject(Entity entity, boolean player) {
 
-        int index = 999;
+        int index = MAX_COST;
 
         for (int i = 0; i < gp.obj[1].length; i++) {
 
@@ -115,7 +116,7 @@ public class CollisionChecker {
     // NPC or MONSTER
     public int checkEntity(Entity entity, Entity[][] target) {
 
-        int index = 999;
+        int index = MAX_COST;
 
         for (int i = 0; i < target[1].length; i++) {
 
