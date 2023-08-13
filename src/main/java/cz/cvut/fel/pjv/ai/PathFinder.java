@@ -4,6 +4,8 @@ import cz.cvut.fel.pjv.GamePanel;
 
 import java.util.ArrayList;
 
+import static cz.cvut.fel.pjv.CollisionChecker.MAX_COST;
+
 public class PathFinder {
 
     GamePanel gp;
@@ -157,7 +159,7 @@ public class PathFinder {
 
             // Find the best Node
             int bestNodeIdx = 0;
-            int bestNodeCost = 999;
+            int bestNodeCost = MAX_COST;
 
             for (int i = 0; i < openList.size(); i++) {
 
