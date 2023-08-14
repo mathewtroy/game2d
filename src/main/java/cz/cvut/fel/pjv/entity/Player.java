@@ -6,7 +6,6 @@ import cz.cvut.fel.pjv.object.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import static cz.cvut.fel.pjv.CollisionChecker.MAX_COST;
 import static cz.cvut.fel.pjv.Sound.*;
@@ -114,7 +113,8 @@ public class Player extends Entity {
         inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_Potion_Red(gp));
-
+        // inventory.add(new OBJ_Potion_Red(gp));
+        //TODO Mana Potion
 
     }
 
@@ -378,8 +378,7 @@ public class Player extends Entity {
             else {
                 String text;
 
-                if (inventory.size() != maxInventorySize) {
-                    inventory.add(gp.obj[gp.currentMap][i]);
+                if (canObtainItem(gp.obj[gp.currentMap][i])) {
                     gp.playSE(SOUND_ONE);
                     text = "Got a " + gp.obj[gp.currentMap][i].name + "!";
                 }
@@ -539,10 +538,62 @@ public class Player extends Entity {
             if (selectedItem.type == type_consumable) {
 
                 if (selectedItem.use(this)) {
-                    inventory.remove(itemIndex);
+                    if (selectedItem.amount > 1) {
+                        selectedItem.amount--;
+                    }
+                    else {
+                        inventory.remove(itemIndex);
+                    }
+
                 }
             }
         }
+    }
+
+    public int searchItemInInventory(String itemName) {
+
+        int itemIndex = MAX_COST;
+
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i).name.equals(itemName)) {
+                itemIndex = i;
+                break;
+            }
+        }
+        return itemIndex;
+
+    }
+
+    public boolean canObtainItem(Entity item) {
+
+        boolean canObtain = false;
+
+        // Check if stackable
+        if (item.stackable) {
+            int index = searchItemInInventory(item.name);
+
+            if (index != MAX_COST) {
+                inventory.get(index).amount++;
+                canObtain = true;
+            }
+
+            else {
+                // New item so need to check vacancy
+                if (inventory.size() != maxInventorySize)  {
+                    inventory.add(item);
+                    canObtain = true;
+                }
+            }
+        }
+
+        else {
+            // New item so need to check vacancy
+            if (inventory.size() != maxInventorySize)  {
+                inventory.add(item);
+                canObtain = true;
+            }
+        }
+        return canObtain;
     }
 
     public void draw (Graphics2D g2) {
