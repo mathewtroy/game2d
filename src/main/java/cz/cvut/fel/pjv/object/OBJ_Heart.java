@@ -3,6 +3,8 @@ package cz.cvut.fel.pjv.object;
 import cz.cvut.fel.pjv.GamePanel;
 import cz.cvut.fel.pjv.entity.Entity;
 
+import static cz.cvut.fel.pjv.Sound.SOUND_TWO;
+
 
 public class OBJ_Heart extends Entity {
 
@@ -21,9 +23,11 @@ public class OBJ_Heart extends Entity {
         image3 = setup("/objects/heart_blank", gp.tileSize, gp.tileSize);
     }
 
-    public void use(Entity entity) {
-        gp.playSE(2);
+    public boolean use(Entity entity) {
+        gp.playSE(SOUND_TWO);
         gp.ui.addMessage("Life +" + value) ;
         entity.life += value;
+
+        return true;
     }
 }

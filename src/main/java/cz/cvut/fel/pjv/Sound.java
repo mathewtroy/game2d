@@ -32,7 +32,7 @@ public class Sound {
     public static final int SOUND_SEVEN = 7;
     static final int SOUND_EIGHT = 8;
     public static final int SOUND_NINE = 9;
-    static final int SOUND_TEN = 10;
+    public static final int SOUND_TEN = 10;
     public static final int SOUND_ELEVEN = 11;
     static final int SOUND_TWELVE = 12 ;
 

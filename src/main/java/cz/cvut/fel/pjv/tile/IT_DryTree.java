@@ -5,6 +5,8 @@ import cz.cvut.fel.pjv.entity.Entity;
 
 import java.awt.*;
 
+import static cz.cvut.fel.pjv.Sound.SOUND_TEN;
+
 public class IT_DryTree extends InteractiveTile{
 
     GamePanel gp;
@@ -30,7 +32,7 @@ public class IT_DryTree extends InteractiveTile{
         return isCorrectItem;
     }
     public void playSE() {
-        gp.playSE(10);
+        gp.playSE(SOUND_TEN);
     }
 
     public InteractiveTile getDestroyedForm() {

@@ -78,22 +78,27 @@ public class AssetSetter {
 //        gp.obj[i].worldY = gp.tileSize*24; // corner at the top of forest, grass tile (txt row: 25, txt col: 56)
 //        i++;
 
-//  DOOR
+        //  DOOR
+        gp.obj[mapNum][i] = new OBJ_Door(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize*33;
+        gp.obj[mapNum][i].worldY = gp.tileSize*13; // grass tile (txt row: 14, txt col: 68)
+        i++;
 
-//        gp.obj[i] = new OBJ_Door(gp);
-//        gp.obj[i].worldX = gp.tileSize*33;
-//        gp.obj[i].worldY = gp.tileSize*13; // grass tile (txt row: 14, txt col: 68)
-//        i++;
-//
-//        gp.obj[i] = new OBJ_Door(gp);
-//        gp.obj[i].worldX = gp.tileSize*36;
-//        gp.obj[i].worldY = gp.tileSize*10; // grass tile (txt row: 11, txt col: 74)
-//        i++;
-//
-//        gp.obj[i] = new OBJ_Door(gp);
-//        gp.obj[i].worldX = gp.tileSize*38;
-//        gp.obj[i].worldY = gp.tileSize*13; // grass tile (txt row: 14, txt col: 76)
-//        i++;
+        gp.obj[mapNum][i] = new OBJ_Door(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize*36;
+        gp.obj[mapNum][i].worldY = gp.tileSize*10; // grass tile (txt row: 11, txt col: 74)
+        i++;
+
+        gp.obj[mapNum][i] = new OBJ_Door(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize*38;
+        gp.obj[mapNum][i].worldY = gp.tileSize*13; // grass tile (txt row: 14, txt col: 76)
+        i++;
+
+
+        gp.obj[mapNum][i] = new OBJ_Chest(gp, new OBJ_Key(gp));
+        gp.obj[mapNum][i].worldX = gp.tileSize*36;
+        gp.obj[mapNum][i].worldY = gp.tileSize*7; // grass tile (txt row: 8, txt col: 74)
+        i++;
 
 
     }

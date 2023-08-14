@@ -22,9 +22,11 @@ public class OBJ_ManaCrystal extends Entity {
         price = 5;
     }
 
-    public void use(Entity entity) {
+    public boolean use(Entity entity) {
         gp.playSE(SOUND_TWO);
         gp.ui.addMessage("Mana +" + value) ;
         entity.mana += value;
+
+        return true;
     }
 }
