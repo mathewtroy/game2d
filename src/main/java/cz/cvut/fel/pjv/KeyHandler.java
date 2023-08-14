@@ -124,6 +124,11 @@ public class KeyHandler implements KeyListener {
             tradeState(code);
         }
 
+        // MAP STATE
+        else if (gp.gameState == gp.mapState) {
+            mapState(code);
+        }
+
     }
 
 
@@ -163,8 +168,18 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_C) { gp.gameState = gp.characterState;}
         if (code == KeyEvent.VK_ENTER) { enterPressed = true; }
         if (code == KeyEvent.VK_F) { shotKeyPressed = true; }
-
         if (code == KeyEvent.VK_R) { gp.gameState = gp.optionState;}
+
+        if (code == KeyEvent.VK_M) { gp.gameState = gp.mapState;}
+        if (code == KeyEvent.VK_Q) {
+
+            if (!gp.map.miniMapOn) {
+                gp.map.miniMapOn = true;
+            }
+            else {
+                gp.map.miniMapOn = false;
+            }
+        }
 
 
 
@@ -340,6 +355,13 @@ public class KeyHandler implements KeyListener {
             }
         }
 
+    }
+
+    public void mapState(int code) {
+
+        if (code == KeyEvent.VK_M) {
+            gp.gameState = gp.playState;
+        }
     }
 
     public void playerInventory(int code) {
