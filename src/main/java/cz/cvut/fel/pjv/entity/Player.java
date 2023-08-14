@@ -113,6 +113,8 @@ public class Player extends Entity {
         inventory.add(currentShield);
         inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Potion_Red(gp));
+
 
     }
 
@@ -362,6 +364,16 @@ public class Player extends Entity {
                 gp.obj[gp.currentMap][i] = null;
             }
 
+            // OBSTACLE
+            else if (gp.obj[gp.currentMap][i].type == type_obstacle) {
+
+                if (keyH.enterPressed) {
+                    attackCanceled = true;
+                    gp.obj[gp.currentMap][i].interact();
+                }
+            }
+
+
             //INVENTORY ITEMS
             else {
                 String text;
@@ -525,8 +537,10 @@ public class Player extends Entity {
             }
 
             if (selectedItem.type == type_consumable) {
-                selectedItem.use(this);
-                inventory.remove(itemIndex);
+
+                if (selectedItem.use(this)) {
+                    inventory.remove(itemIndex);
+                }
             }
         }
     }

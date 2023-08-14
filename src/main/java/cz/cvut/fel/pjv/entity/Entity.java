@@ -9,14 +9,24 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static cz.cvut.fel.pjv.CollisionChecker.MAX_COST;
 import static cz.cvut.fel.pjv.Sound.SOUND_SIX;
 
 public class Entity {
 
     GamePanel gp;
 
-    public BufferedImage up1, up2, down1, down2, right1, right2, left1, left2;
-    public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2,
+    private static final Color HP_BAR_BACKGROUND_COLOR = new Color(35, 35, 35);
+    private static final Color HP_BAR_COLOR = new Color(255, 0, 30);
+
+    private static final int MAX_INVISIBLE_COUNTER = 40;
+    private static final int MAX_SHOT_AVAILABLE_COUNTER = 30;
+    private static final int MAX_SPRITE_COUNTER = 20;
+    private static final int KNOCKBACK_COUNTER_THRESHOLD = 10;
+
+
+    public BufferedImage up1, up2, down1, down2, right1, right2, left1, left2,
+            attackUp1, attackUp2, attackDown1, attackDown2,
             attackLeft1, attackLeft2, attackRight1,attackRight2;
     public BufferedImage image, image2, image3;
     public Rectangle solidArea = new Rectangle(0, 0, 48,48);
@@ -93,11 +103,36 @@ public class Entity {
     public final int type_shield = 5;
     public final int type_consumable = 6;
     public final int type_pickupOnly = 7;
+    public final int type_obstacle = 8;
 
 
 
     public Entity(GamePanel gp) {
         this.gp = gp;
+    }
+
+    public int getLeftX() {
+        return worldX + solidArea.x;
+    }
+
+    public int getRightX() {
+        return worldX + solidArea.x + solidArea.width;
+    }
+
+    public int getTopY() {
+        return worldY + solidArea.y;
+    }
+
+    public int getBottomY() {
+        return worldY + solidArea.y + solidArea.height;
+    }
+
+    public int getCol() {
+        return (worldX + solidArea.x) / gp.tileSize;
+    }
+
+    public int getRow() {
+        return (worldY + solidArea.y) / gp.tileSize;
     }
 
     public void setAction() {
@@ -125,8 +160,12 @@ public class Entity {
         }
     }
 
-    public void use (Entity entity){
+    public void interact() {
 
+    }
+
+    public boolean use (Entity entity) {
+        return false;
     }
 
     public void checkDrop()  {
@@ -194,7 +233,7 @@ public class Entity {
         gp.cChecker.checkEntity(this, gp.iTile);
         boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
-        if (this.type == type_monster && contactPlayer == true) {
+        if (this.type == type_monster && contactPlayer) {
             damagePlayer(attack);
         }
     }
@@ -221,7 +260,7 @@ public class Entity {
 
             knockBackCounter++;
 
-            if(knockBackCounter == 10) {
+            if(knockBackCounter == KNOCKBACK_COUNTER_THRESHOLD) {
                 knockBackCounter = 0;
                 knockBack = false;
                 speed = defaultSpeed;
@@ -249,7 +288,7 @@ public class Entity {
 
 
         spriteCounter++;
-        if (spriteCounter > 20) {
+        if (spriteCounter > MAX_SPRITE_COUNTER) {
             if (spriteNum == 1) { spriteNum = 2; }
             else if (spriteNum == 2) { spriteNum = 1; }
 
@@ -259,12 +298,12 @@ public class Entity {
         if (invisible) {
             invisibleCounter++;
 
-            if (invisibleCounter > 40) {
+            if (invisibleCounter > MAX_INVISIBLE_COUNTER) {
                 invisible = false;
                 invisibleCounter = 0;
             }
         }
-        if (shotAvailableCounter < 30) {
+        if (shotAvailableCounter < MAX_SHOT_AVAILABLE_COUNTER) {
             shotAvailableCounter ++;
         }
 
@@ -326,10 +365,10 @@ public class Entity {
                 double oneScale = (double)gp.tileSize/maxLife;
                 double hpBarValue = oneScale*life;
 
-                g2.setColor(new Color(35,35,35));
+                g2.setColor(HP_BAR_BACKGROUND_COLOR);
                 g2.fillRect(screenX-1, screenY - 16 , gp.tileSize+2, 12);
 
-                g2.setColor(new Color(255,0,30));
+                g2.setColor(HP_BAR_COLOR);
                 g2.fillRect(screenX, screenY - 15 , (int)hpBarValue, 10);
 
                 hpBarCounter++;
@@ -481,5 +520,37 @@ public class Entity {
                 onPath = false;
             }
         }
+    }
+
+    public int getDetected(Entity user, Entity[][] target, String targetName) {
+
+        int index = MAX_COST;
+
+        // Check the surrounding
+        int nextWorldX = user.getLeftX();
+        int nextWorldY = user.getTopY();
+
+        switch (user.direction) {
+
+            case "up": nextWorldY = user.getTopY() - 1; break;
+            case "down": nextWorldY = user.getTopY() + 1; break;
+            case "left": nextWorldX = user.getLeftX() - 1; break;
+            case "right": nextWorldX = user.getRightX() + 1; break;
+        }
+
+        int col = nextWorldX/gp.tileSize;
+        int row = nextWorldY/gp.tileSize;
+
+        for(int i = 0; i < target[1].length; i++) {
+            if (target[gp.currentMap][i] != null) {
+                if (target[gp.currentMap][i].getCol() == col &&
+                        target[gp.currentMap][i].getRow() == row &&
+                        target[gp.currentMap][i].name.equals(targetName)) {
+                    index = i;
+                    break;
+                }
+            }
+        }
+        return index;
     }
 }

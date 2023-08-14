@@ -55,14 +55,24 @@ public class MON_GreenSlime extends Entity {
 
     public  void getImage() {
 
-        up1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
+        up1 = setup("/monster/green_down_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/monster/green_down_2", gp.tileSize, gp.tileSize);
+        down1 = setup("/monster/green_down_1", gp.tileSize, gp.tileSize);
+        down2 = setup("/monster/green_down_2", gp.tileSize, gp.tileSize);
+        left1 = setup("/monster/green_down_1", gp.tileSize, gp.tileSize);
+        left2 = setup("/monster/green_down_2", gp.tileSize, gp.tileSize);
+        right1 = setup("/monster/green_down_1", gp.tileSize, gp.tileSize);
+        right2 = setup("/monster/green_down_2", gp.tileSize, gp.tileSize);
+
+// ghost monster
+//        up1 = setup("/monster/ghost_down_1", gp.tileSize, gp.tileSize);
+//        up2 = setup("/monster/ghost_down_2", gp.tileSize, gp.tileSize);
+//        down1 = setup("/monster/ghost_down_1", gp.tileSize, gp.tileSize);
+//        down2 = setup("/monster/ghost_down_2", gp.tileSize, gp.tileSize);
+//        left1 = setup("/monster/ghost_down_1", gp.tileSize, gp.tileSize);
+//        left2 = setup("/monster/ghost_down_2", gp.tileSize, gp.tileSize);
+//        right1 = setup("/monster/ghost_down_1", gp.tileSize, gp.tileSize);
+//        right2 = setup("/monster/ghost_down_2", gp.tileSize, gp.tileSize);
     }
 
     public void update() {
@@ -99,12 +109,12 @@ public class MON_GreenSlime extends Entity {
                 //gp.projectileList.add(projectile);
 
                 // CHECK VACANCY
-//                for (int ii = 0; ii < gp.projectile[1].length; ii++) {
-//                    if (gp.projectile[gp.currentMap][ii] == null) {
-//                        gp.projectile[gp.currentMap][ii] = projectile;
-//                        break;
-//                    }
-//                }
+                for (int ii = 0; ii < gp.projectile[1].length; ii++) {
+                    if (gp.projectile[gp.currentMap][ii] == null) {
+                        gp.projectile[gp.currentMap][ii] = projectile;
+                        break;
+                    }
+                }
 
                 shotAvailableCounter = 0;
             }

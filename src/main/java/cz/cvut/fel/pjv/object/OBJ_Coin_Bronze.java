@@ -3,6 +3,8 @@ package cz.cvut.fel.pjv.object;
 import cz.cvut.fel.pjv.GamePanel;
 import cz.cvut.fel.pjv.entity.Entity;
 
+import static cz.cvut.fel.pjv.Sound.SOUND_ONE;
+
 public class OBJ_Coin_Bronze extends Entity {
 
     GamePanel gp;
@@ -18,15 +20,12 @@ public class OBJ_Coin_Bronze extends Entity {
 
     }
 
-    public void use(Entity entity) {
-        gp.playSE(1);
+    public boolean use(Entity entity) {
+        gp.playSE(SOUND_ONE);
         gp.ui.addMessage("Coin + " + value);
         gp.player.coin += value;
-//        if (entity.life  > ) {
-//
-//
-//        }
 
+        return true;
     }
 
 }
