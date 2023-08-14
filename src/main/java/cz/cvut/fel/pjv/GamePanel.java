@@ -4,6 +4,7 @@ import cz.cvut.fel.pjv.ai.PathFinder;
 import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.entity.Player;
 import cz.cvut.fel.pjv.tile.InteractiveTile;
+import cz.cvut.fel.pjv.tile.Map;
 import cz.cvut.fel.pjv.tile.TileManager;
 
 import javax.swing.*;
@@ -48,7 +49,7 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS = 60;
 
 //    SYSTEM
-public TileManager tileM = new TileManager(this);
+    public TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
     Sound se = new Sound();
@@ -58,6 +59,7 @@ public TileManager tileM = new TileManager(this);
     public EventHandler eHandler = new EventHandler(this);
     Config config = new Config(this);
     public PathFinder pFinder = new PathFinder(this);
+    Map map = new Map(this);
     Thread gameThread;
 
 //    ENTITY and OBJECT
@@ -83,6 +85,7 @@ public TileManager tileM = new TileManager(this);
     public final int gameOverState = 6;
     public final int transitionState = 7;
     public final int tradeState = 8;
+    public final int mapState = 9;
 
 
 
@@ -247,18 +250,24 @@ public TileManager tileM = new TileManager(this);
 
         Graphics2D g2 = (Graphics2D) g;
 
-//  DEBUG
+        //  DEBUG
         long drawStart = 0;
         if (keyH.checkDrawTime) {
             drawStart = System.nanoTime();
         }
 
-//  TITLE SCREEN
+        //  TITLE SCREEN
         if (gameState == titleState) {
             ui.draw(g2);
         }
 
-//  OTHERS
+        // MAP SCREEN
+        else if (gameState == mapState) {
+            map.drawFullMapScreen(g2);
+        }
+
+
+        //  OTHERS
         else {
             //  TILE
             tileM.draw(g2);
@@ -319,6 +328,9 @@ public TileManager tileM = new TileManager(this);
 
             // EMPTY ENTITY LIST
             entityList.clear();
+
+            // MINI MAP
+            map.drawMiniMap(g2);
 
             //  UI
             ui.draw(g2);
