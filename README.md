@@ -33,15 +33,15 @@ Herní engine musí být vybaven GUI.
 :arrow_left:	    go LEFT **button A** <br>
 :arrow_right:		go RIGHT **button D** <br>
 
-:pause_button:	    **button PAUSE** <br>
 :ok:	    	    action **button ENTER** <br>
-
-
 :gun:	            shooting **button F** <br>
+
+:pause_button:	    pause option **button P** <br>
+:gear:              settings **button R**<br>
 :handbag:		    inventory screen **button C** <br>
+
 :heart:	            hit points (HP) <br>
 :large_blue_diamond:	mana points (MP) <br>
-
 
 :hammer:	        axe item <br>
 :dagger:	        sword item <br>
