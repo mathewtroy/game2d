@@ -4,7 +4,7 @@ import cz.cvut.fel.pjv.GamePanel;
 
 import java.util.Random;
 
-import static cz.cvut.fel.pjv.monster.MON_GreenSlime.*;
+import static cz.cvut.fel.pjv.monster.MON_Green.*;
 
 public class NPC_OldMan extends  Entity {
 
