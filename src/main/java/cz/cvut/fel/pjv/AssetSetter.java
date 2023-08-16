@@ -2,7 +2,8 @@ package cz.cvut.fel.pjv;
 
 import cz.cvut.fel.pjv.entity.NPC_Merchant;
 import cz.cvut.fel.pjv.entity.NPC_OldMan;
-import cz.cvut.fel.pjv.monster.MON_GreenSlime;
+import cz.cvut.fel.pjv.monster.MON_Ghost;
+import cz.cvut.fel.pjv.monster.MON_Green;
 import cz.cvut.fel.pjv.object.*;
 import cz.cvut.fel.pjv.tile.IT_DryTree;
 
@@ -131,34 +132,51 @@ public class AssetSetter {
         int mapNum = 0;
         int i = 0;
 
-        gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+        gp.monster[mapNum][i] = new MON_Green(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize*11;
         gp.monster[mapNum][i].worldY = gp.tileSize*21;
         i++;
 
-        gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+        gp.monster[mapNum][i] = new MON_Green(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize*21;
         gp.monster[mapNum][i].worldY = gp.tileSize*21;  // grass tile (txt row: 22, txt col: 44)
         i++;
 
-        gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+        gp.monster[mapNum][i] = new MON_Green(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize*11;
         gp.monster[mapNum][i].worldY = gp.tileSize*31;
         i++;
 
-        gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+        gp.monster[mapNum][i] = new MON_Green(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize*21;
         gp.monster[mapNum][i].worldY = gp.tileSize*31;
         i++;
 
-        gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+        gp.monster[mapNum][i] = new MON_Green(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize*31;
         gp.monster[mapNum][i].worldY = gp.tileSize*31;
         i++;
 
-        gp.monster[mapNum][i] = new MON_GreenSlime(gp);
+        gp.monster[mapNum][i] = new MON_Green(gp);
         gp.monster[mapNum][i].worldX = gp.tileSize*41;
         gp.monster[mapNum][i].worldY = gp.tileSize*31;
+        i++;
+
+
+        // Ghost
+        gp.monster[mapNum][i] = new MON_Ghost(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize*18;
+        gp.monster[mapNum][i].worldY = gp.tileSize*18;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Ghost(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize*17;
+        gp.monster[mapNum][i].worldY = gp.tileSize*32;
+        i++;
+
+        gp.monster[mapNum][i] = new MON_Ghost(gp);
+        gp.monster[mapNum][i].worldX = gp.tileSize*20;
+        gp.monster[mapNum][i].worldY = gp.tileSize*43;
         i++;
 
     }

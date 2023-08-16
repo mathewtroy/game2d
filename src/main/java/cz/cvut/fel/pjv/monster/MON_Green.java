@@ -2,14 +2,11 @@ package cz.cvut.fel.pjv.monster;
 
 import cz.cvut.fel.pjv.GamePanel;
 import cz.cvut.fel.pjv.entity.Entity;
-import cz.cvut.fel.pjv.object.OBJ_Coin_Bronze;
-import cz.cvut.fel.pjv.object.OBJ_Heart;
-import cz.cvut.fel.pjv.object.OBJ_ManaCrystal;
-import cz.cvut.fel.pjv.object.OBJ_Rock;
+import cz.cvut.fel.pjv.object.*;
 
 import java.util.Random;
 
-public class MON_GreenSlime extends Entity {
+public class MON_Green extends Entity {
 
     // Probability Constants
     public static final int LOW_PROBABILITY = 25;
@@ -27,16 +24,16 @@ public class MON_GreenSlime extends Entity {
 
     GamePanel gp;
 
-    public MON_GreenSlime (GamePanel gp) {
+    public MON_Green (GamePanel gp) {
         super(gp);
 
         this.gp = gp;
 
         type = type_monster;
-        name = "Green Slime";
+        name = "Green monster";
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 12;   // added more life
+        maxLife = 15;   // added more life
         life = maxLife;
         attack = 5;
         defense = 0;
@@ -64,19 +61,10 @@ public class MON_GreenSlime extends Entity {
         right1 = setup("/monster/green_down_1", gp.tileSize, gp.tileSize);
         right2 = setup("/monster/green_down_2", gp.tileSize, gp.tileSize);
 
-// ghost monster
-//        up1 = setup("/monster/ghost_down_1", gp.tileSize, gp.tileSize);
-//        up2 = setup("/monster/ghost_down_2", gp.tileSize, gp.tileSize);
-//        down1 = setup("/monster/ghost_down_1", gp.tileSize, gp.tileSize);
-//        down2 = setup("/monster/ghost_down_2", gp.tileSize, gp.tileSize);
-//        left1 = setup("/monster/ghost_down_1", gp.tileSize, gp.tileSize);
-//        left2 = setup("/monster/ghost_down_2", gp.tileSize, gp.tileSize);
-//        right1 = setup("/monster/ghost_down_1", gp.tileSize, gp.tileSize);
-//        right2 = setup("/monster/ghost_down_2", gp.tileSize, gp.tileSize);
     }
 
-    public void update() {
-        super.update();
+    public void setAction () {
+
         int xDistance = Math.abs(worldX - gp.player.worldX);
         int yDistance = Math.abs(worldY - gp.player.worldY);
         int tileDistance = (xDistance + yDistance) / gp.tileSize;
@@ -89,9 +77,6 @@ public class MON_GreenSlime extends Entity {
         }
 
         if (onPath && tileDistance > FAR_DISTANCE) { onPath = true; }
-    }
-
-    public void setAction () {
 
         if (onPath) {
 
@@ -106,12 +91,10 @@ public class MON_GreenSlime extends Entity {
 
                 projectile.set(worldX, worldY, direction,true, this);
 
-                //gp.projectileList.add(projectile);
-
                 // CHECK VACANCY
-                for (int ii = 0; ii < gp.projectile[1].length; ii++) {
-                    if (gp.projectile[gp.currentMap][ii] == null) {
-                        gp.projectile[gp.currentMap][ii] = projectile;
+                for (int j = 0; j < gp.projectile[1].length; j++) {
+                    if (gp.projectile[gp.currentMap][j] == null) {
+                        gp.projectile[gp.currentMap][j] = projectile;
                         break;
                     }
                 }
