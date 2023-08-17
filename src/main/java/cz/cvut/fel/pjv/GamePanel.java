@@ -1,6 +1,7 @@
 package cz.cvut.fel.pjv;
 
 import cz.cvut.fel.pjv.ai.PathFinder;
+import cz.cvut.fel.pjv.data.SaveLoad;
 import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.entity.Player;
 import cz.cvut.fel.pjv.tile.InteractiveTile;
@@ -60,6 +61,7 @@ public class GamePanel extends JPanel implements Runnable {
     Config config = new Config(this);
     public PathFinder pFinder = new PathFinder(this);
     Map map = new Map(this);
+    SaveLoad saveLoad = new SaveLoad(this) ;
     Thread gameThread;
 
 //    ENTITY and OBJECT
@@ -111,24 +113,17 @@ public class GamePanel extends JPanel implements Runnable {
         gameState = titleState;
     }
 
-    public void retryGame() {
+    public void resetGame(boolean restart) {
         player.setDefaultPositions();
-        player.restoreLifeandMana();
+        player.restoreStatus();
         aSetter.setNPC();
         aSetter.setMonster();
-    }
 
-    public void restartGame() {
-        player.setDefaultValues();
-        //player.setDefaultPositions();
-        playMusic(0);
-        player.setItems();
-
-        aSetter.setObject();
-        aSetter.setNPC();
-        aSetter.setMonster();
-        aSetter.setInteractiveTile();
-
+        if (restart) {
+            player.setDefaultValues();
+            aSetter.setObject();
+            aSetter.setInteractiveTile();
+        }
     }
 
     public void startGameThread() {
