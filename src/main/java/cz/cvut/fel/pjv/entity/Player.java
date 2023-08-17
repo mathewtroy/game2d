@@ -49,9 +49,7 @@ public class Player extends Entity {
 //        attackArea.height = 36;
 
         setDefaultValues();
-        getPlayerImage();
-        getPlayerAttackImage();
-        setItems();
+
     }
 
     public void setDefaultValues () {
@@ -86,6 +84,9 @@ public class Player extends Entity {
         // attack type of bullet
         attack = getAttack();
         defense = getDefense();
+        getPlayerImage();
+        getPlayerAttackImage();
+        setItems();
 
     }
 
@@ -98,10 +99,12 @@ public class Player extends Entity {
 
     }
 
-    public void restoreLifeandMana() {
+    public void restoreStatus() {
         life = maxLife;
         mana = maxMana;
         invisible = false;
+        attacking = false;
+        knockBack = false;
 
     }
 
@@ -125,6 +128,26 @@ public class Player extends Entity {
 
     public int getDefense() {
         return defense = dexterity * currentShield.defenseValue;
+    }
+
+    public int getCurrentWeaponSlot() {
+        int currentWeaponSlot = 0;
+        for (int i = 0; i < inventory.size(); i++) {
+            if(inventory.get(i) == currentWeapon) {
+                currentWeaponSlot = i;
+            }
+        }
+        return currentWeaponSlot;
+    }
+
+    public int getCurrentShieldSlot() {
+        int currentShieldSlot = 0;
+        for (int i = 0; i < inventory.size(); i++) {
+            if(inventory.get(i) == currentWeapon) {
+                currentShieldSlot = i;
+            }
+        }
+        return currentShieldSlot;
     }
 
     public void getPlayerImage() {

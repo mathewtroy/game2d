@@ -96,7 +96,8 @@ public class AssetSetter {
         i++;
 
 
-        gp.obj[mapNum][i] = new OBJ_Chest(gp, new OBJ_Key(gp));
+        gp.obj[mapNum][i] = new OBJ_Chest(gp);
+        gp.obj[mapNum][i].setLoot(new OBJ_Key(gp));
         gp.obj[mapNum][i].worldX = gp.tileSize*36;
         gp.obj[mapNum][i].worldY = gp.tileSize*7; // grass tile (txt row: 8, txt col: 74)
         i++;

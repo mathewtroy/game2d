@@ -151,10 +151,13 @@ public class EventHandler {
             gp.gameState = gameState;
             gp.player.attackCanceled = true;
             gp.playSE(SOUND_THREE);
-            gp.ui.currentDialogue = "You drink the Russian VODKA\nYour life and mana have been recovered";
+            gp.ui.currentDialogue = "You drink the Russian VODKA\nYour life and mana have been recovered\n"+
+            "(The progress has been saved)";
             gp.player.life = gp.player.maxLife;
             gp.player.mana = gp.player.maxMana;
             gp.aSetter.setMonster();
+            gp.saveLoad.save();
+
         }
         //gp.keyH.enterPressed = false;
     }

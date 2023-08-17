@@ -145,12 +145,17 @@ public class KeyHandler implements KeyListener {
 
         if (code == KeyEvent.VK_ENTER) {
             if (gp.ui.commandNum == 0) {
-                gp.ui.titleScreenState = 1;
+                gp.gameState = gp.playState;
+                // gp.ui.titleScreenState = 1;
                 gp.playMusic(0);
             }
 
+            // Load the game
             if (gp.ui.commandNum == 1) {
-
+                gp.saveLoad.load();
+                gp.gameState = gp.playState;
+                // gp.ui.titleScreenState = 1;
+                gp.playMusic(0);
             }
 
 
@@ -304,12 +309,12 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_ENTER) {
             if (gp.ui.commandNum == 0) {
                 gp.gameState = gp.playState;
-                gp.retryGame();
+                gp.resetGame(false);
                 gp.playMusic(0);
             }
             else if (gp.ui.commandNum == 1) {
                 gp.gameState = gp.titleState;
-                gp.restartGame();
+                gp.resetGame(true);
             }
 
         }

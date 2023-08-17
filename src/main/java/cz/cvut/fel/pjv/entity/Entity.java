@@ -49,6 +49,8 @@ public class Entity {
     boolean hpBarOn = false;
     public boolean onPath = false;
     public boolean knockBack = false;
+    public Entity loot;
+    public boolean opened =false;
 
     // COUNTER
     public int actionLockCounter = 0;
@@ -137,8 +139,12 @@ public class Entity {
         return (worldY + solidArea.y) / gp.tileSize;
     }
 
-    public void setAction() {
+    public void setLoot(Entity loot) {
 
+    }
+
+
+    public void setAction() {
 
     }
 
@@ -534,10 +540,10 @@ public class Entity {
 
         switch (user.direction) {
 
-            case "up": nextWorldY = user.getTopY() - 1; break;
-            case "down": nextWorldY = user.getTopY() + 1; break;
-            case "left": nextWorldX = user.getLeftX() - 1; break;
-            case "right": nextWorldX = user.getRightX() + 1; break;
+            case "up": nextWorldY = user.getTopY() - gp.player.speed; break;
+            case "down": nextWorldY = user.getTopY() + gp.player.speed; break;
+            case "left": nextWorldX = user.getLeftX() - gp.player.speed; break;
+            case "right": nextWorldX = user.getRightX() + gp.player.speed; break;
         }
 
         int col = nextWorldX/gp.tileSize;
