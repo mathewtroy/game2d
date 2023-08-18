@@ -7,6 +7,8 @@ import static cz.cvut.fel.pjv.Sound.SOUND_ONE;
 
 public class OBJ_Coin_Bronze extends Entity {
 
+    public static final String objName = "Bronze Coin";
+
     GamePanel gp;
 
     public OBJ_Coin_Bronze(GamePanel gp) {

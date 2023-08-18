@@ -8,6 +8,8 @@ import java.awt.*;
 
 public class OBJ_Fireball extends Projectile {
 
+    public static final String objName = "Fireball";
+
     GamePanel gp;
 
     private static final Color particleColor = new Color(240,50,0);

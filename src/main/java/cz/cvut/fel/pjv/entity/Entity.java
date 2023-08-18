@@ -96,6 +96,7 @@ public class Entity {
     public int knockBackPower = 0;
     public boolean stackable = false;
     public int amount = 1;
+    public int durability = 100;
 
     // TYPE
     public int type;    // 0 = player, 1 = npc, 2 = monster
@@ -137,6 +138,16 @@ public class Entity {
 
     public int getRow() {
         return (worldY + solidArea.y) / gp.tileSize;
+    }
+
+    public void resetCounter() {
+        actionLockCounter = 0;
+        spriteCounter = 0;
+        invisibleCounter = 0;
+        shotAvailableCounter = 0;
+        dyingCounter = 0;
+        hpBarCounter = 0;
+        knockBackCounter = 0;
     }
 
     public void setLoot(Entity loot) {
@@ -190,7 +201,6 @@ public class Entity {
             }
         }
     }
-
 
     public Color getParticleColor() {
         Color color = null;
@@ -429,7 +439,6 @@ public class Entity {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
 
     }
-
 
     public BufferedImage setup(String imagePath, int width, int height) {
 

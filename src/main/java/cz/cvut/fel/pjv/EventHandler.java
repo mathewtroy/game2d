@@ -2,8 +2,7 @@ package cz.cvut.fel.pjv;
 
 import cz.cvut.fel.pjv.entity.Entity;
 
-import static cz.cvut.fel.pjv.Sound.SOUND_THREE;
-import static cz.cvut.fel.pjv.Sound.SOUND_TWELVE;
+import static cz.cvut.fel.pjv.Sound.*;
 
 public class EventHandler {
 
@@ -70,7 +69,7 @@ public class EventHandler {
             else if (hit(0,27, 21, "any")) { damagePit(gp.dialogueState); }
 
             else if (hit(0,29, 27, "up")) { teleportPJV(gp.dialogueState); }
-            else if (hit(0,44, 15, "up")) { teleportFEL(gp.dialogueState); }
+            else if (hit(0,40, 15, "up")) { teleportFEL(gp.dialogueState); }
 
             else if (hit(0,25, 24, "up")) { healingPool( gp.dialogueState);}
 
@@ -78,8 +77,8 @@ public class EventHandler {
               teleport to new map
               Our map new.txt (txt row: 4, txt col: 40)
             */
-            else if (hit(0,19, 3, "any")) { teleportHouse( 1, 12, 13);}
-            else if (hit(1,12, 13, "any")) { teleportHouse( 0, 19, 3);}
+            else if (hit(0,19, 6, "any")) { teleportHouse( 1, 12, 13);}
+            else if (hit(1,12, 13, "any")) { teleportHouse( 0, 19, 6);}
 
             else if (hit(1,12, 9, "up")) { speak( gp.npc[1][0]);}
 
@@ -134,7 +133,7 @@ public class EventHandler {
 
     public void damagePit(int gameState) {
         gp.gameState = gameState;
-        gp.playSE(6);
+        gp.playSE(SOUND_SIX);
         gp.ui.currentDialogue = "You fall into a pit!";
         gp.player.life -= 1;
         //eventRect[col][row].eventDone = true;

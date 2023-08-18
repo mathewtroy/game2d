@@ -7,6 +7,8 @@ import static cz.cvut.fel.pjv.Sound.SOUND_THREE;
 
 public class OBJ_Potion_Red extends Entity {
 
+    public static final String objName = "Red Potion";
+
     GamePanel gp;
 
     public  OBJ_Potion_Red (GamePanel gp) {
