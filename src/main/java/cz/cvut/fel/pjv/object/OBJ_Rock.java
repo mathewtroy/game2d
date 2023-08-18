@@ -7,15 +7,17 @@ import cz.cvut.fel.pjv.entity.Projectile;
 import java.awt.*;
 
 public class OBJ_Rock extends Projectile {
+
     GamePanel gp;
 
     private static final Color particleColor = new Color(40, 50, 0);
+    public static final String objName = "Rock";
 
     public OBJ_Rock (GamePanel gp) {
         super(gp);
         this.gp = gp;
 
-        name = "Rock";
+        name = objName;
         speed = 7;
         maxLife = 80;
         life = maxLife;

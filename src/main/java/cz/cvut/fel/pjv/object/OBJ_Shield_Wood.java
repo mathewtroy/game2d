@@ -5,6 +5,8 @@ import cz.cvut.fel.pjv.entity.Entity;
 
 public class OBJ_Shield_Wood extends Entity {
 
+    public static final String objName = "Wood Shield";
+
     public  OBJ_Shield_Wood (GamePanel gp) {
         super(gp);
 

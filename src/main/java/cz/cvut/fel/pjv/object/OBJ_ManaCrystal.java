@@ -7,6 +7,8 @@ import static cz.cvut.fel.pjv.Sound.SOUND_TWO;
 
 public class OBJ_ManaCrystal extends Entity {
 
+    public static final String objName = "Mana Crystal";
+
     GamePanel gp;
 
     public OBJ_ManaCrystal(GamePanel gp) {

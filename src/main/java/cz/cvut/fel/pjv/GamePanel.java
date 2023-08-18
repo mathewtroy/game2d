@@ -61,7 +61,8 @@ public class GamePanel extends JPanel implements Runnable {
     Config config = new Config(this);
     public PathFinder pFinder = new PathFinder(this);
     Map map = new Map(this);
-    SaveLoad saveLoad = new SaveLoad(this) ;
+    SaveLoad saveLoad = new SaveLoad(this);
+    public EntityGenerator eGenerator = new EntityGenerator(this);
     Thread gameThread;
 
 //    ENTITY and OBJECT
@@ -116,6 +117,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void resetGame(boolean restart) {
         player.setDefaultPositions();
         player.restoreStatus();
+        player.resetCounter();
         aSetter.setNPC();
         aSetter.setMonster();
 

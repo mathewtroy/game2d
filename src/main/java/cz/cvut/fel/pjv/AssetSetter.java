@@ -143,25 +143,25 @@ public class AssetSetter {
         gp.monster[mapNum][i].worldY = gp.tileSize*21;  // grass tile (txt row: 22, txt col: 44)
         i++;
 
-        gp.monster[mapNum][i] = new MON_Green(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize*11;
-        gp.monster[mapNum][i].worldY = gp.tileSize*31;
-        i++;
-
-        gp.monster[mapNum][i] = new MON_Green(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize*21;
-        gp.monster[mapNum][i].worldY = gp.tileSize*31;
-        i++;
-
-        gp.monster[mapNum][i] = new MON_Green(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize*31;
-        gp.monster[mapNum][i].worldY = gp.tileSize*31;
-        i++;
-
-        gp.monster[mapNum][i] = new MON_Green(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize*41;
-        gp.monster[mapNum][i].worldY = gp.tileSize*31;
-        i++;
+//        gp.monster[mapNum][i] = new MON_Green(gp);
+//        gp.monster[mapNum][i].worldX = gp.tileSize*11;
+//        gp.monster[mapNum][i].worldY = gp.tileSize*31;
+//        i++;
+//
+//        gp.monster[mapNum][i] = new MON_Green(gp);
+//        gp.monster[mapNum][i].worldX = gp.tileSize*21;
+//        gp.monster[mapNum][i].worldY = gp.tileSize*31;
+//        i++;
+//
+//        gp.monster[mapNum][i] = new MON_Green(gp);
+//        gp.monster[mapNum][i].worldX = gp.tileSize*31;
+//        gp.monster[mapNum][i].worldY = gp.tileSize*31;
+//        i++;
+//
+//        gp.monster[mapNum][i] = new MON_Green(gp);
+//        gp.monster[mapNum][i].worldX = gp.tileSize*41;
+//        gp.monster[mapNum][i].worldY = gp.tileSize*31;
+//        i++;
 
 
         // Ghost
@@ -170,15 +170,15 @@ public class AssetSetter {
         gp.monster[mapNum][i].worldY = gp.tileSize*18;
         i++;
 
-        gp.monster[mapNum][i] = new MON_Ghost(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize*17;
-        gp.monster[mapNum][i].worldY = gp.tileSize*32;
-        i++;
-
-        gp.monster[mapNum][i] = new MON_Ghost(gp);
-        gp.monster[mapNum][i].worldX = gp.tileSize*20;
-        gp.monster[mapNum][i].worldY = gp.tileSize*43;
-        i++;
+//        gp.monster[mapNum][i] = new MON_Ghost(gp);
+//        gp.monster[mapNum][i].worldX = gp.tileSize*17;
+//        gp.monster[mapNum][i].worldY = gp.tileSize*32;
+//        i++;
+//
+//        gp.monster[mapNum][i] = new MON_Ghost(gp);
+//        gp.monster[mapNum][i].worldX = gp.tileSize*20;
+//        gp.monster[mapNum][i].worldY = gp.tileSize*43;
+//        i++;
 
     }
 

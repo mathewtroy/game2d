@@ -102,6 +102,7 @@ public class Player extends Entity {
     public void restoreStatus() {
         life = maxLife;
         mana = maxMana;
+        speed = defaultSpeed;
         invisible = false;
         attacking = false;
         knockBack = false;
@@ -241,11 +242,13 @@ public class Player extends Entity {
             }
 
 
-            if (keyH.enterPressed) {
-
+            if (keyH.enterPressed && !attackCanceled) {
                 gp.playSE(SOUND_FIVE);
                 attacking = true;
                 spriteCounter = 0;
+
+                // Decrease durability
+                currentWeapon.durability--;
 
             }
 
@@ -591,9 +594,11 @@ public class Player extends Entity {
 
         boolean canObtain = false;
 
+        Entity newItem = gp.eGenerator.getObject(item.name);
+
         // Check if stackable
         if (item.stackable) {
-            int index = searchItemInInventory(item.name);
+            int index = searchItemInInventory(newItem.name);
 
             if (index != MAX_COST) {
                 inventory.get(index).amount++;
@@ -603,7 +608,7 @@ public class Player extends Entity {
             else {
                 // New item so need to check vacancy
                 if (inventory.size() != maxInventorySize)  {
-                    inventory.add(item);
+                    inventory.add(newItem);
                     canObtain = true;
                 }
             }
@@ -612,7 +617,7 @@ public class Player extends Entity {
         else {
             // New item so need to check vacancy
             if (inventory.size() != maxInventorySize)  {
-                inventory.add(item);
+                inventory.add(newItem);
                 canObtain = true;
             }
         }

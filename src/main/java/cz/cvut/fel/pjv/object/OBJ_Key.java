@@ -9,6 +9,8 @@ import static cz.cvut.fel.pjv.Sound.SOUND_THREE;
 
 public class OBJ_Key extends Entity {
 
+    public static final String objName = "Key";
+
     GamePanel gp;
 
     public OBJ_Key(GamePanel gp) {

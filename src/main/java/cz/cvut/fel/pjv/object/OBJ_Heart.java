@@ -8,6 +8,8 @@ import static cz.cvut.fel.pjv.Sound.SOUND_TWO;
 
 public class OBJ_Heart extends Entity {
 
+    public static final String objName = "Heart";
+
     GamePanel gp;
 
     public OBJ_Heart(GamePanel gp) {
