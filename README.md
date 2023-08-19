@@ -25,9 +25,9 @@ Herní engine musí být vybaven GUI.
 
 :man:               main hero in the game <br>
 :older_man:	        old man <br>
-:man_mechanic:      merchant
+:man_office_worker: merchant <br>
 :space_invader:	    monster <br>
-:ghost:             ghost
+:ghost:             ghost <br>
 
 
 :arrow_up:	        go UP **button W** <br>
@@ -48,7 +48,7 @@ Herní engine musí být vybaven GUI.
 
 :heart:	            hit points (HP) <br>
 :large_blue_diamond:	mana points (MP) <br>
-:red_circle:        red potion (recover HP)
+:red_circle:        red potion (recover HP) <br>
 :large_blue_circle: blue potion (recover MP)<br>
 
 
