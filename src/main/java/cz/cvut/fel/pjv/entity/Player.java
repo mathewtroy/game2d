@@ -498,7 +498,7 @@ public class Player extends Entity {
 
                 gp.monster[gp.currentMap][i].life -= damage;
                 gp.ui.addMessage(damage + " damage!");
-
+                logger.info("You caused " + damage + " damage");
 
                 gp.monster[gp.currentMap][i].invisible = true;
                 gp.monster[gp.currentMap][i].damageReaction();
@@ -506,6 +506,7 @@ public class Player extends Entity {
                 if (gp.monster[gp.currentMap][i].life <= 0) {
                     gp.monster[gp.currentMap][i].dying = true;
                     gp.ui.addMessage("killed the" + gp.monster[gp.currentMap][i].name + "!");
+                    logger.info("You killed the " + gp.monster[gp.currentMap][i].name + "!");
                     gp.ui.addMessage("EXP + " + gp.monster[gp.currentMap][i].exp);
                     exp += gp.monster[gp.currentMap][i].exp;
                     checkLevelUp();
