@@ -7,37 +7,38 @@ import java.util.logging.Logger;
 
 import static cz.cvut.fel.pjv.Sound.SOUND_ONE;
 
-public class OBJ_Boots extends Entity {
+public class OBJ_Coin_Gold extends Entity {
 
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
-    private static final String LOGGER_MESSAGE_BOOTS = "Missing image of the BOOTS";
-    public static final String objName = "Boots";
+    private static final String LOGGER_MESSAGE_COIN = "Missing image of the COIN";
+    public static final String objName = "Gold Coin";
 
     GamePanel gp;
 
-    public OBJ_Boots(GamePanel gp) {
+    public OBJ_Coin_Gold(GamePanel gp) {
         super(gp);
         this.gp = gp;
 
         type = type_pickupOnly;
-        value = 2;
         name = objName;
+        value = 10;
 
-        setupBootsImage();
+        setupCoinImage();
     }
 
-    private void setupBootsImage() {
+    private void setupCoinImage() {
         try {
-            down1 = setup("/objects/boots", gp.tileSize, gp.tileSize);
+            down1 = setup("/objects/coin_gold", gp.tileSize, gp.tileSize);
         } catch (Exception e) {
-            logger.warning(LOGGER_MESSAGE_BOOTS);
+            logger.warning(LOGGER_MESSAGE_COIN);
         }
     }
 
     public boolean use(Entity entity) {
         gp.playSE(SOUND_ONE);
         gp.ui.addMessage("Coin + " + value);
-        gp.player.speed += value;
+        gp.player.coin += value;
         return true;
     }
+
 }

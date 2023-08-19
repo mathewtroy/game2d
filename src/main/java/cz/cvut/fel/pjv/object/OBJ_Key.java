@@ -3,12 +3,16 @@ package cz.cvut.fel.pjv.object;
 import cz.cvut.fel.pjv.GamePanel;
 import cz.cvut.fel.pjv.entity.Entity;
 
+import java.util.logging.Logger;
+
 import static cz.cvut.fel.pjv.CollisionChecker.MAX_COST;
 import static cz.cvut.fel.pjv.Sound.SOUND_THREE;
 
 
 public class OBJ_Key extends Entity {
 
+    private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
+    private static final String LOGGER_MESSAGE_KEY = "Missing image of the KEY";
     public static final String objName = "Key";
 
     GamePanel gp;
@@ -19,12 +23,20 @@ public class OBJ_Key extends Entity {
         this.gp = gp;
 
         type = type_consumable;
-        name = "Key";
-        down1 = setup("/objects/key", gp.tileSize, gp.tileSize);
+        name = objName;
+
         description = "[" + name + "]\nAn old key.\nMade in China.";
         price = 10;
         stackable = true;
+        setupKeyImage();
+    }
 
+    private void setupKeyImage() {
+        try {
+            down1 = setup("/objects/key", gp.tileSize, gp.tileSize);
+        } catch (Exception e) {
+            logger.warning(LOGGER_MESSAGE_KEY);
+        }
     }
 
     public boolean use(Entity entity) {
@@ -43,9 +55,5 @@ public class OBJ_Key extends Entity {
             gp.ui.currentDialogue = "What are you doing man ??";
             return false;
         }
-
     }
-
-
-
 }

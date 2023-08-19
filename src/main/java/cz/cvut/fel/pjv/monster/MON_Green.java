@@ -133,7 +133,7 @@ public class MON_Green extends Entity {
         int i = new Random().nextInt(HIGH_PROBABILITY)+1;
 
         // SET THE MONSTER DROP
-        if (i < MEDIUM_LOW_PROBABILITY) { dropItem(new OBJ_Coin_Bronze(gp)); }
+        if (i < MEDIUM_LOW_PROBABILITY) { dropItem(new OBJ_Coin_Gold(gp)); }
 
         if (i >= MEDIUM_LOW_PROBABILITY && i < MEDIUM_HIGH_PROBABILITY) { dropItem(new OBJ_Heart(gp)); }
 

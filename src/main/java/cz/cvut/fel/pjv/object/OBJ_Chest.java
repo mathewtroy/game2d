@@ -5,15 +5,17 @@ import cz.cvut.fel.pjv.entity.Entity;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import static cz.cvut.fel.pjv.Sound.SOUND_THREE;
 
 public class OBJ_Chest extends Entity {
 
+    private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
+    private static final String LOGGER_MESSAGE_CHEST = "Missing image of the CHEST";
     public static final String objName = "Chest";
 
     GamePanel gp;
-
 
     public OBJ_Chest(GamePanel gp) {
 
@@ -22,10 +24,6 @@ public class OBJ_Chest extends Entity {
 
         type = type_obstacle;
         name = objName;
-
-        image = setup("/objects/chest", gp.tileSize, gp.tileSize);
-        image2 = setup("/objects/chest_opened", gp.tileSize, gp.tileSize);
-        down1 = image;
         collisionOn = true;
 
         solidArea.x = 4;
@@ -35,6 +33,17 @@ public class OBJ_Chest extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
+        setupChestImage();
+    }
+
+    private void setupChestImage() {
+        try {
+            image = setup("/objects/chest", gp.tileSize, gp.tileSize);
+            image2 = setup("/objects/chest_opened", gp.tileSize, gp.tileSize);
+            down1 = image;
+        } catch (Exception e) {
+            logger.warning(LOGGER_MESSAGE_CHEST);
+        }
     }
 
     public void setLoot(Entity loot) {
@@ -66,5 +75,4 @@ public class OBJ_Chest extends Entity {
             gp.ui.currentDialogue = "It is empty";
         }
     }
-
 }
