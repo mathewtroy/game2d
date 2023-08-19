@@ -2,9 +2,14 @@ package cz.cvut.fel.pjv.tile;
 
 import cz.cvut.fel.pjv.GamePanel;
 
+import java.util.logging.Logger;
+
 public class IT_Trunk extends InteractiveTile {
 
     GamePanel gp;
+
+    private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
+    private static final String LOGGER_MESSAGE_TRUNK = "Missing image of the TRUNK";
 
     public IT_Trunk(GamePanel gp, int col, int row) {
         super(gp, col, row);
@@ -13,8 +18,6 @@ public class IT_Trunk extends InteractiveTile {
         this.worldX = gp.tileSize * col;
         this.worldY = gp.tileSize * row;
 
-        down1 = setup("/tiles/trunk", gp.tileSize, gp.tileSize);
-
         solidArea.x = 0;
         solidArea.y = 0;
         solidArea.width = 0;
@@ -22,7 +25,14 @@ public class IT_Trunk extends InteractiveTile {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
+        setupTrunkImage();
     }
 
-
+    private void setupTrunkImage() {
+        try {
+            down1 = setup("/tiles/trunk", gp.tileSize, gp.tileSize);
+        } catch (Exception e) {
+            logger.warning(LOGGER_MESSAGE_TRUNK);
+        }
+    }
 }

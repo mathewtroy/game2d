@@ -13,6 +13,8 @@ import java.io.InputStreamReader;
 public class TileManager {
 
     GamePanel gp;
+
+    private static final Color PATH_COLOR = new Color(255, 0, 0, 70);
     public Tile[] tile;
     public int[][][] mapTileNum;
     boolean drawPath = true;
@@ -41,7 +43,7 @@ public class TileManager {
 
     }
 
-    public void getTileImage() {
+    private void getTileImage() {
 
         setup(0, "grass", false);
         setup(1, "wall", true);
@@ -175,7 +177,7 @@ public class TileManager {
         }
 
         if (drawPath) {
-            g2.setColor(new Color(255, 0, 0, 70));
+            g2.setColor(PATH_COLOR);
 
             for(int i = 0; i < gp.pFinder.pathList.size(); i++) {
                 int worldX = worldCol * gp.tileSize;
@@ -185,8 +187,6 @@ public class TileManager {
 
                 g2.fillRect(screenX,screenY, gp.tileSize, gp.tileSize);
             }
-
         }
     }
-
 }

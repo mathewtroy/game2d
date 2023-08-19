@@ -116,27 +116,27 @@ public class Entity {
         this.gp = gp;
     }
 
-    public int getLeftX() {
+    private int getLeftX() {
         return worldX + solidArea.x;
     }
 
-    public int getRightX() {
+    private int getRightX() {
         return worldX + solidArea.x + solidArea.width;
     }
 
-    public int getTopY() {
+    private int getTopY() {
         return worldY + solidArea.y;
     }
 
-    public int getBottomY() {
+    private int getBottomY() {
         return worldY + solidArea.y + solidArea.height;
     }
 
-    public int getCol() {
+    protected int getCol() {
         return (worldX + solidArea.x) / gp.tileSize;
     }
 
-    public int getRow() {
+    protected int getRow() {
         return (worldY + solidArea.y) / gp.tileSize;
     }
 
@@ -154,12 +154,11 @@ public class Entity {
 
     }
 
-
-    public void setAction() {
+    protected void setAction() {
 
     }
 
-    public void damageReaction() {
+    protected void damageReaction() {
 
     }
 
@@ -179,11 +178,11 @@ public class Entity {
         }
     }
 
-    public void interact() {
+    protected void interact() {
 
     }
 
-    public boolean use (Entity entity) {
+    protected boolean use (Entity entity) {
         return false;
     }
 
@@ -191,7 +190,7 @@ public class Entity {
 
     }
 
-    public void dropItem (Entity droppedItem) {
+    protected void dropItem (Entity droppedItem) {
         for (int i = 0; i < gp.obj.length; i++ ) {
             if (gp.obj[gp.currentMap][i] == null) {
                 gp.obj[gp.currentMap][i] = droppedItem;
@@ -202,27 +201,27 @@ public class Entity {
         }
     }
 
-    public Color getParticleColor() {
+    protected Color getParticleColor() {
         Color color = null;
         return color;
     }
 
-    public int getParticleSize() {
+    protected int getParticleSize() {
         int size = 0;   // 6 pixels
         return size;
     }
 
-    public int getParticleSpeed() {
+    protected int getParticleSpeed() {
         int speed = 0;
         return speed;
     }
 
-    public int getParticleMaxLife() {
+    protected int getParticleMaxLife() {
         int maxLife = 0;
         return maxLife;
     }
 
-    public void generateParticle(Entity generator, Entity target) {
+    protected void generateParticle(Entity generator, Entity target) {
 
         Color color = generator.getParticleColor();
 
@@ -242,7 +241,7 @@ public class Entity {
 
     }
 
-    public void checkCollision(){
+    private void checkCollision(){
         collisionOn = false;
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this, false);
@@ -327,7 +326,7 @@ public class Entity {
 
     }
 
-    public void damagePlayer(int attack) {
+    protected void damagePlayer(int attack) {
         if (!gp.player.invisible) {
             // we can give damage
             gp.playSE(SOUND_SIX);
@@ -415,7 +414,7 @@ public class Entity {
         }
     }
 
-    public void dyingAnimation(Graphics2D g2) {
+    private void dyingAnimation(Graphics2D g2) {
 
         dyingCounter++;
 
@@ -456,7 +455,7 @@ public class Entity {
         return image;
     }
 
-    public void searchPath(int goalCol, int goalRow) {
+    protected void searchPath(int goalCol, int goalRow) {
 
         int startCol = (worldX + solidArea.x)/gp.tileSize;
         int startRow = (worldY + solidArea.y)/gp.tileSize;
@@ -539,7 +538,7 @@ public class Entity {
         }
     }
 
-    public int getDetected(Entity user, Entity[][] target, String targetName) {
+    protected int getDetected(Entity user, Entity[][] target, String targetName) {
 
         int index = MAX_COST;
 
@@ -550,7 +549,7 @@ public class Entity {
         switch (user.direction) {
 
             case "up": nextWorldY = user.getTopY() - gp.player.speed; break;
-            case "down": nextWorldY = user.getTopY() + gp.player.speed; break;
+            case "down": nextWorldY = user.getBottomY() + gp.player.speed; break;
             case "left": nextWorldX = user.getLeftX() - gp.player.speed; break;
             case "right": nextWorldX = user.getRightX() + gp.player.speed; break;
         }

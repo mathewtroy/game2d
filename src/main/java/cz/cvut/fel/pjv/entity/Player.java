@@ -111,7 +111,7 @@ public class Player extends Entity {
     }
 
 
-    public void setItems() {
+    private void setItems() {
         inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(currentShield);
@@ -151,7 +151,7 @@ public class Player extends Entity {
         return currentShieldSlot;
     }
 
-    public void getPlayerImage() {
+    private void getPlayerImage() {
 
         up1 = setup("/player/hero_up_1", gp.tileSize, gp.tileSize);
         up2 = setup("/player/hero_up_2", gp.tileSize, gp.tileSize);

@@ -45,7 +45,7 @@ public class Sound {
     int volumeScale = 3;
     float volume;
 
-    public Sound() {
+    Sound() {
 
         soundURL[SOUND_ZERO] = getClass().getResource("/sound/adventure.wav");
         soundURL[SOUND_ONE] = getClass().getResource("/sound/coin.wav");

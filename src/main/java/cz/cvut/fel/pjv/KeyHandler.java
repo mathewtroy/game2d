@@ -133,7 +133,7 @@ public class KeyHandler implements KeyListener {
     }
 
 
-    public void titleState (int code) {
+    private void titleState (int code) {
         if (code == KeyEvent.VK_W) {
             gp.ui.commandNum--;
             if (gp.ui.commandNum < 0) { gp.ui.commandNum = 2; }
@@ -165,7 +165,7 @@ public class KeyHandler implements KeyListener {
     }
 
 
-    public void playState (int code) {
+    private void playState (int code) {
         if (code == KeyEvent.VK_W) { upPressed = true; }
         if (code == KeyEvent.VK_S) { downPressed = true; }
         if (code == KeyEvent.VK_A) { leftPressed = true; }
@@ -207,18 +207,18 @@ public class KeyHandler implements KeyListener {
     }
 
 
-    public void pauseState (int code) {
+    private void pauseState (int code) {
         if(code == KeyEvent.VK_P) { gp.gameState = gp.playState; }
 
     }
 
 
-    public void dialogueState (int code) {
+    private void dialogueState (int code) {
         if(code == KeyEvent.VK_ENTER) { gp.gameState = gp.playState; }
 
     }
 
-    public void characterState (int code) {
+    private void characterState (int code) {
         if (code == KeyEvent.VK_C) {
             gp.gameState = gp.playState;
         }
@@ -231,7 +231,7 @@ public class KeyHandler implements KeyListener {
 
     }
 
-    public void optionState(int code) {
+    private void optionState(int code) {
         if (code == KeyEvent.VK_R) {
             gp.gameState = gp.playState;
         }
@@ -292,7 +292,7 @@ public class KeyHandler implements KeyListener {
     }
 
 
-    public void gameOverState(int code) {
+    private void gameOverState(int code) {
 
         if (code == KeyEvent.VK_W) {
             gp.ui.commandNum--;
@@ -326,7 +326,7 @@ public class KeyHandler implements KeyListener {
     }
 
 
-    public void tradeState(int code) {
+    private void tradeState(int code) {
 
         if (code == KeyEvent.VK_ENTER) {
             enterPressed = true;
@@ -366,14 +366,14 @@ public class KeyHandler implements KeyListener {
 
     }
 
-    public void mapState(int code) {
+    private void mapState(int code) {
 
         if (code == KeyEvent.VK_M) {
             gp.gameState = gp.playState;
         }
     }
 
-    public void playerInventory(int code) {
+    private void playerInventory(int code) {
 
         if (code == KeyEvent.VK_W) {
             if (gp.ui.playerSlotRow != 0) {
@@ -404,7 +404,7 @@ public class KeyHandler implements KeyListener {
         }
     }
 
-    public void npcInventory(int code) {
+    private void npcInventory(int code) {
 
         if (code == KeyEvent.VK_W) {
             if (gp.ui.npcSlotRow != 0) {
