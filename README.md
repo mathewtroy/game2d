@@ -25,7 +25,7 @@ Herní engine musí být vybaven GUI.
 
 :man:               main hero in the game <br>
 :older_man:	        old man <br>
-:man_office_worker: merchant <br>
+:mage:              merchant <br>
 :space_invader:	    monster <br>
 :ghost:             ghost <br>
 
