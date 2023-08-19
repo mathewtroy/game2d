@@ -10,12 +10,8 @@ public class Main {
         window.setResizable(false);
         window.setTitle("2D Game");
 
-
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
-
-        // gamePanel.config.loadConfig();
-
 
         window.pack();
 

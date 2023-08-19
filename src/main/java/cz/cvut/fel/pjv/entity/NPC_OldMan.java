@@ -19,7 +19,7 @@ public class NPC_OldMan extends  Entity {
         setDialogue();
     }
 
-    public void getImage() {
+    private void getImage() {
 
         up1 = setup("/npc/oldman_up_1", gp.tileSize, gp.tileSize);
         up2 = setup("/npc/oldman_up_2", gp.tileSize, gp.tileSize);
@@ -32,7 +32,7 @@ public class NPC_OldMan extends  Entity {
         left2 = setup("/npc/oldman_left_2", gp.tileSize, gp.tileSize);
     }
 
-    public void setDialogue() {
+    private void setDialogue() {
 
         dialogues[0] = "Hello, mister";
         dialogues[1] = "Welcome to FELL (HELL)";

@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 public class Map extends TileManager {
 
     GamePanel gp;
-    BufferedImage worldMap[];
+    private BufferedImage[] worldMap;
     public boolean miniMapOn = false;
 
 

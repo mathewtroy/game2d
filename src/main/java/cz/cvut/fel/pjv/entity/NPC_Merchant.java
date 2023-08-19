@@ -17,7 +17,7 @@ public class NPC_Merchant extends Entity  {
         setItems();
     }
 
-    public void getImage() {
+    private void getImage() {
 
         up1 = setup("/npc/merchant_down_1", gp.tileSize, gp.tileSize);
         up2 = setup("/npc/merchant_down_2", gp.tileSize, gp.tileSize);
@@ -30,12 +30,12 @@ public class NPC_Merchant extends Entity  {
         left2 = setup("/npc/merchant_down_2", gp.tileSize, gp.tileSize);
     }
 
-    public void setDialogue() {
+    private void setDialogue() {
         dialogues[0] = "Zdravim! \nDo you want to trade, Iwan?? ";
         dialogues[1] = "Good luck, Iwan";
     }
 
-    public void setItems() {
+    private void setItems() {
         inventory.add(new OBJ_Axe(gp));
         inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_Potion_Red(gp));

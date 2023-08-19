@@ -9,9 +9,9 @@ public class Particle extends Entity {
 
     Entity generator;
     Color color;
-    int size;
-    int xd;
-    int yd;
+    private int size;
+    private int xd;
+    private int yd;
 
     public Particle(GamePanel gp, Entity generator, Color color, int size,
                     int speed, int maxLife, int xd, int yd) {

@@ -89,7 +89,7 @@ public class EventHandler {
         }
     }
 
-    public boolean hit (int map, int col, int row, String reqDirection) {
+    private boolean hit (int map, int col, int row, String reqDirection) {
 
         boolean hit = false;
 
@@ -119,7 +119,7 @@ public class EventHandler {
         return hit;
     }
 
-    public void teleportIsland(int gameState) {
+    private void teleportIsland(int gameState) {
         gp.gameState = gameState;
         gp.ui.currentDialogue = "You used teleport to Island!";
         gp.player.worldX = gp.tileSize*10;
@@ -127,14 +127,14 @@ public class EventHandler {
     }
 
 
-    public void teleportFEL(int gameState) {
+    private void teleportFEL(int gameState) {
         gp.gameState = gameState;
         gp.ui.currentDialogue = "You used teleport to FEL!";
         gp.player.worldX = gp.tileSize*12;
         gp.player.worldY = gp.tileSize*12;
     }
 
-    public void damagePit(int gameState) {
+    private void damagePit(int gameState) {
         gp.gameState = gameState;
         gp.playSE(SOUND_SIX);
         gp.ui.currentDialogue = "You fall into a pit!";
@@ -145,7 +145,7 @@ public class EventHandler {
         canTouchEvent = false;
     }
 
-    public void healingPool (int gameState) {
+    private void healingPool (int gameState) {
 
         //System.out.println("Healing");
 
@@ -164,7 +164,7 @@ public class EventHandler {
         //gp.keyH.enterPressed = false;
     }
 
-    public void teleportMap(int map, int col, int row) {
+    private void teleportMap(int map, int col, int row) {
         gp.gameState = gp.transitionState;
 
         tempMap = map;
@@ -175,7 +175,7 @@ public class EventHandler {
         gp.playSE(SOUND_TWELVE);
     }
 
-    public void teleportGoldMap(int map, int col, int row) {
+    private void teleportGoldMap(int map, int col, int row) {
         gp.gameState = gp.transitionState;
 
         tempMap = map;
@@ -186,7 +186,7 @@ public class EventHandler {
         gp.playSE(SOUND_TWELVE);
     }
 
-    public void speak(Entity entity) {
+    private void speak(Entity entity) {
 
         if (gp.keyH.enterPressed) {
             gp.gameState = gp.dialogueState;

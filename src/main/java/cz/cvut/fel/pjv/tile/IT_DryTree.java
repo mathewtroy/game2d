@@ -4,12 +4,16 @@ import cz.cvut.fel.pjv.GamePanel;
 import cz.cvut.fel.pjv.entity.Entity;
 
 import java.awt.*;
+import java.util.logging.Logger;
 
 import static cz.cvut.fel.pjv.Sound.SOUND_TEN;
 
 public class IT_DryTree extends InteractiveTile{
 
     GamePanel gp;
+
+    private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
+    private static final String LOGGER_MESSAGE_DRY_TREE = "Missing image of the DRY TREE";
 
     public IT_DryTree(GamePanel gp, int col, int row) {
         super(gp, col, row);
@@ -18,9 +22,18 @@ public class IT_DryTree extends InteractiveTile{
         this.worldX = gp.tileSize * col;
         this.worldY = gp.tileSize * row;
 
-        down1 = setup("/tiles/drytree", gp.tileSize, gp.tileSize);
         destructible = true;
         life = 3;
+
+        setupDryTreeImage();
+    }
+
+    private void setupDryTreeImage() {
+        try {
+            down1 = setup("/tiles/drytree", gp.tileSize, gp.tileSize);
+        } catch (Exception e) {
+            logger.warning(LOGGER_MESSAGE_DRY_TREE);
+        }
     }
 
     public boolean isCorrectItem(Entity entity) {

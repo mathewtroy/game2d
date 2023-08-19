@@ -22,7 +22,7 @@ public class PathFinder {
 
     }
 
-    public void instantiateNodes() {
+    private void instantiateNodes() {
 
         node = new Node[gp.maxWorldCol][gp.maxWorldRow];
 
@@ -40,7 +40,7 @@ public class PathFinder {
         }
     }
 
-    public void resetNodes() {
+    private void resetNodes() {
         int col = 0;
         int row = 0;
 
@@ -112,7 +112,7 @@ public class PathFinder {
         }
     }
 
-    public void getCost(Node node) {
+    private void getCost(Node node) {
         // G cost
         int xDistance = Math.abs(node.col - startNode.col);
         int yDistance = Math.abs(node.row - startNode.row);
@@ -194,7 +194,7 @@ public class PathFinder {
         return goalReached;
     }
 
-    public void openNode(Node node) {
+    private void openNode(Node node) {
 
         if (node.open == false && node.checked == false && node.solid == false) {
             node.open = true;
@@ -203,7 +203,7 @@ public class PathFinder {
         }
     }
 
-    public void trackThePath() {
+    private void trackThePath() {
 
         Node current = goalNode;
 
