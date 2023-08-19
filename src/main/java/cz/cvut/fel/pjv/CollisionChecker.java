@@ -89,13 +89,9 @@ public class CollisionChecker {
                 gp.obj[gp.currentMap][i].solidArea.y
                         = gp.obj[gp.currentMap][i].worldY + gp.obj[gp.currentMap][i].solidArea.y;
 
+                String direction = entity.direction;
+                adjustSolidAreaPosition(entity, direction);
 
-                switch (entity.direction) {
-                    case "up": entity.solidArea.y -= entity.speed; break;
-                    case "down": entity.solidArea.y += entity.speed; break;
-                    case "left": entity.solidArea.x -= entity.speed; break;
-                    case "right": entity.solidArea.x += entity.speed; break;
-                }
 
                 if (entity.solidArea.intersects(gp.obj[gp.currentMap][i].solidArea)) {
                     if (gp.obj[gp.currentMap][i].collision) { entity.collisionOn = true; }
@@ -133,12 +129,9 @@ public class CollisionChecker {
                         = target[gp.currentMap][i].worldY + target[gp.currentMap][i].solidArea.y;
 
 
-                switch (entity.direction) {
-                    case "up": entity.solidArea.y -= entity.speed; break;
-                    case "down": entity.solidArea.y += entity.speed; break;
-                    case "left": entity.solidArea.x -= entity.speed; break;
-                    case "right": entity.solidArea.x += entity.speed; break;
-                }
+                String direction = entity.direction;
+                adjustSolidAreaPosition(entity, direction);
+
 
                 if (entity.solidArea.intersects(target[gp.currentMap][i].solidArea)) {
 
@@ -181,12 +174,9 @@ public class CollisionChecker {
         gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;
 
 
-        switch (entity.direction) {
-            case "up": entity.solidArea.y -= entity.speed; break;
-            case "down": entity.solidArea.y += entity.speed; break;
-            case "left": entity.solidArea.x -= entity.speed; break;
-            case "right": entity.solidArea.x += entity.speed; break;
-        }
+        String direction = entity.direction;
+        adjustSolidAreaPosition(entity, direction);
+
 
         if (entity.solidArea.intersects(gp.player.solidArea)) {
             entity.collisionOn = true;
@@ -199,5 +189,14 @@ public class CollisionChecker {
         gp.player.solidArea.y = gp.player.solidAreaDefaultY;
 
         return contactPlayer;
+    }
+
+    private void adjustSolidAreaPosition(Entity entity, String direction) {
+        switch (direction) {
+            case "up": entity.solidArea.y -= entity.speed; break;
+            case "down": entity.solidArea.y += entity.speed; break;
+            case "left": entity.solidArea.x -= entity.speed; break;
+            case "right": entity.solidArea.x += entity.speed; break;
+        }
     }
 }
