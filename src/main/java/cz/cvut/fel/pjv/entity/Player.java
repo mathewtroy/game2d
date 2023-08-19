@@ -6,11 +6,19 @@ import cz.cvut.fel.pjv.object.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.logging.Logger;
 
 import static cz.cvut.fel.pjv.CollisionChecker.MAX_COST;
 import static cz.cvut.fel.pjv.Sound.*;
 
 public class Player extends Entity {
+
+    private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
+    private static final String LOGGER_MESSAGE_PLAYER = "Missing image of the HERO";
+    private static final String LOGGER_MESSAGE_PLAYER_SWORD = "Missing image of the ATTACKING HERO WITH SWORD";
+    private static final String LOGGER_MESSAGE_PLAYER_AXE = "Missing image of the ATTACKING HERO WITH AXE";
+
+
 
     // CONSTANTS
     private static final int SPRITE_COUNTER_THRESHOLD = 10;
@@ -158,27 +166,53 @@ public class Player extends Entity {
 
     public void getPlayerAttackImage() {
 
+        try {
+            up1 = setup("/player/hero_up_1", gp.tileSize, gp.tileSize);
+            up2 = setup("/player/hero_up_2", gp.tileSize, gp.tileSize);
+            down1 = setup("/player/hero_down_1", gp.tileSize, gp.tileSize);
+            down2 = setup("/player/hero_down_2", gp.tileSize, gp.tileSize);
+
+            right1 = setup("/player/hero_right_1", gp.tileSize, gp.tileSize);
+            right2 = setup("/player/hero_right_2", gp.tileSize, gp.tileSize);
+            left1 = setup("/player/hero_left_1", gp.tileSize, gp.tileSize);
+            left2 = setup("/player/hero_left_2", gp.tileSize, gp.tileSize);
+
+        } catch (Exception e){
+            logger.severe(LOGGER_MESSAGE_PLAYER);
+        }
+
         // SWITCH TYPE OF WEAPON
         if (currentWeapon.type == type_sword) {
-            attackUp1 = setup("/player/boy_attack_up_1", gp.tileSize, gp.tileSize*2);
-            attackUp2 = setup("/player/boy_attack_up_2", gp.tileSize, gp.tileSize*2);
-            attackDown1 = setup("/player/boy_attack_down_1", gp.tileSize, gp.tileSize*2);
-            attackDown2 = setup("/player/boy_attack_down_2", gp.tileSize, gp.tileSize*2);
-            attackLeft1 = setup("/player/boy_attack_left_1", gp.tileSize*2, gp.tileSize);
-            attackLeft2 = setup("/player/boy_attack_left_2", gp.tileSize*2, gp.tileSize);
-            attackRight1 = setup("/player/boy_attack_right_1", gp.tileSize*2, gp.tileSize);
-            attackRight2 = setup("/player/boy_attack_right_2", gp.tileSize*2, gp.tileSize);
+
+            try {
+                attackUp1 = setup("/player/hero_attack_up_1", gp.tileSize, gp.tileSize*2);
+                attackUp2 = setup("/player/hero_attack_up_2", gp.tileSize, gp.tileSize*2);
+                attackDown1 = setup("/player/hero_attack_down_1", gp.tileSize, gp.tileSize*2);
+                attackDown2 = setup("/player/hero_attack_down_2", gp.tileSize, gp.tileSize*2);
+                attackLeft1 = setup("/player/hero_attack_left_1", gp.tileSize*2, gp.tileSize);
+                attackLeft2 = setup("/player/hero_attack_left_2", gp.tileSize*2, gp.tileSize);
+                attackRight1 = setup("/player/hero_attack_right_1", gp.tileSize*2, gp.tileSize);
+                attackRight2 = setup("/player/hero_attack_right_2", gp.tileSize*2, gp.tileSize);
+            } catch (Exception e){
+                logger.warning(LOGGER_MESSAGE_PLAYER_SWORD);
+            }
+
         }
 
         if (currentWeapon.type == type_axe) {
-            attackUp1 = setup("/player/boy_axe_up_1", gp.tileSize, gp.tileSize*2);
-            attackUp2 = setup("/player/boy_axe_up_2", gp.tileSize, gp.tileSize*2);
-            attackDown1 = setup("/player/boy_axe_down_1", gp.tileSize, gp.tileSize*2);
-            attackDown2 = setup("/player/boy_axe_down_2", gp.tileSize, gp.tileSize*2);
-            attackLeft1 = setup("/player/boy_axe_left_1", gp.tileSize*2, gp.tileSize);
-            attackLeft2 = setup("/player/boy_axe_left_2", gp.tileSize*2, gp.tileSize);
-            attackRight1 = setup("/player/boy_axe_right_1", gp.tileSize*2, gp.tileSize);
-            attackRight2 = setup("/player/boy_axe_right_2", gp.tileSize*2, gp.tileSize);
+            try {
+                attackUp1 = setup("/player/hero_axe_up_1", gp.tileSize, gp.tileSize*2);
+                attackUp2 = setup("/player/hero_axe_up_2", gp.tileSize, gp.tileSize*2);
+                attackDown1 = setup("/player/hero_axe_down_1", gp.tileSize, gp.tileSize*2);
+                attackDown2 = setup("/player/hero_axe_down_2", gp.tileSize, gp.tileSize*2);
+                attackLeft1 = setup("/player/hero_axe_left_1", gp.tileSize*2, gp.tileSize);
+                attackLeft2 = setup("/player/hero_axe_left_2", gp.tileSize*2, gp.tileSize);
+                attackRight1 = setup("/player/hero_axe_right_1", gp.tileSize*2, gp.tileSize);
+                attackRight2 = setup("/player/hero_axe_right_2", gp.tileSize*2, gp.tileSize);
+
+            } catch (Exception e){
+                logger.warning(LOGGER_MESSAGE_PLAYER_AXE);
+            }
         }
 
     }
