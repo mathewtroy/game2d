@@ -26,6 +26,18 @@ Herní engine musí být vybaven GUI.
 :man:               main hero in the game <br>
 :older_man:	        old man <br>
 :mage:              merchant <br>
+<br>
+
+:baby: 	🧒 	:child: 	top
+top 	👦 	:boy: 	👧 	:girl: 	top
+top 	🧑 	:adult: 	👱 	:blond_haired_person: 	top
+top 	👨 	:man: 	🧔 	:bearded_person: 	top
+top 	🧔‍♂️ 	:man_beard: 	🧔‍♀️ 	:woman_beard: 	top
+top 	👨‍🦰 	:red_haired_man: 	👨‍🦱 	:curly_haired_man: 	top
+top 	👨‍🦳 	:white_haired_man: 	👨‍🦲 	:bald_man: 	top
+top 	👩 	:woman: 	👩‍🦰 	:red_haired_woman: 	top
+top 	🧑‍🦰 	:person_red_hair: 	👩‍🦱 	:curly_haired_woman:
+<br>
 :space_invader:	    monster <br>
 :ghost:             ghost <br>
 
