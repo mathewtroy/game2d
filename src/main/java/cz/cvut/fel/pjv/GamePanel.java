@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import static cz.cvut.fel.pjv.Sound.SOUND_ZERO;
+
 public class GamePanel extends JPanel implements Runnable {
 
     //  SCREEN Settings
@@ -93,7 +95,6 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     public GamePanel(){
-
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
@@ -103,14 +104,12 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     public void setupGame() {
-
         aSetter.setObject();
         aSetter.setNPC();
         aSetter.setMonster();
         aSetter.setInteractiveTile();
-//        playMusic(0);
-//        stopMusic();
-
+        playMusic(SOUND_ZERO);
+        stopMusic();
         gameState = titleState;
     }
 
@@ -133,7 +132,6 @@ public class GamePanel extends JPanel implements Runnable {
         gameThread.start();
     }
 
-//    @Override
     @Override
     public void run() {
 
@@ -144,10 +142,10 @@ public class GamePanel extends JPanel implements Runnable {
 
         while (gameThread != null) {
 
-//        UPDATE
+            // UPDATE
             update();
 
-//        DRAW
+            // DRAW
             repaint();
 
 
@@ -229,16 +227,8 @@ public class GamePanel extends JPanel implements Runnable {
                 if (iTile[currentMap][i] != null) {
                     iTile[currentMap][i].update();
                 }
-
             }
         }
-
-        if (gameState == pauseState) {
-
-            //TODO nothong
-        }
-
-
     }
 
     public void paintComponent (Graphics g) {

@@ -77,8 +77,11 @@ public class EventHandler {
               teleport to new map
               Our map new.txt (txt row: 4, txt col: 40)
             */
-            else if (hit(0,19, 6, "any")) { teleportHouse( 1, 12, 13);}
-            else if (hit(1,12, 13, "any")) { teleportHouse( 0, 19, 6);}
+            else if (hit(0,19, 6, "any")) { teleportMap( 1, 9, 15);}
+            else if (hit(1,9, 15, "any")) { teleportMap( 0, 19, 6);}
+
+            else if (hit(1,28, 28, "any")) { teleportGoldMap( 2, 9, 15);}
+            else if (hit(2,9, 15, "any")) { teleportGoldMap( 1, 28, 28);}
 
             else if (hit(1,12, 9, "up")) { speak( gp.npc[1][0]);}
 
@@ -161,7 +164,18 @@ public class EventHandler {
         //gp.keyH.enterPressed = false;
     }
 
-    public void teleportHouse(int map, int col, int row) {
+    public void teleportMap(int map, int col, int row) {
+        gp.gameState = gp.transitionState;
+
+        tempMap = map;
+        tempCol = col;
+        tempRow = row;
+
+        canTouchEvent = false;
+        gp.playSE(SOUND_TWELVE);
+    }
+
+    public void teleportGoldMap(int map, int col, int row) {
         gp.gameState = gp.transitionState;
 
         tempMap = map;

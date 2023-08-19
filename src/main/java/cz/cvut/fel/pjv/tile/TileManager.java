@@ -32,10 +32,11 @@ public class TileManager {
 
         getTileImage();
         loadMap("/maps/new2.txt", 0);
-//        loadMap("/maps/new2.txt", 0);
 
-//        loadMap("/maps/interior.txt", 1);
         loadMap("/maps/pjv.txt", 1);
+
+        loadMap("/maps/gold.txt", 2);
+
 
 
     }
@@ -56,7 +57,7 @@ public class TileManager {
         setup(11, "drytree", true);
 
 
-        setup(12, "hut", false);
+        setup(12, "entry", false);
         setup(13, "floor", false);
         setup(14, "table", true);
         setup(15, "h130", false);

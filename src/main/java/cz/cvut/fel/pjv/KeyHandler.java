@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import static cz.cvut.fel.pjv.Sound.SOUND_EIGHT;
+import static cz.cvut.fel.pjv.Sound.SOUND_ZERO;
 
 public class KeyHandler implements KeyListener {
 
@@ -196,9 +197,10 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_E) {
             switch (gp.currentMap) {
                 case 0: gp.tileM.loadMap("/maps/new2.txt", 0); break;
-                //case 0: gp.tileM.loadMap("/maps/new2.txt", 0); break;
 
                 case 1: gp.tileM.loadMap("/maps/pjv.txt", 1); break;
+
+                case 2: gp.tileM.loadMap("/maps/gold.txt", 2); break;
 
             }
         }
@@ -312,7 +314,7 @@ public class KeyHandler implements KeyListener {
             if (gp.ui.commandNum == 0) {
                 gp.gameState = gp.playState;
                 gp.resetGame(false);
-                gp.playMusic(0);
+                gp.playMusic(SOUND_ZERO);
             }
             else if (gp.ui.commandNum == 1) {
                 gp.gameState = gp.titleState;

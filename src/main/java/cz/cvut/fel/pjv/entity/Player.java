@@ -112,10 +112,10 @@ public class Player extends Entity {
         inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(currentShield);
-        inventory.add(new OBJ_Key(gp));
+        // inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_Potion_Red(gp));
-        // inventory.add(new OBJ_Potion_Red(gp));
-        //TODO Mana Potion
+        inventory.add(new OBJ_Potion_Blue(gp));
+
 
     }
 
