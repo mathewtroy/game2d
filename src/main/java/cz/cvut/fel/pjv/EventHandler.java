@@ -68,8 +68,8 @@ public class EventHandler {
             if (hit(0,29, 23, "right")) { damagePit(gp.dialogueState); }
             else if (hit(0,27, 21, "any")) { damagePit(gp.dialogueState); }
 
-            else if (hit(0,29, 27, "up")) { teleportPJV(gp.dialogueState); }
-            else if (hit(0,40, 15, "up")) { teleportFEL(gp.dialogueState); }
+            else if (hit(0,29, 27, "any")) { teleportIsland(gp.dialogueState); }
+            else if (hit(0,20, 42, "any")) { teleportFEL(gp.dialogueState); }
 
             else if (hit(0,25, 24, "up")) { healingPool( gp.dialogueState);}
 
@@ -116,19 +116,19 @@ public class EventHandler {
         return hit;
     }
 
-    public void teleportPJV(int gameState) {
+    public void teleportIsland(int gameState) {
         gp.gameState = gameState;
-        gp.ui.currentDialogue = "You used teleport to PJV!";
-        gp.player.worldX = gp.tileSize*2;
-        gp.player.worldY = gp.tileSize*45;
+        gp.ui.currentDialogue = "You used teleport to Island!";
+        gp.player.worldX = gp.tileSize*10;
+        gp.player.worldY = gp.tileSize*42;
     }
 
 
     public void teleportFEL(int gameState) {
         gp.gameState = gameState;
         gp.ui.currentDialogue = "You used teleport to FEL!";
-        gp.player.worldX = gp.tileSize*8;
-        gp.player.worldY = gp.tileSize*8;
+        gp.player.worldX = gp.tileSize*12;
+        gp.player.worldY = gp.tileSize*12;
     }
 
     public void damagePit(int gameState) {

@@ -37,12 +37,12 @@ public class Player extends Entity {
 
         // SOLID AREA
         solidArea = new Rectangle();
-        solidArea.x = 8;
-        solidArea.y = 16;
+        solidArea.x = 7;
+        solidArea.y = 14;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 32;
-        solidArea.height = 32;
+        solidArea.width = 30;
+        solidArea.height = 30;
 
 //        // ATTACK AREA
 //        attackArea.width = 36;
@@ -55,11 +55,9 @@ public class Player extends Entity {
     public void setDefaultValues () {
 
         // default start position
-        worldX = gp.tileSize * 25;  // original new.txt
+        worldX = gp.tileSize * 25;  // original new2.txt
         worldY = gp.tileSize * 25;
 
-//        worldX = gp.tileSize * 12;
-//        worldY = gp.tileSize * 13;
 
         defaultSpeed = 4;
         speed = defaultSpeed;
@@ -69,7 +67,7 @@ public class Player extends Entity {
         level = 1;
         maxLife = 12;
         life = maxLife;
-        maxMana = 4;
+        maxMana = 6;
         mana = maxMana;
         ammo = 10;
         strength = 1;   // more strength -> more damage he gives
@@ -114,7 +112,6 @@ public class Player extends Entity {
         inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(currentShield);
-        inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_Potion_Red(gp));
         // inventory.add(new OBJ_Potion_Red(gp));

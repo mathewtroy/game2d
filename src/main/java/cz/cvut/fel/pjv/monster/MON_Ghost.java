@@ -23,8 +23,8 @@ public class MON_Ghost extends Entity {
         maxLife = 30;   // added more life
         life = maxLife;
         attack = 5;
-        defense = 2;
-        exp = 3;
+        defense = 3;
+        exp = 4;
 
         solidArea.x = 3;
         solidArea.y = 18;
