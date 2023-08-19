@@ -24,7 +24,7 @@ Herní engine musí být vybaven GUI.
 
 
 👨               main hero in the game <br>
-👨‍🦳	            old man <br>
+:older_man:	            old man <br>
 🧑               merchant <br>
 👾               monster <br>
 👻               ghost <br>
