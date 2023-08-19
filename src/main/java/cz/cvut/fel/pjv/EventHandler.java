@@ -68,8 +68,8 @@ public class EventHandler {
             if (hit(0,29, 23, "right")) { damagePit(gp.dialogueState); }
             else if (hit(0,27, 21, "any")) { damagePit(gp.dialogueState); }
 
-            else if (hit(0,29, 27, "up")) { teleportPJV(gp.dialogueState); }
-            else if (hit(0,40, 15, "up")) { teleportFEL(gp.dialogueState); }
+            else if (hit(0,29, 27, "any")) { teleportIsland(gp.dialogueState); }
+            else if (hit(0,20, 42, "any")) { teleportFEL(gp.dialogueState); }
 
             else if (hit(0,25, 24, "up")) { healingPool( gp.dialogueState);}
 
@@ -77,8 +77,11 @@ public class EventHandler {
               teleport to new map
               Our map new.txt (txt row: 4, txt col: 40)
             */
-            else if (hit(0,19, 6, "any")) { teleportHouse( 1, 12, 13);}
-            else if (hit(1,12, 13, "any")) { teleportHouse( 0, 19, 6);}
+            else if (hit(0,19, 6, "any")) { teleportMap( 1, 9, 15);}
+            else if (hit(1,9, 15, "any")) { teleportMap( 0, 19, 6);}
+
+            else if (hit(1,28, 28, "any")) { teleportGoldMap( 2, 9, 15);}
+            else if (hit(2,9, 15, "any")) { teleportGoldMap( 1, 28, 28);}
 
             else if (hit(1,12, 9, "up")) { speak( gp.npc[1][0]);}
 
@@ -116,19 +119,19 @@ public class EventHandler {
         return hit;
     }
 
-    public void teleportPJV(int gameState) {
+    public void teleportIsland(int gameState) {
         gp.gameState = gameState;
-        gp.ui.currentDialogue = "You used teleport to PJV!";
-        gp.player.worldX = gp.tileSize*2;
-        gp.player.worldY = gp.tileSize*45;
+        gp.ui.currentDialogue = "You used teleport to Island!";
+        gp.player.worldX = gp.tileSize*10;
+        gp.player.worldY = gp.tileSize*42;
     }
 
 
     public void teleportFEL(int gameState) {
         gp.gameState = gameState;
         gp.ui.currentDialogue = "You used teleport to FEL!";
-        gp.player.worldX = gp.tileSize*8;
-        gp.player.worldY = gp.tileSize*8;
+        gp.player.worldX = gp.tileSize*12;
+        gp.player.worldY = gp.tileSize*12;
     }
 
     public void damagePit(int gameState) {
@@ -161,7 +164,18 @@ public class EventHandler {
         //gp.keyH.enterPressed = false;
     }
 
-    public void teleportHouse(int map, int col, int row) {
+    public void teleportMap(int map, int col, int row) {
+        gp.gameState = gp.transitionState;
+
+        tempMap = map;
+        tempCol = col;
+        tempRow = row;
+
+        canTouchEvent = false;
+        gp.playSE(SOUND_TWELVE);
+    }
+
+    public void teleportGoldMap(int map, int col, int row) {
         gp.gameState = gp.transitionState;
 
         tempMap = map;
