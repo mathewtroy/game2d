@@ -19,7 +19,7 @@ public class AssetSetter {
         int mapNum = 0;
         int i = 0;
 
-        gp.obj[mapNum][i] = new OBJ_Coin_Bronze(gp);
+        gp.obj[mapNum][i] = new OBJ_Coin_Gold(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*24;
         gp.obj[mapNum][i].worldY = gp.tileSize*24; // center of the map, grass tile (txt row: 23, txt col: 14)
         i++;
@@ -71,7 +71,9 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = gp.tileSize*37; // Island
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_Heart(gp);
+
+        // Boots
+        gp.obj[mapNum][i] = new OBJ_Boots(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*20;
         gp.obj[mapNum][i].worldY = gp.tileSize*37; // Island
         i++;
@@ -110,22 +112,22 @@ public class AssetSetter {
 
         // Map Gold
         mapNum = 2;
-        gp.obj[mapNum][i] = new OBJ_Coin_Bronze(gp);
+        gp.obj[mapNum][i] = new OBJ_Coin_Gold(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*25;
         gp.obj[mapNum][i].worldY = gp.tileSize*27;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_Coin_Bronze(gp);
+        gp.obj[mapNum][i] = new OBJ_Coin_Gold(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*26;
         gp.obj[mapNum][i].worldY = gp.tileSize*27;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_Coin_Bronze(gp);
+        gp.obj[mapNum][i] = new OBJ_Coin_Gold(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*27;
         gp.obj[mapNum][i].worldY = gp.tileSize*27;
         i++;
 
-        gp.obj[mapNum][i] = new OBJ_Coin_Bronze(gp);
+        gp.obj[mapNum][i] = new OBJ_Coin_Gold(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*28;
         gp.obj[mapNum][i].worldY = gp.tileSize*27;
         i++;

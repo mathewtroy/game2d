@@ -12,11 +12,12 @@ import static cz.cvut.fel.pjv.Sound.*;
 
 public class Player extends Entity {
 
-    // CONSTANTS NUMBER
-    private static final int SIXTY_SIZE = 60;
-    private static final float TWENTY_FIVE_SIZE = 25;
-    private static final float TWENTY_SIZE = 20;
-    private static final float TEN_SIZE = 10;
+    // CONSTANTS
+    private static final int SPRITE_COUNTER_THRESHOLD = 10;
+    private static final int SHOT_AVAILABLE_COUNTER_THRESHOLD = 30;
+    private static final int INVISIBLE_COUNTER_THRESHOLD = 60;
+    private static final int ATTACK_DURATION = 25;
+    private static final int KNOCK_BACK_POWER = 10;
 
     KeyHandler keyH;
 
@@ -37,16 +38,12 @@ public class Player extends Entity {
 
         // SOLID AREA
         solidArea = new Rectangle();
-        solidArea.x = 7;
+        solidArea.x = 6;
         solidArea.y = 14;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 30;
-        solidArea.height = 30;
-
-//        // ATTACK AREA
-//        attackArea.width = 36;
-//        attackArea.height = 36;
+        solidArea.width = 28;
+        solidArea.height = 28;
 
         setDefaultValues();
 
@@ -78,8 +75,6 @@ public class Player extends Entity {
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
         projectile = new OBJ_Fireball(gp);
-        // projectile = new OBJ_Rock(gp);
-        // attack type of bullet
         attack = getAttack();
         defense = getDefense();
         getPlayerImage();
@@ -204,19 +199,19 @@ public class Player extends Entity {
             else if (keyH.leftPressed) { direction = "left"; }
             else if (keyH.rightPressed) { direction = "right"; }
 
-//  CHECK TILE COLLISION
+            //  CHECK TILE COLLISION
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
-//  CHECK OBJECT COLLISION
+            //  CHECK OBJECT COLLISION
             int objIndex = gp.cChecker.checkObject(this, true);
             pickUpObject(objIndex);
 
-//  CHECK NPC COLLISION
+            //  CHECK NPC COLLISION
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC (npcIndex);
 
-//  CHECK MONSTER COLLISION
+            //  CHECK MONSTER COLLISION
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             contactMonster(monsterIndex);
 
@@ -253,7 +248,7 @@ public class Player extends Entity {
             gp.keyH.enterPressed = false;
 
             spriteCounter++;
-            if (spriteCounter > TEN_SIZE) {
+            if (spriteCounter > SPRITE_COUNTER_THRESHOLD) {
                 if (spriteNum == 1) { spriteNum = 2; }
                 else if (spriteNum == 2) { spriteNum = 1; }
                 spriteCounter = 0;
@@ -261,13 +256,14 @@ public class Player extends Entity {
         }
         else {
             standCounter++;
-            if (standCounter == TWENTY_SIZE) {
+            if (standCounter == 20) {
                 spriteNum = 1;
                 standCounter = 0;
             }
         }
 
-        if (gp.keyH.shotKeyPressed && !projectile.alive && (shotAvailableCounter == 30) &&
+        if (gp.keyH.shotKeyPressed && !projectile.alive
+                && (shotAvailableCounter == SHOT_AVAILABLE_COUNTER_THRESHOLD) &&
                 projectile.haveResource(this)) {
 
             // SET DEFAULT COORDINATES, DIRECTION AND USER
@@ -297,13 +293,13 @@ public class Player extends Entity {
         if (invisible) {
             invisibleCounter++;
 
-            if (invisibleCounter > SIXTY_SIZE) {
+            if (invisibleCounter > INVISIBLE_COUNTER_THRESHOLD) {
                 invisible = false;
                 invisibleCounter = 0;
             }
         }
 
-        if (shotAvailableCounter < 30) {
+        if (shotAvailableCounter < SHOT_AVAILABLE_COUNTER_THRESHOLD) {
             shotAvailableCounter ++;
         }
 
@@ -330,7 +326,7 @@ public class Player extends Entity {
 
         if (spriteCounter <=5) { spriteNum = 1; }
 
-        if (spriteCounter > 5 && spriteCounter <= TWENTY_FIVE_SIZE) {
+        if (spriteCounter > 5 && spriteCounter <= ATTACK_DURATION) {
             spriteNum = 2;
 
             // Save the current worldX, worldY, solidArea
@@ -371,7 +367,7 @@ public class Player extends Entity {
 
         }
 
-        if (spriteCounter > TWENTY_FIVE_SIZE) {
+        if (spriteCounter > ATTACK_DURATION) {
             spriteNum = 1;
             spriteCounter = 0;
             attacking = false;
@@ -486,11 +482,9 @@ public class Player extends Entity {
     }
 
     public void knockBack(Entity entity, int knockBackPower) {
-
         entity.direction = direction;
-        entity.speed += 10;
+        entity.speed += KNOCK_BACK_POWER;
         entity.knockBack = true;
-
     }
 
     public void damageInteractiveTile(int i) {
@@ -696,12 +690,6 @@ public class Player extends Entity {
 
         // Reset alpha
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f ));
-
-
-        // DEBUG
-//        g2.setFont(new Font("Arial", Font.PLAIN, 26));
-//        g2.setColor(Color.white);
-//        g2.drawString("Invisible: "+invisibleCounter, 10, 400);
 
 
     }

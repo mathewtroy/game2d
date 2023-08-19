@@ -5,15 +5,17 @@ import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.entity.Projectile;
 
 import java.awt.*;
+import java.util.logging.Logger;
 
 public class OBJ_Fireball extends Projectile {
 
+
+    private static final Color particleColor = new Color(240,50,0);
+    private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
+    private static final String LOGGER_MESSAGE_FIREBALL = "Missing image of the FIREBALL";
     public static final String objName = "Fireball";
 
     GamePanel gp;
-
-    private static final Color particleColor = new Color(240,50,0);
-
 
     public OBJ_Fireball(GamePanel gp) {
         super(gp);
@@ -27,19 +29,23 @@ public class OBJ_Fireball extends Projectile {
         knockBackPower = 5;
         useCost = 1;
         alive = false;
-        getImage();
+
+        setupFireballImage();
     }
 
-    public void getImage() {
-        up1 = setup("/projectiles/fireball_up_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/projectiles/fireball_up_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/projectiles/fireball_down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/projectiles/fireball_down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/projectiles/fireball_left_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/projectiles/fireball_left_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/projectiles/fireball_right_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/projectiles/fireball_right_2", gp.tileSize, gp.tileSize);
-
+    public void setupFireballImage() {
+        try {
+            up1 = setup("/projectiles/fireball_up_1", gp.tileSize, gp.tileSize);
+            up2 = setup("/projectiles/fireball_up_2", gp.tileSize, gp.tileSize);
+            down1 = setup("/projectiles/fireball_down_1", gp.tileSize, gp.tileSize);
+            down2 = setup("/projectiles/fireball_down_2", gp.tileSize, gp.tileSize);
+            left1 = setup("/projectiles/fireball_left_1", gp.tileSize, gp.tileSize);
+            left2 = setup("/projectiles/fireball_left_2", gp.tileSize, gp.tileSize);
+            right1 = setup("/projectiles/fireball_right_1", gp.tileSize, gp.tileSize);
+            right2 = setup("/projectiles/fireball_right_2", gp.tileSize, gp.tileSize);
+        } catch (Exception e) {
+            logger.warning(LOGGER_MESSAGE_FIREBALL);
+        }
     }
 
     public boolean haveResource(Entity user) {

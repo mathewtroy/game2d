@@ -5,12 +5,15 @@ import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.entity.Projectile;
 
 import java.awt.*;
+import java.util.logging.Logger;
 
 public class OBJ_Rock extends Projectile {
 
     GamePanel gp;
 
     private static final Color particleColor = new Color(40, 50, 0);
+    private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
+    private static final String LOGGER_MESSAGE_ROCK = "Missing image of the Rock";
     public static final String objName = "Rock";
 
     public OBJ_Rock (GamePanel gp) {
@@ -24,19 +27,23 @@ public class OBJ_Rock extends Projectile {
         attack = 2;
         useCost = 1;
         alive = false;
-        getImage();
+
+        setupRockImage();
     }
 
-    public void getImage() {
-        up1 = setup("/projectiles/rock_down_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/projectiles/rock_down_1", gp.tileSize, gp.tileSize);
-        down1 = setup("/projectiles/rock_down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/projectiles/rock_down_1", gp.tileSize, gp.tileSize);
-        left1 = setup("/projectiles/rock_down_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/projectiles/rock_down_1", gp.tileSize, gp.tileSize);
-        right1 = setup("/projectiles/rock_down_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/projectiles/rock_down_1", gp.tileSize, gp.tileSize);
-
+    public void setupRockImage() {
+        try {
+            up1 = setup("/projectiles/rock_down_1", gp.tileSize, gp.tileSize);
+            up2 = setup("/projectiles/rock_down_1", gp.tileSize, gp.tileSize);
+            down1 = setup("/projectiles/rock_down_1", gp.tileSize, gp.tileSize);
+            down2 = setup("/projectiles/rock_down_1", gp.tileSize, gp.tileSize);
+            left1 = setup("/projectiles/rock_down_1", gp.tileSize, gp.tileSize);
+            left2 = setup("/projectiles/rock_down_1", gp.tileSize, gp.tileSize);
+            right1 = setup("/projectiles/rock_down_1", gp.tileSize, gp.tileSize);
+            right2 = setup("/projectiles/rock_down_1", gp.tileSize, gp.tileSize);
+        } catch (Exception e) {
+            logger.warning(LOGGER_MESSAGE_ROCK);
+        }
     }
 
     public boolean haveResource(Entity user) {

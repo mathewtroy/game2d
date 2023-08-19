@@ -3,13 +3,16 @@ package cz.cvut.fel.pjv.object;
 import cz.cvut.fel.pjv.GamePanel;
 import cz.cvut.fel.pjv.entity.Entity;
 
+import java.util.logging.Logger;
+
 
 public class OBJ_Door extends Entity {
 
+    private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
+    private static final String LOGGER_MESSAGE_DOOR = "Missing image of the DOOR";
     public static final String objName = "Door";
 
     GamePanel gp;
-
 
     public OBJ_Door(GamePanel gp) {
 
@@ -18,7 +21,6 @@ public class OBJ_Door extends Entity {
 
         type = type_obstacle;
         name = objName;
-        down1 = setup("/objects/door", gp.tileSize, gp.tileSize);
         collision = true;
 
         solidArea.x = 0;
@@ -28,13 +30,19 @@ public class OBJ_Door extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
+        setupDoorImage();
+    }
+
+    private void setupDoorImage() {
+        try {
+            down1 = setup("/objects/door", gp.tileSize, gp.tileSize);
+        } catch (Exception e) {
+            logger.warning(LOGGER_MESSAGE_DOOR);
+        }
     }
 
     public void interact() {
-
         gp.gameState = gp.dialogueState;
         gp.ui.currentDialogue = "You need a key to open the door";
-
     }
-
 }

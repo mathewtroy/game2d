@@ -1,7 +1,7 @@
 package cz.cvut.fel.pjv;
 
 import cz.cvut.fel.pjv.entity.Entity;
-import cz.cvut.fel.pjv.object.OBJ_Coin_Bronze;
+import cz.cvut.fel.pjv.object.OBJ_Coin_Gold;
 import cz.cvut.fel.pjv.object.OBJ_Heart;
 import cz.cvut.fel.pjv.object.OBJ_ManaCrystal;
 
@@ -60,8 +60,8 @@ public class UI {
         Entity crystal = new OBJ_ManaCrystal(gp);
         crystal_full = crystal.image;
         crystal_blank = crystal.image2;
-        Entity bronzeCoin = new OBJ_Coin_Bronze(gp);
-        coin = bronzeCoin.down1;
+        Entity goldCoin = new OBJ_Coin_Gold(gp);
+        coin = goldCoin.down1;
     }
 
 
