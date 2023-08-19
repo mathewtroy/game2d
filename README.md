@@ -23,53 +23,41 @@ Herní engine musí být vybaven GUI.
 ## :label: Game controls
 
 
-:man:               main hero in the game <br>
-:older_man:	        old man <br>
-:mage:              merchant <br>
-<br>
-
-:baby: 	🧒 	:child: 	top
-top 	👦 	:boy: 	👧 	:girl: 	top
-top 	🧑 	:adult: 	👱 	:blond_haired_person: 	top
-top 	👨 	:man: 	🧔 	:bearded_person: 	top
-top 	🧔‍♂️ 	:man_beard: 	🧔‍♀️ 	:woman_beard: 	top
-top 	👨‍🦰 	:red_haired_man: 	👨‍🦱 	:curly_haired_man: 	top
-top 	👨‍🦳 	:white_haired_man: 	👨‍🦲 	:bald_man: 	top
-top 	👩 	:woman: 	👩‍🦰 	:red_haired_woman: 	top
-top 	🧑‍🦰 	:person_red_hair: 	👩‍🦱 	:curly_haired_woman:
-<br>
-:space_invader:	    monster <br>
-:ghost:             ghost <br>
+👨               main hero in the game <br>
+👨‍🦳	            old man <br>
+🧑               merchant <br>
+👾               monster <br>
+👻               ghost <br>
 
 
-:arrow_up:	        go UP **button W** <br>
-:arrow_down:	    go DOWN **button S** <br>
-:arrow_left:	    go LEFT **button A** <br>
-:arrow_right:		go RIGHT **button D** <br>
+⬆️ 		         go UP **button W** <br>
+⬇️	             go DOWN **button S** <br>
+➡️	             go LEFT **button A** <br>
+⬅️		         go RIGHT **button D** <br>
 
-:ok:	    	    action **button ENTER** <br>
-:gun:	            shooting **button F** <br>
+🆗	    	     action **button ENTER** <br>
+🏹	             shooting **button F** <br>
 
-:world_map:         open Map **button M**<br>
-:x:                 hide mini Map **button Q**<br>
-
-
-:pause_button:	    pause option **button P** <br>
-:gear:              settings **button R**<br>
-:handbag:		    inventory screen **button C** <br>
-
-:heart:	            hit points (HP) <br>
-:large_blue_diamond:	mana points (MP) <br>
-:red_circle:        red potion (recover HP) <br>
-:large_blue_circle: blue potion (recover MP)<br>
+🗺️               open Map **button M**<br>
+❌               hide mini Map **button Q**<br>
 
 
-:hammer:	        axe item (cut trees)<br>
-:dagger:	        sword item (default weapon)<br>
-:shield:            shield item (default defense)<br>
-:key:	            key item (open the door)<br>
-:moneybag:	        coin item (time is money)<br>
-:boot:              boot item (increase speed)<br>
+⏯️	             pause option **button P** <br>
+⚙️               settings **button R**<br>
+👜  		     inventory screen **button C** <br>
+
+❤️	             hit points (HP) <br>
+🔷	             mana points (MP) <br>
+🔴               red potion (recover HP) <br>
+🔵               blue potion (recover MP)<br>
+
+
+🪓      	     axe item (cut trees)<br>
+🗡️               sword item (default weapon)<br>
+🛡️               shield item (default defense)<br>
+🗝️	              key item (open the door)<br>
+💰	             coin item (time is money)<br>
+👢               boot item (increase speed)<br>
 
 
 ## Game plot
