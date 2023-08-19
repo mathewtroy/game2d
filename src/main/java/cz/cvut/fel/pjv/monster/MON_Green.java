@@ -5,8 +5,14 @@ import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.object.*;
 
 import java.util.Random;
+import java.util.logging.Logger;
 
 public class MON_Green extends Entity {
+
+    private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
+    private static final String LOGGER_MESSAGE_GREEN_MONSTER = "Missing image of the GREEN MONSTER";
+    private static final String monsterName = "Green monster";
+
 
     // Probability Constants
     public static final int LOW_PROBABILITY = 25;
@@ -30,7 +36,7 @@ public class MON_Green extends Entity {
         this.gp = gp;
 
         type = type_monster;
-        name = "Green monster";
+        name = monsterName;
         defaultSpeed = 1;
         speed = defaultSpeed;
         maxLife = 15;   // added more life
@@ -47,20 +53,22 @@ public class MON_Green extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-        getImage();
+        setupGreenMonsterImage();
     }
 
-    public  void getImage() {
-
-        up1 = setup("/monster/green_down_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/monster/green_down_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/monster/green_down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/monster/green_down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/monster/green_down_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/monster/green_down_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/monster/green_down_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/monster/green_down_2", gp.tileSize, gp.tileSize);
-
+    private void setupGreenMonsterImage() {
+        try {
+            up1 = setup("/monster/green_down_1", gp.tileSize, gp.tileSize);
+            up2 = setup("/monster/green_down_2", gp.tileSize, gp.tileSize);
+            down1 = setup("/monster/green_down_1", gp.tileSize, gp.tileSize);
+            down2 = setup("/monster/green_down_2", gp.tileSize, gp.tileSize);
+            left1 = setup("/monster/green_down_1", gp.tileSize, gp.tileSize);
+            left2 = setup("/monster/green_down_2", gp.tileSize, gp.tileSize);
+            right1 = setup("/monster/green_down_1", gp.tileSize, gp.tileSize);
+            right2 = setup("/monster/green_down_2", gp.tileSize, gp.tileSize);
+        } catch (Exception e) {
+            logger.warning(LOGGER_MESSAGE_GREEN_MONSTER);
+        }
     }
 
     public void setAction () {

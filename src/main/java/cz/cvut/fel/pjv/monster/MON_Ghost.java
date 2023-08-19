@@ -5,10 +5,16 @@ import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.object.*;
 
 import java.util.Random;
+import java.util.logging.Logger;
 
 import static cz.cvut.fel.pjv.monster.MON_Green.*;
 
 public class MON_Ghost extends Entity {
+
+    private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
+    private static final String LOGGER_MESSAGE_GHOST = "Missing image of the GHOST";
+    private static final String monsterName = "Ghost";
+
     GamePanel gp;
 
     public MON_Ghost (GamePanel gp) {
@@ -17,7 +23,7 @@ public class MON_Ghost extends Entity {
         this.gp = gp;
 
         type = type_monster;
-        name = "Ghost";
+        name = monsterName;
         defaultSpeed = 1;
         speed = defaultSpeed;
         maxLife = 30;   // added more life
@@ -33,19 +39,22 @@ public class MON_Ghost extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-        getImage();
+        setupGhostImage();
     }
 
-    public  void getImage() {
-
-        up1 = setup("/monster/ghost_down_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/monster/ghost_down_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/monster/ghost_down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/monster/ghost_down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/monster/ghost_down_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/monster/ghost_down_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/monster/ghost_down_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/monster/ghost_down_2", gp.tileSize, gp.tileSize);
+    private void setupGhostImage() {
+        try {
+            up1 = setup("/monster/ghost_down_1", gp.tileSize, gp.tileSize);
+            up2 = setup("/monster/ghost_down_2", gp.tileSize, gp.tileSize);
+            down1 = setup("/monster/ghost_down_1", gp.tileSize, gp.tileSize);
+            down2 = setup("/monster/ghost_down_2", gp.tileSize, gp.tileSize);
+            left1 = setup("/monster/ghost_down_1", gp.tileSize, gp.tileSize);
+            left2 = setup("/monster/ghost_down_2", gp.tileSize, gp.tileSize);
+            right1 = setup("/monster/ghost_down_1", gp.tileSize, gp.tileSize);
+            right2 = setup("/monster/ghost_down_2", gp.tileSize, gp.tileSize);
+        } catch (Exception e) {
+            logger.warning(LOGGER_MESSAGE_GHOST);
+        }
     }
 
     public void setAction () {
