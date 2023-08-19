@@ -7,11 +7,16 @@ import jdk.nashorn.internal.runtime.regexp.joni.constants.EncloseType;
 
 import javax.swing.*;
 import java.io.*;
+import java.util.logging.Logger;
 
 public class SaveLoad {
 
-    GamePanel gp;
+    private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
+    private static final String LOGGER_MESSAGE_SAVE = "NO FILE TO SAVE";
+    private static final String LOGGER_MESSAGE_LOAD = "NO FILE TO LOAD";
 
+
+    GamePanel gp;
 
     public SaveLoad(GamePanel gp) {
         this.gp = gp;
@@ -80,7 +85,7 @@ public class SaveLoad {
 
 
         } catch (Exception e) {
-            System.out.println("Save Exception");
+            logger.warning(LOGGER_MESSAGE_SAVE);
         }
 
     }
@@ -152,7 +157,7 @@ public class SaveLoad {
         }
 
         catch (Exception e) {
-            System.out.println("Load Exception");
+            logger.warning(LOGGER_MESSAGE_LOAD);
 
         }
     }
