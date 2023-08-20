@@ -11,7 +11,7 @@ public class OBJ_Rock extends Projectile {
 
     GamePanel gp;
 
-    private static final Color particleColor = new Color(40, 50, 0);
+    private static final Color PARTICLE_COLOR_OLIVE = new Color(40, 50, 0);
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_ROCK = "Missing image of the Rock";
     public static final String objName = "Rock";
@@ -59,7 +59,7 @@ public class OBJ_Rock extends Projectile {
     }
 
     public Color getParticleColor() {
-        return particleColor;
+        return PARTICLE_COLOR_OLIVE;
     }
 
     public int getParticleSize() {

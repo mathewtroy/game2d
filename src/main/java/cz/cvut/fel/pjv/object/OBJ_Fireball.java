@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class OBJ_Fireball extends Projectile {
 
 
-    private static final Color particleColor = new Color(240,50,0);
+    private static final Color PARTICLE_COLOR = new Color(240,50,0);
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_FIREBALL = "Missing image of the FIREBALL";
     public static final String objName = "Fireball";
@@ -61,7 +61,7 @@ public class OBJ_Fireball extends Projectile {
     }
 
     public Color getParticleColor() {
-        return particleColor;
+        return PARTICLE_COLOR;
     }
 
     public int getParticleSize() {
