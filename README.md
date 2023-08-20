@@ -97,7 +97,7 @@ Describe my experience.. Bla bla bla.
 
 
 ## :label: Wiki
-[Go to Wiki](https://gitlab.fel.cvut.cz/krossale/java-pro/-/wikis/home)
+**[Go to Wiki](https://gitlab.fel.cvut.cz/krossale/java-pro/-/wikis/home)**
 
 
 ## :label: Contacts
