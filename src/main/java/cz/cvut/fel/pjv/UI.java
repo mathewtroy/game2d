@@ -17,9 +17,16 @@ public class UI {
     private static final int STATE_THREE = 3;
     private static final int STATE_FOUR = 4;
     private static final int TWENTY_FIVE = 25;
+
+    private static final Color GAME_OVER_BLACK = new Color(0,0,0, 150);
+    private static final Color BACKGROUND_GREEN = new Color(70,120,80);
+    private static final Color CURSOR_COLOR = new Color(240,190,90);
+    private static final Color SHADOW_COLOR = new Color(60,60,60);
+    private static final Color SUB_WINDOW_BLACK = new Color(0,0,0, 200);
+    private static final Color SUB_WINDOW_WHITE = new Color(255,255,255);
+
     GamePanel gp;
     Graphics2D g2;
-    public Font maruMonica;
     public Font arial_40;
     Font arial_80B;
     BufferedImage heart_full, heart_half, heart_blank, crystal_full, crystal_blank, coin;
@@ -44,7 +51,6 @@ public class UI {
     int counter = 0;
     public Entity npc;
 
-
     public UI(GamePanel gp) {
 
         this.gp = gp;
@@ -63,7 +69,6 @@ public class UI {
         Entity goldCoin = new OBJ_Coin_Gold(gp);
         coin = goldCoin.down1;
     }
-
 
     public void addMessage (String text) {
 
@@ -132,7 +137,7 @@ public class UI {
         }
     }
 
-    public void drawPlayerLife() {
+    private void drawPlayerLife() {
 
         // gp.player.life = 3;
         int x = gp.tileSize/2;
@@ -186,7 +191,7 @@ public class UI {
 
     }
 
-    public void drawMessage() {
+    private void drawMessage() {
 
         int messageX = gp.tileSize;
         int messageY = gp.tileSize;
@@ -215,11 +220,11 @@ public class UI {
         }
     }
 
-    public void drawTitleScreen() {
+    private void drawTitleScreen() {
 
         if (titleScreenState == 0 ) {
 
-            g2.setColor(new Color(70,120,80));
+            g2.setColor(BACKGROUND_GREEN);
             g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
             // TITLE NAME
@@ -315,12 +320,10 @@ public class UI {
             if (commandNum == 3) {
                 g2.drawString(">", x-gp.tileSize, y);
             }
-
         }
-
     }
 
-    public void drawPauseScreen() {
+    private void drawPauseScreen() {
 
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
         String text = "PAUSED";
@@ -332,7 +335,7 @@ public class UI {
         g2.drawString(text, x,y);
     }
 
-    public void drawDialogueScreen() {
+    private void drawDialogueScreen() {
 
 //        WINDOW
 
@@ -353,7 +356,7 @@ public class UI {
 
     }
 
-    public void drawCharacterScreen() {
+    private void drawCharacterScreen() {
         // CREATE A FRAME
         final int frameX = gp.tileSize;
         final int frameY = gp.tileSize;
@@ -448,7 +451,7 @@ public class UI {
 
     }
 
-    public void drawInventory(Entity entity, boolean cursor) {
+    private void drawInventory(Entity entity, boolean cursor) {
 
         int frameX = 0;
         int frameY = 0;
@@ -493,7 +496,7 @@ public class UI {
             // EQUIP CURSOR
             if (entity.inventory.get(i) == entity.currentWeapon ||
                     entity.inventory.get(i) == entity.currentShield) {
-                g2.setColor(new Color(240,190,90));
+                g2.setColor(CURSOR_COLOR);
                 g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
 
             }
@@ -512,7 +515,7 @@ public class UI {
 
 
             // SHADOW
-                g2.setColor(new Color(60,60,60));
+                g2.setColor(SHADOW_COLOR);
                 g2.drawString(s,amountX, amountY) ;
 
             // NUMBER
@@ -570,10 +573,9 @@ public class UI {
                 g2.drawString("Durability: " + entity.inventory.get(itemIndex).durability, textX, textY+100);
             }
         }
-
     }
 
-    public void drawOptionsScreen() {
+    private void drawOptionsScreen() {
 
         g2.setColor(Color.white);
         g2.setFont(g2.getFont().deriveFont(32F));
@@ -595,9 +597,9 @@ public class UI {
         gp.keyH.enterPressed = false;
     }
 
-    public void drawGameOverScreen() {
+    private void drawGameOverScreen() {
 
-        g2.setColor(new Color(0,0,0, 150));
+        g2.setColor(GAME_OVER_BLACK);
         g2.fillRect(0,0, gp.screenWidth, gp.screenHeight);
 
         int x;
@@ -637,11 +639,9 @@ public class UI {
         if (commandNum == 1) {
             g2.drawString(">", x-40, y);
         }
-
-
     }
 
-    public void options_top(int frameX, int frameY) {
+    private void options_top(int frameX, int frameY) {
         int textX;
         int textY;
 
@@ -720,10 +720,9 @@ public class UI {
         g2.fillRect(textX, textY, volumeWidth, 24);
 
         gp.config.saveConfig();
-
     }
 
-    public void option_control(int frameX, int frameY) {
+    private void option_control(int frameX, int frameY) {
 
         int textX;
         int textY;
@@ -766,10 +765,9 @@ public class UI {
                 commandNum = 2;
             }
         }
-
     }
 
-    public void option_endGame(int frameX, int frameY) {
+    private void option_endGame(int frameX, int frameY) {
         int textX = frameX + gp.tileSize;
         int textY = frameY + gp.tileSize*3;
 
@@ -811,11 +809,9 @@ public class UI {
                 commandNum = 3;
             }
         }
-
-
     }
 
-    public void drawTransition() {
+    private void drawTransition() {
 
         counter++;
         g2.setColor(new Color(0,0,0, counter*5));
@@ -835,7 +831,7 @@ public class UI {
         }
     }
 
-    public void drawTradeScreen() {
+    private void drawTradeScreen() {
 
         switch (subState) {
             case 0: trade_select(); break;
@@ -845,7 +841,7 @@ public class UI {
         gp.keyH.enterPressed = false;
     }
 
-    public void trade_select() {
+    private void trade_select() {
 
         drawDialogueScreen();
 
@@ -889,7 +885,7 @@ public class UI {
 
     }
 
-    public void trade_buy() {
+    private void trade_buy() {
 
         // DRAW PLAYER INVENTORY
         drawInventory(gp.player, false);
@@ -953,7 +949,7 @@ public class UI {
         }
     }
 
-    public void trade_sell() {
+    private void trade_sell() {
 
         // DRAW PLAYER INVENTORY
         drawInventory(gp.player, true);
@@ -1028,28 +1024,25 @@ public class UI {
         return slotCol + (slotRow*5);
     }
 
-    public void drawSubWindow(int x, int y, int width, int height) {
+    private void drawSubWindow(int x, int y, int width, int height) {
 
-        Color c = new Color(0,0,0, 200);
-        g2.setColor(c);
+
+        g2.setColor(SUB_WINDOW_BLACK);
         g2.fillRoundRect(x,y,width ,height,35, 35);
 
-        c = new Color(255,255,255);
-        g2.setColor(c);
+        g2.setColor(SUB_WINDOW_WHITE);
         g2.setStroke(new BasicStroke(5));
         g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
 
     }
 
-
-    public int getXForCenteredText (String text) {
+    private int getXForCenteredText (String text) {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = gp.screenWidth/2 - length/2;
         return x;
     }
 
-
-    public int getXForAlignToRightText (String text, int tailX) {
+    private int getXForAlignToRightText (String text, int tailX) {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = tailX - length;
         return x;
