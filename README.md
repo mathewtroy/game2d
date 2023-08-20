@@ -96,8 +96,8 @@ Describe my experience.. Bla bla bla.
 </details>
 
 
-## :label: Dokumentace
-## NEED TO ADD
+## :label: Wiki
+[Go to Wiki](https://gitlab.fel.cvut.cz/krossale/java-pro/-/wikis/home)
 
 
 ## :label: Contacts
