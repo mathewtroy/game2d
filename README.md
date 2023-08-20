@@ -8,7 +8,7 @@
 
 ## :label: Zadani
 <details><summary> Show more </summary>
-Typická RPG hra, která je tímto tématem zamýšlena je například tato **https://darkwalllke.itch.io/simple-rpg**
+Typická RPG hra, která je tímto tématem zamýšlena je například tato https://darkwalllke.itch.io/simple-rpg
 
 Nezapomínejte, že vaším cílem není vytvořit hru jako takovou (hodně levelů, příběh atd.), ale engine na spuštění a odehrání levelů popsaných externími soubory.
 Hra bude umět načítat seznam předmětů ze souboru. Tyto předměty bude mít hráč na začátku hry. Na konci hry bude umět hra uložit seznam předmětů ve stejném formátu.
