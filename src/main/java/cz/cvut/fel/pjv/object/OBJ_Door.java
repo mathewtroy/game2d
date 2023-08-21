@@ -42,7 +42,7 @@ public class OBJ_Door extends Entity {
     }
 
     public void interact() {
-        gp.gameState = gp.dialogueState;
+        gp.gameState = GamePanel.GameState.DIALOGUE;
         gp.ui.currentDialogue = "You need a key to open the door";
     }
 }

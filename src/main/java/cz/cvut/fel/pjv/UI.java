@@ -31,8 +31,6 @@ public class UI {
     Font arial_80B;
     BufferedImage heart_full, heart_half, heart_blank, crystal_full, crystal_blank, coin;
     public boolean messageOn = false;
-//    public String message = "";
-//    int messageCounter = 0;
     ArrayList<String> message = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
     public boolean gameFinished = false;
@@ -84,55 +82,54 @@ public class UI {
         g2.setFont(arial_40);
         g2.setColor(Color.white);
 
-//  TITLE STATE
-        if (gp.gameState == gp.titleState) {
-
+        //  TITLE STATE
+        if (gp.gameState == GamePanel.GameState.TITLE) {
             drawTitleScreen();
         }
 
 
-//  PLAY STATE
-        if (gp.gameState == gp.playState) {
+        //  PLAY STATE
+        if (gp.gameState == GamePanel.GameState.PLAY) {
             drawPlayerLife();
             drawMessage();
         }
 
-//  PAUSE STATE
-        if (gp.gameState == gp.pauseState) {
+        //  PAUSE STATE
+        if (gp.gameState == GamePanel.GameState.PAUSE) {
             drawPlayerLife();
             drawPauseScreen();
         }
 
-//  DIALOGUE STATE
-        if(gp.gameState == gp.dialogueState) {
+        //  DIALOGUE STATE
+        if(gp.gameState == GamePanel.GameState.DIALOGUE) {
             //drawPlayerLife();
             drawDialogueScreen();
         }
 
 
-//  CHARACTER STATE
-        if (gp.gameState == gp.characterState) {
+        //  CHARACTER STATE
+        if (gp.gameState == GamePanel.GameState.CHARACTER) {
             drawCharacterScreen();
             drawInventory(gp.player, true);
         }
 
-//  OPTION STATE
-        if (gp.gameState == gp.optionState) {
+        //  OPTION STATE
+        if (gp.gameState == GamePanel.GameState.OPTION) {
             drawOptionsScreen();
         }
 
-//  GAME OVER STATE
-        if (gp.gameState == gp.gameOverState) {
+        //  GAME OVER STATE
+        if (gp.gameState == GamePanel.GameState.GAME_OVER) {
             drawGameOverScreen();
         }
 
-//  TRANSITION STATE
-        if (gp.gameState == gp.transitionState) {
+        //  TRANSITION STATE
+        if (gp.gameState == GamePanel.GameState.TRANSITION) {
             drawTransition();
         }
 
-//  TRANSITION STATE
-        if (gp.gameState == gp.tradeState) {
+        //  TRANSITION STATE
+        if (gp.gameState == GamePanel.GameState.TRADE) {
             drawTradeScreen();
         }
     }
@@ -698,7 +695,7 @@ public class UI {
         if (commandNum == STATE_FOUR) {
             g2.drawString(">", textX-TWENTY_FIVE, textY);
             if (gp.keyH.enterPressed) {
-                gp.gameState = gp.playState;
+                gp.gameState = GamePanel.GameState.PLAY;
                 commandNum = 0;
             }
         }
@@ -790,7 +787,7 @@ public class UI {
             g2.drawString(">", textX-TWENTY_FIVE, textY);
             if (gp.keyH.enterPressed) {
                 subState = 0;
-                gp.gameState = gp.titleState;
+                gp.gameState = GamePanel.GameState.TITLE;
                 gp.resetGame(true);
                 gp.stopMusic();
             }
@@ -820,7 +817,7 @@ public class UI {
         if (counter == 50) {
             counter = 0;
 
-            gp.gameState = gp.playState;
+            gp.gameState = GamePanel.GameState.PLAY;
             gp.currentMap = gp.eHandler.tempMap;
             gp.player.worldX = gp.tileSize * gp.eHandler.tempCol;
             gp.player.worldY = gp.tileSize * gp.eHandler.tempRow;
@@ -878,7 +875,7 @@ public class UI {
             g2.drawString(">", x-24, y);
             if(gp.keyH.enterPressed) {
                 commandNum = 0;
-                gp.gameState = gp.dialogueState;
+                gp.gameState = GamePanel.GameState.DIALOGUE;
                 currentDialogue = "Come again";
             }
         }
@@ -930,7 +927,7 @@ public class UI {
             if (gp.keyH.enterPressed) {
                 if (npc.inventory.get(itemIndex).price > gp.player.coin) {
                     subState = 0;
-                    gp.gameState = gp.dialogueState;
+                    gp.gameState = GamePanel.GameState.DIALOGUE;
                     currentDialogue = "You dont have enough money";
                     drawDialogueScreen();
                 }
@@ -941,7 +938,7 @@ public class UI {
                     }
                     else {
                         subState = 0;
-                        gp.gameState = gp.dialogueState;
+                        gp.gameState = GamePanel.GameState.DIALOGUE;
                         currentDialogue = "You dont have place in your Bag";
                     }
                 }
@@ -1000,7 +997,7 @@ public class UI {
                         gp.player.inventory.get(itemIndex) == gp.player.currentShield ) {
                     commandNum = 0;
                     subState = 0;
-                    gp.gameState = gp.dialogueState;
+                    gp.gameState = GamePanel.GameState.DIALOGUE;
                     currentDialogue = "You cannot sell equipped item!";
 
                 }

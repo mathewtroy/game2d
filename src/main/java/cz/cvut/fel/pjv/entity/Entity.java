@@ -286,9 +286,7 @@ public class Entity {
 
         else {
             setAction();
-
             checkCollision();
-
 
             //  IF COLLISION IS FALSE, PLAYER CAN MOVE
             if (!collisionOn) {
@@ -299,7 +297,6 @@ public class Entity {
                     case "right": worldX += speed; break;
                 }
             }
-
         }
 
 
@@ -308,7 +305,6 @@ public class Entity {
         if (spriteCounter > MAX_SPRITE_COUNTER) {
             if (spriteNum == 1) { spriteNum = 2; }
             else if (spriteNum == 2) { spriteNum = 1; }
-
             spriteCounter = 0;
         }
 
@@ -323,7 +319,6 @@ public class Entity {
         if (shotAvailableCounter < MAX_SHOT_AVAILABLE_COUNTER) {
             shotAvailableCounter ++;
         }
-
     }
 
     protected void damagePlayer(int attack) {
@@ -338,13 +333,11 @@ public class Entity {
             gp.player.life -= damage;
             gp.player.invisible  = true;
         }
-
     }
 
     public void draw(Graphics2D g2) {
 
         BufferedImage image = null;
-
 
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
         int screenY = worldY - gp.player.worldY + gp.player.screenY;

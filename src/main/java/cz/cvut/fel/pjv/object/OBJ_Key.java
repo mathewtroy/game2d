@@ -41,7 +41,7 @@ public class OBJ_Key extends Entity {
 
     public boolean use(Entity entity) {
 
-        gp.gameState = gp.dialogueState;
+        gp.gameState = GamePanel.GameState.DIALOGUE;
 
         int objIndex = getDetected(entity, gp.obj, "Door");
 

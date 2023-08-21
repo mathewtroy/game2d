@@ -110,7 +110,6 @@ public class Player extends Entity {
 
     }
 
-
     private void setItems() {
         inventory.clear();
         inventory.add(currentWeapon);
@@ -346,7 +345,7 @@ public class Player extends Entity {
         }
 
         if (life <= 0) {
-            gp.gameState = gp.gameOverState;
+            gp.gameState = GamePanel.GameState.GAME_OVER;
             gp.ui.commandNum = -1;
             gp.stopMusic();
             gp.playSE(SOUND_ELEVEN);
@@ -454,7 +453,7 @@ public class Player extends Entity {
 
                 attackCanceled = true;
 
-                gp.gameState = gp.dialogueState;
+                gp.gameState = GamePanel.GameState.DIALOGUE;
                 gp.npc[gp.currentMap][i].speak();
             }
             else {
@@ -559,7 +558,7 @@ public class Player extends Entity {
             defense =getDefense();
 
             gp.playSE(SOUND_SEVEN);
-            gp.gameState = gp.dialogueState;
+            gp.gameState = GamePanel.GameState.DIALOGUE;
             gp.ui.currentDialogue = "Cograts, PLAYER!\n" +
                     "You are level " + level + "now!\n" +
                     "You became stronger";

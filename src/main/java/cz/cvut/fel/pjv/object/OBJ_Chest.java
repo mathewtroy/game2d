@@ -51,7 +51,7 @@ public class OBJ_Chest extends Entity {
     }
 
     public void interact() {
-        gp.gameState = gp.dialogueState;
+        gp.gameState = GamePanel.GameState.DIALOGUE;
 
         if (!opened) {
             gp.playSE(SOUND_THREE);

@@ -65,13 +65,13 @@ public class EventHandler {
         }
 
         if (canTouchEvent) {
-            if (hit(0,29, 23, "right")) { damagePit(gp.dialogueState); }
-            else if (hit(0,27, 21, "any")) { damagePit(gp.dialogueState); }
+            if (hit(0,29, 23, "right")) { damagePit(); }
+            else if (hit(0,27, 21, "any")) { damagePit(); }
 
-            else if (hit(0,29, 27, "any")) { teleportIsland(gp.dialogueState); }
-            else if (hit(0,20, 42, "any")) { teleportFEL(gp.dialogueState); }
+            else if (hit(0,29, 27, "any")) { teleportIsland(); }
+            else if (hit(0,20, 42, "any")) { teleportFEL(); }
 
-            else if (hit(0,25, 24, "up")) { healingPool( gp.dialogueState);}
+            else if (hit(0,25, 24, "up")) { healingPool();}
 
             /*
               teleport to new map
@@ -119,38 +119,35 @@ public class EventHandler {
         return hit;
     }
 
-    private void teleportIsland(int gameState) {
-        gp.gameState = gameState;
+    private void teleportIsland() {
+        gp.gameState = GamePanel.GameState.DIALOGUE;
         gp.ui.currentDialogue = "You used teleport to Island!";
         gp.player.worldX = gp.tileSize*10;
         gp.player.worldY = gp.tileSize*42;
     }
 
 
-    private void teleportFEL(int gameState) {
-        gp.gameState = gameState;
+    private void teleportFEL() {
+        gp.gameState = GamePanel.GameState.DIALOGUE;
         gp.ui.currentDialogue = "You used teleport to FEL!";
         gp.player.worldX = gp.tileSize*12;
         gp.player.worldY = gp.tileSize*12;
     }
 
-    private void damagePit(int gameState) {
-        gp.gameState = gameState;
+    private void damagePit() {
+        gp.gameState = GamePanel.GameState.DIALOGUE;
         gp.playSE(SOUND_SIX);
         gp.ui.currentDialogue = "You fall into a pit!";
         gp.player.life -= 1;
-        //eventRect[col][row].eventDone = true;
         // one time damage Pit
 
         canTouchEvent = false;
     }
 
-    private void healingPool (int gameState) {
-
-        //System.out.println("Healing");
+    private void healingPool() {
 
         if(gp.keyH.enterPressed) {
-            gp.gameState = gameState;
+            gp.gameState = GamePanel.GameState.DIALOGUE;
             gp.player.attackCanceled = true;
             gp.playSE(SOUND_THREE);
             gp.ui.currentDialogue = "You drink the Russian VODKA\nLife and mana have been recovered\n"+
@@ -161,11 +158,10 @@ public class EventHandler {
             gp.saveLoad.save();
 
         }
-        //gp.keyH.enterPressed = false;
     }
 
     private void teleportMap(int map, int col, int row) {
-        gp.gameState = gp.transitionState;
+        gp.gameState = GamePanel.GameState.TRANSITION;
 
         tempMap = map;
         tempCol = col;
@@ -176,7 +172,7 @@ public class EventHandler {
     }
 
     private void teleportGoldMap(int map, int col, int row) {
-        gp.gameState = gp.transitionState;
+        gp.gameState = GamePanel.GameState.TRANSITION;
 
         tempMap = map;
         tempCol = col;
@@ -189,7 +185,7 @@ public class EventHandler {
     private void speak(Entity entity) {
 
         if (gp.keyH.enterPressed) {
-            gp.gameState = gp.dialogueState;
+            gp.gameState = GamePanel.GameState.DIALOGUE;
             gp.player.attackCanceled = true;
             entity.speak();
         }

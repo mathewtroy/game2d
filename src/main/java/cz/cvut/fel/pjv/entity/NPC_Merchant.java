@@ -31,7 +31,7 @@ public class NPC_Merchant extends Entity  {
     }
 
     private void setDialogue() {
-        dialogues[0] = "Zdravim! \nDo you want to trade, Iwan?? ";
+        dialogues[0] = "Hey! \nDo you want to trade, Iwan?? ";
         dialogues[1] = "Good luck, Iwan";
     }
 
@@ -50,7 +50,7 @@ public class NPC_Merchant extends Entity  {
 
         super.speak();
 
-        gp.gameState = gp.tradeState;
+        gp.gameState = GamePanel.GameState.TRADE;
         gp.ui.npc = this;
 
     }

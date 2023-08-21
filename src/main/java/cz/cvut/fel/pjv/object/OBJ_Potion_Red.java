@@ -38,7 +38,7 @@ public class OBJ_Potion_Red extends Entity {
     }
 
     public boolean use(Entity entity) {
-        gp.gameState = gp.dialogueState;
+        gp.gameState = GamePanel.GameState.DIALOGUE;
 
         gp.ui.currentDialogue = "You drink the " + name + "!\n" +
                 "Life has been recovered by " + value + "!";
