@@ -7,6 +7,7 @@ import jdk.nashorn.internal.runtime.regexp.joni.constants.EncloseType;
 
 import javax.swing.*;
 import java.io.*;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 public class SaveLoad {
@@ -141,7 +142,7 @@ public class SaveLoad {
                         gp.obj[mapNum][i].worldX = ds.mapObjectWorldX[mapNum][i];
                         gp.obj[mapNum][i].worldY = ds.mapObjectWorldY[mapNum][i];
 
-                        if (ds.mapObjectNames[mapNum][i] != "") {
+                        if (!Objects.equals(ds.mapObjectNames[mapNum][i], "")) {
                             gp.obj[mapNum][i].loot = gp.eGenerator.getObject(ds.mapObjectNames[mapNum][i]);
                         }
 

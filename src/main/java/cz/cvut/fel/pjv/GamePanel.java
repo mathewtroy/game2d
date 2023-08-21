@@ -18,6 +18,7 @@ import static cz.cvut.fel.pjv.Sound.SOUND_ZERO;
 
 public class GamePanel extends JPanel implements Runnable {
 
+
     //  SCREEN Settings
     //    16x16 px
     final int originalTileSize = 16;
@@ -79,18 +80,20 @@ public class GamePanel extends JPanel implements Runnable {
     ArrayList<Entity> entityList = new ArrayList<>();
 
 //    GAME STATE
-    public int gameState;
+    public GameState gameState;
 
-    public final int titleState = 0;
-    public final int playState = 1;
-    public final int pauseState = 2;
-    public final int dialogueState = 3;
-    public final int characterState = 4;
-    public final int optionState = 5;
-    public final int gameOverState = 6;
-    public final int transitionState = 7;
-    public final int tradeState = 8;
-    public final int mapState = 9;
+    public enum GameState {
+        TITLE,
+        PLAY,
+        PAUSE,
+        DIALOGUE,
+        CHARACTER,
+        OPTION,
+        GAME_OVER,
+        TRANSITION,
+        TRADE,
+        MAP
+    }
 
 
 
@@ -110,7 +113,7 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setInteractiveTile();
         playMusic(SOUND_ZERO);
         stopMusic();
-        gameState = titleState;
+        gameState = GameState.TITLE;
     }
 
     public void resetGame(boolean restart) {
@@ -171,7 +174,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
 
-        if (gameState == playState) {
+        if (gameState == GameState.PLAY) {
 
             // PLAYER
             player.update();
@@ -244,12 +247,12 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         //  TITLE SCREEN
-        if (gameState == titleState) {
+        if (gameState == GameState.TITLE) {
             ui.draw(g2);
         }
 
         // MAP SCREEN
-        else if (gameState == mapState) {
+        else if (gameState == GameState.MAP) {
             map.drawFullMapScreen(g2);
         }
 
