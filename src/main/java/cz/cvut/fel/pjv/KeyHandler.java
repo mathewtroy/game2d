@@ -46,85 +46,32 @@ public class KeyHandler implements KeyListener {
 
 //        TITLE STATE
         if (gp.gameState == GamePanel.GameState.TITLE) {
-
-            if (gp.ui.titleScreenState == 0) {
-                titleState(code);
-            }
-
-            else if (gp.ui.titleScreenState == 1) {
-
-                if (code == KeyEvent.VK_W) {
-                    gp.ui.commandNum--;
-                    if (gp.ui.commandNum < 0) { gp.ui.commandNum = 3; }
-                }
-
-                if (code == KeyEvent.VK_S) {
-                    gp.ui.commandNum++;
-                    if (gp.ui.commandNum > 3) { gp.ui.commandNum = 0; }
-                }
-
-                if (code == KeyEvent.VK_ENTER) {
-                    if (gp.ui.commandNum == 0) {
-                        System.out.println("Do some fighter specific stuff");
-                        gp.gameState = GamePanel.GameState.PLAY;
-                    }
-
-                    if (gp.ui.commandNum == 1) {
-                        System.out.println("Do some thief specific stuff");
-                        gp.gameState = GamePanel.GameState.PLAY;
-                    }
-
-                    if (gp.ui.commandNum == 2) {
-                        System.out.println("Do some sorcerer specific stuff");
-                        gp.gameState = GamePanel.GameState.PLAY;
-                    }
-
-                    if (gp.ui.commandNum == 3) { gp.ui.titleScreenState = 0; }
-                }
-            }
-
-
-
+            if (gp.ui.titleScreenState == 0) { titleState(code); }
         }
+
         // PLAY STATE
-        else if (gp.gameState == GamePanel.GameState.PLAY) {
-            playState(code);
-        }
+        else if (gp.gameState == GamePanel.GameState.PLAY) { playState(code); }
 
         // PAUSE STATE
-        else if (gp.gameState == GamePanel.GameState.PAUSE) {
-            pauseState(code);
-        }
+        else if (gp.gameState == GamePanel.GameState.PAUSE) { pauseState(code); }
 
         // DIALOGUE STATE
-        else if (gp.gameState == GamePanel.GameState.DIALOGUE) {
-            dialogueState(code);
-        }
+        else if (gp.gameState == GamePanel.GameState.DIALOGUE) { dialogueState(code); }
 
         // CHARACTER STATE
-        else if (gp.gameState == GamePanel.GameState.CHARACTER) {
-            characterState(code);
-        }
+        else if (gp.gameState == GamePanel.GameState.CHARACTER) { characterState(code); }
 
         // OPTION STATE
-        else if (gp.gameState == GamePanel.GameState.OPTION) {
-            optionState(code);
-        }
+        else if (gp.gameState == GamePanel.GameState.OPTION) { optionState(code); }
 
         // GAME OVER STATE
-        else if (gp.gameState == GamePanel.GameState.GAME_OVER) {
-            gameOverState(code);
-        }
+        else if (gp.gameState == GamePanel.GameState.GAME_OVER) { gameOverState(code); }
 
         // TRADE STATE
-        else if (gp.gameState == GamePanel.GameState.TRADE) {
-            tradeState(code);
-        }
+        else if (gp.gameState == GamePanel.GameState.TRADE) { tradeState(code); }
 
         // MAP STATE
-        else if (gp.gameState == GamePanel.GameState.MAP) {
-            mapState(code);
-        }
+        else if (gp.gameState == GamePanel.GameState.MAP) { mapState(code); }
 
     }
 
@@ -143,7 +90,6 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_ENTER) {
             if (gp.ui.commandNum == 0) {
                 gp.gameState = GamePanel.GameState.PLAY;
-                // gp.ui.titleScreenState = 1;
                 gp.playMusic(SOUND_ZERO);
             }
 
@@ -151,10 +97,8 @@ public class KeyHandler implements KeyListener {
             if (gp.ui.commandNum == 1) {
                 gp.saveLoad.load();
                 gp.gameState = GamePanel.GameState.PLAY;
-                // gp.ui.titleScreenState = 1;
                 gp.playMusic(SOUND_ZERO);
             }
-
 
             if (gp.ui.commandNum == 2) { System.exit(0); }
         }
@@ -171,31 +115,22 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_ENTER) { enterPressed = true; }
         if (code == KeyEvent.VK_F) { shotKeyPressed = true; }
         if (code == KeyEvent.VK_R) { gp.gameState = GamePanel.GameState.OPTION;}
-
         if (code == KeyEvent.VK_M) { gp.gameState = GamePanel.GameState.MAP;}
         if (code == KeyEvent.VK_Q) {
 
-            if (!gp.map.miniMapOn) {
-                gp.map.miniMapOn = true;
-            }
-            else {
-                gp.map.miniMapOn = false;
-            }
+            if (!gp.map.miniMapOn) { gp.map.miniMapOn = true; }
+            else { gp.map.miniMapOn = false; }
         }
 
 
 
 //  DEBUG
-        if (code == KeyEvent.VK_T) {
-            checkDrawTime = !checkDrawTime;
-        }
+        if (code == KeyEvent.VK_T) { checkDrawTime = !checkDrawTime; }
 
         if (code == KeyEvent.VK_E) {
             switch (gp.currentMap) {
                 case 0: gp.tileM.loadMap("/maps/new2.txt", 0); break;
-
                 case 1: gp.tileM.loadMap("/maps/pjv.txt", 1); break;
-
                 case 2: gp.tileM.loadMap("/maps/gold.txt", 2); break;
 
             }
@@ -205,36 +140,25 @@ public class KeyHandler implements KeyListener {
 
     private void pauseState (int code) {
         if(code == KeyEvent.VK_P) { gp.gameState = GamePanel.GameState.PLAY; }
-
     }
 
 
     private void dialogueState (int code) {
         if(code == KeyEvent.VK_ENTER) { gp.gameState = GamePanel.GameState.PLAY; }
-
     }
 
     private void characterState (int code) {
-        if (code == KeyEvent.VK_C) {
-            gp.gameState = GamePanel.GameState.PLAY;
-        }
-
-        if (code == KeyEvent.VK_ENTER) {
-            gp.player.selectItem();
-        }
+        if (code == KeyEvent.VK_C) { gp.gameState = GamePanel.GameState.PLAY; }
+        if (code == KeyEvent.VK_ENTER) { gp.player.selectItem(); }
 
         playerInventory(code);
 
     }
 
     private void optionState(int code) {
-        if (code == KeyEvent.VK_R) {
-            gp.gameState = GamePanel.GameState.PLAY;
-        }
+        if (code == KeyEvent.VK_R) { gp.gameState = GamePanel.GameState.PLAY; }
 
-        else if (code == KeyEvent.VK_ENTER) {
-            enterPressed = true;
-        }
+        else if (code == KeyEvent.VK_ENTER) { enterPressed = true; }
 
         int maxCommandNum = 0;
         switch (gp.ui.subState) {
@@ -316,9 +240,7 @@ public class KeyHandler implements KeyListener {
                 gp.gameState = GamePanel.GameState.TITLE;
                 gp.resetGame(true);
             }
-
         }
-
     }
 
 
@@ -363,10 +285,7 @@ public class KeyHandler implements KeyListener {
     }
 
     private void mapState(int code) {
-
-        if (code == KeyEvent.VK_M) {
-            gp.gameState = GamePanel.GameState.PLAY;
-        }
+        if (code == KeyEvent.VK_M) { gp.gameState = GamePanel.GameState.PLAY; }
     }
 
     private void playerInventory(int code) {
@@ -449,7 +368,6 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_A) { leftPressed = false; }
         if (code == KeyEvent.VK_D) { rightPressed = false; }
         if (code == KeyEvent.VK_F) { shotKeyPressed = false; }
-
 
     }
 }
