@@ -13,9 +13,26 @@ public class EventHandler {
     boolean canTouchEvent = true;
     int tempMap, tempCol, tempRow;
 
-    private static final int MAP_ZERO = 0 ;
-    private static final int MAP_ONE = 1 ;
+    public static final int MAP_NEW = 0;
+    public static final int MAP_PJV = 1;
+    public static final int MAP_GOLD = 2;
 
+    private static final int MAP_NEW_COL = 19;
+    private static final int MAP_NEW_ROW = 6;
+
+    private static final int MAP_PJV_COL = 9;
+    private static final int MAP_PJV_ROW = 15;
+
+    private static final int MAP_PJV_TO_GOLD_COL = 28;
+    private static final int MAP_PJV_TO_GOLD_ROW = 28;
+
+    private static final int MAP_GOLD_COL = 9 ;
+    private static final int MAP_GOLD_ROW = 15 ;
+
+    private static final String DIRECTION = "Any";
+
+    private static final int MERCHANT_COL = 12;
+    private static final int MERCHANT_ROW = 9;
 
 
 
@@ -65,25 +82,40 @@ public class EventHandler {
         }
 
         if (canTouchEvent) {
-            if (hit(0,29, 23, "right")) { damagePit(); }
-            else if (hit(0,27, 21, "any")) { damagePit(); }
+            if (hit(MAP_NEW,29, 23, DIRECTION)) { damagePit(); }
+            else if (hit(MAP_NEW,27, 21, DIRECTION)) { damagePit(); }
 
-            else if (hit(0,29, 27, "any")) { teleportIsland(); }
-            else if (hit(0,20, 42, "any")) { teleportFEL(); }
+            else if (hit(MAP_NEW,29, 27, DIRECTION)) { teleportIsland(); }
+            else if (hit(MAP_NEW,20, 42, DIRECTION)) { teleportFEL(); }
 
-            else if (hit(0,25, 24, "up")) { healingPool();}
+            else if (hit(MAP_NEW,25, 24, DIRECTION)) { healingPool();}
 
             /*
               teleport to new map
               Our map new.txt (txt row: 4, txt col: 40)
             */
-            else if (hit(0,19, 6, "any")) { teleportMap( 1, 9, 15);}
-            else if (hit(1,9, 15, "any")) { teleportMap( 0, 19, 6);}
+            else if (hit(MAP_NEW,MAP_NEW_COL, MAP_NEW_ROW, DIRECTION)) {
+                teleportMap( MAP_PJV, MAP_PJV_COL, MAP_PJV_ROW);
+            }
 
-            else if (hit(1,28, 28, "any")) { teleportGoldMap( 2, 9, 15);}
-            else if (hit(2,9, 15, "any")) { teleportGoldMap( 1, 28, 28);}
+            // teleport to pjv map
+            else if (hit(MAP_PJV,MAP_PJV_COL, MAP_PJV_ROW, DIRECTION)) {
+                teleportMap( MAP_NEW, MAP_NEW_COL, MAP_NEW_ROW);
+            }
 
-            else if (hit(1,12, 9, "up")) { speak( gp.npc[1][0]);}
+            // teleport to gold map
+            else if (hit(MAP_PJV,MAP_PJV_TO_GOLD_COL, MAP_PJV_TO_GOLD_ROW, DIRECTION)) {
+                teleportMap( MAP_GOLD, MAP_GOLD_COL, MAP_GOLD_ROW);
+            }
+
+            // back to pjv map from gold map
+            else if (hit(MAP_GOLD,MAP_GOLD_COL, MAP_GOLD_ROW, DIRECTION)) {
+                teleportMap( MAP_PJV, MAP_PJV_TO_GOLD_COL, MAP_PJV_TO_GOLD_ROW);
+            }
+
+            else if (hit(MAP_PJV,MERCHANT_COL, MERCHANT_ROW, DIRECTION)) {
+                speak( gp.npc[1][0]);
+            }
 
 
         }
@@ -102,7 +134,7 @@ public class EventHandler {
             if (gp.player.solidArea.intersects(eventRect[map][col][row])
                     && !eventRect[map][col][row].eventDone) {
 
-                if (gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
+                if (gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals(DIRECTION)) {
                     hit = true;
                     previousEventX = gp.player.worldX;
                     previousEventY = gp.player.worldY;
@@ -122,7 +154,7 @@ public class EventHandler {
     private void teleportIsland() {
         gp.gameState = GamePanel.GameState.DIALOGUE;
         gp.ui.currentDialogue = "You used teleport to Island!";
-        gp.player.worldX = gp.tileSize*10;
+        gp.player.worldX = gp.tileSize*12;
         gp.player.worldY = gp.tileSize*42;
     }
 
@@ -161,17 +193,6 @@ public class EventHandler {
     }
 
     private void teleportMap(int map, int col, int row) {
-        gp.gameState = GamePanel.GameState.TRANSITION;
-
-        tempMap = map;
-        tempCol = col;
-        tempRow = row;
-
-        canTouchEvent = false;
-        gp.playSE(SOUND_TWELVE);
-    }
-
-    private void teleportGoldMap(int map, int col, int row) {
         gp.gameState = GamePanel.GameState.TRANSITION;
 
         tempMap = map;

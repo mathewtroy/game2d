@@ -37,10 +37,7 @@ public class UI {
     public String currentDialogue = "";
     public int commandNum = 0;
 
-    // 0: the first screen,
-    // 1: the second screen
     public int titleScreenState = 0;
-
     public int playerSlotCol = 0;
     public int playerSlotRow = 0;
     public int npcSlotCol = 0;
@@ -102,7 +99,6 @@ public class UI {
 
         //  DIALOGUE STATE
         if(gp.gameState == GamePanel.GameState.DIALOGUE) {
-            //drawPlayerLife();
             drawDialogueScreen();
         }
 
@@ -136,7 +132,6 @@ public class UI {
 
     private void drawPlayerLife() {
 
-        // gp.player.life = 3;
         int x = gp.tileSize/2;
         int y = gp.tileSize/2;
         int i = 0;
@@ -219,7 +214,7 @@ public class UI {
 
     private void drawTitleScreen() {
 
-        if (titleScreenState == 0 ) {
+
 
             g2.setColor(BACKGROUND_GREEN);
             g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
@@ -238,11 +233,12 @@ public class UI {
             g2.setColor(Color.black);
             g2.drawString(text, x, y);
 
-
             // JAVA IMAGE
             x = gp.screenWidth/2 - (gp.tileSize*2)/2;
             y += gp.tileSize*2;
-            g2.drawImage(gp.player.down1, x,y, gp.tileSize*2, gp.tileSize*2, null);
+            g2.drawImage(gp.player.planet, x,y, gp.tileSize*2, gp.tileSize*2, null);
+            g2.drawImage(gp.player.down1, x,y*2, gp.tileSize*2, gp.tileSize*2, null);
+
 
             // MENU
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
@@ -271,53 +267,7 @@ public class UI {
             if (commandNum == 2) {
                 g2.drawString(">", x-gp.tileSize, y);
             }
-        }
 
-        else if (titleScreenState == 1) {
-
-            // CLASS SELECTION SCREEN
-            g2.setColor(Color.white);
-            g2.setFont(g2.getFont().deriveFont(45F));
-
-            String text = "Select your class!";
-            int x = getXForCenteredText(text);
-            int y = gp.tileSize*3;
-            g2.drawString(text, x, y);
-
-            text = "Fighter";
-            x = getXForCenteredText(text);
-            y += gp.tileSize*3;
-            g2.drawString(text, x, y);
-            if (commandNum == 0) {
-                g2.drawString(">", x-gp.tileSize, y);
-            }
-
-            text = "Thief";
-            x = getXForCenteredText(text);
-            y += gp.tileSize;
-            g2.drawString(text, x, y);
-            if (commandNum == 1) {
-                g2.drawString(">", x-gp.tileSize, y);
-            }
-
-
-            text = "Sorcerer";
-            x = getXForCenteredText(text);
-            y += gp.tileSize;
-            g2.drawString(text, x, y);
-            if (commandNum == 2) {
-                g2.drawString(">", x-gp.tileSize, y);
-            }
-
-
-            text = "Back";
-            x = getXForCenteredText(text);
-            y += gp.tileSize*2;
-            g2.drawString(text, x, y);
-            if (commandNum == 3) {
-                g2.drawString(">", x-gp.tileSize, y);
-            }
-        }
     }
 
     private void drawPauseScreen() {
