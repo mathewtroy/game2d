@@ -18,8 +18,6 @@ public class Player extends Entity {
     private static final String LOGGER_MESSAGE_PLAYER_SWORD = "Missing image of the ATTACKING HERO WITH SWORD";
     private static final String LOGGER_MESSAGE_PLAYER_AXE = "Missing image of the ATTACKING HERO WITH AXE";
 
-
-
     // CONSTANTS
     private static final int SPRITE_COUNTER_THRESHOLD = 10;
     private static final int SHOT_AVAILABLE_COUNTER_THRESHOLD = 30;
@@ -161,6 +159,7 @@ public class Player extends Entity {
         right2 = setup("/player/hero_right_2", gp.tileSize, gp.tileSize);
         left1 = setup("/player/hero_left_1", gp.tileSize, gp.tileSize);
         left2 = setup("/player/hero_left_2", gp.tileSize, gp.tileSize);
+        planet = setup("/player/planet", gp.tileSize, gp.tileSize);
     }
 
     public void getPlayerAttackImage() {
