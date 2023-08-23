@@ -23,6 +23,23 @@ public class SaveLoad {
         this.gp = gp;
     }
 
+    public Entity getObject(String itemName){
+        Entity obj = null;
+
+        switch (itemName){
+            case"Normal Axe":obj = new OBJ_Axe(gp);break;
+            case"Red Potion":obj = new OBJ_Potion_Red(gp);break;
+            case"Blue Potion":obj = new OBJ_Potion_Blue(gp);break;
+            case"Boots":obj = new OBJ_Boots(gp);break;
+            case"Key":obj = new OBJ_Key(gp);break;
+            case"Blue Shield":obj = new OBJ_Shield_Blue(gp);break;
+            case"Wood Shield":obj = new OBJ_Shield_Wood(gp);break;
+            case"Normal Sword":obj = new OBJ_Sword_Normal(gp);break;
+            case"Chest":obj = new OBJ_Chest(gp);break;
+            case"Door":obj = new OBJ_Door(gp);break;
+        }
+        return obj;
+    }
 
     public void save() {
 
@@ -115,7 +132,7 @@ public class SaveLoad {
             // Player Inventory
             gp.player.inventory.clear();
             for (int i = 0; i < ds.itemNames.size(); i++) {
-                gp.player.inventory.add(gp.eGenerator. getObject(ds.itemNames.get(i)));
+                gp.player.inventory.add(getObject(ds.itemNames.get(i)));
                 gp.player.inventory.get(i).amount = ds.itemAmounts.get(i);
             }
 
