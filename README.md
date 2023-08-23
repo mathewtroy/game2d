@@ -99,7 +99,7 @@ Během práce na semestrálním projektu jsem získal mnoho cenných zkušenost�
 
 **Interakce s předměty:** Hráč mohl používat různé předměty v inventáři k interakci s herním světem. To zahrnovalo detekci, zda má hráč správný předmět k otevření dveří nebo k boji s nepřítelem. Bylo toho třeba hodně otestovat a ladit. <br>
 
-**Grafické uživatelské rozhraní (GUI): **Vytvořil jsem grafické uživatelské rozhraní pro hru, které zahrnovalo inventář, statistiky hráče a rozhraní pro boj. Toto bylo důležité pro přívětivost hry.
+**Grafické uživatelské rozhraní (GUI):** Vytvořil jsem grafické uživatelské rozhraní pro hru, které zahrnovalo inventář, statistiky hráče a rozhraní pro boj. Toto bylo důležité pro přívětivost hry.
 
 </details>
 
