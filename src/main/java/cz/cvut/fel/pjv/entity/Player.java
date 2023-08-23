@@ -141,7 +141,7 @@ public class Player extends Entity {
     public int getCurrentShieldSlot() {
         int currentShieldSlot = 0;
         for (int i = 0; i < inventory.size(); i++) {
-            if(inventory.get(i) == currentWeapon) {
+            if(inventory.get(i) == currentShield) {
                 currentShieldSlot = i;
             }
         }
