@@ -91,7 +91,15 @@ After the player opens the chest, they can continue to fight the monsters becaus
 
 <details><summary> Show more </summary>
 
-Describe my experience.. Bla bla bla.
+Během práce na semestrálním projektu jsem získal mnoho cenných zkušeností v oblasti vývoje her v jazyce Java. Zde je několik věcí, které jsem se naučil: <br>
+
+**Práce s externími soubory:** Musel jsem se naučit načítat data ze souborů a ukládat je zpět. Toto je klíčová dovednost pro dynamické načítání levelů a ukládání stavu hry. <br>
+
+**Bojový systém:** Implementace způsobu souboje s nepřáteli byla náročná, ale zajímavá část projektu. Musel jsem vytvořit mechanismus pro zpracování útoků hráče a nepřátel, sledování životního stavu a rozhodování o výsledku souboje. <br>
+
+**Interakce s předměty:** Hráč mohl používat různé předměty v inventáři k interakci s herním světem. To zahrnovalo detekci, zda má hráč správný předmět k otevření dveří nebo k boji s nepřítelem. Bylo toho třeba hodně otestovat a ladit. <br>
+
+**Grafické uživatelské rozhraní (GUI): **Vytvořil jsem grafické uživatelské rozhraní pro hru, které zahrnovalo inventář, statistiky hráče a rozhraní pro boj. Toto bylo důležité pro přívětivost hry.
 
 </details>
 
