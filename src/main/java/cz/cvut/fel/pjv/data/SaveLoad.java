@@ -3,9 +3,7 @@ package cz.cvut.fel.pjv.data;
 import cz.cvut.fel.pjv.GamePanel;
 import cz.cvut.fel.pjv.entity.Entity;
 import cz.cvut.fel.pjv.object.*;
-import jdk.nashorn.internal.runtime.regexp.joni.constants.EncloseType;
 
-import javax.swing.*;
 import java.io.*;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -23,6 +21,14 @@ public class SaveLoad {
         this.gp = gp;
     }
 
+    /**
+     * Retrieves an Entity object based on the provided item name
+     *
+     * @param itemName The name of the item for which to retrieve an Entity object
+     * @return An Entity object corresponding to the provided item name.
+     * Returns null if the item name is not recognized.
+     *
+     */
     public Entity getObject(String itemName){
         Entity obj = null;
 
