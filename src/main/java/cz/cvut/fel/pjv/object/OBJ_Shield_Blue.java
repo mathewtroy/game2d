@@ -18,7 +18,7 @@ public class OBJ_Shield_Blue extends Entity {
         this.gp = gp;
 
         type = type_shield;
-        name = objName;
+        setName(objName);
         defenseValue = 3;
         description = "[" + name + "]\nA new iron shield.";
         price = 10;

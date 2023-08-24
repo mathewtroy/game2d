@@ -23,7 +23,7 @@ public class OBJ_Key extends Entity {
         this.gp = gp;
 
         type = type_consumable;
-        name = objName;
+        setName(objName);
 
         description = "[" + name + "]\nAn old key.\nMade in China.";
         price = 10;

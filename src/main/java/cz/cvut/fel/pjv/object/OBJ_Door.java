@@ -20,7 +20,7 @@ public class OBJ_Door extends Entity {
         this.gp = gp;
 
         type = type_obstacle;
-        name = objName;
+        setName(objName);
         collision = true;
 
         solidArea.x = 0;

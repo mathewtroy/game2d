@@ -18,7 +18,7 @@ public class OBJ_Axe extends Entity {
         this.gp = gp;
 
         type = type_axe;
-        name = objName;
+        setName(objName);
         attackValue = 4;
         attackArea.width = 30;
         attackArea.height = 30;

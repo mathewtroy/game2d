@@ -18,7 +18,7 @@ public class OBJ_Sword_Normal extends Entity {
         this.gp = gp;
 
         type = type_sword;
-        name = objName;
+        setName(objName);
         attackValue = 1;
         attackArea.width = 36;
         attackArea.height = 36;

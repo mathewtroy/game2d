@@ -20,7 +20,7 @@ public class OBJ_Potion_Red extends Entity {
         this.gp = gp;
 
         type = type_consumable;
-        name = objName;
+        setName(objName);
         value = 5;
         description = "[Red Potion]\nHeals your life by " + value + "!";
         price = 3;

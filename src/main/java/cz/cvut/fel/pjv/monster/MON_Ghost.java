@@ -23,14 +23,14 @@ public class MON_Ghost extends Entity {
         this.gp = gp;
 
         type = type_monster;
-        name = monsterName;
+        setName(monsterName);
         defaultSpeed = 1;
         speed = defaultSpeed;
         maxLife = 30;   // added more life
         life = maxLife;
         attack = 5;
         defense = 3;
-        exp = 4;
+        setExp(5);
 
         solidArea.x = 3;
         solidArea.y = 18;

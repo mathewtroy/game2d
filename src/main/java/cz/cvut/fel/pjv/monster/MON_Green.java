@@ -36,14 +36,14 @@ public class MON_Green extends Entity {
         this.gp = gp;
 
         type = type_monster;
-        name = monsterName;
+        setName(monsterName);
         defaultSpeed = 1;
         speed = defaultSpeed;
         maxLife = 15;   // added more life
         life = maxLife;
         attack = 5;
         defense = 0;
-        exp = 2;
+        setExp(2);
         projectile = new OBJ_Rock(gp);
 
         solidArea.x = 3;

@@ -18,7 +18,7 @@ public class OBJ_Shield_Wood extends Entity {
         this.gp = gp;
 
         type = type_shield;
-        name = objName;
+        setName(objName);
         defenseValue = 1;
         description = "[" + name + "]\nAn old shield.";
         price = 5;
