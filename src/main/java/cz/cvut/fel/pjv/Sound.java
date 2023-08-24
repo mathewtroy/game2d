@@ -38,8 +38,6 @@ public class Sound {
     public static final int SOUND_THIRTEEN = 13 ;
 
 
-
-
     Clip clip;
 
     URL[] soundURL = new URL[30];

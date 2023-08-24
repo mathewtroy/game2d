@@ -20,7 +20,7 @@ public class OBJ_Coin_Gold extends Entity {
         this.gp = gp;
 
         type = type_pickupOnly;
-        name = objName;
+        setName(objName);
         value = 10;
 
         setupCoinImage();

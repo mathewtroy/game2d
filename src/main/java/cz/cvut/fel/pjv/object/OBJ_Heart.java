@@ -21,7 +21,7 @@ public class OBJ_Heart extends Entity {
         this.gp = gp;
 
         type = type_pickupOnly;
-        name = objName;
+        setName(objName);
         value = 2;
 
         setupHeartImage();

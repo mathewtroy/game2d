@@ -20,7 +20,7 @@ public class OBJ_ManaCrystal extends Entity {
         super(gp);
         this.gp = gp;
         type = type_pickupOnly;
-        name = objName;
+        setName(objName);
         value = 1;
         price = 5;
 

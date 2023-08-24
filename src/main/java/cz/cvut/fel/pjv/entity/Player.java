@@ -427,7 +427,7 @@ public class Player extends Entity {
 
                 if (canObtainItem(gp.obj[gp.currentMap][i])) {
                     gp.playSE(SOUND_ONE);
-                    text = "Got a " + gp.obj[gp.currentMap][i].name + "!";
+                    text = "Got a " + gp.obj[gp.currentMap][i].getName() + "!";
                 }
                 else {
                     text = "You cannot carry any more!";
@@ -499,8 +499,8 @@ public class Player extends Entity {
 
                 if (gp.monster[gp.currentMap][i].life <= 0) {
                     gp.monster[gp.currentMap][i].dying = true;
-                    gp.ui.addMessage("killed the" + gp.monster[gp.currentMap][i].name + "!");
-                    logger.info("You killed the " + gp.monster[gp.currentMap][i].name + "!");
+                    gp.ui.addMessage("killed the" + gp.monster[gp.currentMap][i].getName() + "!");
+                    logger.info("You killed the " + gp.monster[gp.currentMap][i].getName() + "!");
                     gp.ui.addMessage("EXP + " + gp.monster[gp.currentMap][i].exp);
                     exp += gp.monster[gp.currentMap][i].exp;
                     checkLevelUp();
@@ -543,9 +543,9 @@ public class Player extends Entity {
     }
 
     public void checkLevelUp() {
-        if (exp >= nextLevelExp) {
+        if (getExp() >= getNextLevelExp()) {
             level++;
-            nextLevelExp = nextLevelExp*2;
+            nextLevelExp = getNextLevelExp()*2;
             maxLife += 2;
             strength++;
             dexterity++;
@@ -601,7 +601,7 @@ public class Player extends Entity {
         int itemIndex = MAX_COST;
 
         for (int i = 0; i < inventory.size(); i++) {
-            if (inventory.get(i).name.equals(itemName)) {
+            if (inventory.get(i).getName().equals(itemName)) {
                 itemIndex = i;
                 break;
             }
@@ -614,11 +614,11 @@ public class Player extends Entity {
 
         boolean canObtain = false;
 
-        Entity newItem = gp.eGenerator.getObject(item.name);
+        Entity newItem = gp.eGenerator.getObject(item.getName());
 
         // Check if stackable
         if (item.stackable) {
-            int index = searchItemInInventory(newItem.name);
+            int index = searchItemInInventory(newItem.getName());
 
             if (index != MAX_COST) {
                 inventory.get(index).amount++;

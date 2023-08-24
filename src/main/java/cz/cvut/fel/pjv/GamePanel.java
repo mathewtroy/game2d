@@ -49,10 +49,10 @@ public class GamePanel extends JPanel implements Runnable {
     public final int worldHeight = tileSize * maxWorldRow;
 
 
-    //    FPS
+    // FPS
     int FPS = 60;
 
-//    SYSTEM
+    // SYSTEM
     public TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
@@ -68,18 +68,17 @@ public class GamePanel extends JPanel implements Runnable {
     public EntityGenerator eGenerator = new EntityGenerator(this);
     Thread gameThread;
 
-//    ENTITY and OBJECT
+    // ENTITY and OBJECT
     public Player player = new Player(this, keyH);
     public Entity[][] obj = new Entity[maxMap][20];
     public Entity[][] npc = new Entity[maxMap][10];
     public Entity[][] monster = new Entity[maxMap][20];
     public InteractiveTile[][] iTile = new InteractiveTile[maxMap][50];
     public Entity[][] projectile = new Entity[maxMap][50];
-    // public ArrayList<Entity> projectileList = new ArrayList<>();
     public ArrayList<Entity> particleList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
 
-//    GAME STATE
+    // GAME STATE
     public GameState gameState;
 
     public enum GameState {
@@ -95,8 +94,6 @@ public class GamePanel extends JPanel implements Runnable {
         MAP
     }
 
-
-
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
@@ -104,7 +101,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.addKeyListener(keyH);
         this.setFocusable(true);
     }
-
 
     public void setupGame() {
         gameState = GameState.TITLE;
@@ -150,7 +146,6 @@ public class GamePanel extends JPanel implements Runnable {
 
             // DRAW
             repaint();
-
 
             try {
                 double remainingTime = nextDrawTime - System.nanoTime();
@@ -199,7 +194,6 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
 
-
             // PROJECTILE
             for (int i = 0; i < projectile[1].length; i++) {
                 if (projectile[currentMap][i] != null) {
@@ -223,8 +217,6 @@ public class GamePanel extends JPanel implements Runnable {
                     }
                 }
             }
-
-
 
             for (int i = 0; i < iTile[1].length; i++)  {
                 if (iTile[currentMap][i] != null) {
@@ -327,9 +319,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         }
 
-
-
-//  DEBUG
+        //  DEBUG
         if (keyH.checkDrawTime) {
             long drawEnd = System.nanoTime();
             long passed = drawEnd - drawStart;
@@ -337,25 +327,21 @@ public class GamePanel extends JPanel implements Runnable {
             g2.drawString("Draw Time: " + passed, 10, 400);
             System.out.println("Draw Time: " + passed);
         }
-
         g2.dispose();
     }
 
 
     public void playMusic (int i) {
-
         music.setFile(i);
         music.play();
         music.loop();
     }
 
     public void stopMusic () {
-
         music.stop();
     }
 
     public void playSE(int i) {
-
         se.setFile(i);
         se.play();
 

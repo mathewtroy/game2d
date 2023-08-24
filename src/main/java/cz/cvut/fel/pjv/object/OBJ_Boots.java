@@ -21,7 +21,7 @@ public class OBJ_Boots extends Entity {
 
         type = type_pickupOnly;
         value = 2;
-        name = objName;
+        setName(objName);
 
         setupBootsImage();
     }

@@ -35,7 +35,7 @@ public class OBJ_Chest extends Entity {
         this.gp = gp;
 
         type = type_obstacle;
-        name = objName;
+        setName(objName);
         collisionOn = true;
 
         solidArea.x = SOLID_X;
