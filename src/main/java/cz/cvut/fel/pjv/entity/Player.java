@@ -270,10 +270,6 @@ public class Player extends Entity {
                 gp.playSE(SOUND_FIVE);
                 attacking = true;
                 spriteCounter = 0;
-
-                // Decrease durability
-                currentWeapon.durability--;
-
             }
 
             attackCanceled = false;
@@ -558,7 +554,7 @@ public class Player extends Entity {
 
             gp.playSE(SOUND_SEVEN);
             gp.gameState = GamePanel.GameState.DIALOGUE;
-            gp.ui.currentDialogue = "Cograts, PLAYER!\n" +
+            gp.ui.currentDialogue = "Congrats, PLAYER!\n" +
                     "You are level " + level + "now!\n" +
                     "You became stronger";
         }

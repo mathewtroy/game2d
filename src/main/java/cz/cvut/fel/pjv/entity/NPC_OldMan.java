@@ -34,8 +34,8 @@ public class NPC_OldMan extends  Entity {
 
     private void setDialogue() {
 
-        dialogues[0] = "Hello, mister";
-        dialogues[1] = "Welcome to FELL (HELL)";
+        dialogues[0] = "Hello, Iwan";
+        dialogues[1] = "Welcome to FEL (HELL)";
         dialogues[2] = "I am so tired, man. \nI have semester project from PJV";
         dialogues[3] = "Good luck, Iwan";
 
