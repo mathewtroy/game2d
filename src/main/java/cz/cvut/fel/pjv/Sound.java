@@ -35,6 +35,8 @@ public class Sound {
     public static final int SOUND_TEN = 10;
     public static final int SOUND_ELEVEN = 11;
     static final int SOUND_TWELVE = 12 ;
+    public static final int SOUND_THIRTEEN = 13 ;
+
 
 
 
@@ -47,9 +49,9 @@ public class Sound {
 
     Sound() {
 
-        soundURL[SOUND_ZERO] = getClass().getResource("/sound/adventure.wav");
+        soundURL[SOUND_ZERO] = getClass().getResource("/sound/irish.wav");
         soundURL[SOUND_ONE] = getClass().getResource("/sound/coin.wav");
-        soundURL[SOUND_TWO] = getClass().getResource("/sound/fanfare.wav");
+        soundURL[SOUND_TWO] = getClass().getResource("/sound/success.wav");
         soundURL[SOUND_THREE] = getClass().getResource("/sound/powerup.wav");
         soundURL[SOUND_FOUR] = getClass().getResource("/sound/unlock.wav");
         soundURL[SOUND_FIVE] = getClass().getResource("/sound/hitmonster.wav");
@@ -60,6 +62,7 @@ public class Sound {
         soundURL[SOUND_TEN] = getClass().getResource("/sound/cuttree.wav");
         soundURL[SOUND_ELEVEN] = getClass().getResource("/sound/gameover.wav");
         soundURL[SOUND_TWELVE] = getClass().getResource("/sound/stairs.wav");
+        soundURL[SOUND_THIRTEEN] = getClass().getResource("/sound/prize.wav");
 
     }
 
@@ -106,7 +109,6 @@ public class Sound {
         }
         fc.setValue(volume);
     }
-
 
 
 }
