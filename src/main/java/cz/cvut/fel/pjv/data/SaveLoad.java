@@ -27,16 +27,16 @@ public class SaveLoad {
         Entity obj = null;
 
         switch (itemName){
-            case"Normal Axe":obj = new OBJ_Axe(gp);break;
-            case"Red Potion":obj = new OBJ_Potion_Red(gp);break;
-            case"Blue Potion":obj = new OBJ_Potion_Blue(gp);break;
-            case"Boots":obj = new OBJ_Boots(gp);break;
-            case"Key":obj = new OBJ_Key(gp);break;
-            case"Blue Shield":obj = new OBJ_Shield_Blue(gp);break;
-            case"Wood Shield":obj = new OBJ_Shield_Wood(gp);break;
-            case"Normal Sword":obj = new OBJ_Sword_Normal(gp);break;
-            case"Chest":obj = new OBJ_Chest(gp);break;
-            case"Door":obj = new OBJ_Door(gp);break;
+            case"Normal Axe":obj = new OBJ_Axe(gp); break;
+            case"Red Potion":obj = new OBJ_Potion_Red(gp); break;
+            case"Blue Potion":obj = new OBJ_Potion_Blue(gp); break;
+            case"Boots":obj = new OBJ_Boots(gp); break;
+            case"Key":obj = new OBJ_Key(gp); break;
+            case"Blue Shield":obj = new OBJ_Shield_Blue(gp); break;
+            case"Wood Shield":obj = new OBJ_Shield_Wood(gp); break;
+            case"Normal Sword":obj = new OBJ_Sword_Normal(gp); break;
+            case"Chest":obj = new OBJ_Chest(gp); break;
+            case"Door":obj = new OBJ_Door(gp); break;
         }
         return obj;
     }
@@ -49,20 +49,20 @@ public class SaveLoad {
             DataStorage ds = new DataStorage();
 
             // Player stats
-            ds.level = gp.player.level;
+            ds.level = gp.player.getLevel();
             ds.maxLife = gp.player.maxLife;
             ds.life = gp.player.life;
             ds.maxMana = gp.player.maxMana;
             ds.mana = gp.player.mana;
             ds.strength = gp.player.strength;
             ds.dexterity = gp.player.dexterity;
-            ds.exp = gp.player.exp;
-            ds.nextLevelExp = gp.player.nextLevelExp;
+            ds.exp = gp.player.getExp();
+            ds.nextLevelExp = gp.player.getNextLevelExp();
             ds.coin = gp.player.coin;
 
             // Player Inventory
             for (int i = 0; i < gp.player.inventory.size(); i++) {
-                ds.itemNames.add(gp.player.inventory.get(i).name);
+                ds.itemNames.add(gp.player.inventory.get(i).getName());
                 ds.itemAmounts.add(gp.player.inventory.get(i).amount);
             }
 
@@ -86,12 +86,12 @@ public class SaveLoad {
                     }
 
                     else {
-                        ds.mapObjectNames[mapNum][i] = gp.obj[mapNum][i].name;
+                        ds.mapObjectNames[mapNum][i] = gp.obj[mapNum][i].getName();
                         ds.mapObjectWorldX[mapNum][i] = gp.obj[mapNum][i].worldX;
                         ds.mapObjectWorldY[mapNum][i] = gp.obj[mapNum][i].worldY;
 
                         if(gp.obj[mapNum][i].loot != null) {
-                            ds.mapObjectLootNames[mapNum][i] = gp.obj[mapNum][i].loot.name;
+                            ds.mapObjectLootNames[mapNum][i] = gp.obj[mapNum][i].loot.getName();
                         }
                         ds.mapObjectOpened[mapNum][i] = gp.obj[mapNum][i].opened;
                     }
@@ -118,15 +118,15 @@ public class SaveLoad {
             DataStorage ds = (DataStorage)ois.readObject();
 
             // Player stats
-            gp.player.level = ds.level;
+            gp.player.setLevel(ds.level);
             gp.player.maxLife = ds.maxLife;
             gp.player.life = ds.life;
             gp.player.maxMana = ds.maxMana;
             gp.player.mana = ds.mana;
             gp.player.strength = ds.strength;
             gp.player.dexterity = ds.dexterity;
-            gp.player.exp = ds.exp;
-            gp.player.nextLevelExp = ds.nextLevelExp;
+            gp.player.setExp(ds.exp);
+            gp.player.setNextLevelExp(ds.nextLevelExp);
             gp.player.coin = ds.coin;
 
             // Player Inventory
@@ -179,5 +179,4 @@ public class SaveLoad {
 
         }
     }
-
 }

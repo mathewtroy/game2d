@@ -1,14 +1,12 @@
 package cz.cvut.fel.pjv.data;
-import cz.cvut.fel.pjv.GamePanel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.io.File;
 
 public class SaveLoadTest {
-    // Constants
+
     private static final String EXISTING_SAVE_FILE_PATH = "D:/study/2022-2023-leto/pjv/00/pro/save.dat";
     private static final String NON_EXISTENT_SAVE_FILE_PATH = "D:/study/2022-2023-leto/pjv/00/pro/save_not_exist.dat";
-    private static final int DELAY_MILLISECONDS = 1000;
     private static final String ERROR_MESSAGE = "Expected Result: %s, Actual Result: %s";
 
     @Test
