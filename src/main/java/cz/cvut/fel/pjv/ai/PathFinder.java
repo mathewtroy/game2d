@@ -6,6 +6,10 @@ import java.util.ArrayList;
 
 import static cz.cvut.fel.pjv.CollisionChecker.MAX_COST;
 
+/**
+ *  The class is responsible for finding the path from the start node to the target node
+ *
+ */
 public class PathFinder {
 
     GamePanel gp;
@@ -19,7 +23,6 @@ public class PathFinder {
     public PathFinder(GamePanel gp) {
         this.gp = gp;
         instantiateNodes();
-
     }
 
     private void instantiateNodes() {
@@ -40,6 +43,10 @@ public class PathFinder {
         }
     }
 
+    /**
+     * Resets all nodes in the grid, clearing previous pathfinding data
+     *
+     */
     private void resetNodes() {
         int col = 0;
         int row = 0;
@@ -66,6 +73,16 @@ public class PathFinder {
         step = 0;
     }
 
+    /**
+     * Sets the start and goal nodes for the pathfinding process
+     * and initializes the open list with the start node.
+     *
+     * @param startCol The column index of the starting node
+     * @param startRow The row index of the starting node
+     * @param goalCol  The column index of the goal node
+     * @param goalRow  The row index of the goal node
+     *
+     */
     public void setNodes(int startCol, int startRow, int goalCol, int goalRow) {
 
         resetNodes();
@@ -97,7 +114,6 @@ public class PathFinder {
                     int itCol = gp.iTile[gp.currentMap][i].worldX/gp.tileSize;
                     int itRow = gp.iTile[gp.currentMap][i].worldY/gp.tileSize;
                     node[itCol][itRow].solid = true;
-
                 }
             }
             // SET COST
@@ -112,6 +128,12 @@ public class PathFinder {
         }
     }
 
+    /**
+     * Calculates the G, H, and F costs for a given node
+     *
+     * @param node The node for which to calculate costs
+     *
+     */
     private void getCost(Node node) {
         // G cost
         int xDistance = Math.abs(node.col - startNode.col);
@@ -194,6 +216,12 @@ public class PathFinder {
         return goalReached;
     }
 
+    /**
+     * Adds a node to the open list if it meets the criteria for being open (not solid, not checked)
+     *
+     * @param node The node to potentially add to the open list
+     *
+     */
     private void openNode(Node node) {
 
         if (node.open == false && node.checked == false && node.solid == false) {

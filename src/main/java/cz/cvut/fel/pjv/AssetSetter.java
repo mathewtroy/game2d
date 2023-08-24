@@ -7,6 +7,10 @@ import cz.cvut.fel.pjv.monster.MON_Green;
 import cz.cvut.fel.pjv.object.*;
 import cz.cvut.fel.pjv.tile.IT_DryTree;
 
+/**
+ * The AssetSetter is responsible for initializing game objects and NPCs on different maps
+ *
+ */
 public class AssetSetter {
 
     GamePanel gp;

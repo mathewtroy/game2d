@@ -12,7 +12,7 @@ public class KeyHandler implements KeyListener {
 
     public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed;
 
-//    DEBUG
+    // DEBUG
     public boolean checkDrawTime = false;
 
     public KeyHandler(GamePanel gp) {
@@ -75,7 +75,12 @@ public class KeyHandler implements KeyListener {
 
     }
 
-
+    /**
+     * Handles key events when the game is in the title state
+     *
+     * @param code The key code of the pressed key
+     *
+     */
     private void titleState (int code) {
         if (code == KeyEvent.VK_W) {
             gp.ui.commandNum--;
@@ -104,7 +109,12 @@ public class KeyHandler implements KeyListener {
         }
     }
 
-
+    /**
+     * Handles key events when the game is in the play state
+     *
+     * @param code The key code of the pressed key
+     *
+     */
     private void playState (int code) {
         if (code == KeyEvent.VK_W) { upPressed = true; }
         if (code == KeyEvent.VK_S) { downPressed = true; }
@@ -124,7 +134,7 @@ public class KeyHandler implements KeyListener {
 
 
 
-//  DEBUG
+        //  DEBUG
         if (code == KeyEvent.VK_T) { checkDrawTime = !checkDrawTime; }
 
         if (code == KeyEvent.VK_E) {
@@ -142,11 +152,22 @@ public class KeyHandler implements KeyListener {
         if(code == KeyEvent.VK_P) { gp.gameState = GamePanel.GameState.PLAY; }
     }
 
-
+    /**
+     * Handles key events when the game is in the dialogue state
+     *
+     * @param code The key code of the pressed key
+     *
+     */
     private void dialogueState (int code) {
         if(code == KeyEvent.VK_ENTER) { gp.gameState = GamePanel.GameState.PLAY; }
     }
 
+    /**
+     * Handles key events when the game is in the character state
+     *
+     * @param code The key code of the pressed key
+     *
+     */
     private void characterState (int code) {
         if (code == KeyEvent.VK_C) { gp.gameState = GamePanel.GameState.PLAY; }
         if (code == KeyEvent.VK_ENTER) { gp.player.selectItem(); }
@@ -155,6 +176,12 @@ public class KeyHandler implements KeyListener {
 
     }
 
+    /**
+     * Handles key events when the game is in the option state
+     *
+     * @param code The key code of the pressed key
+     *
+     */
     private void optionState(int code) {
         if (code == KeyEvent.VK_R) { gp.gameState = GamePanel.GameState.PLAY; }
 
@@ -211,7 +238,12 @@ public class KeyHandler implements KeyListener {
         }
     }
 
-
+    /**
+     * Handles key events when the game is in the game over state
+     *
+     * @param code The key code of the pressed key
+     *
+     */
     private void gameOverState(int code) {
 
         if (code == KeyEvent.VK_W) {
@@ -243,7 +275,11 @@ public class KeyHandler implements KeyListener {
         }
     }
 
-
+    /**
+     * Handles key events when the game is in the trade state
+     *
+     * @param code The key code of the pressed key
+     */
     private void tradeState(int code) {
 
         if (code == KeyEvent.VK_ENTER) {
@@ -284,10 +320,21 @@ public class KeyHandler implements KeyListener {
 
     }
 
+    /**
+     * Handles key events when the game is in the map state
+     *
+     * @param code The key code of the pressed key
+     */
     private void mapState(int code) {
         if (code == KeyEvent.VK_M) { gp.gameState = GamePanel.GameState.PLAY; }
     }
 
+    /**
+     * Handles key events related to the player's inventory
+     *
+     * @param code The key code of the pressed key
+     *
+     */
     private void playerInventory(int code) {
 
         if (code == KeyEvent.VK_W) {
@@ -319,6 +366,12 @@ public class KeyHandler implements KeyListener {
         }
     }
 
+    /**
+     * Handles key events related to the NPC's inventory
+     *
+     * @param code The key code of the pressed key
+     *
+     */
     private void npcInventory(int code) {
 
         if (code == KeyEvent.VK_W) {

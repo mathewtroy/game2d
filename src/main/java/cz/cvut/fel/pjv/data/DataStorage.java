@@ -1,7 +1,5 @@
 package cz.cvut.fel.pjv.data;
 
-import cz.cvut.fel.pjv.entity.Entity;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
