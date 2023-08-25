@@ -8,6 +8,7 @@ import java.net.URL;
 
 public class Sound {
 
+    // Constants for volume scaling
     private static final int VOLUME_SCALE_ZERO = 0;
     private static final int VOLUME_SCALE_ONE = 1;
     private static final int VOLUME_SCALE_TWO = 2;
@@ -15,6 +16,7 @@ public class Sound {
     private static final int VOLUME_SCALE_FOUR = 4;
     private static final int VOLUME_SCALE_FIVE = 5;
 
+    // Constants for volume levels
     private static final float MUTE = -80;
     private static final float FIRST_LEVEL = -20;
     private static final float SECOND_LEVEL = -12;
@@ -22,6 +24,7 @@ public class Sound {
     private static final float FOURTH_LEVEL = -1;
     private static final float MAX_LEVEL = 6;
 
+    // Sound indices
     static final int SOUND_ZERO = 0;
     public static final int SOUND_ONE = 1;
     public static final int SOUND_TWO = 2;
@@ -37,31 +40,55 @@ public class Sound {
     static final int SOUND_TWELVE = 12 ;
     public static final int SOUND_THIRTEEN = 13 ;
 
+    // Sound file paths
+    private static final String IRISH_SOUND = "/sound/irish.wav";
+    private static final String COIN_SOUND = "/sound/coin.wav";
+    private static final String SUCCESS_SOUND = "/sound/success.wav";
+    private static final String POWERUP_SOUND = "/sound/powerup.wav";
+    private static final String UNLOCK_SOUND = "/sound/unlock.wav";
+    private static final String HIT_MONSTER_SOUND = "/sound/hitmonster.wav";
+    private static final String RECEIVE_DAMAGE_SOUND = "/sound/receivedamage.wav";
+    private static final String LEVEL_UP_SOUND = "/sound/levelup.wav";
+    private static final String CURSOR_SOUND = "/sound/cursor.wav";
+    private static final String BURNING_SOUND = "/sound/burning.wav";
+    private static final String CUT_TREE_SOUND = "/sound/cuttree.wav";
+    private static final String GAME_OVER_SOUND = "/sound/gameover.wav";
+    private static final String STAIRS_SOUND = "/sound/stairs.wav";
+    private static final String PRIZE_SOUND = "/sound/prize.wav";
 
-    Clip clip;
+    private Clip clip;
 
-    URL[] soundURL = new URL[30];
-    FloatControl fc;
-    int volumeScale = 3;
-    float volume;
+    public URL[] soundURL = new URL[30];
+    private FloatControl fc;
+    protected int volumeScale = 3;
+    private float volume;
 
+    // Sound file paths
+    private static final String[] SOUND_PATHS = {
+            IRISH_SOUND,
+            COIN_SOUND,
+            SUCCESS_SOUND,
+            POWERUP_SOUND,
+            UNLOCK_SOUND,
+            HIT_MONSTER_SOUND,
+            RECEIVE_DAMAGE_SOUND,
+            LEVEL_UP_SOUND,
+            CURSOR_SOUND,
+            BURNING_SOUND,
+            CUT_TREE_SOUND,
+            GAME_OVER_SOUND,
+            STAIRS_SOUND,
+            PRIZE_SOUND
+    };
+
+    /**
+     * Constructor for the Sound class. Initializes sound URLs.
+     */
     Sound() {
-
-        soundURL[SOUND_ZERO] = getClass().getResource("/sound/irish.wav");
-        soundURL[SOUND_ONE] = getClass().getResource("/sound/coin.wav");
-        soundURL[SOUND_TWO] = getClass().getResource("/sound/success.wav");
-        soundURL[SOUND_THREE] = getClass().getResource("/sound/powerup.wav");
-        soundURL[SOUND_FOUR] = getClass().getResource("/sound/unlock.wav");
-        soundURL[SOUND_FIVE] = getClass().getResource("/sound/hitmonster.wav");
-        soundURL[SOUND_SIX] = getClass().getResource("/sound/receivedamage.wav");
-        soundURL[SOUND_SEVEN] = getClass().getResource("/sound/levelup.wav");
-        soundURL[SOUND_EIGHT] = getClass().getResource("/sound/cursor.wav");
-        soundURL[SOUND_NINE] = getClass().getResource("/sound/burning.wav");
-        soundURL[SOUND_TEN] = getClass().getResource("/sound/cuttree.wav");
-        soundURL[SOUND_ELEVEN] = getClass().getResource("/sound/gameover.wav");
-        soundURL[SOUND_TWELVE] = getClass().getResource("/sound/stairs.wav");
-        soundURL[SOUND_THIRTEEN] = getClass().getResource("/sound/prize.wav");
-
+        // Initialize sound URLs
+        for (int i = 0; i < SOUND_PATHS.length; i++) {
+            soundURL[i] = getClass().getResource(SOUND_PATHS[i]);
+        }
     }
 
     /**
@@ -84,28 +111,28 @@ public class Sound {
     }
 
     /**
-     *
+     * Starts playback of the audio clip
      */
     public void play() {
         clip.start();
     }
 
     /**
-     *
+     * Loops playback of the audio clip continuously
      */
     public void loop() {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     /**
-     *
+     * Stops playback of the audio clip
      */
     public void stop() {
         clip.stop();
     }
 
     /**
-     *
+     * Adjusts the volume of the audio clip based on the current volume scale
      */
     public void checkVolume() {
         switch (volumeScale) {
