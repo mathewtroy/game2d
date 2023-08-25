@@ -12,7 +12,7 @@ public class Config {
     }
 
     /**
-     *
+     * Saves the game configuration to a file.
      */
     public void saveConfig() {
 
@@ -39,7 +39,7 @@ public class Config {
     }
 
     /**
-     *
+     * Loads the game configuration from a file.
      */
     public void loadConfig() {
 

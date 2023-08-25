@@ -20,7 +20,7 @@ public class AssetSetter {
     }
 
     /**
-     *
+     * Initializes game objects on the current map
      */
     public void setObject() {
         int mapNum = 0;
@@ -148,7 +148,7 @@ public class AssetSetter {
     }
 
     /**
-     *
+     * Initializes NPCs on the current map
      */
     public void setNPC() {
         int mapNum = 0;
@@ -174,7 +174,7 @@ public class AssetSetter {
     }
 
     /**
-     *
+     * Initializes monsters on the current map
      */
     public void setMonster() {
 
@@ -234,7 +234,7 @@ public class AssetSetter {
     }
 
     /**
-     *
+     * Initializes interactive tiles on the current map
      */
     public void setInteractiveTile() {
         int mapNum = 0;

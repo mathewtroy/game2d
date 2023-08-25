@@ -57,7 +57,7 @@ public class MON_Green extends Entity {
     }
 
     /**
-     *
+     * Sets up the images for the Green Monster.
      */
     private void setupGreenMonsterImage() {
         try {
@@ -75,69 +75,30 @@ public class MON_Green extends Entity {
     }
 
     /**
-     *
+     * Sets the action and behavior for the Green Monster.
      */
     public void setAction () {
-
         int xDistance = Math.abs(worldX - gp.player.worldX);
         int yDistance = Math.abs(worldY - gp.player.worldY);
         int tileDistance = (xDistance + yDistance) / gp.tileSize;
 
         if (!onPath && tileDistance < CLOSE_DISTANCE) {
-            int i = new Random().nextInt(HIGH_PROBABILITY)+1;
-            if (i > MEDIUM_LOW_PROBABILITY) {
-                onPath = true;
-            }
+            handleRandomPathSelection();
         }
 
-        if (onPath && tileDistance > FAR_DISTANCE) { onPath = true; }
+        if (onPath && tileDistance > FAR_DISTANCE) {
+            handleRandomPathSelection();
+        }
 
         if (onPath) {
-
-            int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
-            int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
-
-            searchPath(goalCol, goalRow);
-
-            int i = new Random().nextInt(HIGH_PROBABILITY)+1;
-            if (i > SHOT_PROBABILITY && (!projectile.alive)
-                    && shotAvailableCounter == SHOT_COUNTER_MAX) {
-
-                projectile.set(worldX, worldY, direction,true, this);
-
-                // CHECK VACANCY
-                for (int j = 0; j < gp.projectile[1].length; j++) {
-                    if (gp.projectile[gp.currentMap][j] == null) {
-                        gp.projectile[gp.currentMap][j] = projectile;
-                        break;
-                    }
-                }
-
-                shotAvailableCounter = 0;
-            }
+            handlePathAction();
+        } else {
+            handleRandomDirection();
         }
-        else {
-
-            actionLockCounter++;
-
-            if (actionLockCounter == 120) {
-
-                Random random = new Random();
-                int i = random.nextInt(HIGH_PROBABILITY)+1 ; // pick up a number from 1 to 100
-
-                if (i <= LOW_PROBABILITY) { direction = "up"; }
-                if (i > LOW_PROBABILITY && i <= MEDIUM_LOW_PROBABILITY) { direction = "down"; }
-                if (i > MEDIUM_LOW_PROBABILITY && i <= MEDIUM_HIGH_PROBABILITY) { direction = "left"; }
-                if (i > MEDIUM_HIGH_PROBABILITY) { direction = "right"; }
-
-                actionLockCounter = 0;
-            }
-        }
-
     }
 
     /**
-     *
+     * Handles the reaction to damage received by the Ghost monster.
      */
     public void damageReaction() {
         actionLockCounter = 0;
@@ -146,7 +107,7 @@ public class MON_Green extends Entity {
     }
 
     /**
-     *
+     * Checks and determines the item drop for the Ghost monster.
      */
     public void checkDrop() {
         // CAST A DIE
@@ -158,6 +119,64 @@ public class MON_Green extends Entity {
         if (i >= MEDIUM_LOW_PROBABILITY && i < MEDIUM_HIGH_PROBABILITY) { dropItem(new OBJ_Heart(gp)); }
 
         if (i >= MEDIUM_HIGH_PROBABILITY && i < HIGH_PROBABILITY) { dropItem(new OBJ_ManaCrystal(gp)); }
+    }
 
+    /**
+     * Handles the selection of a random path
+     */
+    private void handleRandomPathSelection() {
+        int i = new Random().nextInt(HIGH_PROBABILITY) + 1;
+        if (i > MEDIUM_LOW_PROBABILITY) {
+            onPath = true;
+        }
+    }
+
+    /**
+     * Handles the action when the monster is on a path
+     */
+    private void handlePathAction() {
+        int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
+        int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
+        searchPath(goalCol, goalRow);
+
+        int i = new Random().nextInt(HIGH_PROBABILITY) + 1;
+        if (i > SHOT_PROBABILITY && (!projectile.alive) && shotAvailableCounter == SHOT_COUNTER_MAX) {
+            shootProjectile();
+        }
+    }
+
+    /**
+     * Handles the selection of a random direction when not on a path
+     */
+    private void handleRandomDirection() {
+        actionLockCounter++;
+
+        if (actionLockCounter == 120) {
+            Random random = new Random();
+            int i = random.nextInt(HIGH_PROBABILITY) + 1; // pick up a number from 1 to 100
+
+            if (i <= LOW_PROBABILITY) { direction = "up"; }
+            if (i > LOW_PROBABILITY && i <= MEDIUM_LOW_PROBABILITY) { direction = "down"; }
+            if (i > MEDIUM_LOW_PROBABILITY && i <= MEDIUM_HIGH_PROBABILITY) { direction = "left"; }
+            if (i > MEDIUM_HIGH_PROBABILITY) { direction = "right"; }
+
+            actionLockCounter = 0;
+        }
+    }
+
+    /**
+     * Shoots a projectile
+     */
+    private void shootProjectile() {
+        projectile.set(worldX, worldY, direction, true, this);
+
+        // CHECK VACANCY
+        for (int j = 0; j < gp.projectile[1].length; j++) {
+            if (gp.projectile[gp.currentMap][j] == null) {
+                gp.projectile[gp.currentMap][j] = projectile;
+                break;
+            }
+        }
+        shotAvailableCounter = 0;
     }
 }

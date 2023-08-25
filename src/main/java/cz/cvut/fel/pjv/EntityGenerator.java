@@ -12,9 +12,12 @@ public class EntityGenerator {
     }
 
     /**
+     * Generates an entity object based on the given item name.
      *
-     * @param itemName
-     * @return
+     * @param itemName The name of the item for which an entity is generated.
+     * @return An entity object corresponding to the given item name,
+     * or null if the item name is not recognized.
+     *
      */
     public Entity getObject(String itemName){
         Entity obj = null;
@@ -37,6 +40,4 @@ public class EntityGenerator {
         }
         return obj;
     }
-
-
 }

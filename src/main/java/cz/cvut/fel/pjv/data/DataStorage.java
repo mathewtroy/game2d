@@ -3,6 +3,13 @@ package cz.cvut.fel.pjv.data;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Represents a data storage class for storing
+ * player stats, inventory, and map object information.
+ *
+ * This class is serializable, allowing it to be easily saved
+ * and loaded from external sources.
+ */
 public class DataStorage implements Serializable {
 
     // Player stats

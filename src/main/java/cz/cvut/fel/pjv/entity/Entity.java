@@ -176,7 +176,7 @@ public class Entity {
     }
 
     /**
-     *
+     * Resets various counters associated with the entity.
      */
     public void resetCounter() {
         resetActionLockCounter();
@@ -189,49 +189,57 @@ public class Entity {
     }
 
     /**
-     *
+     * Resets the action lock counter.
+     * When this counter is reset to 0, it signifies that the entity
+     * is no longer locked from performing specific actions.
      */
     private void resetActionLockCounter() {
         actionLockCounter = 0;
     }
 
     /**
-     *
+     * Resets the sprite counter used for managing sprite animations.
+     * This counter keeps track of the entity's sprite animation frames.
      */
     private void resetSpriteCounter() {
         spriteCounter = 0;
     }
 
     /**
-     *
+     * Resets the invisible counter used to manage the entity's invisibility state.
+     * This counter keeps track of how long the entity remains invisible.
      */
     private void resetInvisibleCounter() {
         invisibleCounter = 0;
     }
 
     /**
-     *
+     * Resets the shot available counter used for controlling the entity's shooting abilities.
+     * This counter determines when the entity can perform a shot action.
      */
     private void resetShotAvailableCounter() {
         shotAvailableCounter = 0;
     }
 
     /**
-     *
+     * Resets the dying counter used for managing the entity's dying animation.
+     * This counter is incremented during the dying animation sequence.
      */
     private void resetDyingCounter() {
         dyingCounter = 0;
     }
 
     /**
-     *
+     * Resets the health bar counter used for displaying the entity's health bar.
+     * This counter controls how long the health bar is displayed on the screen.
      */
     private void resetHpBarCounter() {
         hpBarCounter = 0;
     }
 
     /**
-     *
+     * Resets the knockback counter used for handling knockback motion of the entity.
+     * This counter tracks how long the entity is affected by knockback.
      */
     private void resetKnockBackCounter() {
         knockBackCounter = 0;
@@ -251,7 +259,7 @@ public class Entity {
     }
 
     /**
-     *
+     * Initiates a speaking action for the entity.
      */
     public void speak() {
 
@@ -282,8 +290,13 @@ public class Entity {
     }
 
     /**
+     * Drops an item entity onto the game map.
      *
-     * @param droppedItem
+     * This method is used to drop an item represented by the 'droppedItem' parameter onto the game map.
+     * It searches for an available slot in the current map's object array and assigns the item's position
+     * to match the current entity's world coordinates.
+     *
+     * @param droppedItem The item entity to be dropped onto the game map.
      */
     protected void dropItem (Entity droppedItem) {
         for (int i = 0; i < gp.obj.length; i++ ) {
@@ -296,10 +309,6 @@ public class Entity {
         }
     }
 
-    /**
-     *
-     * @return
-     */
     protected Color getParticleColor() {
         Color color = null;
         return color;
@@ -321,9 +330,15 @@ public class Entity {
     }
 
     /**
+     * Generates particle effects based on a generator entity and a target entity.
      *
-     * @param generator
-     * @param target
+     * This method generates particle effects using the provided 'generator' entity as the source
+     * and the 'target' entity as the point of origin for the particles. It creates four particles
+     * with specified characteristics such as color, size, speed, and maximum life span, and adds
+     * them to the game's particle list.
+     *
+     * @param generator The entity responsible for generating the particles.
+     * @param target The entity that serves as the point of origin for the particles.
      */
     protected void generateParticle(Entity generator, Entity target) {
 
@@ -346,7 +361,12 @@ public class Entity {
     }
 
     /**
+     * Checks for collisions involving the entity.
      *
+     * This method checks for collisions involving the entity and sets the 'collisionOn' flag
+     * accordingly. It performs collision checks with tiles, objects, NPCs, monsters, interactive
+     * tiles, and the player. If the entity is of type 'type_monster' and comes into contact with
+     * the player, it inflicts damage on the player based on the entity's attack power.
      */
     private void checkCollision(){
         collisionOn = false;
@@ -363,7 +383,7 @@ public class Entity {
     }
 
     /**
-     *
+     * Updates the entity's state and behavior.
      */
     public void update() {
         if (knockBack) {
@@ -378,7 +398,7 @@ public class Entity {
     }
 
     /**
-     *
+     * Handles the knockback behavior of the entity.
      */
     private void handleKnockBack() {
         checkCollision();
@@ -397,7 +417,7 @@ public class Entity {
     }
 
     /**
-     *
+     * Resets the entity's knockback state.
      */
     private void resetKnockBack() {
         knockBackCounter = 0;
@@ -406,7 +426,7 @@ public class Entity {
     }
 
     /**
-     *
+     * Moves the entity while in a knockback state.
      */
     private void moveWithKnockBack() {
         switch (gp.player.direction) {
@@ -417,15 +437,12 @@ public class Entity {
         }
     }
 
-    /**
-     *
-     */
     private void incrementKnockBackCounter() {
         knockBackCounter++;
     }
 
     /**
-     *
+     * Handles the entity's regular movement.
      */
     private void handleMovement() {
         setAction();
@@ -437,7 +454,7 @@ public class Entity {
     }
 
     /**
-     *
+     * Moves the entity in its current direction.
      */
     private void moveInDirection() {
         switch (direction) {
@@ -449,7 +466,7 @@ public class Entity {
     }
 
     /**
-     *
+     * Updates the entity's sprite animation.
      */
     private void updateSprite() {
         spriteCounter++;
@@ -460,7 +477,7 @@ public class Entity {
     }
 
     /**
-     *
+     * Switches the entity's sprite.
      */
     private void switchSprite() {
         if (spriteNum == 1) {
@@ -471,7 +488,7 @@ public class Entity {
     }
 
     /**
-     *
+     * Handles the entity's invisibility state.
      */
     private void handleInvisibility() {
         if (invisible) {
@@ -483,15 +500,13 @@ public class Entity {
         }
     }
 
-    /**
-     *
-     */
     private void incrementInvisibleCounter() {
         invisibleCounter++;
     }
 
     /**
-     *
+     * Handles the shot available counter for this entity.
+     * Increments the shot available counter if it's less than the maximum threshold.
      */
     private void handleShotAvailableCounter() {
         if (shotAvailableCounter < MAX_SHOT_AVAILABLE_COUNTER) {
@@ -499,16 +514,15 @@ public class Entity {
         }
     }
 
-    /**
-     *
-     */
     private void incrementShotAvailableCounter() {
         shotAvailableCounter++;
     }
 
     /**
+     * Inflicts damage on the player entity.
+     * This method damages the player entity if it is not in an invisible state.
      *
-     * @param attack
+     * @param attack The amount of damage to inflict on the player.
      */
     protected void damagePlayer(int attack) {
         if (!gp.player.invisible) {
@@ -525,8 +539,9 @@ public class Entity {
     }
 
     /**
+     * Draws the entity on the graphics context.
      *
-     * @param g2
+     * @param g2 The Graphics2D object on which to draw the entity.
      */
     public void draw(Graphics2D g2) {
 
@@ -594,8 +609,11 @@ public class Entity {
     }
 
     /**
+     * Performs a dying animation effect for the entity.
+     * This method alternates the alpha (transparency) of the entity's rendering
+     * to create a fading effect when the entity is dying.
      *
-     * @param g2
+     * @param g2 The Graphics2D object on which to apply the dying animation.
      */
     private void dyingAnimation(Graphics2D g2) {
 
@@ -617,20 +635,22 @@ public class Entity {
     }
 
     /**
+     * Changes the alpha (transparency) of the Graphics2D object.
      *
-     * @param g2
-     * @param alphaValue
+     * @param g2          The Graphics2D object on which to change the alpha.
+     * @param alphaValue  The new alpha (transparency) value.
      */
     public void changeAlpha(Graphics2D g2, float alphaValue) {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
     }
 
     /**
+     * Loads and sets up an image from a specified file path, scaling it to the specified width and height.
      *
-     * @param imagePath
-     * @param width
-     * @param height
-     * @return
+     * @param imagePath The path to the image file (excluding the file extension).
+     * @param width The desired width of the scaled image.
+     * @param height The desired height of the scaled image.
+     * @return A BufferedImage containing the loaded and scaled image, or null if an error occurs.
      */
     public BufferedImage setup(String imagePath, int width, int height) {
 
@@ -648,83 +668,126 @@ public class Entity {
     }
 
     /**
+     * Searches for a path to a specified goal position represented by column and row coordinates.
      *
-     * @param goalCol
-     * @param goalRow
+     * @param goalCol The column coordinate of the goal position.
+     * @param goalRow The row coordinate of the goal position.
      */
     protected void searchPath(int goalCol, int goalRow) {
-
-        int startCol = (worldX + solidArea.x)/gp.tileSize;
-        int startRow = (worldY + solidArea.y)/gp.tileSize;
+        int startCol = calculateStartCol();
+        int startRow = calculateStartRow();
 
         gp.pFinder.setNodes(startCol, startRow, goalCol, goalRow);
 
         if (gp.pFinder.search()) {
-
-            // Next worldX, worldY
             int nextX = gp.pFinder.pathList.get(0).col * gp.tileSize;
             int nextY = gp.pFinder.pathList.get(0).row * gp.tileSize;
 
-            // Entity's solidArea position
             int enLeftX = worldX + solidArea.x;
             int enRightX = worldX + solidArea.x + solidArea.width;
             int enTopY = worldY + solidArea.y;
             int enBottomY = worldY + solidArea.y + solidArea.height;
 
-            if ((enTopY > nextY) && (enLeftX >= nextX) && (enRightX < nextX + gp.tileSize)) {
-                direction = UP;
+            determineDirection(nextX, nextY, enLeftX, enRightX, enTopY, enBottomY);
+
+            if (reachedGoal(gp.pFinder.pathList.get(0).col, gp.pFinder.pathList.get(0).row, goalCol, goalRow)) {
+                onPath = false;
             }
-
-            else if ((enTopY < nextY) && (enLeftX >= nextX) && (enRightX < nextX + gp.tileSize)) {
-                direction = DOWN;
-            }
-
-            else if ((enTopY >= nextY) && (enBottomY < nextY + gp.tileSize)) {
-                // left or right
-                if (enLeftX > nextX) { direction = LEFT; }
-                if (enLeftX < nextX) { direction = RIGHT; }
-            }
-
-            else if ((enTopY > nextY) && (enLeftX > nextX)) {
-                //up or left
-                direction = UP;
-                checkCollision();
-                if (collisionOn) { direction = "left"; }
-            }
-
-            else if ((enTopY > nextY) && (enLeftX < nextX)) {
-                // up or right
-                direction = UP;
-                checkCollision();
-                if (collisionOn) { direction = RIGHT; }
-            }
-
-            else if ((enTopY < nextY) && (enLeftX > nextX)) {
-                // down or left
-                direction = DOWN;
-                if (collisionOn) { direction = LEFT; }
-            }
-
-            else if ((enTopY < nextY) && (enLeftX < nextX)) {
-                // down or right
-                direction = DOWN;
-                if (collisionOn) { direction = RIGHT; }
-            }
-
-            // if reaches the goal
-            int nextCol = gp.pFinder.pathList.get(0).col ;
-            int nextRow = gp.pFinder.pathList.get(0).row ;
-
-            if ((nextCol == goalCol) && (nextRow == goalRow)) { onPath = false; }
         }
     }
 
     /**
+     * Calculates the starting column for pathfinding.
      *
-     * @param user
-     * @param target
-     * @param targetName
-     * @return
+     * @return The starting column.
+     */
+    private int calculateStartCol() {
+        return (worldX + solidArea.x) / gp.tileSize;
+    }
+
+    /**
+     * Calculates the starting row for pathfinding.
+     *
+     * @return The starting row.
+     */
+    private int calculateStartRow() {
+        return (worldY + solidArea.y) / gp.tileSize;
+    }
+
+    /**
+     * Determines the direction based on the next X and Y positions and entity's position.
+     *
+     * @param nextX    The next X position.
+     * @param nextY    The next Y position.
+     * @param enLeftX  The left X position of the entity.
+     * @param enRightX The right X position of the entity.
+     * @param enTopY   The top Y position of the entity.
+     * @param enBottomY The bottom Y position of the entity.
+     */
+    private void determineDirection(int nextX, int nextY, int enLeftX, int enRightX, int enTopY, int enBottomY) {
+        // Determine the direction based on the positions
+        if ((enTopY > nextY) && (enLeftX >= nextX) && (enRightX < nextX + gp.tileSize)) {
+            direction = UP;
+        } else if ((enTopY < nextY) && (enLeftX >= nextX) && (enRightX < nextX + gp.tileSize)) {
+            direction = DOWN;
+        } else if ((enTopY >= nextY) && (enBottomY < nextY + gp.tileSize)) {
+            // Left or right
+            if (enLeftX > nextX) {
+                direction = LEFT;
+            }
+            if (enLeftX < nextX) {
+                direction = RIGHT;
+            }
+        } else if ((enTopY > nextY) && (enLeftX > nextX)) {
+            // Up or left
+            direction = UP;
+            checkCollision();
+            if (collisionOn) {
+                direction = "left";
+            }
+        } else if ((enTopY > nextY) && (enLeftX < nextX)) {
+            // Up or right
+            direction = UP;
+            checkCollision();
+            if (collisionOn) {
+                direction = RIGHT;
+            }
+        } else if ((enTopY < nextY) && (enLeftX > nextX)) {
+            // Down or left
+            direction = DOWN;
+            if (collisionOn) {
+                direction = LEFT;
+            }
+        } else if ((enTopY < nextY) && (enLeftX < nextX)) {
+            // Down or right
+            direction = DOWN;
+            if (collisionOn) {
+                direction = RIGHT;
+            }
+        }
+    }
+
+
+    /**
+     * Checks if the entity has reached the goal.
+     *
+     * @param nextCol  The next column.
+     * @param nextRow  The next row.
+     * @param goalCol  The goal column.
+     * @param goalRow  The goal row.
+     * @return True if the entity has reached the goal, otherwise false.
+     */
+    private boolean reachedGoal(int nextCol, int nextRow, int goalCol, int goalRow) {
+        return (nextCol == goalCol) && (nextRow == goalRow);
+    }
+
+    /**
+     * Determines the index of a detected target entity in the specified target array.
+     *
+     * @param user The entity detecting the target.
+     * @param target The array of target entities to search in.
+     * @param targetName The name of the target entity to search for.
+     * @return The index of the detected target in the target array, or a constant representing no detection.
      */
     protected int getDetected(Entity user, Entity[][] target, String targetName) {
 

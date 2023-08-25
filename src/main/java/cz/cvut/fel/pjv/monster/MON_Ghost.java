@@ -43,7 +43,7 @@ public class MON_Ghost extends Entity {
     }
 
     /**
-     *
+     * Sets up the images for the Ghost monster.
      */
     private void setupGhostImage() {
         try {
@@ -61,53 +61,69 @@ public class MON_Ghost extends Entity {
     }
 
     /**
-     *
+     * Sets the action and behavior for the Ghost monster.
      */
     public void setAction () {
-
         int xDistance = Math.abs(worldX - gp.player.worldX);
         int yDistance = Math.abs(worldY - gp.player.worldY);
         int tileDistance = (xDistance + yDistance) / gp.tileSize;
 
         if (!onPath && tileDistance < CLOSE_DISTANCE) {
-            int i = new Random().nextInt(HIGH_PROBABILITY)+1;
-            if (i > MEDIUM_LOW_PROBABILITY) {
-                onPath = true;
-            }
+            handleRandomPathSelection();
         }
 
-        if (onPath && tileDistance > FAR_DISTANCE) { onPath = true; }
+        if (onPath && tileDistance > FAR_DISTANCE) {
+            handleRandomPathSelection();
+        }
 
         if (onPath) {
-
             int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
             int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
-
             searchPath(goalCol, goalRow);
-
+        } else {
+            handleRandomDirection();
         }
-        else {
-
-            actionLockCounter++;
-
-            if (actionLockCounter == 120) {
-
-                Random random = new Random();
-                int i = random.nextInt(HIGH_PROBABILITY)+1 ; // pick up a number from 1 to 100
-
-                if (i <= LOW_PROBABILITY) { direction = "up"; }
-                if (i > LOW_PROBABILITY && i <= MEDIUM_LOW_PROBABILITY) { direction = "down"; }
-                if (i > MEDIUM_LOW_PROBABILITY && i <= MEDIUM_HIGH_PROBABILITY) { direction = "left"; }
-                if (i > MEDIUM_HIGH_PROBABILITY) { direction = "right"; }
-
-                actionLockCounter = 0;
-            }
-        }
-
     }
 
     /**
-     *
+     * Handles the selection of a random path.
+     */
+    private void handleRandomPathSelection() {
+        int i = new Random().nextInt(HIGH_PROBABILITY) + 1;
+        if (i > MEDIUM_LOW_PROBABILITY) {
+            onPath = true;
+        }
+    }
+
+    /**
+     * Handles the selection of a random direction when not on a path.
+     */
+    private void handleRandomDirection() {
+        actionLockCounter++;
+
+        if (actionLockCounter == 120) {
+            Random random = new Random();
+            int i = random.nextInt(HIGH_PROBABILITY) + 1; // pick up a number from 1 to 100
+
+            if (i <= LOW_PROBABILITY) {
+                direction = "up";
+            }
+            if (i > LOW_PROBABILITY && i <= MEDIUM_LOW_PROBABILITY) {
+                direction = "down";
+            }
+            if (i > MEDIUM_LOW_PROBABILITY && i <= MEDIUM_HIGH_PROBABILITY) {
+                direction = "left";
+            }
+            if (i > MEDIUM_HIGH_PROBABILITY) {
+                direction = "right";
+            }
+
+            actionLockCounter = 0;
+        }
+    }
+
+    /**
+     * Handles the reaction to damage received by the Ghost monster.
      */
     public void damageReaction() {
         actionLockCounter = 0;
@@ -116,7 +132,7 @@ public class MON_Ghost extends Entity {
     }
 
     /**
-     *
+     * Checks and determines the item drop for the Ghost monster.
      */
     public void checkDrop() {
         // CAST A DIE
