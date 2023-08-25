@@ -48,7 +48,7 @@ public class SaveLoad {
     }
 
     /**
-     *
+     * Saves the current game state to a file named "save.dat".
      */
     public void save() {
 
@@ -118,7 +118,7 @@ public class SaveLoad {
     }
 
     /**
-     *
+     * Loads the game state from the "save.dat" file and updates the game accordingly.
      */
     public void load() {
 
@@ -183,7 +183,6 @@ public class SaveLoad {
                     }
                 }
             }
-
         }
 
         catch (Exception e) {

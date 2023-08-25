@@ -82,7 +82,7 @@ public class GamePanel extends JPanel implements Runnable {
     public GameState gameState;
 
     /**
-     *
+     * The `GameState` enum represents the different states of the game.
      */
     public enum GameState {
         TITLE,
@@ -109,7 +109,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     /**
-     *
+     * Sets up the initial state of the game, including game objects and assets.
      */
     public void setupGame() {
         gameState = GameState.TITLE;
@@ -122,8 +122,9 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     /**
+     * Resets the game, optionally restarting it from the beginning.
      *
-     * @param restart
+     * @param restart `true` to restart the game, `false` to reset it without starting over.
      */
     public void resetGame(boolean restart) {
         player.setDefaultPositions();
@@ -140,7 +141,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     /**
-     *
+     * Starts the game thread to handle game logic and rendering.
      */
     public void startGameThread() {
         gameThread = new Thread(this);
@@ -148,7 +149,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     /**
-     *
+     * The main game loop where game logic is updated and rendering is performed.
      */
     @Override
     public void run() {
@@ -187,7 +188,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     /**
-     *
+     * Updates the game logic, including player and entity behaviors.
      */
     public void update() {
 
@@ -249,8 +250,9 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     /**
+     * Renders the game, including tiles, entities, and the user interface.
      *
-     * @param g
+     * @param g The graphics context used for rendering.
      */
     public void paintComponent (Graphics g) {
 
@@ -328,7 +330,6 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             });
 
-
             // DRAW ENTITIES
             for (int i = 0; i < entityList.size(); i++) {
                 entityList.get(i).draw(g2);
@@ -342,7 +343,6 @@ public class GamePanel extends JPanel implements Runnable {
 
             //  UI
             ui.draw(g2);
-
         }
 
         //  DEBUG
@@ -358,8 +358,9 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     /**
+     * Plays background music with the specified index.
      *
-     * @param i
+     * @param i The index of the background music to play.
      */
     public void playMusic (int i) {
         music.setFile(i);
@@ -368,20 +369,20 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     /**
-     *
+     * Stops the currently playing background music.
      */
     public void stopMusic () {
         music.stop();
     }
 
     /**
+     * Plays a sound effect with the specified index.
      *
-     * @param i
+     * @param i The index of the sound effect to play.
      */
     public void playSE(int i) {
         se.setFile(i);
         se.play();
-
     }
 
 }

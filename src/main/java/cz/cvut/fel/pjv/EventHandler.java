@@ -13,6 +13,7 @@ public class EventHandler {
     boolean canTouchEvent = true;
     int tempMap, tempCol, tempRow;
 
+    // Map Constants
     public static final int MAP_NEW = 0;
     public static final int MAP_PJV = 1;
     public static final int MAP_GOLD = 2;
@@ -29,8 +30,10 @@ public class EventHandler {
     private static final int MAP_GOLD_COL = 9 ;
     private static final int MAP_GOLD_ROW = 15 ;
 
+    // General Constants
     private static final String DIRECTION = "Any";
 
+    // Merchant Constants
     private static final int MERCHANT_COL = 12;
     private static final int MERCHANT_ROW = 9;
 
@@ -70,7 +73,7 @@ public class EventHandler {
     }
 
     /**
-     *
+     * Checks for in-game events and triggers corresponding actions when necessary
      */
     public void checkEvent() {
 
@@ -125,12 +128,14 @@ public class EventHandler {
     }
 
     /**
+     * Determines whether an event has been triggered at the specified map coordinates and direction.
      *
-     * @param map
-     * @param col
-     * @param row
-     * @param reqDirection
-     * @return
+     * @param map           The map where the event should be checked.
+     * @param col           The column where the event should be checked.
+     * @param row           The row where the event should be checked.
+     * @param reqDirection  The required direction for the event, or "Any" if direction is not relevant.
+     * @return True if an event has been triggered, false otherwise.
+     *
      */
     private boolean hit (int map, int col, int row, String reqDirection) {
 
@@ -163,7 +168,7 @@ public class EventHandler {
     }
 
     /**
-     *
+     * Initiates the teleportation to the Island map
      */
     private void teleportIsland() {
         gp.gameState = GamePanel.GameState.DIALOGUE;
@@ -173,7 +178,7 @@ public class EventHandler {
     }
 
     /**
-     *
+     * Initiates the teleportation to the FEL map
      */
     private void teleportFEL() {
         gp.gameState = GamePanel.GameState.DIALOGUE;
@@ -182,21 +187,23 @@ public class EventHandler {
         gp.player.worldY = gp.tileSize*12;
     }
 
+
     /**
-     *
+     * Handles damage when the player character falls into a pit
      */
     private void damagePit() {
         gp.gameState = GamePanel.GameState.DIALOGUE;
         gp.playSE(SOUND_SIX);
         gp.ui.currentDialogue = "You fall into a pit!";
-        gp.player.life -= 1;
-        // one time damage Pit
+        gp.player.life -= 2;
+        // two time damage Pit
 
         canTouchEvent = false;
     }
 
     /**
-     *
+     * Handles healing when the player character drinks from a healing pool
+     * Save the game
      */
     private void healingPool() {
 
@@ -215,10 +222,12 @@ public class EventHandler {
     }
 
     /**
+     * Initiates the teleportation to a different map based
+     * on the provided map, column, and row coordinates.
      *
-     * @param map
-     * @param col
-     * @param row
+     * @param map The map to teleport to.
+     * @param col The column to teleport to.
+     * @param row The row to teleport to.
      */
     private void teleportMap(int map, int col, int row) {
         gp.gameState = GamePanel.GameState.TRANSITION;
@@ -232,8 +241,9 @@ public class EventHandler {
     }
 
     /**
+     * Initiates a conversation with an NPC or merchant entity.
      *
-     * @param entity
+     * @param entity The entity representing the NPC or merchant.
      */
     private void speak(Entity entity) {
 

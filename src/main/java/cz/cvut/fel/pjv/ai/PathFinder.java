@@ -25,6 +25,12 @@ public class PathFinder {
         instantiateNodes();
     }
 
+    /**
+     * Instantiates a grid of nodes to represent a world.
+     * Each node corresponds to a specific position in the world grid.
+     * This method initializes the grid of nodes and assigns each node
+     * its column and row indices.
+     */
     private void instantiateNodes() {
 
         node = new Node[gp.maxWorldCol][gp.maxWorldRow];
@@ -147,9 +153,14 @@ public class PathFinder {
 
         // F cost
         node.fCost = node.gCost + node.hCost;
-
     }
 
+    /**
+     * Performs a search operation to find a path from the current node to the goal node.
+     * The search continues until the goal is reached or a maximum number of steps is reached.
+     *
+     * @return True if the goal is reached; otherwise, false.
+     */
     public boolean search() {
         while (goalReached == false  && step < 500) {
             int col = currentNode.col;
@@ -223,22 +234,23 @@ public class PathFinder {
      *
      */
     private void openNode(Node node) {
-
-        if (node.open == false && node.checked == false && node.solid == false) {
+        if (!node.open && !node.checked && !node.solid) {
             node.open = true;
             node.parent = currentNode;
             openList.add(node);
         }
     }
 
+    /**
+     * Traces the path from the goal node to the start node and populates the pathList with nodes.
+     * This method is called when the goal is reached.
+     */
     private void trackThePath() {
-
         Node current = goalNode;
-
         while (current != startNode) {
-
             pathList.add(0, current);
             current = current.parent;
         }
     }
+
 }

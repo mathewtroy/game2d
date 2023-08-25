@@ -279,7 +279,6 @@ public class UI {
                 g2.drawString(">", x-gp.tileSize, y);
             }
 
-
             text = "LOAD GAME";
             x = getXForCenteredText(text);
             y += gp.tileSize;
@@ -295,7 +294,6 @@ public class UI {
             if (commandNum == 2) {
                 g2.drawString(">", x-gp.tileSize, y);
             }
-
     }
 
     /**

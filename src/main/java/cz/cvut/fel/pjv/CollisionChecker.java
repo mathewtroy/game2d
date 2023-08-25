@@ -12,8 +12,9 @@ public class CollisionChecker {
     }
 
     /**
+     * Checks for collision between an entity and map tiles.
      *
-     * @param entity
+     * @param entity The entity for which collision is being checked.
      */
     public void checkTile(Entity entity) {
 
@@ -76,10 +77,11 @@ public class CollisionChecker {
     }
 
     /**
+     * Checks for collision between an entity and game objects.
      *
-     * @param entity
-     * @param player
-     * @return
+     * @param entity The entity for which collision is being checked.
+     * @param player Indicates whether the entity is the player.
+     * @return The index of the collided object, or MAX_COST if no collision occurred.
      */
     public int checkObject(Entity entity, boolean player) {
 
@@ -120,10 +122,11 @@ public class CollisionChecker {
     }
 
     /**
+     * Checks for collision between an entity and other entities (NPCs or monsters).
      *
-     * @param entity
-     * @param target
-     * @return
+     * @param entity The entity for which collision is being checked.
+     * @param target The array of entities to check for collision with.
+     * @return The index of the collided entity, or MAX_COST if no collision occurred.
      */
     // NPC or MONSTER
     public int checkEntity(Entity entity, Entity[][] target) {
@@ -208,9 +211,10 @@ public class CollisionChecker {
     }
 
     /**
+     * Adjusts the solid area position of an entity based on its direction.
      *
-     * @param entity
-     * @param direction
+     * @param entity The entity for which the solid area position is being adjusted.
+     * @param direction The direction in which the entity is moving.
      */
     private void adjustSolidAreaPosition(Entity entity, String direction) {
         switch (direction) {
