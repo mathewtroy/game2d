@@ -19,6 +19,9 @@ public class AssetSetter {
         this.gp = gp;
     }
 
+    /**
+     *
+     */
     public void setObject() {
         int mapNum = 0;
         int i = 0;
@@ -144,6 +147,9 @@ public class AssetSetter {
 
     }
 
+    /**
+     *
+     */
     public void setNPC() {
         int mapNum = 0;
         int i = 0;
@@ -167,6 +173,9 @@ public class AssetSetter {
 
     }
 
+    /**
+     *
+     */
     public void setMonster() {
 
         int mapNum = 0;
@@ -224,6 +233,9 @@ public class AssetSetter {
 
     }
 
+    /**
+     *
+     */
     public void setInteractiveTile() {
         int mapNum = 0;
         int i = 0;

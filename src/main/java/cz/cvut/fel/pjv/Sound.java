@@ -83,18 +83,30 @@ public class Sound {
         }
     }
 
+    /**
+     *
+     */
     public void play() {
         clip.start();
     }
 
+    /**
+     *
+     */
     public void loop() {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
+    /**
+     *
+     */
     public void stop() {
         clip.stop();
     }
 
+    /**
+     *
+     */
     public void checkVolume() {
         switch (volumeScale) {
             case VOLUME_SCALE_ZERO: volume = MUTE; break;

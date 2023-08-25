@@ -46,6 +46,10 @@ public class UI {
     int counter = 0;
     public Entity npc;
 
+    /**
+     * 
+     * @param gp
+     */
     public UI(GamePanel gp) {
 
         this.gp = gp;
@@ -65,6 +69,10 @@ public class UI {
         coin = goldCoin.down1;
     }
 
+    /**
+     *
+     * @param text
+     */
     public void addMessage (String text) {
 
         message.add(text);
@@ -72,6 +80,10 @@ public class UI {
 
     }
 
+    /**
+     *
+     * @param g2
+     */
     public void draw(Graphics2D g2) {
 
         this.g2 = g2;
@@ -130,6 +142,9 @@ public class UI {
         }
     }
 
+    /**
+     *
+     */
     private void drawPlayerLife() {
 
         int x = gp.tileSize/2;
@@ -183,6 +198,9 @@ public class UI {
 
     }
 
+    /**
+     *
+     */
     private void drawMessage() {
 
         int messageX = gp.tileSize;
@@ -212,9 +230,10 @@ public class UI {
         }
     }
 
+    /**
+     *
+     */
     private void drawTitleScreen() {
-
-
 
             g2.setColor(BACKGROUND_GREEN);
             g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
@@ -270,6 +289,9 @@ public class UI {
 
     }
 
+    /**
+     *
+     */
     private void drawPauseScreen() {
 
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80F));
@@ -282,9 +304,12 @@ public class UI {
         g2.drawString(text, x,y);
     }
 
+    /**
+     *
+     */
     private void drawDialogueScreen() {
 
-//        WINDOW
+        // WINDOW
 
         int x = gp.tileSize*3;
         int y = gp.tileSize/2;
@@ -303,6 +328,9 @@ public class UI {
 
     }
 
+    /**
+     *
+     */
     private void drawCharacterScreen() {
         // CREATE A FRAME
         final int frameX = gp.tileSize;
@@ -398,6 +426,11 @@ public class UI {
 
     }
 
+    /**
+     *
+     * @param entity
+     * @param cursor
+     */
     private void drawInventory(Entity entity, boolean cursor) {
 
         int frameX = 0;
@@ -520,6 +553,9 @@ public class UI {
         }
     }
 
+    /**
+     *
+     */
     private void drawOptionsScreen() {
 
         g2.setColor(Color.white);
@@ -542,6 +578,9 @@ public class UI {
         gp.keyH.enterPressed = false;
     }
 
+    /**
+     *
+     */
     private void drawGameOverScreen() {
 
         g2.setColor(GAME_OVER_BLACK);
@@ -586,6 +625,11 @@ public class UI {
         }
     }
 
+    /**
+     *
+     * @param frameX
+     * @param frameY
+     */
     private void options_top(int frameX, int frameY) {
         int textX;
         int textY;
@@ -667,6 +711,11 @@ public class UI {
         gp.config.saveConfig();
     }
 
+    /**
+     *
+     * @param frameX
+     * @param frameY
+     */
     private void option_control(int frameX, int frameY) {
 
         int textX;
@@ -712,6 +761,11 @@ public class UI {
         }
     }
 
+    /**
+     *
+     * @param frameX
+     * @param frameY
+     */
     private void option_endGame(int frameX, int frameY) {
         int textX = frameX + gp.tileSize;
         int textY = frameY + gp.tileSize*3;
@@ -965,10 +1019,23 @@ public class UI {
 
     }
 
+    /**
+     *
+     * @param slotCol
+     * @param slotRow
+     * @return
+     */
     public int getItemIndexOnSlot(int slotCol, int slotRow) {
         return slotCol + (slotRow*5);
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     */
     private void drawSubWindow(int x, int y, int width, int height) {
 
 
@@ -981,12 +1048,23 @@ public class UI {
 
     }
 
+    /**
+     *
+     * @param text
+     * @return
+     */
     private int getXForCenteredText (String text) {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = gp.screenWidth/2 - length/2;
         return x;
     }
 
+    /**
+     *
+     * @param text
+     * @param tailX
+     * @return
+     */
     private int getXForAlignToRightText (String text, int tailX) {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = tailX - length;

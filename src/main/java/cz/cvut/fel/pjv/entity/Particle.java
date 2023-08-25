@@ -13,6 +13,17 @@ public class Particle extends Entity {
     private int xd;
     private int yd;
 
+    /**
+     *
+     * @param gp
+     * @param generator
+     * @param color
+     * @param size
+     * @param speed
+     * @param maxLife
+     * @param xd
+     * @param yd
+     */
     public Particle(GamePanel gp, Entity generator, Color color, int size,
                     int speed, int maxLife, int xd, int yd) {
         super(gp);
@@ -31,6 +42,9 @@ public class Particle extends Entity {
         worldY = generator.worldY + offset;
     }
 
+    /**
+     *
+     */
     public void update() {
 
         life--;
@@ -48,6 +62,10 @@ public class Particle extends Entity {
 
     }
 
+    /**
+     *
+     * @param g2
+     */
     public void draw(Graphics2D g2) {
 
         int screenX = worldX - gp.player.worldX + gp.player.screenX;

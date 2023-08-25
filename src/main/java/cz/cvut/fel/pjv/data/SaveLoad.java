@@ -47,6 +47,9 @@ public class SaveLoad {
         return obj;
     }
 
+    /**
+     *
+     */
     public void save() {
 
         try {
@@ -114,6 +117,9 @@ public class SaveLoad {
 
     }
 
+    /**
+     *
+     */
     public void load() {
 
         try {

@@ -11,6 +11,11 @@ public class EntityGenerator {
         this.gp = gp;
     }
 
+    /**
+     *
+     * @param itemName
+     * @return
+     */
     public Entity getObject(String itemName){
         Entity obj = null;
 

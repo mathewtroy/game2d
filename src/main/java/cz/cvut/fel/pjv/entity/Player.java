@@ -33,7 +33,11 @@ public class Player extends Entity {
     int standCounter = 0;
     public boolean attackCanceled = false;
 
-
+    /**
+     *
+     * @param gp
+     * @param keyH
+     */
     public Player(GamePanel gp, KeyHandler keyH) {
 
         super(gp);
@@ -55,6 +59,9 @@ public class Player extends Entity {
 
     }
 
+    /**
+     *
+     */
     public void setDefaultValues () {
 
         // default start position
@@ -89,6 +96,9 @@ public class Player extends Entity {
 
     }
 
+    /**
+     *
+     */
     public void setDefaultPositions() {
         // default start position
         worldX = gp.tileSize * 25;
@@ -98,6 +108,9 @@ public class Player extends Entity {
 
     }
 
+    /**
+     *
+     */
     public void restoreStatus() {
         life = maxLife;
         mana = maxMana;
@@ -108,6 +121,9 @@ public class Player extends Entity {
 
     }
 
+    /**
+     *
+     */
     private void setItems() {
         inventory.clear();
         inventory.add(currentWeapon);
@@ -119,15 +135,27 @@ public class Player extends Entity {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public int getAttack() {
         attackArea = currentWeapon.attackArea;
         return attack = strength * currentWeapon.attackValue;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDefense() {
         return defense = dexterity * currentShield.defenseValue;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCurrentWeaponSlot() {
         int currentWeaponSlot = 0;
         for (int i = 0; i < inventory.size(); i++) {
@@ -138,6 +166,10 @@ public class Player extends Entity {
         return currentWeaponSlot;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCurrentShieldSlot() {
         int currentShieldSlot = 0;
         for (int i = 0; i < inventory.size(); i++) {
@@ -148,6 +180,9 @@ public class Player extends Entity {
         return currentShieldSlot;
     }
 
+    /**
+     *
+     */
     private void getPlayerImage() {
 
         up1 = setup("/player/hero_up_1", gp.tileSize, gp.tileSize);
@@ -162,6 +197,9 @@ public class Player extends Entity {
         planet = setup("/player/planet", gp.tileSize, gp.tileSize);
     }
 
+    /**
+     *
+     */
     public void getPlayerAttackImage() {
 
         try {
@@ -215,6 +253,9 @@ public class Player extends Entity {
 
     }
 
+    /**
+     *
+     */
     public void update() {
 
         if (attacking) {
@@ -348,6 +389,9 @@ public class Player extends Entity {
 
     }
 
+    /**
+     *
+     */
     public void attacking() {
 
         spriteCounter++;
@@ -402,6 +446,10 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     *
+     * @param i
+     */
     public void pickUpObject (int i) {
         if (i != MAX_COST) {
 
@@ -441,6 +489,10 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     *
+     * @param i
+     */
     public void interactNPC(int i) {
         if (gp.keyH.enterPressed) {
 
@@ -458,6 +510,10 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     *
+     * @param i
+     */
     public void contactMonster(int i) {
 
         if (i != MAX_COST) {
@@ -475,6 +531,12 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     *
+     * @param i
+     * @param attack
+     * @param knockBackPower
+     */
     public void damageMonster(int i, int attack, int knockBackPower) {
         if (i != MAX_COST) {
             if (!gp.monster[gp.currentMap][i].invisible) {
@@ -510,12 +572,21 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     *
+     * @param entity
+     * @param knockBackPower
+     */
     public void knockBack(Entity entity, int knockBackPower) {
         entity.direction = direction;
         entity.speed += KNOCK_BACK_POWER;
         entity.knockBack = true;
     }
 
+    /**
+     *
+     * @param i
+     */
     public void damageInteractiveTile(int i) {
         if (i != MAX_COST && gp.iTile[gp.currentMap][i].destructible
                 && gp.iTile[gp.currentMap][i].isCorrectItem(this)
@@ -533,6 +604,10 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     *
+     * @param i
+     */
     public void damageProjectile(int i) {
 
         if (i != MAX_COST) {
@@ -542,6 +617,9 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     *
+     */
     public void checkLevelUp() {
         if (getExp() >= getNextLevelExp()) {
             level++;
@@ -561,6 +639,9 @@ public class Player extends Entity {
 
     }
 
+    /**
+     *
+     */
     public void selectItem() {
 
         int itemIndex = gp.ui.getItemIndexOnSlot(gp.ui.playerSlotCol, gp.ui.playerSlotRow);
@@ -596,6 +677,11 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     *
+     * @param itemName
+     * @return
+     */
     public int searchItemInInventory(String itemName) {
 
         int itemIndex = MAX_COST;
@@ -610,6 +696,11 @@ public class Player extends Entity {
 
     }
 
+    /**
+     *
+     * @param item
+     * @return
+     */
     public boolean canObtainItem(Entity item) {
 
         boolean canObtain = false;
@@ -644,6 +735,10 @@ public class Player extends Entity {
         return canObtain;
     }
 
+    /**
+     *
+     * @param g2
+     */
     public void draw (Graphics2D g2) {
 
         BufferedImage image = null;
