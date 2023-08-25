@@ -9,8 +9,14 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/**
+ * The UI class is responsible for rendering the user interface elements of the game.
+ * It handles various game states and displays relevant information such as player stats,
+ * messages, dialogue, and inventory.
+ */
 public class UI {
 
+    // Constants for different game states
     private static final int STATE_ZERO = 0;
     private static final int STATE_ONE = 1;
     private static final int STATE_TWO = 2;
@@ -18,6 +24,7 @@ public class UI {
     private static final int STATE_FOUR = 4;
     private static final int TWENTY_FIVE = 25;
 
+    // Colors used for UI elements
     private static final Color GAME_OVER_BLACK = new Color(0,0,0, 150);
     private static final Color BACKGROUND_GREEN = new Color(70,120,80);
     private static final Color CURSOR_COLOR = new Color(240,190,90);
@@ -48,7 +55,7 @@ public class UI {
 
     /**
      * 
-     * @param gp
+     * @param gp    The GamePanel reference
      */
     public UI(GamePanel gp) {
 
@@ -57,7 +64,7 @@ public class UI {
         arial_40 = new Font("Arial", Font.PLAIN, 40);
         arial_80B = new Font("Arial", Font.BOLD, 80);
 
-//        CREATE HUD OBJECT
+        //  CREATE HUD OBJECT
         Entity heart = new OBJ_Heart(gp);
         heart_full = heart.image;
         heart_half = heart.image2;
@@ -70,19 +77,21 @@ public class UI {
     }
 
     /**
+     * Add a message to be displayed in the UI.
      *
-     * @param text
+     * @param text The message text to be displayed
+     *
      */
     public void addMessage (String text) {
-
         message.add(text);
         messageCounter.add(0);
-
     }
 
     /**
+     * Draw the UI elements on the screen.
      *
-     * @param g2
+     * @param g2 The graphics context to draw on
+     *
      */
     public void draw(Graphics2D g2) {
 
@@ -143,7 +152,7 @@ public class UI {
     }
 
     /**
-     *
+     * Draw the player's life
      */
     private void drawPlayerLife() {
 
@@ -199,7 +208,7 @@ public class UI {
     }
 
     /**
-     *
+     * Draw game messages
      */
     private void drawMessage() {
 
@@ -231,7 +240,7 @@ public class UI {
     }
 
     /**
-     *
+     * Draw the title screen
      */
     private void drawTitleScreen() {
 
@@ -290,7 +299,7 @@ public class UI {
     }
 
     /**
-     *
+     * Draw the pause screen
      */
     private void drawPauseScreen() {
 
@@ -305,12 +314,11 @@ public class UI {
     }
 
     /**
-     *
+     * Draw the dialogue screen
      */
     private void drawDialogueScreen() {
 
         // WINDOW
-
         int x = gp.tileSize*3;
         int y = gp.tileSize/2;
         int width = gp.screenWidth - (gp.tileSize*8);
@@ -329,7 +337,7 @@ public class UI {
     }
 
     /**
-     *
+     * Draw the character screen
      */
     private void drawCharacterScreen() {
         // CREATE A FRAME
@@ -427,9 +435,10 @@ public class UI {
     }
 
     /**
+     * Draws the inventory for a given entity with an optional cursor.
      *
-     * @param entity
-     * @param cursor
+     * @param entity The entity for which to draw the inventory.
+     * @param cursor A boolean indicating whether to display a cursor in the inventory.
      */
     private void drawInventory(Entity entity, boolean cursor) {
 
@@ -554,7 +563,7 @@ public class UI {
     }
 
     /**
-     *
+     * Draw the options screen
      */
     private void drawOptionsScreen() {
 
@@ -579,7 +588,7 @@ public class UI {
     }
 
     /**
-     *
+     * Draw the game over screen
      */
     private void drawGameOverScreen() {
 
@@ -626,9 +635,12 @@ public class UI {
     }
 
     /**
+     * Draws the top-level options' menu, including music
+     * and sound effect volume controls,
+     * controls settings, and the option to end the game.
      *
-     * @param frameX
-     * @param frameY
+     * @param frameX The X-coordinate of the frame for rendering the menu.
+     * @param frameY The Y-coordinate of the frame for rendering the menu.
      */
     private void options_top(int frameX, int frameY) {
         int textX;
@@ -712,9 +724,10 @@ public class UI {
     }
 
     /**
+     * Draws the control settings menu, displaying key bindings for various actions.
      *
-     * @param frameX
-     * @param frameY
+     * @param frameX The X-coordinate of the frame for rendering the menu.
+     * @param frameY The Y-coordinate of the frame for rendering the menu.
      */
     private void option_control(int frameX, int frameY) {
 
@@ -762,9 +775,11 @@ public class UI {
     }
 
     /**
+     * Draws the end game confirmation dialog,
+     * allowing the player to quit the game or cancel.
      *
-     * @param frameX
-     * @param frameY
+     * @param frameX The X-coordinate of the frame for rendering the dialog.
+     * @param frameY The Y-coordinate of the frame for rendering the dialog.
      */
     private void option_endGame(int frameX, int frameY) {
         int textX = frameX + gp.tileSize;
@@ -810,6 +825,9 @@ public class UI {
         }
     }
 
+    /**
+     * Draw the transition screen
+     */
     private void drawTransition() {
 
         counter++;
@@ -830,6 +848,11 @@ public class UI {
         }
     }
 
+    /**
+     * Draws the trade screen based on the current sub-state,
+     * which can be for selecting, buying, or selling items.
+     * Handles player input for navigation within the trade screen.
+     */
     private void drawTradeScreen() {
 
         switch (subState) {
@@ -840,6 +863,11 @@ public class UI {
         gp.keyH.enterPressed = false;
     }
 
+    /**
+     * Displays the initial trade selection menu, allowing the player
+     * to choose between buying, selling, or leaving the trade screen.
+     * Handles player input for menu selection.
+     */
     private void trade_select() {
 
         drawDialogueScreen();
@@ -884,6 +912,11 @@ public class UI {
 
     }
 
+    /**
+     * Handles the process of buying items in the trade screen.
+     * Displays player and NPC inventories, item prices,
+     * and handles player input for buying items.
+     */
     private void trade_buy() {
 
         // DRAW PLAYER INVENTORY
@@ -948,6 +981,11 @@ public class UI {
         }
     }
 
+    /**
+     * Handles the process of selling items in the trade screen.
+     * Displays player inventory, item prices,
+     * and handles player input for selling items.
+     */
     private void trade_sell() {
 
         // DRAW PLAYER INVENTORY
@@ -1020,24 +1058,26 @@ public class UI {
     }
 
     /**
+     * Calculate the index of an item in the inventory based
+     * on the given slot column and slot row.
      *
-     * @param slotCol
-     * @param slotRow
-     * @return
+     * @param slotCol The column of the slot.
+     * @param slotRow The row of the slot.
+     * @return The index of the item in the inventory.
      */
     public int getItemIndexOnSlot(int slotCol, int slotRow) {
         return slotCol + (slotRow*5);
     }
 
     /**
+     * Draw a sub-window with rounded corners.
      *
-     * @param x
-     * @param y
-     * @param width
-     * @param height
+     * @param x      The x-coordinate of the sub-window.
+     * @param y      The y-coordinate of the sub-window.
+     * @param width  The width of the sub-window.
+     * @param height The height of the sub-window.
      */
     private void drawSubWindow(int x, int y, int width, int height) {
-
 
         g2.setColor(SUB_WINDOW_BLACK);
         g2.fillRoundRect(x,y,width ,height,35, 35);
@@ -1049,9 +1089,10 @@ public class UI {
     }
 
     /**
+     * Calculate the x-coordinate for centering text horizontally on the screen.
      *
-     * @param text
-     * @return
+     * @param text The text to be centered.
+     * @return The x-coordinate for centered text.
      */
     private int getXForCenteredText (String text) {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
@@ -1060,10 +1101,12 @@ public class UI {
     }
 
     /**
+     * Calculate the x-coordinate for aligning text to the right
+     * relative to a specified tail x-coordinate.
      *
-     * @param text
-     * @param tailX
-     * @return
+     * @param text  The text to be aligned to the right.
+     * @param tailX The x-coordinate that serves as the reference point for alignment.
+     * @return The x-coordinate for aligned text.
      */
     private int getXForAlignToRightText (String text, int tailX) {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
