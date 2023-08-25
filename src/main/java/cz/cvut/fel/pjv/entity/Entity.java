@@ -787,7 +787,7 @@ public class Entity {
      * @param user The entity detecting the target.
      * @param target The array of target entities to search in.
      * @param targetName The name of the target entity to search for.
-     * @return The index of the detected target in the target array, or a constant representing no detection.
+     * @return The index of the detected target in the target array, or a constant representing no detection
      */
     protected int getDetected(Entity user, Entity[][] target, String targetName) {
 

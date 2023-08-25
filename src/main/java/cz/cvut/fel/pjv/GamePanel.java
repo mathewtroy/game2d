@@ -343,7 +343,6 @@ public class GamePanel extends JPanel implements Runnable {
 
             //  UI
             ui.draw(g2);
-
         }
 
         //  DEBUG

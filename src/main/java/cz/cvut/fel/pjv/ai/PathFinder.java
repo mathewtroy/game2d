@@ -153,7 +153,6 @@ public class PathFinder {
 
         // F cost
         node.fCost = node.gCost + node.hCost;
-
     }
 
     /**
