@@ -175,6 +175,9 @@ public class Entity {
         return (worldY + solidArea.y) / gp.tileSize;
     }
 
+    /**
+     *
+     */
     public void resetCounter() {
         resetActionLockCounter();
         resetSpriteCounter();
@@ -185,30 +188,51 @@ public class Entity {
         resetKnockBackCounter();
     }
 
+    /**
+     *
+     */
     private void resetActionLockCounter() {
         actionLockCounter = 0;
     }
 
+    /**
+     *
+     */
     private void resetSpriteCounter() {
         spriteCounter = 0;
     }
 
+    /**
+     *
+     */
     private void resetInvisibleCounter() {
         invisibleCounter = 0;
     }
 
+    /**
+     *
+     */
     private void resetShotAvailableCounter() {
         shotAvailableCounter = 0;
     }
 
+    /**
+     *
+     */
     private void resetDyingCounter() {
         dyingCounter = 0;
     }
 
+    /**
+     *
+     */
     private void resetHpBarCounter() {
         hpBarCounter = 0;
     }
 
+    /**
+     *
+     */
     private void resetKnockBackCounter() {
         knockBackCounter = 0;
     }
@@ -226,6 +250,9 @@ public class Entity {
 
     }
 
+    /**
+     *
+     */
     public void speak() {
 
         if (dialogues[dialogueIndex] == null) {
@@ -254,6 +281,10 @@ public class Entity {
 
     }
 
+    /**
+     *
+     * @param droppedItem
+     */
     protected void dropItem (Entity droppedItem) {
         for (int i = 0; i < gp.obj.length; i++ ) {
             if (gp.obj[gp.currentMap][i] == null) {
@@ -265,6 +296,10 @@ public class Entity {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     protected Color getParticleColor() {
         Color color = null;
         return color;
@@ -285,6 +320,11 @@ public class Entity {
         return maxLife;
     }
 
+    /**
+     *
+     * @param generator
+     * @param target
+     */
     protected void generateParticle(Entity generator, Entity target) {
 
         Color color = generator.getParticleColor();
@@ -305,6 +345,9 @@ public class Entity {
 
     }
 
+    /**
+     *
+     */
     private void checkCollision(){
         collisionOn = false;
         gp.cChecker.checkTile(this);
@@ -319,6 +362,9 @@ public class Entity {
         }
     }
 
+    /**
+     *
+     */
     public void update() {
         if (knockBack) {
             handleKnockBack();
@@ -331,6 +377,9 @@ public class Entity {
         handleShotAvailableCounter();
     }
 
+    /**
+     *
+     */
     private void handleKnockBack() {
         checkCollision();
 
@@ -347,12 +396,18 @@ public class Entity {
         }
     }
 
+    /**
+     *
+     */
     private void resetKnockBack() {
         knockBackCounter = 0;
         knockBack = false;
         speed = defaultSpeed;
     }
 
+    /**
+     *
+     */
     private void moveWithKnockBack() {
         switch (gp.player.direction) {
             case UP: worldY -= speed; break;
@@ -362,10 +417,16 @@ public class Entity {
         }
     }
 
+    /**
+     *
+     */
     private void incrementKnockBackCounter() {
         knockBackCounter++;
     }
 
+    /**
+     *
+     */
     private void handleMovement() {
         setAction();
         checkCollision();
@@ -375,6 +436,9 @@ public class Entity {
         }
     }
 
+    /**
+     *
+     */
     private void moveInDirection() {
         switch (direction) {
             case UP: worldY -= speed; break;
@@ -384,6 +448,9 @@ public class Entity {
         }
     }
 
+    /**
+     *
+     */
     private void updateSprite() {
         spriteCounter++;
         if (spriteCounter > MAX_SPRITE_COUNTER) {
@@ -392,6 +459,9 @@ public class Entity {
         }
     }
 
+    /**
+     *
+     */
     private void switchSprite() {
         if (spriteNum == 1) {
             spriteNum = 2;
@@ -400,6 +470,9 @@ public class Entity {
         }
     }
 
+    /**
+     *
+     */
     private void handleInvisibility() {
         if (invisible) {
             incrementInvisibleCounter();
@@ -410,20 +483,33 @@ public class Entity {
         }
     }
 
+    /**
+     *
+     */
     private void incrementInvisibleCounter() {
         invisibleCounter++;
     }
 
+    /**
+     *
+     */
     private void handleShotAvailableCounter() {
         if (shotAvailableCounter < MAX_SHOT_AVAILABLE_COUNTER) {
             incrementShotAvailableCounter();
         }
     }
 
+    /**
+     *
+     */
     private void incrementShotAvailableCounter() {
         shotAvailableCounter++;
     }
 
+    /**
+     *
+     * @param attack
+     */
     protected void damagePlayer(int attack) {
         if (!gp.player.invisible) {
             // we can give damage
@@ -438,6 +524,10 @@ public class Entity {
         }
     }
 
+    /**
+     *
+     * @param g2
+     */
     public void draw(Graphics2D g2) {
 
         BufferedImage image = null;
@@ -503,6 +593,10 @@ public class Entity {
         }
     }
 
+    /**
+     *
+     * @param g2
+     */
     private void dyingAnimation(Graphics2D g2) {
 
         dyingCounter++;
@@ -522,10 +616,22 @@ public class Entity {
 
     }
 
+    /**
+     *
+     * @param g2
+     * @param alphaValue
+     */
     public void changeAlpha(Graphics2D g2, float alphaValue) {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
     }
 
+    /**
+     *
+     * @param imagePath
+     * @param width
+     * @param height
+     * @return
+     */
     public BufferedImage setup(String imagePath, int width, int height) {
 
         UtilityTool uTool = new UtilityTool();
@@ -541,6 +647,11 @@ public class Entity {
         return image;
     }
 
+    /**
+     *
+     * @param goalCol
+     * @param goalRow
+     */
     protected void searchPath(int goalCol, int goalRow) {
 
         int startCol = (worldX + solidArea.x)/gp.tileSize;
@@ -608,6 +719,13 @@ public class Entity {
         }
     }
 
+    /**
+     *
+     * @param user
+     * @param target
+     * @param targetName
+     * @return
+     */
     protected int getDetected(Entity user, Entity[][] target, String targetName) {
 
         int index = MAX_COST;

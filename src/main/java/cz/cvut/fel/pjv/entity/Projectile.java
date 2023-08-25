@@ -12,6 +12,14 @@ public class Projectile extends Entity {
         super(gp);
     }
 
+    /**
+     *
+     * @param worldX
+     * @param worldY
+     * @param direction
+     * @param alive
+     * @param user
+     */
     public void set(int worldX, int worldY, String direction, boolean alive, Entity user) {
         this.worldX = worldX;
         this.worldY = worldY;
@@ -22,6 +30,9 @@ public class Projectile extends Entity {
 
     }
 
+    /**
+     *
+     */
     public void update() {
 
         if (user == gp.player) {
@@ -70,11 +81,20 @@ public class Projectile extends Entity {
         }
     }
 
+    /**
+     *
+     * @param user
+     * @return
+     */
     public boolean haveResource(Entity user) {
         boolean haveResource = false;
         return haveResource;
     }
 
+    /**
+     *
+     * @param user
+     */
     public void subtractResource(Entity user) {
     }
 

@@ -81,6 +81,9 @@ public class GamePanel extends JPanel implements Runnable {
     // GAME STATE
     public GameState gameState;
 
+    /**
+     *
+     */
     public enum GameState {
         TITLE,
         PLAY,
@@ -94,6 +97,9 @@ public class GamePanel extends JPanel implements Runnable {
         MAP
     }
 
+    /**
+     *
+     */
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
@@ -102,6 +108,9 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
     }
 
+    /**
+     *
+     */
     public void setupGame() {
         gameState = GameState.TITLE;
         aSetter.setObject();
@@ -112,6 +121,10 @@ public class GamePanel extends JPanel implements Runnable {
         stopMusic();
     }
 
+    /**
+     *
+     * @param restart
+     */
     public void resetGame(boolean restart) {
         player.setDefaultPositions();
         player.restoreStatus();
@@ -126,11 +139,17 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     *
+     */
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
     }
 
+    /**
+     *
+     */
     @Override
     public void run() {
 
@@ -167,6 +186,9 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     *
+     */
     public void update() {
 
         if (gameState == GameState.PLAY) {
@@ -226,6 +248,10 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     *
+     * @param g
+     */
     public void paintComponent (Graphics g) {
 
         super.paintComponent(g);
@@ -331,16 +357,27 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
 
+    /**
+     *
+     * @param i
+     */
     public void playMusic (int i) {
         music.setFile(i);
         music.play();
         music.loop();
     }
 
+    /**
+     *
+     */
     public void stopMusic () {
         music.stop();
     }
 
+    /**
+     *
+     * @param i
+     */
     public void playSE(int i) {
         se.setFile(i);
         se.play();

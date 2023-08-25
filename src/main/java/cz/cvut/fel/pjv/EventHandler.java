@@ -69,6 +69,9 @@ public class EventHandler {
         }
     }
 
+    /**
+     *
+     */
     public void checkEvent() {
 
         //  Check if the player character is more than
@@ -121,6 +124,14 @@ public class EventHandler {
         }
     }
 
+    /**
+     *
+     * @param map
+     * @param col
+     * @param row
+     * @param reqDirection
+     * @return
+     */
     private boolean hit (int map, int col, int row, String reqDirection) {
 
         boolean hit = false;
@@ -151,6 +162,9 @@ public class EventHandler {
         return hit;
     }
 
+    /**
+     *
+     */
     private void teleportIsland() {
         gp.gameState = GamePanel.GameState.DIALOGUE;
         gp.ui.currentDialogue = "You used teleport to Island!";
@@ -158,7 +172,9 @@ public class EventHandler {
         gp.player.worldY = gp.tileSize*42;
     }
 
-
+    /**
+     *
+     */
     private void teleportFEL() {
         gp.gameState = GamePanel.GameState.DIALOGUE;
         gp.ui.currentDialogue = "You used teleport to FEL!";
@@ -166,6 +182,9 @@ public class EventHandler {
         gp.player.worldY = gp.tileSize*12;
     }
 
+    /**
+     *
+     */
     private void damagePit() {
         gp.gameState = GamePanel.GameState.DIALOGUE;
         gp.playSE(SOUND_SIX);
@@ -176,6 +195,9 @@ public class EventHandler {
         canTouchEvent = false;
     }
 
+    /**
+     *
+     */
     private void healingPool() {
 
         if(gp.keyH.enterPressed) {
@@ -192,6 +214,12 @@ public class EventHandler {
         }
     }
 
+    /**
+     *
+     * @param map
+     * @param col
+     * @param row
+     */
     private void teleportMap(int map, int col, int row) {
         gp.gameState = GamePanel.GameState.TRANSITION;
 
@@ -203,6 +231,10 @@ public class EventHandler {
         gp.playSE(SOUND_TWELVE);
     }
 
+    /**
+     *
+     * @param entity
+     */
     private void speak(Entity entity) {
 
         if (gp.keyH.enterPressed) {

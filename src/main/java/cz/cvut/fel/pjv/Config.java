@@ -11,6 +11,9 @@ public class Config {
         this.gp = gp;
     }
 
+    /**
+     *
+     */
     public void saveConfig() {
 
         try {
@@ -35,7 +38,9 @@ public class Config {
 
     }
 
-
+    /**
+     *
+     */
     public void loadConfig() {
 
         try {

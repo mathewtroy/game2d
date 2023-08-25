@@ -11,6 +11,10 @@ public class CollisionChecker {
         this.gp = gp;
     }
 
+    /**
+     *
+     * @param entity
+     */
     public void checkTile(Entity entity) {
 
         int entityLeftWorldX = entity.worldX + entity.solidArea.x ;
@@ -71,6 +75,12 @@ public class CollisionChecker {
         }
     }
 
+    /**
+     *
+     * @param entity
+     * @param player
+     * @return
+     */
     public int checkObject(Entity entity, boolean player) {
 
         int index = MAX_COST;
@@ -109,6 +119,12 @@ public class CollisionChecker {
         return index;
     }
 
+    /**
+     *
+     * @param entity
+     * @param target
+     * @return
+     */
     // NPC or MONSTER
     public int checkEntity(Entity entity, Entity[][] target) {
 
@@ -191,6 +207,11 @@ public class CollisionChecker {
         return contactPlayer;
     }
 
+    /**
+     *
+     * @param entity
+     * @param direction
+     */
     private void adjustSolidAreaPosition(Entity entity, String direction) {
         switch (direction) {
             case "up": entity.solidArea.y -= entity.speed; break;

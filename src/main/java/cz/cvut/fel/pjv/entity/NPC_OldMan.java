@@ -19,6 +19,9 @@ public class NPC_OldMan extends  Entity {
         setDialogue();
     }
 
+    /**
+     *
+     */
     private void getImage() {
 
         up1 = setup("/npc/oldman_up_1", gp.tileSize, gp.tileSize);
@@ -32,8 +35,10 @@ public class NPC_OldMan extends  Entity {
         left2 = setup("/npc/oldman_left_2", gp.tileSize, gp.tileSize);
     }
 
+    /**
+     *
+     */
     private void setDialogue() {
-
         dialogues[0] = "Hello, Iwan";
         dialogues[1] = "Welcome to FEL (HELL)";
         dialogues[2] = "I am so tired, man. \nI have semester project from PJV";
@@ -41,6 +46,9 @@ public class NPC_OldMan extends  Entity {
 
     }
 
+    /**
+     *
+     */
     public void setAction() {
 
         if (onPath) {
@@ -67,11 +75,11 @@ public class NPC_OldMan extends  Entity {
                 actionLockCounter = 0;
             }
         }
-
-
-
     }
 
+    /**
+     *
+     */
     public void speak() {
         // Do this character specific stuff
         super.speak();

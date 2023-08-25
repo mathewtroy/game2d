@@ -56,6 +56,9 @@ public class MON_Green extends Entity {
         setupGreenMonsterImage();
     }
 
+    /**
+     *
+     */
     private void setupGreenMonsterImage() {
         try {
             up1 = setup("/monster/green_down_1", gp.tileSize, gp.tileSize);
@@ -71,6 +74,9 @@ public class MON_Green extends Entity {
         }
     }
 
+    /**
+     *
+     */
     public void setAction () {
 
         int xDistance = Math.abs(worldX - gp.player.worldX);
@@ -130,12 +136,18 @@ public class MON_Green extends Entity {
 
     }
 
+    /**
+     *
+     */
     public void damageReaction() {
         actionLockCounter = 0;
         direction = gp.player.direction;
         onPath = true;
     }
 
+    /**
+     *
+     */
     public void checkDrop() {
         // CAST A DIE
         int i = new Random().nextInt(HIGH_PROBABILITY)+1;
