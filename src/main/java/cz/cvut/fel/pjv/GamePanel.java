@@ -3,6 +3,7 @@ package cz.cvut.fel.pjv;
 import cz.cvut.fel.pjv.ai.PathFinder;
 import cz.cvut.fel.pjv.data.SaveLoad;
 import cz.cvut.fel.pjv.entity.Entity;
+import cz.cvut.fel.pjv.entity.NullEntity;
 import cz.cvut.fel.pjv.entity.Player;
 import cz.cvut.fel.pjv.tile.InteractiveTile;
 import cz.cvut.fel.pjv.tile.Map;
@@ -77,6 +78,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Entity[][] projectile = new Entity[maxMap][50];
     public ArrayList<Entity> particleList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
+    public NullEntity nullEntity;
 
     // GAME STATE
     public GameState gameState;
@@ -199,39 +201,39 @@ public class GamePanel extends JPanel implements Runnable {
 
             // NPS
             for (int i = 0; i < npc[1].length; i++) {
-                if (npc[currentMap][i] != null) {
+                if (npc[currentMap][i] != nullEntity) {
                     npc[currentMap][i].update();
                 }
             }
 
             // MONSTER
             for (int i = 0; i < monster[1].length; i++) {
-                if (monster[currentMap][i] != null) {
+                if (monster[currentMap][i] != nullEntity) {
                     if (monster[currentMap][i].alive && !monster[currentMap][i].dying) {
                         monster[currentMap][i].update();
                     }
                     if (!monster[currentMap][i].alive) {
                         monster[currentMap][i].checkDrop();
-                        monster[currentMap][i] = null;
+                        monster[currentMap][i] = nullEntity;
                     }
                 }
             }
 
             // PROJECTILE
             for (int i = 0; i < projectile[1].length; i++) {
-                if (projectile[currentMap][i] != null) {
+                if (projectile[currentMap][i] != nullEntity) {
                     if (projectile[currentMap][i].alive) {
                         projectile[currentMap][i].update();
                     }
                     if (!projectile[currentMap][i].alive) {
-                        projectile[currentMap][i] = null;
+                        projectile[currentMap][i] = nullEntity;
                     }
                 }
             }
 
             // PARTICLE
             for (int i = 0; i < particleList.size(); i++) {
-                if (particleList.get(i) != null) {
+                if (particleList.get(i) != nullEntity) {
                     if (particleList.get(i).alive) {
                         particleList.get(i).update();
                     }
