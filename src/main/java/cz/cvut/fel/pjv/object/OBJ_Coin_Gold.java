@@ -18,14 +18,15 @@ public class OBJ_Coin_Gold extends Entity {
     public OBJ_Coin_Gold(GamePanel gp) {
         super(gp);
         this.gp = gp;
-
         type = type_pickupOnly;
         setName(objName);
         value = 10;
-
         setupCoinImage();
     }
 
+    /**
+     * Sets up the image for the coin object.
+     */
     private void setupCoinImage() {
         try {
             down1 = setup("/objects/coin_gold", gp.tileSize, gp.tileSize);
@@ -34,6 +35,12 @@ public class OBJ_Coin_Gold extends Entity {
         }
     }
 
+    /**
+     * Handles the use of the Gold Coin by adding its value to the player's coin count.
+     *
+     * @param entity The entity using the coin (usually the player).
+     * @return True, indicating that the coin was successfully used.
+     */
     public boolean use(Entity entity) {
         gp.playSE(SOUND_ONE);
         gp.ui.addMessage("Coin + " + value);

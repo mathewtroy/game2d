@@ -18,17 +18,18 @@ public class OBJ_Potion_Red extends Entity {
     public  OBJ_Potion_Red (GamePanel gp) {
         super(gp);
         this.gp = gp;
-
         type = type_consumable;
         setName(objName);
         value = 5;
         description = "[Red Potion]\nHeals your life by " + value + "!";
         price = 3;
         stackable = true;
-
         setupRedPotionImage();
     }
 
+    /**
+     * Sets up the image for the red potion object.
+     */
     private void setupRedPotionImage() {
         try {
             down1 = setup("/objects/potion_red", gp.tileSize, gp.tileSize);
@@ -37,6 +38,12 @@ public class OBJ_Potion_Red extends Entity {
         }
     }
 
+    /**
+     * Uses the Red Potion to restore life to the player.
+     *
+     * @param entity The entity (usually the player) that uses the Red Potion.
+     * @return True if the Red Potion was successfully used, false otherwise.
+     */
     public boolean use(Entity entity) {
         gp.gameState = GamePanel.GameState.DIALOGUE;
 

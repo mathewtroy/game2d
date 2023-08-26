@@ -16,7 +16,6 @@ public class OBJ_Axe extends Entity {
     public  OBJ_Axe (GamePanel gp) {
         super(gp);
         this.gp = gp;
-
         type = type_axe;
         setName(objName);
         attackValue = 4;
@@ -25,10 +24,12 @@ public class OBJ_Axe extends Entity {
         description = "[" + name + "]\nA powerful axe.";
         price = 30;
         knockBackPower = 10;
-
         setupAxeImage();
     }
 
+    /**
+     * Sets up the image for the wood shield object.
+     */
     private void setupAxeImage() {
         try {
             down1 = setup("/objects/axe", gp.tileSize, gp.tileSize);

@@ -18,19 +18,19 @@ public class OBJ_Key extends Entity {
     GamePanel gp;
 
     public OBJ_Key(GamePanel gp) {
-
         super(gp);
         this.gp = gp;
-
         type = type_consumable;
         setName(objName);
-
         description = "[" + name + "]\nAn old key.\nMade in China.";
         price = 10;
         stackable = true;
         setupKeyImage();
     }
 
+    /**
+     * Sets up the image for the key object.
+     */
     private void setupKeyImage() {
         try {
             down1 = setup("/objects/key", gp.tileSize, gp.tileSize);
@@ -39,10 +39,15 @@ public class OBJ_Key extends Entity {
         }
     }
 
+    /**
+     * Uses the key item to open a door when interacting with it.
+     *
+     * @param entity The entity that uses the key.
+     * @return True if the key was successfully used to open a door, false otherwise.
+     */
     public boolean use(Entity entity) {
 
         gp.gameState = GamePanel.GameState.DIALOGUE;
-
         int objIndex = getDetected(entity, gp.obj, "Door");
 
         if (objIndex != MAX_COST) {

@@ -18,14 +18,15 @@ public class OBJ_Boots extends Entity {
     public OBJ_Boots(GamePanel gp) {
         super(gp);
         this.gp = gp;
-
         type = type_pickupOnly;
         value = 2;
         setName(objName);
-
         setupBootsImage();
     }
 
+    /**
+     * Sets up the image for the boots object.
+     */
     private void setupBootsImage() {
         try {
             down1 = setup("/objects/boots", gp.tileSize, gp.tileSize);
@@ -34,6 +35,13 @@ public class OBJ_Boots extends Entity {
         }
     }
 
+    /**
+     * Uses the boots object, providing a speed boost to the player.
+     * Plays a sound effect and adds a message to the user interface.
+     *
+     * @param entity The entity (typically the player) using the boots.
+     * @return True if the boots were used successfully, false otherwise.
+     */
     public boolean use(Entity entity) {
         gp.playSE(SOUND_ONE);
         gp.ui.addMessage("Coin + " + value);

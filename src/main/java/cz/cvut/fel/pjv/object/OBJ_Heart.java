@@ -19,14 +19,15 @@ public class OBJ_Heart extends Entity {
     public OBJ_Heart(GamePanel gp) {
         super(gp);
         this.gp = gp;
-
         type = type_pickupOnly;
         setName(objName);
         value = 2;
-
         setupHeartImage();
     }
 
+    /**
+     * Sets up the image for the heart object.
+     */
     private void setupHeartImage() {
         try {
             down1 = setup("/objects/heart_full", gp.tileSize, gp.tileSize);
@@ -38,12 +39,16 @@ public class OBJ_Heart extends Entity {
         }
     }
 
-
+    /**
+     * Uses the Life Potion item on the specified entity.
+     *
+     * @param entity The entity on which the Life Potion is used.
+     * @return True if the Life Potion was successfully used, false otherwise.
+     */
     public boolean use(Entity entity) {
         gp.playSE(SOUND_TWO);
         gp.ui.addMessage("Life +" + value) ;
         entity.life += value;
-
         return true;
     }
 }

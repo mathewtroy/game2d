@@ -19,7 +19,6 @@ public class OBJ_Rock extends Projectile {
     public OBJ_Rock (GamePanel gp) {
         super(gp);
         this.gp = gp;
-
         setName(objName);
         speed = 7;
         maxLife = 80;
@@ -27,10 +26,12 @@ public class OBJ_Rock extends Projectile {
         attack = 2;
         useCost = 1;
         alive = false;
-
         setupRockImage();
     }
 
+    /**
+     * Sets up the image for the rock object.
+     */
     public void setupRockImage() {
         try {
             up1 = setup("/projectiles/rock_down_1", gp.tileSize, gp.tileSize);
@@ -46,6 +47,12 @@ public class OBJ_Rock extends Projectile {
         }
     }
 
+    /**
+     * Checks if the user has enough resources (ammo) to use this rock.
+     *
+     * @param user The entity (usually the player) using the rock.
+     * @return True if the user has enough resources, false otherwise.
+     */
     public boolean haveResource(Entity user) {
         boolean haveResource = false;
         if (user.ammo >= useCost) {
@@ -54,24 +61,49 @@ public class OBJ_Rock extends Projectile {
         return haveResource;
     }
 
+    /**
+     * Subtracts the resource cost (ammo) when using this rock.
+     *
+     * @param user The entity (usually the player) using the rock.
+     */
     public void subtractResource(Entity user) {
         user.ammo -= useCost;
     }
 
+    /**
+     * Gets the color of particles emitted when this rock hits a target.
+     *
+     * @return The color of the particles.
+     */
     public Color getParticleColor() {
         return PARTICLE_COLOR_OLIVE;
     }
 
+    /**
+     * Gets the size of particles emitted when this rock hits a target.
+     *
+     * @return The size of the particles.
+     */
     public int getParticleSize() {
         int size = 10;   // 6 pixels
         return size;
     }
 
+    /**
+     * Gets the speed of particles emitted when this rock hits a target.
+     *
+     * @return The speed of the particles.
+     */
     public int getParticleSpeed() {
         int speed = 1;
         return speed;
     }
 
+    /**
+     * Gets the maximum life of particles emitted when this rock hits a target.
+     *
+     * @return The maximum life of the particles.
+     */
     public int getParticleMaxLife() {
         int maxLife = 20;
         return maxLife;

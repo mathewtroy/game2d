@@ -16,17 +16,18 @@ public class OBJ_ManaCrystal extends Entity {
     GamePanel gp;
 
     public OBJ_ManaCrystal(GamePanel gp) {
-
         super(gp);
         this.gp = gp;
         type = type_pickupOnly;
         setName(objName);
         value = 1;
         price = 5;
-
         setupManaImage();
     }
 
+    /**
+     * Sets up the image for the mana crystal object.
+     */
     private void setupManaImage() {
         try {
             down1 = setup("/objects/manacrystal_full", gp.tileSize, gp.tileSize);
@@ -37,11 +38,16 @@ public class OBJ_ManaCrystal extends Entity {
         }
     }
 
+    /**
+     * Uses the Mana Crystal to restore mana to the player.
+     *
+     * @param entity The entity (usually the player) that uses the Mana Crystal.
+     * @return True if the Mana Crystal was successfully used, false otherwise.
+     */
     public boolean use(Entity entity) {
         gp.playSE(SOUND_TWO);
         gp.ui.addMessage("Mana +" + value) ;
         entity.mana += value;
-
         return true;
     }
 }

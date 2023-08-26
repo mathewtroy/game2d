@@ -16,7 +16,13 @@ public class IT_DryTree extends InteractiveTile{
     private static final String LOGGER_MESSAGE_DRY_TREE = "Missing image of the DRY TREE";
     private static final Color PARTICLE_COLOR_BROWN = new Color(65,50,30);
 
-
+    /**
+     * Constructs a Dry Tree interactive tile.
+     *
+     * @param gp  The GamePanel in which this tile exists.
+     * @param col The column position of the tile.
+     * @param row The row position of the tile.
+     */
     public IT_DryTree(GamePanel gp, int col, int row) {
         super(gp, col, row);
         this.gp = gp;
@@ -30,6 +36,9 @@ public class IT_DryTree extends InteractiveTile{
         setupDryTreeImage();
     }
 
+    /**
+     * Sets up the image for the Dry Tree.
+     */
     private void setupDryTreeImage() {
         try {
             down1 = setup("/tiles/drytree", gp.tileSize, gp.tileSize);
@@ -38,6 +47,12 @@ public class IT_DryTree extends InteractiveTile{
         }
     }
 
+    /**
+     * Checks if the provided entity is the correct item (axe) to interact with this Dry Tree.
+     *
+     * @param entity The entity to check.
+     * @return True if the entity is the correct item (axe) for interaction, otherwise false.
+     */
     public boolean isCorrectItem(Entity entity) {
         boolean isCorrectItem = false;
 
@@ -46,30 +61,59 @@ public class IT_DryTree extends InteractiveTile{
         }
         return isCorrectItem;
     }
+
+    /**
+     * Plays a sound effect associated with interacting with this Dry Tree.
+     */
     public void playSE() {
         gp.playSE(SOUND_TEN);
     }
 
+    /**
+     * Gets the destroyed form of this Dry Tree, which is an IT_Trunk.
+     *
+     * @return The destroyed form of the Dry Tree.
+     */
     public InteractiveTile getDestroyedForm() {
         InteractiveTile tile = new IT_Trunk(gp, worldX/gp.tileSize, worldY/gp.tileSize);
         return tile;
     }
 
+    /**
+     * Gets the color of particles generated when interacting with this Dry Tree.
+     *
+     * @return The color of particles.
+     */
     public Color getParticleColor() {
         Color color = PARTICLE_COLOR_BROWN;
         return color;
     }
 
+    /**
+     * Gets the size of particles generated when interacting with this Dry Tree.
+     *
+     * @return The size of particles in pixels.
+     */
     public int getParticleSize() {
         int size = 6;   // 6 pixels
         return size;
     }
 
+    /**
+     * Gets the speed of particles generated when interacting with this Dry Tree.
+     *
+     * @return The speed of particles.
+     */
     public int getParticleSpeed() {
         int speed = 1;
         return speed;
     }
 
+    /**
+     * Gets the maximum life of particles generated when interacting with this Dry Tree.
+     *
+     * @return The maximum life of particles.
+     */
     public int getParticleMaxLife() {
         int maxLife = 20;
         return maxLife;
