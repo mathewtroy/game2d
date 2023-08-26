@@ -11,6 +11,13 @@ public class IT_Trunk extends InteractiveTile {
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_TRUNK = "Missing image of the TRUNK";
 
+    /**
+     * Constructs a Trunk interactive tile.
+     *
+     * @param gp  The GamePanel in which this tile exists.
+     * @param col The column position of the tile.
+     * @param row The row position of the tile.
+     */
     public IT_Trunk(GamePanel gp, int col, int row) {
         super(gp, col, row);
         this.gp = gp;
@@ -28,6 +35,9 @@ public class IT_Trunk extends InteractiveTile {
         setupTrunkImage();
     }
 
+    /**
+     * Sets up the image for the Trunk.
+     */
     private void setupTrunkImage() {
         try {
             down1 = setup("/tiles/trunk", gp.tileSize, gp.tileSize);

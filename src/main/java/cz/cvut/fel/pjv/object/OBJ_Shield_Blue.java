@@ -16,16 +16,17 @@ public class OBJ_Shield_Blue extends Entity {
     public  OBJ_Shield_Blue (GamePanel gp) {
         super(gp);
         this.gp = gp;
-
         type = type_shield;
         setName(objName);
         defenseValue = 3;
         description = "[" + name + "]\nA new iron shield.";
         price = 10;
-
         setupShieldBlueImage();
     }
 
+    /**
+     * Sets up the image for the blue shield object.
+     */
     private void setupShieldBlueImage() {
         try {
             down1 = setup("/objects/shield_blue", gp.tileSize, gp.tileSize);

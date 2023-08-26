@@ -16,16 +16,17 @@ public class OBJ_Shield_Wood extends Entity {
     public  OBJ_Shield_Wood (GamePanel gp) {
         super(gp);
         this.gp = gp;
-
         type = type_shield;
         setName(objName);
         defenseValue = 1;
         description = "[" + name + "]\nAn old shield.";
         price = 5;
-
         setupShieldWoodImage();
     }
 
+    /**
+     * Sets up the image for the wood shield object.
+     */
     private void setupShieldWoodImage() {
         try {
             down1 = setup("/objects/shield_wood", gp.tileSize, gp.tileSize);

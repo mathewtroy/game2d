@@ -20,7 +20,6 @@ public class OBJ_Fireball extends Projectile {
     public OBJ_Fireball(GamePanel gp) {
         super(gp);
         this.gp = gp;
-
         setName(objName);
         speed = 5;
         maxLife = 80;
@@ -29,10 +28,12 @@ public class OBJ_Fireball extends Projectile {
         knockBackPower = 5;
         useCost = 1;
         alive = false;
-
         setupFireballImage();
     }
 
+    /**
+     * Sets up the image for the fireball object.
+     */
     public void setupFireballImage() {
         try {
             up1 = setup("/projectiles/fireball_up_1", gp.tileSize, gp.tileSize);
@@ -48,6 +49,12 @@ public class OBJ_Fireball extends Projectile {
         }
     }
 
+    /**
+     * Checks if the user has sufficient mana to use the fireball.
+     *
+     * @param user The entity using the fireball.
+     * @return True if the user has enough mana, false otherwise.
+     */
     public boolean haveResource(Entity user) {
         boolean haveResource = false;
         if (user.mana >= useCost) {
@@ -56,24 +63,49 @@ public class OBJ_Fireball extends Projectile {
         return haveResource;
     }
 
+    /**
+     * Subtracts the mana cost of using the fireball from the user's mana.
+     *
+     * @param user The entity using the fireball.
+     */
     public void subtractResource(Entity user) {
         user.mana -= useCost;
     }
 
+    /**
+     * Gets the color of the fireball's particles.
+     *
+     * @return The color of the fireball's particles.
+     */
     public Color getParticleColor() {
         return PARTICLE_COLOR;
     }
 
+    /**
+     * Gets the size of the fireball's particles.
+     *
+     * @return The size of the fireball's particles.
+     */
     public int getParticleSize() {
         int size = 10;   // 6 pixels
         return size;
     }
 
+    /**
+     * Gets the speed of the fireball's particles.
+     *
+     * @return The speed of the fireball's particles.
+     */
     public int getParticleSpeed() {
         int speed = 1;
         return speed;
     }
 
+    /**
+     * Gets the maximum life of the fireball's particles.
+     *
+     * @return The maximum life of the fireball's particles.
+     */
     public int getParticleMaxLife() {
         int maxLife = 20;
         return maxLife;

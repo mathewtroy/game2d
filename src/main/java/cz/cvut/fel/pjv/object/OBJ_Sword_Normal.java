@@ -16,7 +16,6 @@ public class OBJ_Sword_Normal extends Entity {
     public  OBJ_Sword_Normal (GamePanel gp) {
         super(gp);
         this.gp = gp;
-
         type = type_sword;
         setName(objName);
         attackValue = 1;
@@ -25,11 +24,13 @@ public class OBJ_Sword_Normal extends Entity {
         description = "[" + name + "]\nAn old sword.";
         price = 15;
         knockBackPower = 2;
-
         setupSwordImage();
     }
 
-    public void setupSwordImage() {
+    /**
+     * Sets up the image for the sword object.
+     */
+    private void setupSwordImage() {
         try {
             down1 = setup("/objects/sword_normal", gp.tileSize, gp.tileSize);
         } catch (Exception e) {

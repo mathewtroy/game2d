@@ -23,6 +23,9 @@ public class Map extends TileManager {
         createWorldMap();
     }
 
+    /**
+     * Creates the world map by assembling tiles from mapTileNum into images.
+     */
     public void createWorldMap() {
 
         worldMap = new BufferedImage[gp.maxMap];
@@ -55,6 +58,11 @@ public class Map extends TileManager {
         }
     }
 
+    /**
+     * Draws the full map screen, including the map, player, and hints.
+     *
+     * @param g2 The Graphics2D object used for drawing.
+     */
     public void drawFullMapScreen(Graphics2D g2) {
 
         // Background color
@@ -83,6 +91,11 @@ public class Map extends TileManager {
 
     }
 
+    /**
+     * Draws the mini-map if it's enabled.
+     *
+     * @param g2 The Graphics2D object used for drawing.
+     */
     public void drawMiniMap(Graphics2D g2) {
 
         if (!miniMapOn) {

@@ -29,6 +29,9 @@ public class OBJ_Potion_Blue extends Entity {
         setupBluePotionImage();
     }
 
+    /**
+     * Sets up the image for the blue potion object.
+     */
     private void setupBluePotionImage() {
         try {
             down1 = setup("/objects/potion_blue", gp.tileSize, gp.tileSize);
@@ -37,6 +40,12 @@ public class OBJ_Potion_Blue extends Entity {
         }
     }
 
+    /**
+     * Uses the Blue Potion to restore mana to the player.
+     *
+     * @param entity The entity (usually the player) that uses the Blue Potion.
+     * @return True if the Blue Potion was successfully used, false otherwise.
+     */
     public boolean use(Entity entity) {
         gp.gameState = GamePanel.GameState.DIALOGUE;
 
