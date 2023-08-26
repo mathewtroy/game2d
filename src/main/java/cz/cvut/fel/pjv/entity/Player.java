@@ -34,9 +34,10 @@ public class Player extends Entity {
     public boolean attackCanceled = false;
 
     /**
+     * Constructs a new Player object.
      *
-     * @param gp
-     * @param keyH
+     * @param gp    The GamePanel instance.
+     * @param keyH  The KeyHandler instance for handling player input.
      */
     public Player(GamePanel gp, KeyHandler keyH) {
 
@@ -54,13 +55,12 @@ public class Player extends Entity {
         solidAreaDefaultY = solidArea.y;
         solidArea.width = 28;
         solidArea.height = 28;
-
         setDefaultValues();
 
     }
 
     /**
-     *
+     * Sets default values and initializes the player.
      */
     public void setDefaultValues () {
 
@@ -97,7 +97,7 @@ public class Player extends Entity {
     }
 
     /**
-     *
+     * Sets the default positions of the player.
      */
     public void setDefaultPositions() {
         // default start position
@@ -109,7 +109,7 @@ public class Player extends Entity {
     }
 
     /**
-     *
+     * Restores the player's status, including life, mana, and visibility.
      */
     public void restoreStatus() {
         life = maxLife;
@@ -122,7 +122,7 @@ public class Player extends Entity {
     }
 
     /**
-     *
+     * Initializes the player's inventory with default items.
      */
     private void setItems() {
         inventory.clear();
@@ -136,8 +136,9 @@ public class Player extends Entity {
     }
 
     /**
+     * Calculates and returns the player's attack value based on equipped weapon and strength.
      *
-     * @return
+     * @return The player's attack value.
      */
     public int getAttack() {
         attackArea = currentWeapon.attackArea;
@@ -145,16 +146,18 @@ public class Player extends Entity {
     }
 
     /**
+     * Calculates and returns the player's defense value based on equipped shield and dexterity.
      *
-     * @return
+     * @return The player's defense value.
      */
     public int getDefense() {
         return defense = dexterity * currentShield.defenseValue;
     }
 
     /**
+     * Retrieves the index of the current weapon in the player's inventory.
      *
-     * @return
+     * @return The index of the current weapon.
      */
     public int getCurrentWeaponSlot() {
         int currentWeaponSlot = 0;
@@ -167,8 +170,9 @@ public class Player extends Entity {
     }
 
     /**
+     * Retrieves the index of the current shield in the player's inventory.
      *
-     * @return
+     * @return The index of the current shield.
      */
     public int getCurrentShieldSlot() {
         int currentShieldSlot = 0;
@@ -181,7 +185,7 @@ public class Player extends Entity {
     }
 
     /**
-     *
+     * Loads player images for different directions
      */
     private void getPlayerImage() {
 
@@ -198,7 +202,7 @@ public class Player extends Entity {
     }
 
     /**
-     *
+     * Loads player attack images based on the equipped weapon.
      */
     public void getPlayerAttackImage() {
 
@@ -254,111 +258,153 @@ public class Player extends Entity {
     }
 
     /**
-     *
+     * Updates the player's position and performs various game interactions.
      */
     public void update() {
-
         if (attacking) {
             attacking();
+        } else if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || keyH.enterPressed) {
+            handleMovementAndInteractions();
+        } else {
+            handleStandingState();
         }
-        //  we want player move when we press button
-        else if (keyH.upPressed || keyH.downPressed ||
-                keyH.leftPressed || keyH.rightPressed ||
-                keyH.enterPressed) {
 
+        handleProjectile();
+        handleInvisibility();
+        handleLifeAndMana();
+    }
 
-            if (keyH.upPressed) { direction = "up"; }
-            else if (keyH.downPressed) { direction = "down"; }
-            else if (keyH.leftPressed) { direction = "left"; }
-            else if (keyH.rightPressed) { direction = "right"; }
-
-            //  CHECK TILE COLLISION
-            collisionOn = false;
-            gp.cChecker.checkTile(this);
-
-            //  CHECK OBJECT COLLISION
-            int objIndex = gp.cChecker.checkObject(this, true);
-            pickUpObject(objIndex);
-
-            //  CHECK NPC COLLISION
-            int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
-            interactNPC (npcIndex);
-
-            //  CHECK MONSTER COLLISION
-            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-            contactMonster(monsterIndex);
-
-            // CHECK INTERACTIVE TILE COLLISION
-            int iTileIndex = gp.cChecker.checkEntity(this,gp.iTile);
-
-            //  CHECK EVENT
-            gp.eHandler.checkEvent();
-            gp.keyH.enterPressed = false;
-
-
-            //  IF COLLISION IS FALSE, PLAYER CAN MOVE
-            if (!collisionOn && (!keyH.enterPressed)) {
-                switch (direction) {
-                    case "up": worldY -= speed; break;
-                    case "down": worldY += speed; break;
-                    case "left": worldX -= speed; break;
-                    case "right": worldX += speed; break;
-                }
-            }
-
-
-            if (keyH.enterPressed && !attackCanceled) {
-                gp.playSE(SOUND_FIVE);
-                attacking = true;
-                spriteCounter = 0;
-            }
-
-            attackCanceled = false;
-            gp.keyH.enterPressed = false;
-
-            spriteCounter++;
-            if (spriteCounter > SPRITE_COUNTER_THRESHOLD) {
-                if (spriteNum == 1) { spriteNum = 2; }
-                else if (spriteNum == 2) { spriteNum = 1; }
-                spriteCounter = 0;
-            }
+    /**
+     * Handles the player's movement and various interactions when a movement key or enter key is pressed.
+     */
+    private void handleMovementAndInteractions() {
+        if (keyH.upPressed) {
+            direction = "up";
+        } else if (keyH.downPressed) {
+            direction = "down";
+        } else if (keyH.leftPressed) {
+            direction = "left";
+        } else if (keyH.rightPressed) {
+            direction = "right";
         }
-        else {
-            standCounter++;
-            if (standCounter == 20) {
+
+        collisionOn = false;
+        gp.cChecker.checkTile(this);
+
+        int objIndex = gp.cChecker.checkObject(this, true);
+        pickUpObject(objIndex);
+
+        int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+        interactNPC(npcIndex);
+
+        int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+        contactMonster(monsterIndex);
+
+        int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
+
+        gp.eHandler.checkEvent();
+        gp.keyH.enterPressed = false;
+
+        if (!collisionOn && !keyH.enterPressed) {
+            handlePlayerMovement();
+        }
+
+        if (keyH.enterPressed && !attackCanceled) {
+            startAttack();
+        }
+
+        attackCanceled = false;
+        gp.keyH.enterPressed = false;
+
+        updateSpriteCounter();
+    }
+
+    /**
+     * Handles the player's movement based on the current direction.
+     */
+    private void handlePlayerMovement() {
+        switch (direction) {
+            case "up":
+                worldY -= speed;
+                break;
+            case "down":
+                worldY += speed;
+                break;
+            case "left":
+                worldX -= speed;
+                break;
+            case "right":
+                worldX += speed;
+                break;
+        }
+    }
+
+    /**
+     * Starts the player's attack animation.
+     */
+    private void startAttack() {
+        gp.playSE(SOUND_FIVE);
+        attacking = true;
+        spriteCounter = 0;
+    }
+
+    /**
+     * Updates the sprite counter and switches between player sprites.
+     */
+    private void updateSpriteCounter() {
+        spriteCounter++;
+        if (spriteCounter > SPRITE_COUNTER_THRESHOLD) {
+            if (spriteNum == 1) {
+                spriteNum = 2;
+            } else if (spriteNum == 2) {
                 spriteNum = 1;
-                standCounter = 0;
             }
+            spriteCounter = 0;
         }
+    }
 
+    /**
+     * Handles the player's standing state and sprite updates.
+     */
+    private void handleStandingState() {
+        standCounter++;
+        if (standCounter == 20) {
+            spriteNum = 1;
+            standCounter = 0;
+        }
+    }
+
+    /**
+     * Handles the player's projectile attack.
+     */
+    private void handleProjectile() {
         if (gp.keyH.shotKeyPressed && !projectile.alive
-                && (shotAvailableCounter == SHOT_AVAILABLE_COUNTER_THRESHOLD) &&
-                projectile.haveResource(this)) {
+                && (shotAvailableCounter == SHOT_AVAILABLE_COUNTER_THRESHOLD)
+                && projectile.haveResource(this)) {
 
-            // SET DEFAULT COORDINATES, DIRECTION AND USER
             projectile.set(worldX, worldY, direction, true, this);
-
-
-            // SUBTRACT THE COST ( MANA )
             projectile.subtractResource(this);
 
-
-            // CHECK VACANCY
             for (int i = 0; i < gp.projectile[1].length; i++) {
-
                 if (gp.projectile[gp.currentMap][i] == null) {
                     gp.projectile[gp.currentMap][i] = projectile;
                     break;
                 }
-
             }
 
             shotAvailableCounter = 0;
-
             gp.playSE(SOUND_NINE);
         }
 
-        // This needs to be outside of key if statement
+        if (shotAvailableCounter < SHOT_AVAILABLE_COUNTER_THRESHOLD) {
+            shotAvailableCounter++;
+        }
+    }
+
+    /**
+     * Handles the player's invisibility state.
+     */
+    private void handleInvisibility() {
         if (invisible) {
             invisibleCounter++;
 
@@ -367,11 +413,12 @@ public class Player extends Entity {
                 invisibleCounter = 0;
             }
         }
+    }
 
-        if (shotAvailableCounter < SHOT_AVAILABLE_COUNTER_THRESHOLD) {
-            shotAvailableCounter ++;
-        }
-
+    /**
+     * Handles the player's life and mana attributes.
+     */
+    private void handleLifeAndMana() {
         if (life > maxLife) {
             life = maxLife;
         }
@@ -381,16 +428,23 @@ public class Player extends Entity {
         }
 
         if (life <= 0) {
-            gp.gameState = GamePanel.GameState.GAME_OVER;
-            gp.ui.commandNum = -1;
-            gp.stopMusic();
-            gp.playSE(SOUND_ELEVEN);
+            handlePlayerDeath();
         }
-
     }
 
     /**
-     *
+     * Handles the player's death state.
+     */
+    private void handlePlayerDeath() {
+        gp.gameState = GamePanel.GameState.GAME_OVER;
+        gp.ui.commandNum = -1;
+        gp.stopMusic();
+        gp.playSE(SOUND_ELEVEN);
+    }
+
+
+    /**
+     * Handles player attacks, including animations and collision checks.
      */
     public void attacking() {
 
@@ -447,8 +501,9 @@ public class Player extends Entity {
     }
 
     /**
+     * Handles picking up objects and interacting with them.
      *
-     * @param i
+     * @param i The index of the object in the game world.
      */
     public void pickUpObject (int i) {
         if (i != MAX_COST) {
@@ -490,8 +545,9 @@ public class Player extends Entity {
     }
 
     /**
+     * Initiates a conversation with an NPC if the player interacts with them.
      *
-     * @param i
+     * @param i The index of the NPC in the game world.
      */
     public void interactNPC(int i) {
         if (gp.keyH.enterPressed) {
@@ -511,8 +567,9 @@ public class Player extends Entity {
     }
 
     /**
+     * Handles interactions when the player comes into contact with a monster.
      *
-     * @param i
+     * @param i The index of the monster in the game world.
      */
     public void contactMonster(int i) {
 
@@ -532,10 +589,11 @@ public class Player extends Entity {
     }
 
     /**
+     * Damages a monster based on the player's attack and knockback power.
      *
-     * @param i
-     * @param attack
-     * @param knockBackPower
+     * @param i              The index of the monster in the game world.
+     * @param attack         The player's attack value.
+     * @param knockBackPower The knockback power applied to the monster.
      */
     public void damageMonster(int i, int attack, int knockBackPower) {
         if (i != MAX_COST) {
@@ -573,9 +631,10 @@ public class Player extends Entity {
     }
 
     /**
+     * Applies knockback to an entity based on a specified knockback power.
      *
-     * @param entity
-     * @param knockBackPower
+     * @param entity         The entity to apply knockback to.
+     * @param knockBackPower The knockback power to apply.
      */
     public void knockBack(Entity entity, int knockBackPower) {
         entity.direction = direction;
@@ -584,8 +643,10 @@ public class Player extends Entity {
     }
 
     /**
+     * Damages an interactive tile if it is destructible, the player has the correct item to destroy it,
+     * and the tile is not already invisible. Generates particles and updates the tile if it reaches zero life.
      *
-     * @param i
+     * @param i The index of the interactive tile to damage.
      */
     public void damageInteractiveTile(int i) {
         if (i != MAX_COST && gp.iTile[gp.currentMap][i].destructible
@@ -605,8 +666,9 @@ public class Player extends Entity {
     }
 
     /**
+     * Damages a projectile by marking it as not alive and generates particles.
      *
-     * @param i
+     * @param i The index of the projectile to damage.
      */
     public void damageProjectile(int i) {
 
@@ -618,7 +680,8 @@ public class Player extends Entity {
     }
 
     /**
-     *
+     * Checks if the player's experience points have reached the required amount for the next level-up.
+     * If so, increases the player's level, updates their attributes, and displays a level-up message.
      */
     public void checkLevelUp() {
         if (getExp() >= getNextLevelExp()) {
@@ -640,7 +703,7 @@ public class Player extends Entity {
     }
 
     /**
-     *
+     * Allows the player to select and equip items from their inventory, such as weapons, shields, and consumables.
      */
     public void selectItem() {
 
@@ -678,9 +741,10 @@ public class Player extends Entity {
     }
 
     /**
+     * Searches for an item with the given name in the player's inventory.
      *
-     * @param itemName
-     * @return
+     * @param itemName The name of the item to search for.
+     * @return The index of the item in the inventory, or MAX_COST if not found.
      */
     public int searchItemInInventory(String itemName) {
 
@@ -697,9 +761,11 @@ public class Player extends Entity {
     }
 
     /**
+     * Determines if the player can obtain an item, considering factors like item stackability and available inventory slots.
+     * Increases the stack count or adds a new item to the inventory accordingly.
      *
-     * @param item
-     * @return
+     * @param item The item to obtain.
+     * @return True if the item was successfully obtained, false otherwise.
      */
     public boolean canObtainItem(Entity item) {
 
@@ -736,8 +802,9 @@ public class Player extends Entity {
     }
 
     /**
+     * Draws the player character on the screen based on their current state and direction.
      *
-     * @param g2
+     * @param g2 The graphics context on which to draw the player.
      */
     public void draw (Graphics2D g2) {
 

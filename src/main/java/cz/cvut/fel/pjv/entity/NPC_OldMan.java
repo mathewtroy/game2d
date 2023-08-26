@@ -11,16 +11,14 @@ public class NPC_OldMan extends  Entity {
     public NPC_OldMan(GamePanel gp) {
 
         super(gp);
-
         direction = "down";
         speed = 1;
-
         getImage();
         setDialogue();
     }
 
     /**
-     *
+     * Loads and sets the images for the old man's different directions.
      */
     private void getImage() {
 
@@ -36,26 +34,24 @@ public class NPC_OldMan extends  Entity {
     }
 
     /**
-     *
+     * Sets the dialogue options for the old man.
      */
     private void setDialogue() {
         dialogues[0] = "Hello, Iwan";
         dialogues[1] = "Welcome to FEL (HELL)";
         dialogues[2] = "I am so tired, man. \nI have semester project from PJV";
         dialogues[3] = "Good luck, Iwan";
-
     }
 
     /**
-     *
+     * Defines the actions of the old man NPC.
+     * If not on a predefined path, the old man will randomly change directions after a certain time interval.
      */
     public void setAction() {
 
         if (onPath) {
-
             int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
             int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
-
             searchPath(goalCol, goalRow);
         }
         else {
@@ -78,13 +74,12 @@ public class NPC_OldMan extends  Entity {
     }
 
     /**
-     *
+     * Initiates a conversation with the old man.
+     * Sets the NPC on a predefined path.
      */
     public void speak() {
         // Do this character specific stuff
         super.speak();
-
         onPath = true;
     }
-
 }

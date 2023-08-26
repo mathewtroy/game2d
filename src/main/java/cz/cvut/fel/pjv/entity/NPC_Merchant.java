@@ -8,17 +8,15 @@ public class NPC_Merchant extends Entity  {
     public NPC_Merchant(GamePanel gp) {
 
         super(gp);
-
         direction = "down";
         speed = 1;
-
         getImage();
         setDialogue();
         setItems();
     }
 
     /**
-     *
+     * Loads and sets the images for the merchant's different directions.
      */
     private void getImage() {
 
@@ -34,7 +32,7 @@ public class NPC_Merchant extends Entity  {
     }
 
     /**
-     *
+     * Sets the dialogue options for the merchant.
      */
     private void setDialogue() {
         dialogues[0] = "Hey! \nDo you want to trade, Iwan?? ";
@@ -42,7 +40,7 @@ public class NPC_Merchant extends Entity  {
     }
 
     /**
-     *
+     * Fills the item merchant's inventory.
      */
     private void setItems() {
         inventory.add(new OBJ_Axe(gp));
@@ -56,12 +54,11 @@ public class NPC_Merchant extends Entity  {
     }
 
     /**
-     *
+     * Initiates a conversation with the merchant.
+     * Sets the game state to TRADE and associates the NPC with the game's user interface.
      */
     public void speak() {
-
         super.speak();
-
         gp.gameState = GamePanel.GameState.TRADE;
         gp.ui.npc = this;
 
