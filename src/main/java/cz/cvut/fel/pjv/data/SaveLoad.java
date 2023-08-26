@@ -30,7 +30,7 @@ public class SaveLoad {
      *
      */
     public Entity getObject(String itemName){
-        Entity obj = null;
+        Entity obj = gp.nullEntity;
 
         switch (itemName){
             case"Normal Axe":obj = new OBJ_Axe(gp); break;
@@ -90,7 +90,7 @@ public class SaveLoad {
 
                 for(int i = 0; i < gp.obj[1].length; i++) {
 
-                    if(gp.obj[mapNum][i] == null){
+                    if(gp.obj[mapNum][i] == gp.nullEntity){
                         ds.mapObjectNames[mapNum][i] = "NA";
                     }
 
@@ -99,7 +99,7 @@ public class SaveLoad {
                         ds.mapObjectWorldX[mapNum][i] = gp.obj[mapNum][i].worldX;
                         ds.mapObjectWorldY[mapNum][i] = gp.obj[mapNum][i].worldY;
 
-                        if(gp.obj[mapNum][i].loot != null) {
+                        if(gp.obj[mapNum][i].loot != gp.nullEntity) {
                             ds.mapObjectLootNames[mapNum][i] = gp.obj[mapNum][i].loot.getName();
                         }
                         ds.mapObjectOpened[mapNum][i] = gp.obj[mapNum][i].opened;
@@ -163,7 +163,7 @@ public class SaveLoad {
                 for(int i = 0; i < gp.obj[1].length; i++){
 
                     if (ds.mapObjectNames[mapNum][i].equals("NA")){
-                        gp.obj[mapNum][i] = null;
+                        gp.obj[mapNum][i] = gp.nullEntity;
                     }
 
                     else {
@@ -177,7 +177,7 @@ public class SaveLoad {
 
                         gp.obj[mapNum][i].opened = ds.mapObjectOpened[mapNum][i];
 
-                        if (gp.obj[mapNum][i].opened == true) {
+                        if (gp.obj[mapNum][i].opened) {
                             gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image2;
                         }
                     }

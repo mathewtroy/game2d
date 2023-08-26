@@ -16,6 +16,8 @@ public class Entity {
 
     GamePanel gp;
 
+    public NullEntity nullEntity;
+
     private static final Color HP_BAR_BACKGROUND_COLOR = new Color(35, 35, 35);
     private static final Color HP_BAR_COLOR = new Color(255, 0, 30);
 
@@ -300,7 +302,7 @@ public class Entity {
      */
     protected void dropItem (Entity droppedItem) {
         for (int i = 0; i < gp.obj.length; i++ ) {
-            if (gp.obj[gp.currentMap][i] == null) {
+            if (gp.obj[gp.currentMap][i] == gp.nullEntity) {
                 gp.obj[gp.currentMap][i] = droppedItem;
                 gp.obj[gp.currentMap][i].worldX = worldX;  // dead monster's worldX
                 gp.obj[gp.currentMap][i].worldY = worldY;  // dead monster's worldY
@@ -808,7 +810,7 @@ public class Entity {
         int row = nextWorldY/gp.tileSize;
 
         for(int i = 0; i < target[1].length; i++) {
-            if (target[gp.currentMap][i] != null) {
+            if (target[gp.currentMap][i] != gp.nullEntity) {
                 if (target[gp.currentMap][i].getCol() == col &&
                         target[gp.currentMap][i].getRow() == row &&
                         target[gp.currentMap][i].name.equals(targetName)) {
