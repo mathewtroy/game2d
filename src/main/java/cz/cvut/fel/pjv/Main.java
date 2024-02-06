@@ -1,5 +1,7 @@
 package cz.cvut.fel.pjv;
 
+import cz.cvut.fel.pjv.view.GamePanel;
+
 import javax.swing.*;
 
 public class Main {
