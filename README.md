@@ -1,4 +1,4 @@
-# :label: Semestrální projekt z předmětu Programování v JAVA  (PJV)
+# :label: Semester project from the subject Programming in JAVA  (PJV)
 
 **Code**: B0B36PJV <br>
 **Name**: Programming in Java/ Programování v JAVA <br>
@@ -6,7 +6,7 @@
 **Department**: 13136 - Department of Computer Science/ Katedra počítačů <br>
 
 
-## :label: Zadani
+## :label: Assignment
 <details><summary> Show more </summary>
 Typická RPG hra, která je tímto tématem zamýšlena je například tato https://darkwalllke.itch.io/simple-rpg
 
@@ -20,8 +20,20 @@ Herní engine musí být vybaven GUI.
 
 </details>
 
+# :label: Launch
+
+**1.Download the source code of the application from the repository:** <br>
+`git clone https://gitlab.fel.cvut.cz/krossale/java-pro.git`<br>
+
+**2.Run a command in IntelliJ IDEA to build and package the project:** <br>
+`mvn clean install`<br>
+
+**3.Run Main.java:** <br>
+`run java main`
+
 ## :label: Game controls
 
+<details><summary> Show more </summary>
 
 👨               main hero in the game <br>
 :older_man:	            old man <br>
@@ -58,7 +70,7 @@ Herní engine musí být vybaven GUI.
 🗝️	              key item (open the door)<br>
 💰	             coin item (time is money)<br>
 👢               boot item (increase speed)<br>
-
+</details>
 
 ## Game plot
 
@@ -87,19 +99,19 @@ After the player opens the chest, they can continue to fight the monsters becaus
 
 
 
-## :label: Zkušenosti získané během SP
+## :label: Experience gained during Semester project
 
 <details><summary> Show more </summary>
 
-Během práce na semestrálním projektu jsem získal mnoho cenných zkušeností v oblasti vývoje her v jazyce Java. Zde je několik věcí, které jsem se naučil: <br>
+While working on a semester project, I gained a lot of valuable experience in the field of Java game development. Here are a few things I learned: <br>
 
-**Práce s externími soubory:** Musel jsem se naučit načítat data ze souborů a ukládat je zpět. Toto je klíčová dovednost pro dynamické načítání levelů a ukládání stavu hry. <br>
+**Working with external files:** I had to learn how to load data from files and save them back. This is a key skill for dynamically loading levels and saving game state. <br>
 
-**Bojový systém:** Implementace způsobu souboje s nepřáteli byla náročná, ale zajímavá část projektu. Musel jsem vytvořit mechanismus pro zpracování útoků hráče a nepřátel, sledování životního stavu a rozhodování o výsledku souboje. <br>
+**Battle system:** Implementing the way to fight enemies was a challenging but interesting part of the project. I had to create a mechanism to handle player and enemy attacks, monitor health status and decide the outcome of the fight. <br>
 
-**Interakce s předměty:** Hráč mohl používat různé předměty v inventáři k interakci s herním světem. To zahrnovalo detekci, zda má hráč správný předmět k otevření dveří nebo k boji s nepřítelem. Bylo toho třeba hodně otestovat a ladit. <br>
+**Interaction with objects:** The player could use various items in the inventory to interact with the game world. This included detecting whether the player has the correct item to open a door or fight an enemy. There was a lot to test and debug. <br>
 
-**Grafické uživatelské rozhraní (GUI):** Vytvořil jsem grafické uživatelské rozhraní pro hru, které zahrnovalo inventář, statistiky hráče a rozhraní pro boj. Toto bylo důležité pro přívětivost hry.
+**Graphical user interface (GUI):** I created a GUI for the game that included the inventory, player stats, and combat interface. This was important for the playability of the game.
 
 </details>
 
@@ -107,11 +119,13 @@ Během práce na semestrálním projektu jsem získal mnoho cenných zkušenost�
 ## :label: Wiki
 **[Go to Wiki](https://gitlab.fel.cvut.cz/krossale/java-pro/-/wikis/home)**
 
+## :label: Documents
+**[Go to Docs](https://docs.google.com/document/d/1_nWswo61mqfpcLLpSvPrqq7BsWZOZbq6HDDdP99xWVw/)**
 
 ## :label: Contacts
 
-**Cvičící:** Ladislav Serédi <br>
-**Zpracoval:** Aleksandr Kross  <br>
+**Teacher:** Ladislav Serédi <br>
+**Author:** Aleksandr Kross  <br>
 :email: **[If you have questions text me](mailto:krossale@fel.czut.cz)**
 
 
