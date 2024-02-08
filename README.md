@@ -33,7 +33,6 @@ Herní engine musí být vybaven GUI.
 
 ## :label: Game controls
 
-<details><summary> Show more </summary>
 
 👨               main hero in the game <br>
 :older_man:	            old man <br>
@@ -70,7 +69,6 @@ Herní engine musí být vybaven GUI.
 🗝️	              key item (open the door)<br>
 💰	             coin item (time is money)<br>
 👢               boot item (increase speed)<br>
-</details>
 
 ## Game plot
 
