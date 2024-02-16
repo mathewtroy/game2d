@@ -3,6 +3,7 @@ package cz.cvut.fel.pjv.controller;
 import cz.cvut.fel.pjv.model.EventRect;
 import cz.cvut.fel.pjv.view.GamePanel;
 import cz.cvut.fel.pjv.model.entity.Entity;
+import cz.cvut.fel.pjv.view.GameState;
 
 import static cz.cvut.fel.pjv.model.Sound.*;
 
@@ -176,7 +177,7 @@ public class EventHandler {
      * Initiates the teleportation to the Island map
      */
     private void teleportIsland() {
-        gp.gameState = GamePanel.GameState.DIALOGUE;
+        gp.gameState = GameState.DIALOGUE;
         gp.ui.currentDialogue = "You used teleport to Island!";
         gp.player.worldX = gp.tileSize*12;
         gp.player.worldY = gp.tileSize*42;
@@ -186,7 +187,7 @@ public class EventHandler {
      * Initiates the teleportation to the FEL map
      */
     private void teleportFEL() {
-        gp.gameState = GamePanel.GameState.DIALOGUE;
+        gp.gameState = GameState.DIALOGUE;
         gp.ui.currentDialogue = "You used teleport to FEL!";
         gp.player.worldX = gp.tileSize*12;
         gp.player.worldY = gp.tileSize*12;
@@ -197,7 +198,7 @@ public class EventHandler {
      * Handles damage when the player character falls into a pit
      */
     private void damagePit() {
-        gp.gameState = GamePanel.GameState.DIALOGUE;
+        gp.gameState = GameState.DIALOGUE;
         gp.playSE(SOUND_SIX);
         gp.ui.currentDialogue = "You fall into a pit!";
         gp.player.life -= 2;
@@ -213,14 +214,14 @@ public class EventHandler {
     private void healingPool() {
 
         if(gp.keyH.enterPressed) {
-            gp.gameState = GamePanel.GameState.DIALOGUE;
+            gp.gameState = GameState.DIALOGUE;
             gp.player.attackCanceled = true;
             gp.playSE(SOUND_THREE);
             gp.ui.currentDialogue = "You drink the Russian VODKA\nLife and mana have been recovered\n"+
             "(The progress has been saved)";
             gp.player.life = gp.player.maxLife;
             gp.player.mana = gp.player.maxMana;
-            gp.aSetter.setMonster();
+            gp.aSetter.setEnemy();
             gp.saveLoad.save();
 
         }
@@ -235,7 +236,7 @@ public class EventHandler {
      * @param row The row to teleport to.
      */
     private void teleportMap(int map, int col, int row) {
-        gp.gameState = GamePanel.GameState.TRANSITION;
+        gp.gameState = GameState.TRANSITION;
 
         tempMap = map;
         tempCol = col;
@@ -253,7 +254,7 @@ public class EventHandler {
     private void speak(Entity entity) {
 
         if (gp.keyH.enterPressed) {
-            gp.gameState = GamePanel.GameState.DIALOGUE;
+            gp.gameState = GameState.DIALOGUE;
             gp.player.attackCanceled = true;
             entity.speak();
         }

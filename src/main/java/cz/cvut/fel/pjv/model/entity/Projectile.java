@@ -32,12 +32,12 @@ public class Projectile extends Entity {
     }
 
     /**
-     * Updates the projectile's position and checks for collisions with monsters or the player.
+     * Updates the projectile's position and checks for collisions with enemies or the player.
      */
     public void update() {
         // Check collisions and apply damage if user is the player
         if (user == gp.player) {
-            checkAndDamageMonster();
+            checkAndDamageEnemy();
         }
 
         // Check collisions and apply damage if user is not the player
@@ -56,14 +56,14 @@ public class Projectile extends Entity {
     }
 
     /**
-     * Checks for collisions with monsters and damages them if necessary.
+     * Checks for collisions with enemies and damages them if necessary.
      */
-    private void checkAndDamageMonster() {
-        int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+    private void checkAndDamageEnemy() {
+        int enemyIndex = gp.cChecker.checkEntity(this, gp.enemy);
 
-        if (monsterIndex != MAX_COST) {
-            gp.player.damageMonster(monsterIndex, attack, knockBackPower);
-            generateParticle(user.projectile, gp.monster[gp.currentMap][monsterIndex]);
+        if (enemyIndex != MAX_COST) {
+            gp.player.damageEnemy(enemyIndex, attack, knockBackPower);
+            generateParticle(user.projectile, gp.enemy[gp.currentMap][enemyIndex]);
             alive = false;
         }
     }

@@ -123,13 +123,13 @@ public class CollisionChecker {
     }
 
     /**
-     * Checks for collision between an entity and other entities (NPCs or monsters).
+     * Checks for collision between an entity and other entities (NPCs or enemies).
      *
      * @param entity The entity for which collision is being checked.
      * @param target The array of entities to check for collision with.
      * @return The index of the collided entity, or MAX_COST if no collision occurred.
      */
-    // NPC or MONSTER
+    // NPC or ENEMY
     public int checkEntity(Entity entity, Entity[][] target) {
 
         int index = MAX_COST;

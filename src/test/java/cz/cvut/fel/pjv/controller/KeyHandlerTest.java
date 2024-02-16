@@ -1,6 +1,7 @@
 package cz.cvut.fel.pjv.controller;
 
 import cz.cvut.fel.pjv.view.GamePanel;
+import cz.cvut.fel.pjv.view.GameState;
 import org.junit.jupiter.api.*;
 import java.awt.event.KeyEvent;
 
@@ -12,7 +13,7 @@ public class KeyHandlerTest {
     @BeforeEach
     void setUp() {
         gp = new GamePanel();
-        gp.gameState = GamePanel.GameState.PLAY;
+        gp.gameState = GameState.PLAY;
         keyHandler = new KeyHandler(gp);
     }
 
@@ -24,8 +25,8 @@ public class KeyHandlerTest {
         keyHandler.keyPressed(keyEvent);
 
         // Define expected and actual results
-        GamePanel.GameState actualResult = gp.gameState;
-        GamePanel.GameState expectedResult = GamePanel.GameState.PAUSE;
+        GameState actualResult = gp.gameState;
+        GameState expectedResult = GameState.PAUSE;
 
         Assertions.assertEquals(expectedResult, actualResult);
     }
@@ -38,8 +39,8 @@ public class KeyHandlerTest {
         keyHandler.keyPressed(keyEvent);
 
         // Define expected and actual results
-        GamePanel.GameState actualResult = gp.gameState;
-        GamePanel.GameState expectedResult = GamePanel.GameState.MAP;
+        GameState actualResult = gp.gameState;
+        GameState expectedResult = GameState.MAP;
 
         Assertions.assertEquals(expectedResult, actualResult);
     }
@@ -52,8 +53,8 @@ public class KeyHandlerTest {
         keyHandler.keyPressed(keyEvent);
 
         // Define expected and actual results
-        GamePanel.GameState actualResult = gp.gameState;
-        GamePanel.GameState expectedResult = GamePanel.GameState.CHARACTER;
+        GameState actualResult = gp.gameState;
+        GameState expectedResult = GameState.CHARACTER;
 
         Assertions.assertEquals(expectedResult, actualResult);
     }
@@ -66,8 +67,8 @@ public class KeyHandlerTest {
         keyHandler.keyPressed(keyEvent);
 
         // Define expected and actual results
-        GamePanel.GameState actualResult = gp.gameState;
-        GamePanel.GameState expectedResult = GamePanel.GameState.OPTION;
+        GameState actualResult = gp.gameState;
+        GameState expectedResult = GameState.OPTION;
 
         Assertions.assertEquals(expectedResult, actualResult);
     }

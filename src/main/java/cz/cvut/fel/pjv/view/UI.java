@@ -1,9 +1,9 @@
 package cz.cvut.fel.pjv.view;
 
 import cz.cvut.fel.pjv.model.entity.Entity;
-import cz.cvut.fel.pjv.model.object.OBJ_Coin_Gold;
-import cz.cvut.fel.pjv.model.object.OBJ_Heart;
-import cz.cvut.fel.pjv.model.object.OBJ_ManaCrystal;
+import cz.cvut.fel.pjv.model.object.Coin_Gold;
+import cz.cvut.fel.pjv.model.object.Heart;
+import cz.cvut.fel.pjv.model.object.ManaCrystal;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -65,14 +65,14 @@ public class UI {
         arial_80B = new Font("Arial", Font.BOLD, 80);
 
         //  CREATE HUD OBJECT
-        Entity heart = new OBJ_Heart(gp);
+        Entity heart = new Heart(gp);
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;
-        Entity crystal = new OBJ_ManaCrystal(gp);
+        Entity crystal = new ManaCrystal(gp);
         crystal_full = crystal.image;
         crystal_blank = crystal.image2;
-        Entity goldCoin = new OBJ_Coin_Gold(gp);
+        Entity goldCoin = new Coin_Gold(gp);
         coin = goldCoin.down1;
     }
 
@@ -101,52 +101,52 @@ public class UI {
         g2.setColor(Color.white);
 
         //  TITLE STATE
-        if (gp.gameState == GamePanel.GameState.TITLE) {
+        if (gp.gameState == GameState.TITLE) {
             drawTitleScreen();
         }
 
 
         //  PLAY STATE
-        if (gp.gameState == GamePanel.GameState.PLAY) {
+        if (gp.gameState == GameState.PLAY) {
             drawPlayerLife();
             drawMessage();
         }
 
         //  PAUSE STATE
-        if (gp.gameState == GamePanel.GameState.PAUSE) {
+        if (gp.gameState == GameState.PAUSE) {
             drawPlayerLife();
             drawPauseScreen();
         }
 
         //  DIALOGUE STATE
-        if(gp.gameState == GamePanel.GameState.DIALOGUE) {
+        if(gp.gameState == GameState.DIALOGUE) {
             drawDialogueScreen();
         }
 
 
         //  CHARACTER STATE
-        if (gp.gameState == GamePanel.GameState.CHARACTER) {
+        if (gp.gameState == GameState.CHARACTER) {
             drawCharacterScreen();
             drawInventory(gp.player, true);
         }
 
         //  OPTION STATE
-        if (gp.gameState == GamePanel.GameState.OPTION) {
+        if (gp.gameState == GameState.OPTION) {
             drawOptionsScreen();
         }
 
         //  GAME OVER STATE
-        if (gp.gameState == GamePanel.GameState.GAME_OVER) {
+        if (gp.gameState == GameState.GAME_OVER) {
             drawGameOverScreen();
         }
 
         //  TRANSITION STATE
-        if (gp.gameState == GamePanel.GameState.TRANSITION) {
+        if (gp.gameState == GameState.TRANSITION) {
             drawTransition();
         }
 
         //  TRANSITION STATE
-        if (gp.gameState == GamePanel.GameState.TRADE) {
+        if (gp.gameState == GameState.TRADE) {
             drawTradeScreen();
         }
     }
@@ -249,7 +249,7 @@ public class UI {
 
             // TITLE NAME
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
-            String text = "JAVA 2D GAME";
+            String text = "TANKI 2D GAME";
             int x = getXForCenteredText(text);
             int y = gp.tileSize*3;
 
@@ -264,7 +264,6 @@ public class UI {
             // JAVA IMAGE
             x = gp.screenWidth/2 - (gp.tileSize*2)/2;
             y += gp.tileSize*2;
-            g2.drawImage(gp.player.planet, x,y, gp.tileSize*2, gp.tileSize*2, null);
             g2.drawImage(gp.player.down1, x,y*2, gp.tileSize*2, gp.tileSize*2, null);
 
 
@@ -366,7 +365,7 @@ public class UI {
         g2.drawString("Next Level", textX, textY); textY += lineHeight;
         g2.drawString("Coin", textX, textY); textY += lineHeight + 10;
         g2.drawString("Weapon", textX, textY); textY += lineHeight + 15;
-        g2.drawString("Shield", textX, textY); textY += lineHeight;
+        g2.drawString("Helmet", textX, textY); textY += lineHeight;
 
         // VALUES
         int tailX = (frameX + frameWidth) - 30 ;
@@ -428,7 +427,7 @@ public class UI {
 
         g2.drawImage(gp.player.currentWeapon.down1, tailX - gp.tileSize, textY-24, null);
         textY += gp.tileSize;
-        g2.drawImage(gp.player.currentShield.down1,tailX - gp.tileSize, textY-24, null);
+        g2.drawImage(gp.player.currentHelmet.down1,tailX - gp.tileSize, textY-24, null);
 
     }
 
@@ -482,7 +481,7 @@ public class UI {
 
             // EQUIP CURSOR
             if (entity.inventory.get(i) == entity.currentWeapon ||
-                    entity.inventory.get(i) == entity.currentShield) {
+                    entity.inventory.get(i) == entity.currentHelmet) {
                 g2.setColor(CURSOR_COLOR);
                 g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
 
@@ -697,7 +696,7 @@ public class UI {
         if (commandNum == STATE_FOUR) {
             g2.drawString(">", textX-TWENTY_FIVE, textY);
             if (gp.keyH.enterPressed) {
-                gp.gameState = GamePanel.GameState.PLAY;
+                gp.gameState = GameState.PLAY;
                 commandNum = 0;
             }
         }
@@ -802,7 +801,7 @@ public class UI {
             g2.drawString(">", textX-TWENTY_FIVE, textY);
             if (gp.keyH.enterPressed) {
                 subState = 0;
-                gp.gameState = GamePanel.GameState.TITLE;
+                gp.gameState = GameState.TITLE;
                 gp.resetGame(true);
                 gp.stopMusic();
             }
@@ -835,7 +834,7 @@ public class UI {
         if (counter == 50) {
             counter = 0;
 
-            gp.gameState = GamePanel.GameState.PLAY;
+            gp.gameState = GameState.PLAY;
             gp.currentMap = gp.eHandler.tempMap;
             gp.player.worldX = gp.tileSize * gp.eHandler.tempCol;
             gp.player.worldY = gp.tileSize * gp.eHandler.tempRow;
@@ -903,7 +902,7 @@ public class UI {
             g2.drawString(">", x-24, y);
             if(gp.keyH.enterPressed) {
                 commandNum = 0;
-                gp.gameState = GamePanel.GameState.DIALOGUE;
+                gp.gameState = GameState.DIALOGUE;
                 currentDialogue = "Come again";
             }
         }
@@ -960,7 +959,7 @@ public class UI {
             if (gp.keyH.enterPressed) {
                 if (npc.inventory.get(itemIndex).price > gp.player.coin) {
                     subState = 0;
-                    gp.gameState = GamePanel.GameState.DIALOGUE;
+                    gp.gameState = GameState.DIALOGUE;
                     currentDialogue = "You dont have enough money";
                     drawDialogueScreen();
                 }
@@ -971,7 +970,7 @@ public class UI {
                     }
                     else {
                         subState = 0;
-                        gp.gameState = GamePanel.GameState.DIALOGUE;
+                        gp.gameState = GameState.DIALOGUE;
                         currentDialogue = "You dont have place in your Bag";
                     }
                 }
@@ -1032,10 +1031,10 @@ public class UI {
             if (gp.keyH.enterPressed) {
 
                 if (gp.player.inventory.get(itemIndex) == gp.player.currentWeapon ||
-                        gp.player.inventory.get(itemIndex) == gp.player.currentShield ) {
+                        gp.player.inventory.get(itemIndex) == gp.player.currentHelmet ) {
                     commandNum = 0;
                     subState = 0;
-                    gp.gameState = GamePanel.GameState.DIALOGUE;
+                    gp.gameState = GameState.DIALOGUE;
                     currentDialogue = "You cannot sell equipped item!";
 
                 }

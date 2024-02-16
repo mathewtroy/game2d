@@ -37,7 +37,7 @@ Herní engine musí být vybaven GUI.
 👨               main hero in the game <br>
 :older_man:	            old man <br>
 🧑               merchant <br>
-👾               monster <br>
+🚂               tank <br>
 👻               ghost <br>
 
 
@@ -63,9 +63,9 @@ Herní engine musí být vybaven GUI.
 🔵               blue potion (recover MP)<br>
 
 
-🪓      	     axe item (cut trees)<br>
-🗡️               sword item (default weapon)<br>
-🛡️               shield item (default defense)<br>
+🏏      	     ram item (cut trees)<br>
+⚔               spike item (default weapon)<br>
+🛡️               helmet item (default defense)<br>
 🗝️	              key item (open the door)<br>
 💰	             coin item (time is money)<br>
 👢               boot item (increase speed)<br>
@@ -74,7 +74,7 @@ Herní engine musí být vybaven GUI.
 
 <details><summary> Show more </summary>
 
-The goal of the game is for the player to collect keys and open the chest. To do this, he first needs to find an axe. Then he will be able to cut down the yellow trees. <br>
+The goal of the game is for the player to collect keys and open the chest. To do this, he first needs to find a ram. Then he will be able to cut down the yellow trees. <br>
 
 In the center of the map there is a teleport to the island. This teleport is hidden behind yellow trees. <br>
 
@@ -89,7 +89,7 @@ There will also be gold as a reward. After that, the hero should return to the m
 The hero will open two doors. Then he will be able to find a third key, with which he will open the last door to the treasure. <br>
 
 
-After the player opens the chest, they can continue to fight the monsters because the world is in danger. And only our hero can save the world.
+After the player opens the chest, they can continue to fight the enemies because the world is in danger. And only our hero can save the world.
 
 </details>
 

@@ -34,7 +34,7 @@ public class Entity {
 
     public BufferedImage up1, up2, down1, down2, right1, right2, left1, left2,
             attackUp1, attackUp2, attackDown1, attackDown2,
-            attackLeft1, attackLeft2, attackRight1,attackRight2, planet;
+            attackLeft1, attackLeft2, attackRight1,attackRight2;
     public BufferedImage image, image2, image3;
     public Rectangle solidArea = new Rectangle(0, 0, 48,48);
     public Rectangle attackArea = new Rectangle(0,0, 0,0);
@@ -88,7 +88,7 @@ public class Entity {
     public int coin;
 
     public Entity currentWeapon;
-    public Entity currentShield;
+    public Entity currentHelmet;
     public Projectile projectile;
 
     // ITEM ATTRIBUTES
@@ -108,10 +108,10 @@ public class Entity {
     public int type;
     private final int type_player = 0;
     private final int type_npc = 1;
-    protected final int type_monster = 2;
-    protected final int type_sword = 3;
-    protected final int type_axe = 4;
-    protected final int type_shield = 5;
+    protected final int type_enemy = 2;
+    protected final int type_spike = 3;
+    protected final int type_ram = 4;
+    protected final int type_helmet = 5;
     protected final int type_consumable = 6;
     protected final int type_pickupOnly = 7;
     protected final int type_obstacle = 8;
@@ -304,8 +304,8 @@ public class Entity {
         for (int i = 0; i < gp.obj.length; i++ ) {
             if (gp.obj[gp.currentMap][i] == gp.nullEntity) {
                 gp.obj[gp.currentMap][i] = droppedItem;
-                gp.obj[gp.currentMap][i].worldX = worldX;  // dead monster's worldX
-                gp.obj[gp.currentMap][i].worldY = worldY;  // dead monster's worldY
+                gp.obj[gp.currentMap][i].worldX = worldX;  // dead enemy's worldX
+                gp.obj[gp.currentMap][i].worldY = worldY;  // dead enemy's worldY
                 break;
             }
         }
@@ -366,8 +366,8 @@ public class Entity {
      * Checks for collisions involving the entity.
      *
      * This method checks for collisions involving the entity and sets the 'collisionOn' flag
-     * accordingly. It performs collision checks with tiles, objects, NPCs, monsters, interactive
-     * tiles, and the player. If the entity is of type 'type_monster' and comes into contact with
+     * accordingly. It performs collision checks with tiles, objects, NPCs, enemies, interactive
+     * tiles, and the player. If the entity is of type 'type_enemy' and comes into contact with
      * the player, it inflicts damage on the player based on the entity's attack power.
      */
     private void checkCollision(){
@@ -375,11 +375,11 @@ public class Entity {
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this, false);
         gp.cChecker.checkEntity(this, gp.npc);
-        gp.cChecker.checkEntity(this, gp.monster);
+        gp.cChecker.checkEntity(this, gp.enemy);
         gp.cChecker.checkEntity(this, gp.iTile);
         boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
-        if (this.type == type_monster && contactPlayer) {
+        if (this.type == type_enemy && contactPlayer) {
             damagePlayer(attack);
         }
     }
@@ -579,8 +579,8 @@ public class Entity {
                     break;
             }
 
-            // Monster Health Bar
-            if (type == type_monster && hpBarOn) {
+            // Enemy Health Bar
+            if (type == type_enemy && hpBarOn) {
 
                 double oneScale = (double)gp.tileSize/maxLife;
                 double hpBarValue = oneScale*life;

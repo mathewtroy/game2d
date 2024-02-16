@@ -54,9 +54,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int worldWidth = tileSize * maxWorldCol;
     public final int worldHeight = tileSize * maxWorldRow;
 
-
-    // FPS
-    int FPS = 60;
+    int frameRate = 60;
 
     // SYSTEM
     public TileManager tileM = new TileManager(this);
@@ -78,7 +76,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyH);
     public Entity[][] obj = new Entity[maxMap][20];
     public Entity[][] npc = new Entity[maxMap][10];
-    public Entity[][] monster = new Entity[maxMap][20];
+    public Entity[][] enemy = new Entity[maxMap][20];
     public InteractiveTile[][] iTile = new InteractiveTile[maxMap][50];
     public Entity[][] projectile = new Entity[maxMap][50];
     public ArrayList<Entity> particleList = new ArrayList<>();
@@ -88,21 +86,21 @@ public class GamePanel extends JPanel implements Runnable {
     // GAME STATE
     public GameState gameState;
 
-    /**
-     * The `GameState` enum represents the different states of the game.
-     */
-    public enum GameState {
-        TITLE,
-        PLAY,
-        PAUSE,
-        DIALOGUE,
-        CHARACTER,
-        OPTION,
-        GAME_OVER,
-        TRANSITION,
-        TRADE,
-        MAP
-    }
+//    /**
+//     * The `GameState` enum represents the different states of the game.
+//     */
+//    public enum GameState {
+//        TITLE,
+//        PLAY,
+//        PAUSE,
+//        DIALOGUE,
+//        CHARACTER,
+//        OPTION,
+//        GAME_OVER,
+//        TRANSITION,
+//        TRADE,
+//        MAP
+//    }
 
     /**
      *
@@ -122,7 +120,7 @@ public class GamePanel extends JPanel implements Runnable {
         gameState = GameState.TITLE;
         aSetter.setObject();
         aSetter.setNPC();
-        aSetter.setMonster();
+        aSetter.setEnemy();
         aSetter.setInteractiveTile();
         playMusic(SOUND_ZERO);
         stopMusic();
@@ -138,7 +136,7 @@ public class GamePanel extends JPanel implements Runnable {
         player.restoreStatus();
         player.resetCounter();
         aSetter.setNPC();
-        aSetter.setMonster();
+        aSetter.setEnemy();
 
         if (restart) {
             player.setDefaultValues();
@@ -161,7 +159,7 @@ public class GamePanel extends JPanel implements Runnable {
     @Override
     public void run() {
 
-        double drawInterval = BILLION_SIZE / FPS;
+        double drawInterval = BILLION_SIZE / frameRate;
         //  0.01666 seconds
 
         double nextDrawTime = System.nanoTime() + drawInterval;
@@ -211,15 +209,15 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
 
-            // MONSTER
-            for (int i = 0; i < monster[1].length; i++) {
-                if (monster[currentMap][i] != nullEntity) {
-                    if (monster[currentMap][i].alive && !monster[currentMap][i].dying) {
-                        monster[currentMap][i].update();
+            // ENEMY
+            for (int i = 0; i < enemy[1].length; i++) {
+                if (enemy[currentMap][i] != nullEntity) {
+                    if (enemy[currentMap][i].alive && !enemy[currentMap][i].dying) {
+                        enemy[currentMap][i].update();
                     }
-                    if (!monster[currentMap][i].alive) {
-                        monster[currentMap][i].checkDrop();
-                        monster[currentMap][i] = nullEntity;
+                    if (!enemy[currentMap][i].alive) {
+                        enemy[currentMap][i].checkDrop();
+                        enemy[currentMap][i] = nullEntity;
                     }
                 }
             }
@@ -311,9 +309,9 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
 
-            for (int i = 0; i < monster[1].length; i++) {
-                if (monster[currentMap][i] != null) {
-                    entityList.add(monster[currentMap][i]);
+            for (int i = 0; i < enemy[1].length; i++) {
+                if (enemy[currentMap][i] != null) {
+                    entityList.add(enemy[currentMap][i]);
                 }
             }
 

@@ -3,6 +3,7 @@ package cz.cvut.fel.pjv.model.entity;
 import cz.cvut.fel.pjv.model.object.*;
 import cz.cvut.fel.pjv.view.GamePanel;
 import cz.cvut.fel.pjv.controller.KeyHandler;
+import cz.cvut.fel.pjv.view.GameState;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -15,8 +16,8 @@ public class Player extends Entity {
 
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_PLAYER = "Missing image of the HERO";
-    private static final String LOGGER_MESSAGE_PLAYER_SWORD = "Missing image of the ATTACKING HERO WITH SWORD";
-    private static final String LOGGER_MESSAGE_PLAYER_AXE = "Missing image of the ATTACKING HERO WITH AXE";
+    private static final String LOGGER_MESSAGE_PLAYER_SPIKE = "Missing image of the ATTACKING HERO WITH SPIKE";
+    private static final String LOGGER_MESSAGE_PLAYER_RAM = "Missing image of the ATTACKING HERO WITH RAM";
 
     // CONSTANTS
     private static final int SPRITE_COUNTER_THRESHOLD = 10;
@@ -77,7 +78,7 @@ public class Player extends Entity {
         level = 1;
         maxLife = 12;
         life = maxLife;
-        maxMana = 6;
+        maxMana = 12;
         mana = maxMana;
         ammo = 10;
         strength = 1;   // more strength -> more damage he gives
@@ -85,9 +86,9 @@ public class Player extends Entity {
         exp = 0;
         nextLevelExp = 0;
         coin = 150;
-        currentWeapon = new OBJ_Sword_Normal(gp);
-        currentShield = new OBJ_Shield_Wood(gp);
-        projectile = new OBJ_Fireball(gp);
+        currentWeapon = new Spike(gp);
+        currentHelmet = new Helmet(gp);
+        projectile = new Bullet(gp);
         attack = getAttack();
         defense = getDefense();
         getPlayerImage();
@@ -127,10 +128,9 @@ public class Player extends Entity {
     private void setItems() {
         inventory.clear();
         inventory.add(currentWeapon);
-        inventory.add(currentShield);
-        // inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Potion_Red(gp));
-        inventory.add(new OBJ_Potion_Blue(gp));
+        inventory.add(currentHelmet);
+        inventory.add(new Potion_Red(gp));
+        inventory.add(new Potion_Blue(gp));
 
 
     }
@@ -146,12 +146,12 @@ public class Player extends Entity {
     }
 
     /**
-     * Calculates and returns the player's defense value based on equipped shield and dexterity.
+     * Calculates and returns the player's defense value based on equipped helmet and dexterity.
      *
      * @return The player's defense value.
      */
     public int getDefense() {
-        return defense = dexterity * currentShield.defenseValue;
+        return defense = dexterity * currentHelmet.defenseValue;
     }
 
     /**
@@ -170,23 +170,32 @@ public class Player extends Entity {
     }
 
     /**
-     * Retrieves the index of the current shield in the player's inventory.
+     * Retrieves the index of the current helmet in the player's inventory.
      *
-     * @return The index of the current shield.
+     * @return The index of the current helmet.
      */
-    public int getCurrentShieldSlot() {
-        int currentShieldSlot = 0;
+    public int getCurrentHelmetSlot() {
+        int currentHelmetSlot = 0;
         for (int i = 0; i < inventory.size(); i++) {
-            if(inventory.get(i) == currentShield) {
-                currentShieldSlot = i;
+            if(inventory.get(i) == currentHelmet) {
+                currentHelmetSlot = i;
             }
         }
-        return currentShieldSlot;
+        return currentHelmetSlot;
     }
+
+
+
+
+
+
+
 
     /**
      * Loads player images for different directions
      */
+
+
     private void getPlayerImage() {
 
         up1 = setup("/player/hero_up_1", gp.tileSize, gp.tileSize);
@@ -198,7 +207,6 @@ public class Player extends Entity {
         right2 = setup("/player/hero_right_2", gp.tileSize, gp.tileSize);
         left1 = setup("/player/hero_left_1", gp.tileSize, gp.tileSize);
         left2 = setup("/player/hero_left_2", gp.tileSize, gp.tileSize);
-        planet = setup("/player/planet", gp.tileSize, gp.tileSize);
     }
 
     /**
@@ -207,22 +215,14 @@ public class Player extends Entity {
     public void getPlayerAttackImage() {
 
         try {
-            up1 = setup("/player/hero_up_1", gp.tileSize, gp.tileSize);
-            up2 = setup("/player/hero_up_2", gp.tileSize, gp.tileSize);
-            down1 = setup("/player/hero_down_1", gp.tileSize, gp.tileSize);
-            down2 = setup("/player/hero_down_2", gp.tileSize, gp.tileSize);
-
-            right1 = setup("/player/hero_right_1", gp.tileSize, gp.tileSize);
-            right2 = setup("/player/hero_right_2", gp.tileSize, gp.tileSize);
-            left1 = setup("/player/hero_left_1", gp.tileSize, gp.tileSize);
-            left2 = setup("/player/hero_left_2", gp.tileSize, gp.tileSize);
+            getPlayerImage();
 
         } catch (Exception e){
             logger.severe(LOGGER_MESSAGE_PLAYER);
         }
 
         // SWITCH TYPE OF WEAPON
-        if (currentWeapon.type == type_sword) {
+        if (currentWeapon.type == type_spike) {
 
             try {
                 attackUp1 = setup("/player/hero_attack_up_1", gp.tileSize, gp.tileSize*2);
@@ -234,28 +234,33 @@ public class Player extends Entity {
                 attackRight1 = setup("/player/hero_attack_right_1", gp.tileSize*2, gp.tileSize);
                 attackRight2 = setup("/player/hero_attack_right_2", gp.tileSize*2, gp.tileSize);
             } catch (Exception e){
-                logger.warning(LOGGER_MESSAGE_PLAYER_SWORD);
+                logger.warning(LOGGER_MESSAGE_PLAYER_SPIKE);
             }
 
         }
 
-        if (currentWeapon.type == type_axe) {
+        if (currentWeapon.type == type_ram) {
             try {
-                attackUp1 = setup("/player/hero_axe_up_1", gp.tileSize, gp.tileSize*2);
-                attackUp2 = setup("/player/hero_axe_up_2", gp.tileSize, gp.tileSize*2);
-                attackDown1 = setup("/player/hero_axe_down_1", gp.tileSize, gp.tileSize*2);
-                attackDown2 = setup("/player/hero_axe_down_2", gp.tileSize, gp.tileSize*2);
-                attackLeft1 = setup("/player/hero_axe_left_1", gp.tileSize*2, gp.tileSize);
-                attackLeft2 = setup("/player/hero_axe_left_2", gp.tileSize*2, gp.tileSize);
-                attackRight1 = setup("/player/hero_axe_right_1", gp.tileSize*2, gp.tileSize);
-                attackRight2 = setup("/player/hero_axe_right_2", gp.tileSize*2, gp.tileSize);
+                attackUp1 = setup("/player/hero_ram_up_1", gp.tileSize, gp.tileSize*2);
+                attackUp2 = setup("/player/hero_ram_up_2", gp.tileSize, gp.tileSize*2);
+                attackDown1 = setup("/player/hero_ram_down_1", gp.tileSize, gp.tileSize*2);
+                attackDown2 = setup("/player/hero_ram_down_2", gp.tileSize, gp.tileSize*2);
+                attackLeft1 = setup("/player/hero_ram_left_1", gp.tileSize*2, gp.tileSize);
+                attackLeft2 = setup("/player/hero_ram_left_2", gp.tileSize*2, gp.tileSize);
+                attackRight1 = setup("/player/hero_ram_right_1", gp.tileSize*2, gp.tileSize);
+                attackRight2 = setup("/player/hero_ram_right_2", gp.tileSize*2, gp.tileSize);
 
             } catch (Exception e){
-                logger.warning(LOGGER_MESSAGE_PLAYER_AXE);
+                logger.warning(LOGGER_MESSAGE_PLAYER_RAM);
             }
         }
 
     }
+
+
+
+
+
 
     /**
      * Updates the player's position and performs various game interactions.
@@ -297,8 +302,8 @@ public class Player extends Entity {
         int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
         interactNPC(npcIndex);
 
-        int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-        contactMonster(monsterIndex);
+        int enemyIndex = gp.cChecker.checkEntity(this, gp.enemy);
+        contactEnemy(enemyIndex);
 
         int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
 
@@ -436,7 +441,7 @@ public class Player extends Entity {
      * Handles the player's death state.
      */
     private void handlePlayerDeath() {
-        gp.gameState = GamePanel.GameState.GAME_OVER;
+        gp.gameState = GameState.GAME_OVER;
         gp.ui.commandNum = -1;
         gp.stopMusic();
         gp.playSE(SOUND_ELEVEN);
@@ -475,9 +480,9 @@ public class Player extends Entity {
             solidArea.width = attackArea.width;
             solidArea.height = attackArea.height;
 
-            // Check monster collision with updated worldX, worldY and solidArea
-            int monsterIndex  = gp.cChecker.checkEntity(this, gp.monster);
-            damageMonster(monsterIndex, attack, currentWeapon.knockBackPower);
+            // Check enemy collision with updated worldX, worldY and solidArea
+            int enemyIndex  = gp.cChecker.checkEntity(this, gp.enemy);
+            damageEnemy(enemyIndex, attack, currentWeapon.knockBackPower);
 
             int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
             damageInteractiveTile(iTileIndex);
@@ -556,7 +561,7 @@ public class Player extends Entity {
 
                 attackCanceled = true;
 
-                gp.gameState = GamePanel.GameState.DIALOGUE;
+                gp.gameState = GameState.DIALOGUE;
                 gp.npc[gp.currentMap][i].speak();
             }
             else {
@@ -567,18 +572,18 @@ public class Player extends Entity {
     }
 
     /**
-     * Handles interactions when the player comes into contact with a monster.
+     * Handles interactions when the player comes into contact with a enemy.
      *
-     * @param i The index of the monster in the game world.
+     * @param i The index of the enemy in the game world.
      */
-    public void contactMonster(int i) {
+    public void contactEnemy(int i) {
 
         if (i != MAX_COST) {
 
-            if (!invisible && !gp.monster[gp.currentMap][i].dying) {
+            if (!invisible && !gp.enemy[gp.currentMap][i].dying) {
                 gp.playSE(SOUND_SIX);
 
-                int damage = gp.monster[gp.currentMap][i].attack - defense;
+                int damage = gp.enemy[gp.currentMap][i].attack - defense;
                 if (damage < 0) {
                     damage = 0;
                 }
@@ -589,40 +594,40 @@ public class Player extends Entity {
     }
 
     /**
-     * Damages a monster based on the player's attack and knockback power.
+     * Damages a enemy based on the player's attack and knockback power.
      *
-     * @param i              The index of the monster in the game world.
+     * @param i              The index of the enemy in the game world.
      * @param attack         The player's attack value.
-     * @param knockBackPower The knockback power applied to the monster.
+     * @param knockBackPower The knockback power applied to the enemy.
      */
-    public void damageMonster(int i, int attack, int knockBackPower) {
+    public void damageEnemy(int i, int attack, int knockBackPower) {
         if (i != MAX_COST) {
-            if (!gp.monster[gp.currentMap][i].invisible) {
+            if (!gp.enemy[gp.currentMap][i].invisible) {
 
                 gp.playSE(SOUND_FIVE);
 
                 if (knockBackPower > 0) {
-                    knockBack(gp.monster[gp.currentMap][i], knockBackPower);
+                    knockBack(gp.enemy[gp.currentMap][i], knockBackPower);
                 }
 
-                int damage = attack - gp.monster[gp.currentMap][i].defense;
+                int damage = attack - gp.enemy[gp.currentMap][i].defense;
                 if (damage < 0) {
                     damage = 0;
                 }
 
-                gp.monster[gp.currentMap][i].life -= damage;
+                gp.enemy[gp.currentMap][i].life -= damage;
                 gp.ui.addMessage(damage + " damage!");
                 logger.info("You caused " + damage + " damage");
 
-                gp.monster[gp.currentMap][i].invisible = true;
-                gp.monster[gp.currentMap][i].damageReaction();
+                gp.enemy[gp.currentMap][i].invisible = true;
+                gp.enemy[gp.currentMap][i].damageReaction();
 
-                if (gp.monster[gp.currentMap][i].life <= 0) {
-                    gp.monster[gp.currentMap][i].dying = true;
-                    gp.ui.addMessage("killed the" + gp.monster[gp.currentMap][i].getName() + "!");
-                    logger.info("You killed the " + gp.monster[gp.currentMap][i].getName() + "!");
-                    gp.ui.addMessage("EXP + " + gp.monster[gp.currentMap][i].exp);
-                    exp += gp.monster[gp.currentMap][i].exp;
+                if (gp.enemy[gp.currentMap][i].life <= 0) {
+                    gp.enemy[gp.currentMap][i].dying = true;
+                    gp.ui.addMessage("killed the" + gp.enemy[gp.currentMap][i].getName() + "!");
+                    logger.info("You killed the " + gp.enemy[gp.currentMap][i].getName() + "!");
+                    gp.ui.addMessage("EXP + " + gp.enemy[gp.currentMap][i].exp);
+                    exp += gp.enemy[gp.currentMap][i].exp;
                     checkLevelUp();
 
                 }
@@ -694,7 +699,7 @@ public class Player extends Entity {
             defense =getDefense();
 
             gp.playSE(SOUND_SEVEN);
-            gp.gameState = GamePanel.GameState.DIALOGUE;
+            gp.gameState = GameState.DIALOGUE;
             gp.ui.currentDialogue = "Congrats, PLAYER!\n" +
                     "You are level " + level + "now!\n" +
                     "You became stronger";
@@ -703,7 +708,7 @@ public class Player extends Entity {
     }
 
     /**
-     * Allows the player to select and equip items from their inventory, such as weapons, shields, and consumables.
+     * Allows the player to select and equip items from their inventory, such as weapons, helmets, and consumables.
      */
     public void selectItem() {
 
@@ -713,15 +718,15 @@ public class Player extends Entity {
 
             Entity selectedItem = inventory.get(itemIndex);
 
-            if (selectedItem.type == type_sword ||
-            selectedItem.type == type_axe) {
+            if (selectedItem.type == type_spike ||
+            selectedItem.type == type_ram) {
                 currentWeapon = selectedItem;
                 attack = getAttack();
                 getPlayerAttackImage();
             }
 
-            if (selectedItem.type == type_shield) {
-                currentShield = selectedItem;
+            if (selectedItem.type == type_helmet) {
+                currentHelmet = selectedItem;
                 defense = getDefense();
             }
 

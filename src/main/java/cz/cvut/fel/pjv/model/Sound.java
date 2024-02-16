@@ -46,7 +46,7 @@ public class Sound {
     private static final String SUCCESS_SOUND = "/sound/success.wav";
     private static final String POWERUP_SOUND = "/sound/powerup.wav";
     private static final String UNLOCK_SOUND = "/sound/unlock.wav";
-    private static final String HIT_MONSTER_SOUND = "/sound/hitmonster.wav";
+    private static final String HIT_ENEMY_SOUND = "/sound/hitenemy.wav";
     private static final String RECEIVE_DAMAGE_SOUND = "/sound/receivedamage.wav";
     private static final String LEVEL_UP_SOUND = "/sound/levelup.wav";
     private static final String CURSOR_SOUND = "/sound/cursor.wav";
@@ -70,7 +70,7 @@ public class Sound {
             SUCCESS_SOUND,
             POWERUP_SOUND,
             UNLOCK_SOUND,
-            HIT_MONSTER_SOUND,
+            HIT_ENEMY_SOUND,
             RECEIVE_DAMAGE_SOUND,
             LEVEL_UP_SOUND,
             CURSOR_SOUND,

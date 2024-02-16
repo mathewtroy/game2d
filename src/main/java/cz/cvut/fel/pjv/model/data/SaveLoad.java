@@ -33,16 +33,16 @@ public class SaveLoad {
         Entity obj = gp.nullEntity;
 
         switch (itemName){
-            case"Normal Axe":obj = new OBJ_Axe(gp); break;
-            case"Red Potion":obj = new OBJ_Potion_Red(gp); break;
-            case"Blue Potion":obj = new OBJ_Potion_Blue(gp); break;
-            case"Boots":obj = new OBJ_Boots(gp); break;
-            case"Key":obj = new OBJ_Key(gp); break;
-            case"Blue Shield":obj = new OBJ_Shield_Blue(gp); break;
-            case"Wood Shield":obj = new OBJ_Shield_Wood(gp); break;
-            case"Normal Sword":obj = new OBJ_Sword_Normal(gp); break;
-            case"Chest":obj = new OBJ_Chest(gp); break;
-            case"Door":obj = new OBJ_Door(gp); break;
+            case"Normal Ram":obj = new Ram(gp); break;
+            case"Red Potion":obj = new Potion_Red(gp); break;
+            case"Blue Potion":obj = new Potion_Blue(gp); break;
+            case"Boots":obj = new Boots(gp); break;
+            case"Key":obj = new Key(gp); break;
+            case"German Helmet":obj = new Helmet_Ger(gp); break;
+            case"Helmet":obj = new Helmet(gp); break;
+            case"Normal Spike":obj = new Spike(gp); break;
+            case"Chest":obj = new Chest(gp); break;
+            case"Door":obj = new Door(gp); break;
         }
         return obj;
     }
@@ -76,7 +76,7 @@ public class SaveLoad {
             }
 
             // Player equipment
-            ds.currentShieldSlot = gp.player.getCurrentShieldSlot();
+            ds.currentHelmetSlot = gp.player.getCurrentHelmetSlot();
             ds.currentWeaponSlot = gp.player.getCurrentWeaponSlot();
 
             // Objects on map
@@ -150,12 +150,11 @@ public class SaveLoad {
 
             // Player equipment
             gp.player.currentWeapon = gp.player.inventory.get(ds.currentWeaponSlot);
-            gp.player.currentShield = gp.player.inventory.get(ds.currentShieldSlot);
+            gp.player.currentHelmet = gp.player.inventory.get(ds.currentHelmetSlot);
 
             gp.player.getAttack();
             gp.player.getDefense();
             gp.player.getPlayerAttackImage();
-
 
             // Objects on map
             for(int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
@@ -187,7 +186,6 @@ public class SaveLoad {
 
         catch (Exception e) {
             logger.warning(LOGGER_MESSAGE_LOAD);
-
         }
     }
 }

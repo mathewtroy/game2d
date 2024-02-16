@@ -24,20 +24,20 @@ public class EntityGenerator {
         Entity obj = null;
 
         switch (itemName){
-            case OBJ_Axe.objName: obj = new OBJ_Axe(gp); break;
-            case OBJ_Boots.objName :obj = new OBJ_Boots(gp); break;
-            case OBJ_Chest.objName : obj = new OBJ_Chest(gp); break;
-            case OBJ_Coin_Gold.objName : obj = new OBJ_Coin_Gold(gp); break;
-            case OBJ_Door.objName : obj = new OBJ_Door(gp); break;
-            case OBJ_Fireball.objName : obj = new OBJ_Fireball(gp); break;
-            case OBJ_Heart.objName :obj = new OBJ_Heart(gp); break;
-            case OBJ_Key.objName :obj = new OBJ_Key(gp); break;
-            case OBJ_ManaCrystal.objName :obj = new OBJ_ManaCrystal(gp); break;
-            case OBJ_Potion_Blue.objName: obj = new OBJ_Potion_Blue(gp); break;
-            case OBJ_Potion_Red.objName: obj = new OBJ_Potion_Red(gp); break;
-            case OBJ_Shield_Blue.objName : obj = new OBJ_Shield_Blue(gp); break;
-            case OBJ_Shield_Wood.objName : obj = new OBJ_Shield_Wood(gp); break;
-            case OBJ_Sword_Normal.objName : obj = new OBJ_Sword_Normal(gp); break;
+            case Ram.objName: obj = new Ram(gp); break;
+            case Boots.objName :obj = new Boots(gp); break;
+            case Chest.objName : obj = new Chest(gp); break;
+            case Coin_Gold.objName : obj = new Coin_Gold(gp); break;
+            case Door.objName : obj = new Door(gp); break;
+            case Bullet.objName : obj = new Bullet(gp); break;
+            case Heart.objName :obj = new Heart(gp); break;
+            case Key.objName :obj = new Key(gp); break;
+            case ManaCrystal.objName :obj = new ManaCrystal(gp); break;
+            case Potion_Blue.objName: obj = new Potion_Blue(gp); break;
+            case Potion_Red.objName: obj = new Potion_Red(gp); break;
+            case Helmet_Ger.objName : obj = new Helmet_Ger(gp); break;
+            case Helmet.objName : obj = new Helmet(gp); break;
+            case Spike.objName : obj = new Spike(gp); break;
         }
         return obj;
     }

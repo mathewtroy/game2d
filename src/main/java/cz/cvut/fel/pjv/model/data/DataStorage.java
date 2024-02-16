@@ -29,7 +29,7 @@ public class DataStorage implements Serializable {
     ArrayList<Integer> itemAmounts = new ArrayList<>();
 
     int currentWeaponSlot;
-    int currentShieldSlot;
+    int currentHelmetSlot;
 
     String[][] mapObjectNames;
     int[][] mapObjectWorldX;
