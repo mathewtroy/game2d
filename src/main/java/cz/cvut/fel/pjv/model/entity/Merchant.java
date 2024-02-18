@@ -1,6 +1,8 @@
 package cz.cvut.fel.pjv.model.entity;
 
 import cz.cvut.fel.pjv.model.object.*;
+import cz.cvut.fel.pjv.model.weapon.Ram;
+import cz.cvut.fel.pjv.model.weapon.Spike;
 import cz.cvut.fel.pjv.view.GamePanel;
 import cz.cvut.fel.pjv.view.GameState;
 

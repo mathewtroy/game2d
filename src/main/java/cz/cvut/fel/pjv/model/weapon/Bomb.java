@@ -1,4 +1,4 @@
-package cz.cvut.fel.pjv.model.object;
+package cz.cvut.fel.pjv.model.weapon;
 
 import cz.cvut.fel.pjv.view.GamePanel;
 import cz.cvut.fel.pjv.model.entity.Entity;

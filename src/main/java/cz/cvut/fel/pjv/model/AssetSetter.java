@@ -6,6 +6,7 @@ import cz.cvut.fel.pjv.model.entity.OldMan;
 import cz.cvut.fel.pjv.model.enemy.Ghost;
 import cz.cvut.fel.pjv.model.object.*;
 import cz.cvut.fel.pjv.model.tile.DryTree;
+import cz.cvut.fel.pjv.model.weapon.Ram;
 import cz.cvut.fel.pjv.view.GamePanel;
 
 /**

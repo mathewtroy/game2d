@@ -1,6 +1,6 @@
 package cz.cvut.fel.pjv.model.enemy;
 
-import cz.cvut.fel.pjv.model.object.Bomb;
+import cz.cvut.fel.pjv.model.weapon.Bomb;
 import cz.cvut.fel.pjv.model.object.Coin_Gold;
 import cz.cvut.fel.pjv.model.object.Heart;
 import cz.cvut.fel.pjv.model.object.ManaCrystal;
