@@ -10,6 +10,8 @@ public class Boots extends Entity {
 
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_BOOTS = "Missing image of the BOOTS";
+    private static final String BOOTS_PREFIX = "Boots + ";
+    private static final String BOOTS_PATH = "/objects/boots";
     public static final String objName = "Boots";
 
     GamePanel gp;
@@ -28,7 +30,7 @@ public class Boots extends Entity {
      */
     private void setupBootsImage() {
         try {
-            down1 = setup("/objects/boots", gp.tileSize, gp.tileSize);
+            down1 = setup(BOOTS_PATH, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
             logger.warning(LOGGER_MESSAGE_BOOTS);
         }
@@ -43,7 +45,7 @@ public class Boots extends Entity {
      */
     public boolean use(Entity entity) {
         gp.playSE(GameConstants.SOUND_ONE);
-        gp.ui.addMessage("Coin + " + value);
+        gp.ui.addMessage(BOOTS_PREFIX + value);
         gp.player.speed += value;
         return true;
     }

@@ -36,11 +36,11 @@ public class SaveLoad {
 
         switch (itemName){
             case"Normal Ram":obj = new Ram(gp); break;
-            case"Red Potion":obj = new Potion_Red(gp); break;
-            case"Blue Potion":obj = new Potion_Blue(gp); break;
+            case"First Aid":obj = new FirstAid(gp); break;
+            case"Ammunition":obj = new Ammunition(gp); break;
             case"Boots":obj = new Boots(gp); break;
             case"Key":obj = new Key(gp); break;
-            case"German Helmet":obj = new Helmet_Ger(gp); break;
+            case"German Helmet":obj = new HelmetGerman(gp); break;
             case"Helmet":obj = new Helmet(gp); break;
             case"Normal Spike":obj = new Spike(gp); break;
             case"Chest":obj = new Chest(gp); break;

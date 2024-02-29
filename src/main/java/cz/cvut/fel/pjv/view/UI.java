@@ -1,9 +1,9 @@
 package cz.cvut.fel.pjv.view;
 
 import cz.cvut.fel.pjv.model.entity.Entity;
-import cz.cvut.fel.pjv.model.object.Coin_Gold;
+import cz.cvut.fel.pjv.model.object.CoinGold;
 import cz.cvut.fel.pjv.model.object.Heart;
-import cz.cvut.fel.pjv.model.object.ManaCrystal;
+import cz.cvut.fel.pjv.model.object.Mana;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -16,20 +16,15 @@ import java.util.ArrayList;
  */
 public class UI {
 
-
-
     GamePanel gp;
     Graphics2D g2;
     public Font arial_40;
     Font arial_80B;
     BufferedImage heart_full, heart_half, heart_blank, crystal_full, crystal_blank, coin;
-    public boolean messageOn = false;
     ArrayList<String> message = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
-    public boolean gameFinished = false;
     public String currentDialogue = GameConstants.BLANK;
     public int commandNum = 0;
-
     public int titleScreenState = 0;
     public int playerSlotCol = 0;
     public int playerSlotRow = 0;
@@ -46,7 +41,6 @@ public class UI {
     public UI(GamePanel gp) {
 
         this.gp = gp;
-
         arial_40 = new Font(GameConstants.FONT_ARIAL, Font.PLAIN, 40);
         arial_80B = new Font(GameConstants.FONT_ARIAL, Font.BOLD, 80);
 
@@ -55,10 +49,10 @@ public class UI {
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;
-        Entity crystal = new ManaCrystal(gp);
+        Entity crystal = new Mana(gp);
         crystal_full = crystal.image;
         crystal_blank = crystal.image2;
-        Entity goldCoin = new Coin_Gold(gp);
+        Entity goldCoin = new CoinGold(gp);
         coin = goldCoin.down1;
     }
 
@@ -66,7 +60,6 @@ public class UI {
      * Add a message to be displayed in the UI.
      *
      * @param text The message text to be displayed
-     *
      */
     public void addMessage (String text) {
         message.add(text);
@@ -77,7 +70,6 @@ public class UI {
      * Draw the UI elements on the screen.
      *
      * @param g2 The graphics context to draw on
-     *
      */
     public void draw(Graphics2D g2) {
 
@@ -122,9 +114,7 @@ public class UI {
         while (i < gp.player.life) {
             g2.drawImage(heart_half, x, y, null);
             i++;
-            if (i < gp.player.life) {
-                g2.drawImage(heart_full, x, y, null);
-            }
+            if (i < gp.player.life) { g2.drawImage(heart_full, x, y, null); }
             i++;
             x += gp.tileSize;
         }
@@ -158,7 +148,6 @@ public class UI {
     private void drawMessage() {
         int messageX = gp.tileSize;
         int messageY = gp.tileSize;
-
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 32F));
 
         for (int i = 0; i < message.size(); i++) {
@@ -196,7 +185,6 @@ public class UI {
 
             g2.setColor(UIColors.GRAY); // Shadow
             g2.drawString(text, x+5, y+5);
-
             g2.setColor(UIColors.BLACK); // The black main color
             g2.drawString(text, x, y);
 
@@ -239,7 +227,6 @@ public class UI {
      * Draw the dialogue screen
      */
     private void drawDialogueScreen() {
-
         // WINDOW
         int x = gp.tileSize*3;
         int y = gp.tileSize/2;
@@ -255,7 +242,6 @@ public class UI {
             g2.drawString(line, x, y);
             y += 40;
         }
-
     }
 
     /**
@@ -267,13 +253,11 @@ public class UI {
         final int frameY = gp.tileSize;
         final int frameWidth = gp.tileSize*5;
         final int frameHeight = gp.tileSize*10;
-
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
         // TEXT
         g2.setColor(UIColors.WHITE);
         g2.setFont(g2.getFont().deriveFont(32F));
-
         int textX = frameX + 20;
         int textY = frameY + gp.tileSize;
         final int lineHeight = 35;
@@ -398,10 +382,8 @@ public class UI {
 
         // Draw player's items
         for(int i = 0; i < entity.inventory.size(); i++) {
-
             // Equip cursor
-            if (entity.inventory.get(i) == entity.currentWeapon ||
-                    entity.inventory.get(i) == entity.currentHelmet) {
+            if (entity.inventory.get(i) == entity.currentWeapon || entity.inventory.get(i) == entity.currentHelmet) {
                 g2.setColor(UIColors.CURSOR_COLOR);
                 g2.fillRoundRect(slotX, slotY, gp.tileSize, gp.tileSize, 10, 10);
             }
@@ -412,7 +394,6 @@ public class UI {
                 g2.setFont(g2.getFont().deriveFont(32F));
                 int amountX;
                 int amountY;
-
                 String s = GameConstants.BLANK + entity.inventory.get(i).amount;
                 amountX = getXForAlignToRightText(s, slotX+44);
                 amountY = slotY + gp.tileSize;
@@ -766,7 +747,6 @@ public class UI {
                 currentDialogue = GameConstants.COME_AGAIN;
             }
         }
-
     }
 
     /**
@@ -775,7 +755,6 @@ public class UI {
      * and handles player input for buying items.
      */
     private void tradeBuy() {
-
         drawInventory(gp.player, false);
         drawInventory(npc, true);
 

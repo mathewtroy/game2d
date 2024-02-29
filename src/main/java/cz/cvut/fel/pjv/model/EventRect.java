@@ -8,9 +8,7 @@ import java.awt.*;
  * It extends the Rectangle class to provide functionality for event handling.
  */
 public class EventRect extends Rectangle {
-
     public int eventRectDefaultX;
     public int eventRectDefaultY;
     public boolean eventDone = false;
-
 }

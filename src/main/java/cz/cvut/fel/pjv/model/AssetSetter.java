@@ -28,46 +28,41 @@ public class AssetSetter {
         int mapNum = 0;
         int i = 0;
 
-        gp.obj[mapNum][i] = new Coin_Gold(gp);
+        gp.obj[mapNum][i] = new CoinGold(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*24;
         gp.obj[mapNum][i].worldY = gp.tileSize*24; // center of the map, grass tile (txt row: 23, txt col: 14)
         i++;
-
 
         gp.obj[mapNum][i] = new Key(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*24;
         gp.obj[mapNum][i].worldY = gp.tileSize*8; // corner at the top of forest, grass tile (txt row: 9, txt col: 50)
         i++;
 
-
         gp.obj[mapNum][i] = new Ram(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*23;
         gp.obj[mapNum][i].worldY = gp.tileSize*23; // corner at the top of forest, grass tile (txt row: 24, txt col: 48)
         i++;
 
-
-        gp.obj[mapNum][i] = new Helmet_Ger(gp);
+        gp.obj[mapNum][i] = new HelmetGerman(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*17;
         gp.obj[mapNum][i].worldY = gp.tileSize*12; // fel area
         i++;
 
-
-        // Potions
-        gp.obj[mapNum][i] = new Potion_Red(gp);
+        // First Aid and Ammunition
+        gp.obj[mapNum][i] = new FirstAid(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*30;
         gp.obj[mapNum][i].worldY = gp.tileSize*25; // corner at the top of forest, grass tile (txt row: 26, txt col: 60)
         i++;
 
-        gp.obj[mapNum][i] = new Potion_Red(gp);
+        gp.obj[mapNum][i] = new FirstAid(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*39;
         gp.obj[mapNum][i].worldY = gp.tileSize*15; // old man area
         i++;
 
-        gp.obj[mapNum][i] = new Potion_Blue(gp);
+        gp.obj[mapNum][i] = new Ammunition(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*15;
         gp.obj[mapNum][i].worldY = gp.tileSize*41; // Island
         i++;
-
 
         // Heart
         gp.obj[mapNum][i] = new Heart(gp);
@@ -80,15 +75,13 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = gp.tileSize*37; // Island
         i++;
 
-
         // Boots
         gp.obj[mapNum][i] = new Boots(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*20;
         gp.obj[mapNum][i].worldY = gp.tileSize*37; // Island
         i++;
 
-
-        //  DOOR
+        // Door
         gp.obj[mapNum][i] = new Door(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*33;
         gp.obj[mapNum][i].worldY = gp.tileSize*13; // grass tile (txt row: 14, txt col: 68)
@@ -104,13 +97,12 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = gp.tileSize*13; // grass tile (txt row: 14, txt col: 76)
         i++;
 
-        // CHEST
+        // Chest
         gp.obj[mapNum][i] = new Chest(gp);
         gp.obj[mapNum][i].setLoot(new Key(gp));
         gp.obj[mapNum][i].worldX = gp.tileSize*36;
         gp.obj[mapNum][i].worldY = gp.tileSize*7; // grass tile (txt row: 8, txt col: 74)
         i++;
-
 
         // Map PJV
         mapNum = 1;
@@ -119,25 +111,24 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = gp.tileSize*7; // below fel area
         i++;
 
-
         // Map Gold
         mapNum = 2;
-        gp.obj[mapNum][i] = new Coin_Gold(gp);
+        gp.obj[mapNum][i] = new CoinGold(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*25;
         gp.obj[mapNum][i].worldY = gp.tileSize*27;
         i++;
 
-        gp.obj[mapNum][i] = new Coin_Gold(gp);
+        gp.obj[mapNum][i] = new CoinGold(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*26;
         gp.obj[mapNum][i].worldY = gp.tileSize*27;
         i++;
 
-        gp.obj[mapNum][i] = new Coin_Gold(gp);
+        gp.obj[mapNum][i] = new CoinGold(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*27;
         gp.obj[mapNum][i].worldY = gp.tileSize*27;
         i++;
 
-        gp.obj[mapNum][i] = new Coin_Gold(gp);
+        gp.obj[mapNum][i] = new CoinGold(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*28;
         gp.obj[mapNum][i].worldY = gp.tileSize*27;
         i++;
@@ -146,7 +137,6 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldX = gp.tileSize*28;
         gp.obj[mapNum][i].worldY = gp.tileSize*20;
         i++;
-
     }
 
     /**
@@ -162,7 +152,6 @@ public class AssetSetter {
         gp.npc[mapNum][i].worldY = gp.tileSize*20; // grass tile (txt row: 21, txt col: 60)
         i++;
 
-
         // MAP PJV
         mapNum = 1;
         i = 0;
@@ -170,16 +159,12 @@ public class AssetSetter {
         gp.npc[mapNum][i].worldX = gp.tileSize*12;
         gp.npc[mapNum][i].worldY = gp.tileSize*8; //
         i++;
-
-
-
     }
 
     /**
      * Initializes enemies on the current map
      */
     public void setEnemy() {
-
         int mapNum = 0;
         int i = 0;
 
@@ -213,7 +198,6 @@ public class AssetSetter {
         gp.enemy[mapNum][i].worldY = gp.tileSize*24;
         i++;
 
-
         // Map 3
         mapNum = 2;
 
@@ -232,7 +216,6 @@ public class AssetSetter {
         gp.enemy[mapNum][i].worldX = gp.tileSize*28;
         gp.enemy[mapNum][i].worldY = gp.tileSize*21;
         i++;
-
     }
 
     /**
@@ -255,8 +238,6 @@ public class AssetSetter {
         gp.iTile[mapNum][i] = new DryTree(gp,29,26); i++; // teleport Island tree
 
         gp.iTile[mapNum][i] = new DryTree(gp,19,42); i++; // teleport FEL tree
-
         gp.iTile[mapNum][i] = new DryTree(gp,23,10); i++; // key tree
-
     }
 }

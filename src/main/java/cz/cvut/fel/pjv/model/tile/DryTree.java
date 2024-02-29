@@ -14,6 +14,8 @@ public class DryTree extends InteractiveTile{
 
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_DRY_TREE = "Missing image of the DRY TREE";
+    private static final String DRY_TREE_PATH = "/tiles/drytree";
+
 
     /**
      * Constructs a Dry Tree interactive tile.
@@ -25,13 +27,10 @@ public class DryTree extends InteractiveTile{
     public DryTree(GamePanel gp, int col, int row) {
         super(gp, col, row);
         this.gp = gp;
-
         this.worldX = gp.tileSize * col;
         this.worldY = gp.tileSize * row;
-
         destructible = true;
         life = 3;
-
         setupDryTreeImage();
     }
 
@@ -40,7 +39,7 @@ public class DryTree extends InteractiveTile{
      */
     private void setupDryTreeImage() {
         try {
-            down1 = setup("/tiles/drytree", gp.tileSize, gp.tileSize);
+            down1 = setup(DRY_TREE_PATH, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
             logger.warning(LOGGER_MESSAGE_DRY_TREE);
         }
@@ -54,10 +53,7 @@ public class DryTree extends InteractiveTile{
      */
     public boolean isCorrectItem(Entity entity) {
         boolean isCorrectItem = false;
-
-        if (entity.currentWeapon.type == type_ram) {
-            isCorrectItem = true;
-        }
+        if (entity.currentWeapon.type == type_ram) { isCorrectItem = true; }
         return isCorrectItem;
     }
 
@@ -117,5 +113,4 @@ public class DryTree extends InteractiveTile{
         int maxLife = 20;
         return maxLife;
     }
-
 }

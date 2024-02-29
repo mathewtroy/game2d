@@ -1,5 +1,6 @@
 package cz.cvut.fel.pjv.model.entity;
 
+import cz.cvut.fel.pjv.controller.MapConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
 
 import java.util.Random;
@@ -69,19 +70,15 @@ public class OldMan extends  Entity {
             searchPath(goalCol, goalRow);
         }
         else {
-
             actionLockCounter ++;
 
             if (actionLockCounter == 120) {
-
                 Random random = new Random();
                 int i = random.nextInt(HIGH_PROBABILITY)+1 ; // pick up a number from 1 to 100
-
-                if (i <= LOW_PROBABILITY) { direction = "up"; }
-                if (i > LOW_PROBABILITY && i <= MEDIUM_LOW_PROBABILITY) { direction = "down"; }
-                if (i > MEDIUM_LOW_PROBABILITY && i <= MEDIUM_HIGH_PROBABILITY) { direction = "left"; }
-                if (i > MEDIUM_HIGH_PROBABILITY) { direction = "right"; }
-
+                if (i <= LOW_PROBABILITY) { direction = MapConstants.UP; }
+                if (i > LOW_PROBABILITY && i <= MEDIUM_LOW_PROBABILITY) { direction = MapConstants.DOWN; }
+                if (i > MEDIUM_LOW_PROBABILITY && i <= MEDIUM_HIGH_PROBABILITY) { direction = MapConstants.LEFT; }
+                if (i > MEDIUM_HIGH_PROBABILITY) { direction = MapConstants.RIGHT; }
                 actionLockCounter = 0;
             }
         }

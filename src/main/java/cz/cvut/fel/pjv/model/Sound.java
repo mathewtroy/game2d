@@ -103,7 +103,6 @@ public class Sound {
             case VOLUME_SCALE_THREE: volume = GameConstants.THIRD_LEVEL; break;
             case VOLUME_SCALE_FOUR: volume = GameConstants.FOURTH_LEVEL; break;
             case VOLUME_SCALE_FIVE: volume = GameConstants.MAX_LEVEL; break;
-
         }
         fc.setValue(volume);
     }

@@ -6,15 +6,18 @@ import cz.cvut.fel.pjv.model.entity.Entity;
 
 import java.util.logging.Logger;
 
-public class ManaCrystal extends Entity {
+public class Mana extends Entity {
 
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_MANA = "Missing image of the MANA";
+    private static final String MANA_PLUS_PREFIX = "Mana +";
+    private static final String FULL_BULLET_PATH = "/objects/bullet_full";
+    private static final String BLANK_BULLET_PATH = "/objects/bullet_blank";
     public static final String objName = "Mana Crystal";
 
     GamePanel gp;
 
-    public ManaCrystal(GamePanel gp) {
+    public Mana(GamePanel gp) {
         super(gp);
         this.gp = gp;
         type = type_pickupOnly;
@@ -29,9 +32,9 @@ public class ManaCrystal extends Entity {
      */
     private void setupManaImage() {
         try {
-            down1 = setup("/objects/manacrystal_full", gp.tileSize, gp.tileSize);
-            image = setup("/objects/manacrystal_full", gp.tileSize, gp.tileSize);
-            image2 = setup("/objects/manacrystal_blank", gp.tileSize, gp.tileSize);
+            down1 = setup(FULL_BULLET_PATH, gp.tileSize, gp.tileSize);
+            image = setup(FULL_BULLET_PATH, gp.tileSize, gp.tileSize);
+            image2 = setup(BLANK_BULLET_PATH, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
             logger.warning(LOGGER_MESSAGE_MANA);
         }
@@ -45,7 +48,7 @@ public class ManaCrystal extends Entity {
      */
     public boolean use(Entity entity) {
         gp.playSE(GameConstants.SOUND_TWO);
-        gp.ui.addMessage("Mana +" + value) ;
+        gp.ui.addMessage(MANA_PLUS_PREFIX + value) ;
         entity.mana += value;
         return true;
     }

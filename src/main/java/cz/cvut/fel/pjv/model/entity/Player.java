@@ -12,8 +12,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.logging.Logger;
 
-import static cz.cvut.fel.pjv.model.Sound.*;
-
 public class Player extends Entity {
 
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
@@ -131,8 +129,8 @@ public class Player extends Entity {
         inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(currentHelmet);
-        inventory.add(new Potion_Red(gp));
-        inventory.add(new Potion_Blue(gp));
+        inventory.add(new FirstAid(gp));
+        inventory.add(new Ammunition(gp));
 
 
     }

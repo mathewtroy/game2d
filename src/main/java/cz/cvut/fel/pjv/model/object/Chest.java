@@ -11,21 +11,18 @@ public class Chest extends Entity {
 
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_CHEST = "Missing image of the CHEST";
-    public static final String objName = "Chest";
-
     private static final int SOLID_X = 4;
     private static final int SOLID_Y = 16;
     private static final int SOLID_WIDTH = 40;
     private static final int SOLID_HEIGHT = 32;
-
     private static final String CHEST_IMAGE_PATH = "/objects/chest";
     private static final String CHEST_OPENED_IMAGE_PATH = "/objects/chest_opened";
-
     private static final String OPEN_CHEST_MESSAGE = "You open the chest and find a ";
     private static final String CANNOT_CARRY_MESSAGE = "\n... But you cannot carry any more!";
     private static final String OBTAIN_MESSAGE = "\n You obtain the ";
     private static final String EMPTY_CHEST_MESSAGE = "It is empty";
-
+    public static final String EXCLAMATION_MARK = "!";
+    public static final String objName = "Chest";
 
     GamePanel gp;
 
@@ -72,12 +69,8 @@ public class Chest extends Entity {
      */
     public void interact() {
         gp.gameState = GameState.DIALOGUE;
-
-        if (!opened) {
-            openChest();
-        } else {
-            gp.ui.currentDialogue = EMPTY_CHEST_MESSAGE;
-        }
+        if (!opened) { openChest(); }
+        else { gp.ui.currentDialogue = EMPTY_CHEST_MESSAGE; }
     }
 
     /**
@@ -86,18 +79,15 @@ public class Chest extends Entity {
      */
     private void openChest() {
         gp.playSE(GameConstants.SOUND_THIRTEEN);
-
         StringBuilder sb = new StringBuilder();
-        sb.append(OPEN_CHEST_MESSAGE).append(loot.name).append("!");
+        sb.append(OPEN_CHEST_MESSAGE).append(loot.name).append(EXCLAMATION_MARK);
 
-        if (!gp.player.canObtainItem(loot)) {
-            sb.append(CANNOT_CARRY_MESSAGE);
-        } else {
-            sb.append(OBTAIN_MESSAGE).append(loot.name).append("!");
+        if (!gp.player.canObtainItem(loot)) {sb.append(CANNOT_CARRY_MESSAGE); }
+        else {
+            sb.append(OBTAIN_MESSAGE).append(loot.name).append(EXCLAMATION_MARK);
             down1 = image2;
             opened = true;
         }
-
         gp.ui.currentDialogue = sb.toString();
     }
 }

@@ -11,6 +11,7 @@ public class Map extends TileManager {
     GamePanel gp;
     protected BufferedImage[] worldMap;
     public boolean miniMapOn = false;
+    private static final String OPEN_CLOSE_MAP = "Press M to close";
 
     /**
      * Manages tiles for the game, initializing tile array, map tile numbers, and loading maps.
@@ -36,7 +37,6 @@ public class Map extends TileManager {
 
             worldMap[i] = new BufferedImage(worldMapWidth, worldMapHeight, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2 = (Graphics2D) worldMap[i].createGraphics();
-
             int col = 0;
             int row = 0;
 
@@ -87,7 +87,7 @@ public class Map extends TileManager {
         g2.setFont(gp.ui.arial_40.deriveFont(32f));
         // think about another font
         g2.setColor(UIColors.WHITE);
-        g2.drawString("Press M to close", 720, 550);
+        g2.drawString(OPEN_CLOSE_MAP, 720, 550);
 
     }
 
@@ -115,9 +115,7 @@ public class Map extends TileManager {
             int playerY = (int) (y + gp.player.worldY/scale);
             int playerSize = gp.tileSize/3;
             g2.drawImage(gp.player.down1, playerX-6, playerY-6, playerSize, playerSize,null);
-
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-
         }
     }
 }

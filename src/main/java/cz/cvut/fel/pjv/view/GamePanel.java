@@ -40,9 +40,6 @@ public class GamePanel extends JPanel implements Runnable {
     public int maxWorldRow = 50;
     public int maxMap = 10;
     public int currentMap = 0;
-
-    public final int worldWidth = tileSize * maxWorldCol;
-    public final int worldHeight = tileSize * maxWorldRow;
     int frameRate = 60;
 
     // System
@@ -124,37 +121,23 @@ public class GamePanel extends JPanel implements Runnable {
      */
     @Override
     public void run() {
-
-        double drawInterval = BILLION_SIZE / frameRate;
-        //  0.01666 seconds
-
+        double drawInterval = BILLION_SIZE / frameRate; //  0.01666 seconds
         double nextDrawTime = System.nanoTime() + drawInterval;
 
         while (gameThread != null) {
-
-            // UPDATE
-            update();
-
-            // DRAW
-            repaint();
+            update(); // Update
+            repaint(); // Draw
 
             try {
                 double remainingTime = nextDrawTime - System.nanoTime();
                 remainingTime = remainingTime / MILLION_SIZE;
-
-                if (remainingTime < 0) {
-                    remainingTime = 0;
-                }
-
+                if (remainingTime < 0) { remainingTime = 0; }
                 Thread.sleep((long) remainingTime);
-
                 nextDrawTime += drawInterval;
 
             } catch (InterruptedException e) {
-
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -164,23 +147,18 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
 
         if (gameState == GameState.PLAY) {
-
             // PLAYER
             player.update();
 
             // NPS
             for (int i = 0; i < npc[1].length; i++) {
-                if (npc[currentMap][i] != nullEntity) {
-                    npc[currentMap][i].update();
-                }
+                if (npc[currentMap][i] != nullEntity) { npc[currentMap][i].update(); }
             }
 
             // ENEMY
             for (int i = 0; i < enemy[1].length; i++) {
                 if (enemy[currentMap][i] != nullEntity) {
-                    if (enemy[currentMap][i].alive && !enemy[currentMap][i].dying) {
-                        enemy[currentMap][i].update();
-                    }
+                    if (enemy[currentMap][i].alive && !enemy[currentMap][i].dying) { enemy[currentMap][i].update(); }
                     if (!enemy[currentMap][i].alive) {
                         enemy[currentMap][i].checkDrop();
                         enemy[currentMap][i] = nullEntity;
@@ -191,31 +169,21 @@ public class GamePanel extends JPanel implements Runnable {
             // PROJECTILE
             for (int i = 0; i < projectile[1].length; i++) {
                 if (projectile[currentMap][i] != nullEntity) {
-                    if (projectile[currentMap][i].alive) {
-                        projectile[currentMap][i].update();
-                    }
-                    if (!projectile[currentMap][i].alive) {
-                        projectile[currentMap][i] = nullEntity;
-                    }
+                    if (projectile[currentMap][i].alive) { projectile[currentMap][i].update(); }
+                    if (!projectile[currentMap][i].alive) { projectile[currentMap][i] = nullEntity; }
                 }
             }
 
             // PARTICLE
             for (int i = 0; i < particleList.size(); i++) {
                 if (particleList.get(i) != nullEntity) {
-                    if (particleList.get(i).alive) {
-                        particleList.get(i).update();
-                    }
-                    if (!particleList.get(i).alive) {
-                        particleList.remove(i);
-                    }
+                    if (particleList.get(i).alive) { particleList.get(i).update(); }
+                    if (!particleList.get(i).alive) { particleList.remove(i); }
                 }
             }
 
             for (int i = 0; i < iTile[1].length; i++)  {
-                if (iTile[currentMap][i] != null) {
-                    iTile[currentMap][i].update();
-                }
+                if (iTile[currentMap][i] != null) { iTile[currentMap][i].update(); }
             }
         }
     }
@@ -231,92 +199,56 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D) g;
 
-        //  DEBUG
         long drawStart = 0;
-        if (keyH.checkDrawTime) {
-            drawStart = System.nanoTime();
-        }
+        if (keyH.checkDrawTime) { drawStart = System.nanoTime(); }
+        if (gameState == GameState.TITLE) { ui.draw(g2); } // Title screen
+        else if (gameState == GameState.MAP) { map.drawFullMapScreen(g2); } // Map screen
 
-        //  TITLE SCREEN
-        if (gameState == GameState.TITLE) {
-            ui.draw(g2);
-        }
-
-        // MAP SCREEN
-        else if (gameState == GameState.MAP) {
-            map.drawFullMapScreen(g2);
-        }
-
-
-        //  OTHERS
         else {
-            //  TILE
+            //  Draw Tile
             tileM.draw(g2);
 
-            // INTERACTIVE TILE
+            // Interactive Tile
             for (int i = 0; i < iTile[1].length ; i++) {
-                if (iTile[currentMap][i] != null) {
-                    iTile[currentMap][i].draw(g2);
-                }
+                if (iTile[currentMap][i] != null) { iTile[currentMap][i].draw(g2); }
             }
 
-            //  ADD ENTITIES TO THE LIST
-            entityList.add(player);
+            entityList.add(player); // Add entities to the list
 
             for (int i = 0; i < npc[1].length; i++) {
-                if(npc[currentMap][i] != null) {
-                    entityList.add(npc[currentMap][i]);
-                }
+                if(npc[currentMap][i] != null) { entityList.add(npc[currentMap][i]); }
             }
 
             for (int i = 0; i < obj[1].length; i++) {
-                if (obj[currentMap][i] != null) {
-                    entityList.add(obj[currentMap][i]);
-                }
+                if (obj[currentMap][i] != null) { entityList.add(obj[currentMap][i]); }
             }
 
             for (int i = 0; i < enemy[1].length; i++) {
-                if (enemy[currentMap][i] != null) {
-                    entityList.add(enemy[currentMap][i]);
-                }
+                if (enemy[currentMap][i] != null) { entityList.add(enemy[currentMap][i]); }
             }
 
             for (int i = 0; i < projectile[1].length; i++) {
-                if (projectile[currentMap][i] != null) {
-                    entityList.add(projectile[currentMap][i]);
-                }
+                if (projectile[currentMap][i] != null) { entityList.add(projectile[currentMap][i]); }
             }
 
             for (int i = 0; i < particleList.size(); i++) {
-                if (particleList.get(i) != null) {
-                    entityList.add(particleList.get(i));
-                }
+                if (particleList.get(i) != null) { entityList.add(particleList.get(i)); }
             }
 
-            // SORT
-            Collections.sort(entityList, new Comparator<Entity>() {
-                @Override
-                public int compare(Entity e1, Entity e2) {
-                    return Integer.compare(e1.worldY, e2.worldY);
-                }
-            });
+//            // SORT
+//            Collections.sort(entityList, new Comparator<Entity>() {
+//                @Override
+//                public int compare(Entity e1, Entity e2) {
+//                    return Integer.compare(e1.worldY, e2.worldY);
+//                }
+//            });
 
-            // DRAW ENTITIES
-            for (int i = 0; i < entityList.size(); i++) {
-                entityList.get(i).draw(g2);
-            }
-
-            // EMPTY ENTITY LIST
-            entityList.clear();
-
-            // MINI MAP
-            map.drawMiniMap(g2);
-
-            //  UI
-            ui.draw(g2);
+            for (int i = 0; i < entityList.size(); i++) { entityList.get(i).draw(g2); } // Draw Entities
+            entityList.clear(); // Empty entity list
+            map.drawMiniMap(g2); // Draw Mini map
+            ui.draw(g2); // Draw UI
         }
 
-        //  DEBUG
         if (keyH.checkDrawTime) {
             long drawEnd = System.nanoTime();
             long passed = drawEnd - drawStart;

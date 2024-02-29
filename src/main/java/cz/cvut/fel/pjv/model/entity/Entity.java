@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Entity {
 
@@ -21,6 +22,8 @@ public class Entity {
     private static final int MAX_SHOT_AVAILABLE_COUNTER = 30;
     private static final int MAX_SPRITE_COUNTER = 20;
     private static final int KNOCKBACK_COUNTER_THRESHOLD = 10;
+    public static final String PNG_FORMAT = ".png";
+
 
     public BufferedImage up1, up2, down1, down2, right1, right2, left1, left2,
             attackUp1, attackUp2, attackDown1, attackDown2,
@@ -427,11 +430,8 @@ public class Entity {
      * Switches the entity's sprite.
      */
     private void switchSprite() {
-        if (spriteNum == 1) {
-            spriteNum = 2;
-        } else if (spriteNum == 2) {
-            spriteNum = 1;
-        }
+        if (spriteNum == 1) { spriteNum = 2; }
+        else if (spriteNum == 2) { spriteNum = 1; }
     }
 
     /**
@@ -440,10 +440,7 @@ public class Entity {
     private void handleInvisibility() {
         if (invisible) {
             incrementInvisibleCounter();
-            if (invisibleCounter > MAX_INVISIBLE_COUNTER) {
-                invisible = false;
-                resetInvisibleCounter();
-            }
+            if (invisibleCounter > MAX_INVISIBLE_COUNTER) { invisible = false; resetInvisibleCounter(); }
         }
     }
 
@@ -456,9 +453,7 @@ public class Entity {
      * Increments the shot available counter if it's less than the maximum threshold.
      */
     private void handleShotAvailableCounter() {
-        if (shotAvailableCounter < MAX_SHOT_AVAILABLE_COUNTER) {
-            incrementShotAvailableCounter();
-        }
+        if (shotAvailableCounter < MAX_SHOT_AVAILABLE_COUNTER) { incrementShotAvailableCounter(); }
     }
 
     private void incrementShotAvailableCounter() {
@@ -475,11 +470,8 @@ public class Entity {
         if (!gp.player.invisible) {
             // we can give damage
             gp.playSE(GameConstants.SOUND_SIX);
-
             int damage = attack - gp.player.defense;
-            if (damage < 0) {
-                damage = 0;
-            }
+            if (damage < 0) { damage = 0; }
             gp.player.life -= damage;
             gp.player.invisible  = true;
         }
@@ -525,21 +517,14 @@ public class Entity {
 
             // Enemy Health Bar
             if (type == type_enemy && hpBarOn) {
-
                 double oneScale = (double)gp.tileSize/maxLife;
                 double hpBarValue = oneScale*life;
-
                 g2.setColor(UIColors.HP_BAR_BACKGROUND_COLOR);
                 g2.fillRect(screenX-1, screenY - 16 , gp.tileSize+2, 12);
                 g2.setColor(UIColors.HP_BAR_COLOR);
                 g2.fillRect(screenX, screenY - 15 , (int)hpBarValue, 10);
-
                 hpBarCounter++;
-
-                if (hpBarCounter > 600) {
-                    hpBarCounter = 0;
-                    hpBarOn = false;
-                }
+                if (hpBarCounter > 600) { hpBarCounter = 0; hpBarOn = false; }
             }
 
             if (invisible) {
@@ -599,7 +584,7 @@ public class Entity {
         BufferedImage image = null;
 
         try {
-            image = ImageIO.read(getClass().getResourceAsStream( imagePath + ".png"));
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(imagePath + ".png")));
             image = uTool.scaleImage(image, width, height);
         }
         catch (IOException e) { e.printStackTrace(); }
@@ -694,9 +679,7 @@ public class Entity {
         } else if ((enTopY < nextY) && (enLeftX < nextX)) {
             // Down or right
             direction = MapConstants.DOWN;
-            if (collisionOn) {
-                direction = MapConstants.RIGHT;
-            }
+            if (collisionOn) { direction = MapConstants.RIGHT; }
         }
     }
 

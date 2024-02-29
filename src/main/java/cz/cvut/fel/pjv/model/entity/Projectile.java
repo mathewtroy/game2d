@@ -1,5 +1,6 @@
 package cz.cvut.fel.pjv.model.entity;
 
+import cz.cvut.fel.pjv.controller.MapConstants;
 import cz.cvut.fel.pjv.view.GameConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
 
@@ -27,7 +28,6 @@ public class Projectile extends Entity {
         this.alive = alive;
         this.user = user;
         this.life = this.maxLife;
-
     }
 
     /**
@@ -35,23 +35,14 @@ public class Projectile extends Entity {
      */
     public void update() {
         // Check collisions and apply damage if user is the player
-        if (user == gp.player) {
-            checkAndDamageEnemy();
-        }
+        if (user == gp.player) { checkAndDamageEnemy(); }
 
         // Check collisions and apply damage if user is not the player
-        if (user != gp.player) {
-            checkAndDamagePlayer();
-        }
+        if (user != gp.player) { checkAndDamagePlayer(); }
 
-        // Update projectile's position based on its direction
-        updateProjectilePosition();
-
-        // Decrement the projectile's lifespan
-        decrementLife();
-
-        // Handle projectile animation
-        handleAnimation();
+        updateProjectilePosition(); // Update projectile's position based on its direction
+        decrementLife(); // Decrement the projectile's lifespan
+        handleAnimation(); // Handle projectile animation
     }
 
     /**
@@ -85,10 +76,10 @@ public class Projectile extends Entity {
      */
     private void updateProjectilePosition() {
         switch (direction) {
-            case "up": worldY -= speed; break;
-            case "down": worldY += speed; break;
-            case "left": worldX -= speed; break;
-            case "right": worldX += speed; break;
+            case MapConstants.UP: worldY -= speed; break;
+            case MapConstants.DOWN: worldY += speed; break;
+            case MapConstants.LEFT: worldX -= speed; break;
+            case MapConstants.RIGHT: worldX += speed; break;
         }
     }
 
@@ -97,10 +88,7 @@ public class Projectile extends Entity {
      */
     private void decrementLife() {
         life--;
-
-        if (life <= 0) {
-            alive = false;
-        }
+        if (life <= 0) { alive = false; }
     }
 
     /**
@@ -110,11 +98,8 @@ public class Projectile extends Entity {
         spriteCounter++;
 
         if (spriteCounter > 12) {
-            if (spriteNum == 1) {
-                spriteNum = 2;
-            } else if (spriteNum == 2) {
-                spriteNum = 1;
-            }
+            if (spriteNum == 1) { spriteNum = 2; }
+            else if (spriteNum == 2) { spriteNum = 1; }
             spriteCounter = 0;
         }
     }
@@ -137,6 +122,5 @@ public class Projectile extends Entity {
      */
     public void subtractResource(Entity user) {
     }
-
 
 }

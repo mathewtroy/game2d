@@ -59,8 +59,8 @@ Herní engine musí být vybaven GUI.
 
 ❤️	             hit points (HP) <br>
 🔷	             mana points (MP) <br>
-🔴               red potion (recover HP) <br>
-🔵               blue potion (recover MP)<br>
+💊               first aid (recover HP) <br>
+📦               ammunition (recover MP)<br>
 
 
 🏏      	     ram item (cut trees)<br>

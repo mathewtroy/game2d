@@ -30,15 +30,15 @@ public class EntityGenerator {
             case Ram.objName: obj = new Ram(gp); break;
             case Boots.objName :obj = new Boots(gp); break;
             case Chest.objName : obj = new Chest(gp); break;
-            case Coin_Gold.objName : obj = new Coin_Gold(gp); break;
+            case CoinGold.objName : obj = new CoinGold(gp); break;
             case Door.objName : obj = new Door(gp); break;
             case Bullet.objName : obj = new Bullet(gp); break;
             case Heart.objName :obj = new Heart(gp); break;
             case Key.objName :obj = new Key(gp); break;
-            case ManaCrystal.objName :obj = new ManaCrystal(gp); break;
-            case Potion_Blue.objName: obj = new Potion_Blue(gp); break;
-            case Potion_Red.objName: obj = new Potion_Red(gp); break;
-            case Helmet_Ger.objName : obj = new Helmet_Ger(gp); break;
+            case Mana.objName :obj = new Mana(gp); break;
+            case Ammunition.objName: obj = new Ammunition(gp); break;
+            case FirstAid.objName: obj = new FirstAid(gp); break;
+            case HelmetGerman.objName : obj = new HelmetGerman(gp); break;
             case Helmet.objName : obj = new Helmet(gp); break;
             case Spike.objName : obj = new Spike(gp); break;
         }

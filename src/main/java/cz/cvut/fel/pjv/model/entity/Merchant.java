@@ -29,12 +29,10 @@ public class Merchant extends Entity  {
      * Loads and sets the images for the merchant's different directions.
      */
     private void getImage() {
-
         up1 = setup(DOWN1_IMAGE_MERCHANT_PATH, gp.tileSize, gp.tileSize);
         up2 = setup(DOWN2_IMAGE_MERCHANT_PATH, gp.tileSize, gp.tileSize);
         down1 = setup(DOWN1_IMAGE_MERCHANT_PATH, gp.tileSize, gp.tileSize);
         down2 = setup(DOWN2_IMAGE_MERCHANT_PATH, gp.tileSize, gp.tileSize);
-
         right1 = setup(DOWN1_IMAGE_MERCHANT_PATH, gp.tileSize, gp.tileSize);
         right2 = setup(DOWN2_IMAGE_MERCHANT_PATH, gp.tileSize, gp.tileSize);
         left1 = setup(DOWN1_IMAGE_MERCHANT_PATH, gp.tileSize, gp.tileSize);
@@ -55,10 +53,10 @@ public class Merchant extends Entity  {
     private void setItems() {
         inventory.add(new Ram(gp));
         inventory.add(new Key(gp));
-        inventory.add(new Potion_Red(gp));
-        inventory.add(new Potion_Blue(gp));
+        inventory.add(new FirstAid(gp));
+        inventory.add(new Ammunition(gp));
         inventory.add(new Spike(gp));
-        inventory.add(new Helmet_Ger(gp));
+        inventory.add(new HelmetGerman(gp));
         inventory.add(new Helmet(gp));
     }
 

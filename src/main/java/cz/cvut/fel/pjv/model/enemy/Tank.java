@@ -1,9 +1,10 @@
 package cz.cvut.fel.pjv.model.enemy;
 
+import cz.cvut.fel.pjv.controller.MapConstants;
 import cz.cvut.fel.pjv.model.weapon.Bomb;
-import cz.cvut.fel.pjv.model.object.Coin_Gold;
+import cz.cvut.fel.pjv.model.object.CoinGold;
 import cz.cvut.fel.pjv.model.object.Heart;
-import cz.cvut.fel.pjv.model.object.ManaCrystal;
+import cz.cvut.fel.pjv.model.object.Mana;
 import cz.cvut.fel.pjv.view.GamePanel;
 import cz.cvut.fel.pjv.model.entity.Entity;
 
@@ -14,6 +15,10 @@ public class Tank extends Entity {
 
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_TANK = "Missing image of the TANK";
+    private static final String TANK_UP_PATH = "/enemy/tank_up";
+    private static final String TANK_DOWN_PATH = "/enemy/tank_down";
+    private static final String TANK_LEFT_PATH = "/enemy/tank_left";
+    private static final String TANK_RIGHT_PATH = "/enemy/tank_right";
     private static final String enemyName = "Tank";
 
 
@@ -35,9 +40,7 @@ public class Tank extends Entity {
 
     public Tank(GamePanel gp) {
         super(gp);
-
         this.gp = gp;
-
         type = type_enemy;
         setName(enemyName);
         defaultSpeed = 1;
@@ -48,7 +51,6 @@ public class Tank extends Entity {
         defense = 0;
         setExp(2);
         projectile = new Bomb(gp);
-
         solidArea.x = 3;
         solidArea.y = 18;
         solidArea.width = 42;
@@ -63,14 +65,14 @@ public class Tank extends Entity {
      */
     private void setupTankImage() {
         try {
-            up1 = setup("/enemy/tank_up", gp.tileSize, gp.tileSize);
-            up2 = setup("/enemy/tank_up", gp.tileSize, gp.tileSize);
-            down1 = setup("/enemy/tank_down", gp.tileSize, gp.tileSize);
-            down2 = setup("/enemy/tank_down", gp.tileSize, gp.tileSize);
-            left1 = setup("/enemy/tank_left", gp.tileSize, gp.tileSize);
-            left2 = setup("/enemy/tank_left", gp.tileSize, gp.tileSize);
-            right1 = setup("/enemy/tank_right", gp.tileSize, gp.tileSize);
-            right2 = setup("/enemy/tank_right", gp.tileSize, gp.tileSize);
+            up1 = setup(TANK_UP_PATH, gp.tileSize, gp.tileSize);
+            up2 = setup(TANK_UP_PATH, gp.tileSize, gp.tileSize);
+            down1 = setup(TANK_DOWN_PATH, gp.tileSize, gp.tileSize);
+            down2 = setup(TANK_DOWN_PATH, gp.tileSize, gp.tileSize);
+            left1 = setup(TANK_LEFT_PATH, gp.tileSize, gp.tileSize);
+            left2 = setup(TANK_LEFT_PATH, gp.tileSize, gp.tileSize);
+            right1 = setup(TANK_RIGHT_PATH, gp.tileSize, gp.tileSize);
+            right2 = setup(TANK_RIGHT_PATH, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
             logger.warning(LOGGER_MESSAGE_TANK);
         }
@@ -83,20 +85,10 @@ public class Tank extends Entity {
         int xDistance = Math.abs(worldX - gp.player.worldX);
         int yDistance = Math.abs(worldY - gp.player.worldY);
         int tileDistance = (xDistance + yDistance) / gp.tileSize;
-
-        if (!onPath && tileDistance < CLOSE_DISTANCE) {
-            handleRandomPathSelection();
-        }
-
-        if (onPath && tileDistance > FAR_DISTANCE) {
-            handleRandomPathSelection();
-        }
-
-        if (onPath) {
-            handlePathAction();
-        } else {
-            handleRandomDirection();
-        }
+        if (!onPath && tileDistance < CLOSE_DISTANCE) { handleRandomPathSelection(); }
+        if (onPath && tileDistance > FAR_DISTANCE) { handleRandomPathSelection();}
+        if (onPath) { handlePathAction(); }
+        else { handleRandomDirection(); }
     }
 
     /**
@@ -116,11 +108,9 @@ public class Tank extends Entity {
         int i = new Random().nextInt(HIGH_PROBABILITY)+1;
 
         // SET THE TANK DROP
-        if (i < MEDIUM_LOW_PROBABILITY) { dropItem(new Coin_Gold(gp)); }
-
+        if (i < MEDIUM_LOW_PROBABILITY) { dropItem(new CoinGold(gp)); }
         if (i >= MEDIUM_LOW_PROBABILITY && i < MEDIUM_HIGH_PROBABILITY) { dropItem(new Heart(gp)); }
-
-        if (i >= MEDIUM_HIGH_PROBABILITY && i < HIGH_PROBABILITY) { dropItem(new ManaCrystal(gp)); }
+        if (i >= MEDIUM_HIGH_PROBABILITY && i < HIGH_PROBABILITY) { dropItem(new Mana(gp)); }
     }
 
     /**
@@ -128,9 +118,7 @@ public class Tank extends Entity {
      */
     private void handleRandomPathSelection() {
         int i = new Random().nextInt(HIGH_PROBABILITY) + 1;
-        if (i > MEDIUM_LOW_PROBABILITY) {
-            onPath = true;
-        }
+        if (i > MEDIUM_LOW_PROBABILITY) { onPath = true; }
     }
 
     /**
@@ -156,12 +144,10 @@ public class Tank extends Entity {
         if (actionLockCounter == 120) {
             Random random = new Random();
             int i = random.nextInt(HIGH_PROBABILITY) + 1; // pick up a number from 1 to 100
-
-            if (i <= LOW_PROBABILITY) { direction = "up"; }
-            if (i > LOW_PROBABILITY && i <= MEDIUM_LOW_PROBABILITY) { direction = "down"; }
-            if (i > MEDIUM_LOW_PROBABILITY && i <= MEDIUM_HIGH_PROBABILITY) { direction = "left"; }
-            if (i > MEDIUM_HIGH_PROBABILITY) { direction = "right"; }
-
+            if (i <= LOW_PROBABILITY) { direction = MapConstants.UP; }
+            if (i > LOW_PROBABILITY && i <= MEDIUM_LOW_PROBABILITY) { direction = MapConstants.DOWN; }
+            if (i > MEDIUM_LOW_PROBABILITY && i <= MEDIUM_HIGH_PROBABILITY) { direction = MapConstants.LEFT; }
+            if (i > MEDIUM_HIGH_PROBABILITY) { direction = MapConstants.RIGHT; }
             actionLockCounter = 0;
         }
     }
