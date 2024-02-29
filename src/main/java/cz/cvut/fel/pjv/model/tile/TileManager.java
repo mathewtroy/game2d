@@ -13,11 +13,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Objects;
+import java.util.logging.Logger;
+
 
 public class TileManager {
 
+
     GamePanel gp;
     private static final String TILE_PATH = "/tiles/";
+    private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
+    private static final String LOGGER_NEGATIVE_NUMBER_MAP_VALUE = "Use positive number!";
+    private static final String LOGGER_MAX_NUMBER_MAP_VALUE = "Use positive number till 22";
+    private static final String LOGGER_WRONG_MAP_VALUE = "Are you idiot? Use only numbers!!!";
     public Tile[] tile;
     public int[][][] mapTileNum;
     boolean drawPath = true;
@@ -100,20 +107,40 @@ public class TileManager {
             int row = 0;
 
             while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
-
                 String line = br.readLine();
 
-                while (col < gp.maxWorldCol) {
+                if (line == null) {
+                    break; // Stop if we reach the end of the file.
+                }
 
-                    String[] numbers = line.split(" ");
-                    int num = Integer.parseInt(numbers[col]);
-                    mapTileNum[map][col][row] = num;
+                String[] numbers = line.split(" ");
+                while (col < gp.maxWorldCol) {
+                    try {
+                        int num = Integer.parseInt(numbers[col]);
+
+                        if (num < 0) {
+                            logger.warning(LOGGER_NEGATIVE_NUMBER_MAP_VALUE);
+                            num = 1; // Change value to "wall" if number is negative
+                        }
+
+                        if (num > 22) {
+                            logger.warning(LOGGER_MAX_NUMBER_MAP_VALUE);
+                            num = 2; // Change value to "water" if number is larger then 22
+                        }
+
+                        mapTileNum[map][col][row] = num;
+                    } catch (NumberFormatException e) {
+                        logger.warning(LOGGER_WRONG_MAP_VALUE);
+                        mapTileNum[map][col][row] = 6; // If there is an error in the data, use "tree2"
+                    }
                     col++;
                 }
                 if (col == gp.maxWorldCol) {
                     col = 0;
                     row++;
                 }
+
+
             }
             br.close();
         }
