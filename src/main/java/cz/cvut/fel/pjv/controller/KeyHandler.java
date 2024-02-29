@@ -1,27 +1,22 @@
 package cz.cvut.fel.pjv.controller;
 
+import cz.cvut.fel.pjv.view.GameConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
 import cz.cvut.fel.pjv.view.GameState;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import static cz.cvut.fel.pjv.model.Sound.SOUND_EIGHT;
-import static cz.cvut.fel.pjv.model.Sound.SOUND_ZERO;
-
 public class KeyHandler implements KeyListener {
 
     GamePanel gp;
 
     public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed;
-
-    // DEBUG
     public boolean checkDrawTime = false;
 
     public KeyHandler(GamePanel gp) {
         this.gp = gp;
     }
-
 
     /**
      * Invoked when a key has been typed.
@@ -47,10 +42,8 @@ public class KeyHandler implements KeyListener {
 
         int code = e.getKeyCode();
 
-//        TITLE STATE
-        if (gp.gameState == GameState.TITLE) {
-            if (gp.ui.titleScreenState == 0) { titleState(code); }
-        }
+        // TITLE STATE
+        if (gp.gameState == GameState.TITLE) { if (gp.ui.titleScreenState == 0) { titleState(code); } }
 
         // PLAY STATE
         else if (gp.gameState == GameState.PLAY) { playState(code); }
@@ -75,7 +68,6 @@ public class KeyHandler implements KeyListener {
 
         // MAP STATE
         else if (gp.gameState == GameState.MAP) { mapState(code); }
-
     }
 
     /**
@@ -98,14 +90,14 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_ENTER) {
             if (gp.ui.commandNum == 0) {
                 gp.gameState = GameState.PLAY;
-                gp.playMusic(SOUND_ZERO);
+                gp.playMusic(GameConstants.SOUND_ZERO);
             }
 
             // Load the game
             if (gp.ui.commandNum == 1) {
                 gp.saveLoad.load();
                 gp.gameState = GameState.PLAY;
-                gp.playMusic(SOUND_ZERO);
+                gp.playMusic(GameConstants.SOUND_ZERO);
             }
 
             if (gp.ui.commandNum == 2) { System.exit(0); }
@@ -135,21 +127,16 @@ public class KeyHandler implements KeyListener {
             else { gp.map.miniMapOn = false; }
         }
 
-
-
-        //  DEBUG
         if (code == KeyEvent.VK_T) { checkDrawTime = !checkDrawTime; }
 
         if (code == KeyEvent.VK_E) {
             switch (gp.currentMap) {
-                case 0: gp.tileM.loadMap("/maps/new2.txt", 0); break;
-                case 1: gp.tileM.loadMap("/maps/pjv.txt", 1); break;
-                case 2: gp.tileM.loadMap("/maps/gold.txt", 2); break;
-
+                case 0: gp.tileM.loadMap(MapConstants.MAP_PATH_NEW2, MapConstants.MAP_NEW); break;
+                case 1: gp.tileM.loadMap(MapConstants.MAP_PATH_PJV, MapConstants.MAP_PJV); break;
+                case 2: gp.tileM.loadMap(MapConstants.MAP_PATH_GOLD, MapConstants.MAP_GOLD); break;
             }
         }
     }
-
 
     private void pauseState (int code) {
         if(code == KeyEvent.VK_P) { gp.gameState = GameState.PLAY; }
@@ -174,9 +161,7 @@ public class KeyHandler implements KeyListener {
     private void characterState (int code) {
         if (code == KeyEvent.VK_C) { gp.gameState = GameState.PLAY; }
         if (code == KeyEvent.VK_ENTER) { gp.player.selectItem(); }
-
         playerInventory(code);
-
     }
 
     /**
@@ -198,7 +183,7 @@ public class KeyHandler implements KeyListener {
 
         if (code == KeyEvent.VK_W) {
             gp.ui.commandNum--;
-            gp.playSE(SOUND_EIGHT);
+            gp.playSE(GameConstants.SOUND_EIGHT);
             if (gp.ui.commandNum < 0) {
                 gp.ui.commandNum = maxCommandNum;
             }
@@ -206,7 +191,7 @@ public class KeyHandler implements KeyListener {
 
         if (code == KeyEvent.VK_S) {
             gp.ui.commandNum++;
-            gp.playSE(SOUND_EIGHT);
+            gp.playSE(GameConstants.SOUND_EIGHT);
             if (gp.ui.commandNum > maxCommandNum) {
                 gp.ui.commandNum = 0;
             }
@@ -217,11 +202,11 @@ public class KeyHandler implements KeyListener {
                 if (gp.ui.commandNum == 0 && gp.music.volumeScale > 0) {
                     gp.music.volumeScale--;
                     gp.music.checkVolume();
-                    gp.playSE(SOUND_EIGHT);
+                    gp.playSE(GameConstants.SOUND_EIGHT);
                 }
                 if (gp.ui.commandNum == 1 && gp.se.volumeScale > 0) {
                     gp.se.volumeScale--;
-                    gp.playSE(SOUND_EIGHT);
+                    gp.playSE(GameConstants.SOUND_EIGHT);
                 }
             }
         }
@@ -231,11 +216,11 @@ public class KeyHandler implements KeyListener {
                 if (gp.ui.commandNum == 0 && gp.music.volumeScale < 5) {
                     gp.music.volumeScale++;
                     gp.music.checkVolume();
-                    gp.playSE(SOUND_EIGHT);
+                    gp.playSE(GameConstants.SOUND_EIGHT);
                 }
                 if (gp.ui.commandNum == 1 && gp.se.volumeScale < 5) {
                     gp.se.volumeScale++;
-                    gp.playSE(SOUND_EIGHT);
+                    gp.playSE(GameConstants.SOUND_EIGHT);
                 }
             }
         }
@@ -254,7 +239,7 @@ public class KeyHandler implements KeyListener {
             if (gp.ui.commandNum < 0) {
                 gp.ui.commandNum = 1;
             }
-            gp.playSE(SOUND_EIGHT);
+            gp.playSE(GameConstants.SOUND_EIGHT);
         }
 
         if (code == KeyEvent.VK_S) {
@@ -262,14 +247,14 @@ public class KeyHandler implements KeyListener {
             if (gp.ui.commandNum > 1) {
                 gp.ui.commandNum = 0;
             }
-            gp.playSE(SOUND_EIGHT);
+            gp.playSE(GameConstants.SOUND_EIGHT);
         }
 
         if (code == KeyEvent.VK_ENTER) {
             if (gp.ui.commandNum == 0) {
                 gp.gameState = GameState.PLAY;
                 gp.resetGame(false);
-                gp.playMusic(SOUND_ZERO);
+                gp.playMusic(GameConstants.SOUND_ZERO);
             }
             else if (gp.ui.commandNum == 1) {
                 gp.gameState = GameState.TITLE;
@@ -295,14 +280,14 @@ public class KeyHandler implements KeyListener {
                 if (gp.ui.commandNum < 0) {
                     gp.ui.commandNum = 2;
                 }
-                gp.playSE(SOUND_EIGHT);
+                gp.playSE(GameConstants.SOUND_EIGHT);
             }
             if (code == KeyEvent.VK_S) {
                 gp.ui.commandNum++;
                 if (gp.ui.commandNum > 2) {
                     gp.ui.commandNum = 0;
                 }
-                gp.playSE(SOUND_EIGHT);
+                gp.playSE(GameConstants.SOUND_EIGHT);
             }
         }
         if (gp.ui.subState == 1) {
@@ -320,7 +305,6 @@ public class KeyHandler implements KeyListener {
                 gp.ui.subState = 0;
             }
         }
-
     }
 
     /**
@@ -343,28 +327,28 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_W) {
             if (gp.ui.playerSlotRow != 0) {
                 gp.ui.playerSlotRow--;
-                gp.playSE(SOUND_EIGHT);
+                gp.playSE(GameConstants.SOUND_EIGHT);
             }
         }
 
         if (code == KeyEvent.VK_A) {
             if (gp.ui.playerSlotCol != 0) {
                 gp.ui.playerSlotCol--;
-                gp.playSE(SOUND_EIGHT);
+                gp.playSE(GameConstants.SOUND_EIGHT);
             }
         }
 
         if (code == KeyEvent.VK_S) {
             if (gp.ui.playerSlotRow != 3) {
                 gp.ui.playerSlotRow++;
-                gp.playSE(SOUND_EIGHT);
+                gp.playSE(GameConstants.SOUND_EIGHT);
             }
         }
 
         if (code == KeyEvent.VK_D) {
             if (gp.ui.playerSlotCol != 4) {
                 gp.ui.playerSlotCol++;
-                gp.playSE(SOUND_EIGHT);
+                gp.playSE(GameConstants.SOUND_EIGHT);
             }
         }
     }
@@ -380,32 +364,31 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_W) {
             if (gp.ui.npcSlotRow != 0) {
                 gp.ui.npcSlotRow--;
-                gp.playSE(SOUND_EIGHT);
+                gp.playSE(GameConstants.SOUND_EIGHT);
             }
         }
 
         if (code == KeyEvent.VK_A) {
             if (gp.ui.npcSlotCol != 0) {
                 gp.ui.npcSlotCol--;
-                gp.playSE(SOUND_EIGHT);
+                gp.playSE(GameConstants.SOUND_EIGHT);
             }
         }
 
         if (code == KeyEvent.VK_S) {
             if (gp.ui.npcSlotRow != 3) {
                 gp.ui.npcSlotRow++;
-                gp.playSE(SOUND_EIGHT);
+                gp.playSE(GameConstants.SOUND_EIGHT);
             }
         }
 
         if (code == KeyEvent.VK_D) {
             if (gp.ui.npcSlotCol != 4) {
                 gp.ui.npcSlotCol++;
-                gp.playSE(SOUND_EIGHT);
+                gp.playSE(GameConstants.SOUND_EIGHT);
             }
         }
     }
-
 
     /**
      * Invoked when a key has been released.
@@ -416,14 +399,11 @@ public class KeyHandler implements KeyListener {
      */
     @Override
     public void keyReleased(KeyEvent e) {
-
         int code = e.getKeyCode();
-
         if (code == KeyEvent.VK_W) { upPressed = false; }
         if (code == KeyEvent.VK_S) { downPressed = false; }
         if (code == KeyEvent.VK_A) { leftPressed = false; }
         if (code == KeyEvent.VK_D) { rightPressed = false; }
         if (code == KeyEvent.VK_F) { shotKeyPressed = false; }
-
     }
 }

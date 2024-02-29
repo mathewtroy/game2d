@@ -1,8 +1,7 @@
 package cz.cvut.fel.pjv.model.entity;
 
+import cz.cvut.fel.pjv.view.GameConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
-
-import static cz.cvut.fel.pjv.model.CollisionChecker.MAX_COST;
 
 public class Projectile extends Entity {
 
@@ -61,7 +60,7 @@ public class Projectile extends Entity {
     private void checkAndDamageEnemy() {
         int enemyIndex = gp.cChecker.checkEntity(this, gp.enemy);
 
-        if (enemyIndex != MAX_COST) {
+        if (enemyIndex != GameConstants.MAX_COST) {
             gp.player.damageEnemy(enemyIndex, attack, knockBackPower);
             generateParticle(user.projectile, gp.enemy[gp.currentMap][enemyIndex]);
             alive = false;

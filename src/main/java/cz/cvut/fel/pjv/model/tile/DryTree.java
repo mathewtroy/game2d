@@ -1,12 +1,12 @@
 package cz.cvut.fel.pjv.model.tile;
 
+import cz.cvut.fel.pjv.view.GameConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
 import cz.cvut.fel.pjv.model.entity.Entity;
+import cz.cvut.fel.pjv.view.UIColors;
 
 import java.awt.*;
 import java.util.logging.Logger;
-
-import static cz.cvut.fel.pjv.model.Sound.SOUND_TEN;
 
 public class DryTree extends InteractiveTile{
 
@@ -14,7 +14,6 @@ public class DryTree extends InteractiveTile{
 
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_DRY_TREE = "Missing image of the DRY TREE";
-    private static final Color PARTICLE_COLOR_BROWN = new Color(65,50,30);
 
     /**
      * Constructs a Dry Tree interactive tile.
@@ -66,7 +65,7 @@ public class DryTree extends InteractiveTile{
      * Plays a sound effect associated with interacting with this Dry Tree.
      */
     public void playSE() {
-        gp.playSE(SOUND_TEN);
+        gp.playSE(GameConstants.SOUND_TEN);
     }
 
     /**
@@ -85,7 +84,7 @@ public class DryTree extends InteractiveTile{
      * @return The color of particles.
      */
     public Color getParticleColor() {
-        Color color = PARTICLE_COLOR_BROWN;
+        Color color = UIColors.PARTICLE_COLOR_BROWN;
         return color;
     }
 

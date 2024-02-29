@@ -112,11 +112,9 @@ public class SaveLoad {
             // Write the DBS object
             oos.writeObject(ds);
 
-
         } catch (Exception e) {
             logger.warning(LOGGER_MESSAGE_SAVE);
         }
-
     }
 
     /**

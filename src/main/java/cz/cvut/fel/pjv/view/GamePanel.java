@@ -20,25 +20,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
-import static cz.cvut.fel.pjv.model.Sound.SOUND_ZERO;
-
 public class GamePanel extends JPanel implements Runnable {
 
-
-    //  SCREEN Settings
-    //    16x16 px
+    //  Screen Settings
     final int originalTileSize = 16;
     final int scale = 3;
-
-    // 48x48 px
     public int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 20;
     public final int maxScreenRow = 12;
-
-    // 960 px
     public final int screenWidth = tileSize * maxScreenCol;
-
-    // 576 px
     public final int screenHeight = tileSize * maxScreenRow;
 
     // CONSTANTS NUMBER
@@ -53,10 +43,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     public final int worldWidth = tileSize * maxWorldCol;
     public final int worldHeight = tileSize * maxWorldRow;
-
     int frameRate = 60;
 
-    // SYSTEM
+    // System
     public TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
     public Sound music = new Sound();
@@ -71,8 +60,6 @@ public class GamePanel extends JPanel implements Runnable {
     public SaveLoad saveLoad = new SaveLoad(this);
     public EntityGenerator eGenerator = new EntityGenerator(this);
     Thread gameThread;
-
-    // ENTITY and OBJECT
     public Player player = new Player(this, keyH);
     public Entity[][] obj = new Entity[maxMap][20];
     public Entity[][] npc = new Entity[maxMap][10];
@@ -82,32 +69,11 @@ public class GamePanel extends JPanel implements Runnable {
     public ArrayList<Entity> particleList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
     public NullEntity nullEntity;
-
-    // GAME STATE
     public GameState gameState;
 
-//    /**
-//     * The `GameState` enum represents the different states of the game.
-//     */
-//    public enum GameState {
-//        TITLE,
-//        PLAY,
-//        PAUSE,
-//        DIALOGUE,
-//        CHARACTER,
-//        OPTION,
-//        GAME_OVER,
-//        TRANSITION,
-//        TRADE,
-//        MAP
-//    }
-
-    /**
-     *
-     */
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.BLACK);
+        this.setBackground(UIColors.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
@@ -122,7 +88,7 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setNPC();
         aSetter.setEnemy();
         aSetter.setInteractiveTile();
-        playMusic(SOUND_ZERO);
+        playMusic(GameConstants.SOUND_ZERO);
         stopMusic();
     }
 
@@ -354,7 +320,7 @@ public class GamePanel extends JPanel implements Runnable {
         if (keyH.checkDrawTime) {
             long drawEnd = System.nanoTime();
             long passed = drawEnd - drawStart;
-            g2.setColor(Color.white);
+            g2.setColor(UIColors.WHITE);
             g2.drawString("Draw Time: " + passed, 10, 400);
             System.out.println("Draw Time: " + passed);
         }

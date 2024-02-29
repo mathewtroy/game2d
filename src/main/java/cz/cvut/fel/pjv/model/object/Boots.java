@@ -1,11 +1,10 @@
 package cz.cvut.fel.pjv.model.object;
 
+import cz.cvut.fel.pjv.view.GameConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
 import cz.cvut.fel.pjv.model.entity.Entity;
 
 import java.util.logging.Logger;
-
-import static cz.cvut.fel.pjv.model.Sound.SOUND_ONE;
 
 public class Boots extends Entity {
 
@@ -43,7 +42,7 @@ public class Boots extends Entity {
      * @return True if the boots were used successfully, false otherwise.
      */
     public boolean use(Entity entity) {
-        gp.playSE(SOUND_ONE);
+        gp.playSE(GameConstants.SOUND_ONE);
         gp.ui.addMessage("Coin + " + value);
         gp.player.speed += value;
         return true;

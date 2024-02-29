@@ -1,11 +1,11 @@
 package cz.cvut.fel.pjv.model;
 
 import cz.cvut.fel.pjv.model.entity.Entity;
+import cz.cvut.fel.pjv.view.GameConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
 
 public class CollisionChecker {
 
-    public static final int MAX_COST = 999;
     GamePanel gp;
 
     public CollisionChecker(GamePanel gp) {
@@ -86,7 +86,7 @@ public class CollisionChecker {
      */
     public int checkObject(Entity entity, boolean player) {
 
-        int index = MAX_COST;
+        int index = GameConstants.MAX_COST;
 
         for (int i = 0; i < gp.obj[1].length; i++) {
 
@@ -132,7 +132,7 @@ public class CollisionChecker {
     // NPC or ENEMY
     public int checkEntity(Entity entity, Entity[][] target) {
 
-        int index = MAX_COST;
+        int index = GameConstants.MAX_COST;
 
         for (int i = 0; i < target[1].length; i++) {
 

@@ -1,14 +1,11 @@
 package cz.cvut.fel.pjv.model.object;
 
+import cz.cvut.fel.pjv.view.GameConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
 import cz.cvut.fel.pjv.model.entity.Entity;
 import cz.cvut.fel.pjv.view.GameState;
 
 import java.util.logging.Logger;
-
-import static cz.cvut.fel.pjv.model.CollisionChecker.MAX_COST;
-import static cz.cvut.fel.pjv.model.Sound.SOUND_THREE;
-
 
 public class Key extends Entity {
 
@@ -51,9 +48,9 @@ public class Key extends Entity {
         gp.gameState = GameState.DIALOGUE;
         int objIndex = getDetected(entity, gp.obj, "Door");
 
-        if (objIndex != MAX_COST) {
+        if (objIndex != GameConstants.MAX_COST) {
             gp.ui.currentDialogue = "You use the " + name + " and open the door";
-            gp.playSE(SOUND_THREE);
+            gp.playSE(GameConstants.SOUND_THREE);
             gp.obj[gp.currentMap][objIndex] = null;
             return true;
         }

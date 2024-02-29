@@ -1,7 +1,10 @@
 package cz.cvut.fel.pjv.model.entity;
 
+import cz.cvut.fel.pjv.controller.MapConstants;
+import cz.cvut.fel.pjv.view.GameConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
 import cz.cvut.fel.pjv.utils.UtilityTool;
+import cz.cvut.fel.pjv.view.UIColors;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -9,28 +12,15 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static cz.cvut.fel.pjv.model.CollisionChecker.MAX_COST;
-import static cz.cvut.fel.pjv.model.Sound.SOUND_SIX;
-
 public class Entity {
 
     GamePanel gp;
-
     public NullEntity nullEntity;
-
-    private static final Color HP_BAR_BACKGROUND_COLOR = new Color(35, 35, 35);
-    private static final Color HP_BAR_COLOR = new Color(255, 0, 30);
 
     private static final int MAX_INVISIBLE_COUNTER = 40;
     private static final int MAX_SHOT_AVAILABLE_COUNTER = 30;
     private static final int MAX_SPRITE_COUNTER = 20;
     private static final int KNOCKBACK_COUNTER_THRESHOLD = 10;
-
-    private static final String UP = "up";
-    private static final String DOWN = "down";
-    private static final String LEFT = "left";
-    private static final String RIGHT = "right";
-
 
     public BufferedImage up1, up2, down1, down2, right1, right2, left1, left2,
             attackUp1, attackUp2, attackDown1, attackDown2,
@@ -41,10 +31,9 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     String[] dialogues = new String[20];
 
-
     // STATE
     public int worldX, worldY;
-    public String direction = DOWN;
+    public String direction = MapConstants.DOWN;
     public int spriteNum = 1;
     private int dialogueIndex = 0;
     public boolean collisionOn = false;
@@ -77,7 +66,6 @@ public class Entity {
     public int maxMana;
     public int mana;
     public int ammo;
-
     public int level;
     public int strength;
     public int dexterity;
@@ -116,7 +104,6 @@ public class Entity {
     protected final int type_pickupOnly = 7;
     protected final int type_obstacle = 8;
 
-
     public Entity(GamePanel gp) {
         this.gp = gp;
     }
@@ -137,9 +124,7 @@ public class Entity {
         this.level = level;
     }
 
-    public int getExp() {
-        return exp;
-    }
+    public int getExp() { return exp; }
 
     public void setExp(int exp) {
         this.exp = exp;
@@ -247,18 +232,11 @@ public class Entity {
         knockBackCounter = 0;
     }
 
+    public void setLoot(Entity loot) {   }
 
-    public void setLoot(Entity loot) {
+    protected void setAction() {    }
 
-    }
-
-    protected void setAction() {
-
-    }
-
-    protected void damageReaction() {
-
-    }
+    protected void damageReaction() {    }
 
     /**
      * Initiates a speaking action for the entity.
@@ -272,24 +250,20 @@ public class Entity {
         dialogueIndex++;
 
         switch (gp.player.direction) {
-            case UP: direction = DOWN; break;
-            case DOWN: direction = UP; break;
-            case LEFT: direction = RIGHT; break;
-            case RIGHT: direction = LEFT; break;
+            case MapConstants.UP: direction = MapConstants.DOWN; break;
+            case MapConstants.DOWN: direction = MapConstants.UP; break;
+            case MapConstants.LEFT: direction = MapConstants.RIGHT; break;
+            case MapConstants.RIGHT: direction = MapConstants.LEFT; break;
         }
     }
 
-    protected void interact() {
-
-    }
+    protected void interact() {    }
 
     protected boolean use (Entity entity) {
         return false;
     }
 
-    public void checkDrop()  {
-
-    }
+    public void checkDrop()  {    }
 
     /**
      * Drops an item entity onto the game map.
@@ -311,25 +285,16 @@ public class Entity {
         }
     }
 
-    protected Color getParticleColor() {
-        Color color = null;
-        return color;
-    }
+    protected Color getParticleColor() { Color color = null; return color; }
 
     protected int getParticleSize() {
         int size = 0;   // 6 pixels
         return size;
     }
 
-    protected int getParticleSpeed() {
-        int speed = 0;
-        return speed;
-    }
+    protected int getParticleSpeed() { int speed = 0; return speed; }
 
-    protected int getParticleMaxLife() {
-        int maxLife = 0;
-        return maxLife;
-    }
+    protected int getParticleMaxLife() { int maxLife = 0; return maxLife; }
 
     /**
      * Generates particle effects based on a generator entity and a target entity.
@@ -345,7 +310,6 @@ public class Entity {
     protected void generateParticle(Entity generator, Entity target) {
 
         Color color = generator.getParticleColor();
-
         int size = generator.getParticleSize();
         int speed = generator.getParticleSpeed();
         int maxLife = generator.getParticleMaxLife();
@@ -359,7 +323,6 @@ public class Entity {
         gp.particleList.add(p2);
         gp.particleList.add(p3);
         gp.particleList.add(p4);
-
     }
 
     /**
@@ -378,22 +341,15 @@ public class Entity {
         gp.cChecker.checkEntity(this, gp.enemy);
         gp.cChecker.checkEntity(this, gp.iTile);
         boolean contactPlayer = gp.cChecker.checkPlayer(this);
-
-        if (this.type == type_enemy && contactPlayer) {
-            damagePlayer(attack);
-        }
+        if (this.type == type_enemy && contactPlayer) { damagePlayer(attack); }
     }
 
     /**
      * Updates the entity's state and behavior.
      */
     public void update() {
-        if (knockBack) {
-            handleKnockBack();
-        } else {
-            handleMovement();
-        }
-
+        if (knockBack) { handleKnockBack(); }
+        else { handleMovement(); }
         updateSprite();
         handleInvisibility();
         handleShotAvailableCounter();
@@ -404,18 +360,10 @@ public class Entity {
      */
     private void handleKnockBack() {
         checkCollision();
-
-        if (collisionOn) {
-            resetKnockBack();
-        } else {
-            moveWithKnockBack();
-        }
-
+        if (collisionOn) { resetKnockBack(); }
+        else { moveWithKnockBack(); }
         incrementKnockBackCounter();
-
-        if (knockBackCounter == KNOCKBACK_COUNTER_THRESHOLD) {
-            resetKnockBack();
-        }
+        if (knockBackCounter == KNOCKBACK_COUNTER_THRESHOLD) { resetKnockBack(); }
     }
 
     /**
@@ -432,10 +380,10 @@ public class Entity {
      */
     private void moveWithKnockBack() {
         switch (gp.player.direction) {
-            case UP: worldY -= speed; break;
-            case DOWN: worldY += speed; break;
-            case LEFT: worldX -= speed; break;
-            case RIGHT: worldX += speed; break;
+            case MapConstants.UP: worldY -= speed; break;
+            case MapConstants.DOWN: worldY += speed; break;
+            case MapConstants.LEFT: worldX -= speed; break;
+            case MapConstants.RIGHT: worldX += speed; break;
         }
     }
 
@@ -449,10 +397,7 @@ public class Entity {
     private void handleMovement() {
         setAction();
         checkCollision();
-
-        if (!collisionOn) {
-            moveInDirection();
-        }
+        if (!collisionOn) { moveInDirection(); }
     }
 
     /**
@@ -460,10 +405,10 @@ public class Entity {
      */
     private void moveInDirection() {
         switch (direction) {
-            case UP: worldY -= speed; break;
-            case DOWN: worldY += speed; break;
-            case LEFT: worldX -= speed; break;
-            case RIGHT: worldX += speed; break;
+            case MapConstants.UP: worldY -= speed; break;
+            case MapConstants.DOWN: worldY += speed; break;
+            case MapConstants.LEFT: worldX -= speed; break;
+            case MapConstants.RIGHT: worldX += speed; break;
         }
     }
 
@@ -529,7 +474,7 @@ public class Entity {
     protected void damagePlayer(int attack) {
         if (!gp.player.invisible) {
             // we can give damage
-            gp.playSE(SOUND_SIX);
+            gp.playSE(GameConstants.SOUND_SIX);
 
             int damage = attack - gp.player.defense;
             if (damage < 0) {
@@ -548,7 +493,6 @@ public class Entity {
     public void draw(Graphics2D g2) {
 
         BufferedImage image = null;
-
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
         int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
@@ -558,22 +502,22 @@ public class Entity {
                 worldY - gp.tileSize < gp.player.worldY + gp.player.screenY ) {
 
             switch (direction) {
-                case UP:
+                case MapConstants.UP:
                     if (spriteNum == 1) { image = up1; }
                     if (spriteNum == 2) { image = up2; }
                     break;
 
-                case DOWN:
+                case MapConstants.DOWN:
                     if (spriteNum == 1) { image = down1; }
                     if (spriteNum == 2) { image = down2; }
                     break;
 
-                case LEFT:
+                case MapConstants.LEFT:
                     if (spriteNum == 1) { image = left1; }
                     if (spriteNum == 2) { image = left2; }
                     break;
 
-                case RIGHT:
+                case MapConstants.RIGHT:
                     if (spriteNum == 1) { image = right1; }
                     if (spriteNum == 2) { image = right2; }
                     break;
@@ -585,9 +529,9 @@ public class Entity {
                 double oneScale = (double)gp.tileSize/maxLife;
                 double hpBarValue = oneScale*life;
 
-                g2.setColor(HP_BAR_BACKGROUND_COLOR);
+                g2.setColor(UIColors.HP_BAR_BACKGROUND_COLOR);
                 g2.fillRect(screenX-1, screenY - 16 , gp.tileSize+2, 12);
-                g2.setColor(HP_BAR_COLOR);
+                g2.setColor(UIColors.HP_BAR_COLOR);
                 g2.fillRect(screenX, screenY - 15 , (int)hpBarValue, 10);
 
                 hpBarCounter++;
@@ -618,7 +562,6 @@ public class Entity {
      * @param g2 The Graphics2D object on which to apply the dying animation.
      */
     private void dyingAnimation(Graphics2D g2) {
-
         dyingCounter++;
         int i = 5;
 
@@ -630,10 +573,7 @@ public class Entity {
         if (dyingCounter > i*5 && dyingCounter <= i*6) { changeAlpha(g2, 1f); }
         if (dyingCounter > i*6 && dyingCounter <= i*7) { changeAlpha(g2, 0f); }
         if (dyingCounter > i*7 && dyingCounter <= i*8) { changeAlpha(g2, 1f); }
-        if (dyingCounter > i*8) {
-            alive = false;
-        }
-
+        if (dyingCounter > i*8) { alive = false; }
     }
 
     /**
@@ -655,7 +595,6 @@ public class Entity {
      * @return A BufferedImage containing the loaded and scaled image, or null if an error occurs.
      */
     public BufferedImage setup(String imagePath, int width, int height) {
-
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
 
@@ -663,9 +602,7 @@ public class Entity {
             image = ImageIO.read(getClass().getResourceAsStream( imagePath + ".png"));
             image = uTool.scaleImage(image, width, height);
         }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        catch (IOException e) { e.printStackTrace(); }
         return image;
     }
 
@@ -678,7 +615,6 @@ public class Entity {
     protected void searchPath(int goalCol, int goalRow) {
         int startCol = calculateStartCol();
         int startRow = calculateStartRow();
-
         gp.pFinder.setNodes(startCol, startRow, goalCol, goalRow);
 
         if (gp.pFinder.search()) {
@@ -729,46 +665,40 @@ public class Entity {
     private void determineDirection(int nextX, int nextY, int enLeftX, int enRightX, int enTopY, int enBottomY) {
         // Determine the direction based on the positions
         if ((enTopY > nextY) && (enLeftX >= nextX) && (enRightX < nextX + gp.tileSize)) {
-            direction = UP;
+            direction = MapConstants.UP;
         } else if ((enTopY < nextY) && (enLeftX >= nextX) && (enRightX < nextX + gp.tileSize)) {
-            direction = DOWN;
+            direction = MapConstants.DOWN;
+
         } else if ((enTopY >= nextY) && (enBottomY < nextY + gp.tileSize)) {
             // Left or right
-            if (enLeftX > nextX) {
-                direction = LEFT;
-            }
-            if (enLeftX < nextX) {
-                direction = RIGHT;
-            }
+            if (enLeftX > nextX) { direction = MapConstants.LEFT; }
+            if (enLeftX < nextX) { direction = MapConstants.RIGHT; }
+
         } else if ((enTopY > nextY) && (enLeftX > nextX)) {
             // Up or left
-            direction = UP;
+            direction = MapConstants.UP;
             checkCollision();
-            if (collisionOn) {
-                direction = "left";
-            }
+            if (collisionOn) { direction = MapConstants.LEFT; }
+
         } else if ((enTopY > nextY) && (enLeftX < nextX)) {
             // Up or right
-            direction = UP;
+            direction = MapConstants.UP;
             checkCollision();
-            if (collisionOn) {
-                direction = RIGHT;
-            }
+            if (collisionOn) { direction = MapConstants.RIGHT; }
+
         } else if ((enTopY < nextY) && (enLeftX > nextX)) {
             // Down or left
-            direction = DOWN;
-            if (collisionOn) {
-                direction = LEFT;
-            }
+            direction = MapConstants.DOWN;
+            if (collisionOn) { direction = MapConstants.LEFT; }
+
         } else if ((enTopY < nextY) && (enLeftX < nextX)) {
             // Down or right
-            direction = DOWN;
+            direction = MapConstants.DOWN;
             if (collisionOn) {
-                direction = RIGHT;
+                direction = MapConstants.RIGHT;
             }
         }
     }
-
 
     /**
      * Checks if the entity has reached the goal.
@@ -792,18 +722,16 @@ public class Entity {
      * @return The index of the detected target in the target array, or a constant representing no detection
      */
     protected int getDetected(Entity user, Entity[][] target, String targetName) {
-
-        int index = MAX_COST;
-
+        int index = GameConstants.MAX_COST;
         // Check the surrounding
         int nextWorldX = user.getLeftX();
         int nextWorldY = user.getTopY();
 
         switch (user.direction) {
-            case UP: nextWorldY = user.getTopY() - gp.player.speed; break;
-            case DOWN: nextWorldY = user.getBottomY() + gp.player.speed; break;
-            case LEFT: nextWorldX = user.getLeftX() - gp.player.speed; break;
-            case RIGHT: nextWorldX = user.getRightX() + gp.player.speed; break;
+            case MapConstants.UP: nextWorldY = user.getTopY() - gp.player.speed; break;
+            case MapConstants.DOWN: nextWorldY = user.getBottomY() + gp.player.speed; break;
+            case MapConstants.LEFT: nextWorldX = user.getLeftX() - gp.player.speed; break;
+            case MapConstants.RIGHT: nextWorldX = user.getRightX() + gp.player.speed; break;
         }
 
         int col = nextWorldX/gp.tileSize;

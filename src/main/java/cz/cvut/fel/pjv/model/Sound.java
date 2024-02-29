@@ -1,5 +1,7 @@
 package cz.cvut.fel.pjv.model;
 
+import cz.cvut.fel.pjv.view.GameConstants;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -16,48 +18,7 @@ public class Sound {
     private static final int VOLUME_SCALE_FOUR = 4;
     private static final int VOLUME_SCALE_FIVE = 5;
 
-    // Constants for volume levels
-    private static final float MUTE = -80;
-    private static final float FIRST_LEVEL = -20;
-    private static final float SECOND_LEVEL = -12;
-    private static final float THIRD_LEVEL = -5;
-    private static final float FOURTH_LEVEL = -1;
-    private static final float MAX_LEVEL = 6;
-
-    // Sound indices
-    public static final int SOUND_ZERO = 0;
-    public static final int SOUND_ONE = 1;
-    public static final int SOUND_TWO = 2;
-    public static final int SOUND_THREE = 3;
-    static final int SOUND_FOUR = 4;
-    public static final int SOUND_FIVE = 5;
-    public static final int SOUND_SIX = 6;
-    public static final int SOUND_SEVEN = 7;
-    public static final int SOUND_EIGHT = 8;
-    public static final int SOUND_NINE = 9;
-    public static final int SOUND_TEN = 10;
-    public static final int SOUND_ELEVEN = 11;
-    public static final int SOUND_TWELVE = 12 ;
-    public static final int SOUND_THIRTEEN = 13 ;
-
-    // Sound file paths
-    private static final String IRISH_SOUND = "/sound/irish.wav";
-    private static final String COIN_SOUND = "/sound/coin.wav";
-    private static final String SUCCESS_SOUND = "/sound/success.wav";
-    private static final String POWERUP_SOUND = "/sound/powerup.wav";
-    private static final String UNLOCK_SOUND = "/sound/unlock.wav";
-    private static final String HIT_ENEMY_SOUND = "/sound/hitenemy.wav";
-    private static final String RECEIVE_DAMAGE_SOUND = "/sound/receivedamage.wav";
-    private static final String LEVEL_UP_SOUND = "/sound/levelup.wav";
-    private static final String CURSOR_SOUND = "/sound/cursor.wav";
-    private static final String BURNING_SOUND = "/sound/burning.wav";
-    private static final String CUT_TREE_SOUND = "/sound/cuttree.wav";
-    private static final String GAME_OVER_SOUND = "/sound/gameover.wav";
-    private static final String STAIRS_SOUND = "/sound/stairs.wav";
-    private static final String PRIZE_SOUND = "/sound/prize.wav";
-
     private Clip clip;
-
     public URL[] soundURL = new URL[30];
     private FloatControl fc;
     public int volumeScale = 3;
@@ -65,20 +26,20 @@ public class Sound {
 
     // Sound file paths
     private static final String[] SOUND_PATHS = {
-            IRISH_SOUND,
-            COIN_SOUND,
-            SUCCESS_SOUND,
-            POWERUP_SOUND,
-            UNLOCK_SOUND,
-            HIT_ENEMY_SOUND,
-            RECEIVE_DAMAGE_SOUND,
-            LEVEL_UP_SOUND,
-            CURSOR_SOUND,
-            BURNING_SOUND,
-            CUT_TREE_SOUND,
-            GAME_OVER_SOUND,
-            STAIRS_SOUND,
-            PRIZE_SOUND
+            GameConstants.IRISH_SOUND,
+            GameConstants.COIN_SOUND,
+            GameConstants.SUCCESS_SOUND,
+            GameConstants.POWERUP_SOUND,
+            GameConstants.UNLOCK_SOUND,
+            GameConstants.HIT_ENEMY_SOUND,
+            GameConstants.RECEIVE_DAMAGE_SOUND,
+            GameConstants.LEVEL_UP_SOUND,
+            GameConstants.CURSOR_SOUND,
+            GameConstants.BURNING_SOUND,
+            GameConstants.CUT_TREE_SOUND,
+            GameConstants.GAME_OVER_SOUND,
+            GameConstants.STAIRS_SOUND,
+            GameConstants.PRIZE_SOUND
     };
 
     /**
@@ -136,15 +97,14 @@ public class Sound {
      */
     public void checkVolume() {
         switch (volumeScale) {
-            case VOLUME_SCALE_ZERO: volume = MUTE; break;
-            case VOLUME_SCALE_ONE: volume = FIRST_LEVEL; break;
-            case VOLUME_SCALE_TWO: volume = SECOND_LEVEL; break;
-            case VOLUME_SCALE_THREE: volume = THIRD_LEVEL; break;
-            case VOLUME_SCALE_FOUR: volume = FOURTH_LEVEL; break;
-            case VOLUME_SCALE_FIVE: volume = MAX_LEVEL; break;
+            case VOLUME_SCALE_ZERO: volume = GameConstants.MUTE; break;
+            case VOLUME_SCALE_ONE: volume = GameConstants.FIRST_LEVEL; break;
+            case VOLUME_SCALE_TWO: volume = GameConstants.SECOND_LEVEL; break;
+            case VOLUME_SCALE_THREE: volume = GameConstants.THIRD_LEVEL; break;
+            case VOLUME_SCALE_FOUR: volume = GameConstants.FOURTH_LEVEL; break;
+            case VOLUME_SCALE_FIVE: volume = GameConstants.MAX_LEVEL; break;
 
         }
         fc.setValue(volume);
     }
-
 }

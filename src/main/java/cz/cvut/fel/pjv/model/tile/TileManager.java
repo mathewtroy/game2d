@@ -1,7 +1,9 @@
 package cz.cvut.fel.pjv.model.tile;
 
+import cz.cvut.fel.pjv.controller.MapConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
 import cz.cvut.fel.pjv.utils.UtilityTool;
+import cz.cvut.fel.pjv.view.UIColors;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -14,7 +16,6 @@ public class TileManager {
 
     GamePanel gp;
 
-    private static final Color PATH_COLOR = new Color(255, 0, 0, 70);
     public Tile[] tile;
     public int[][][] mapTileNum;
     boolean drawPath = true;
@@ -33,14 +34,9 @@ public class TileManager {
         mapTileNum = new int[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage();
-        loadMap("/maps/new2.txt", 0);
-
-        loadMap("/maps/pjv.txt", 1);
-
-        loadMap("/maps/gold.txt", 2);
-
-
-
+        loadMap(MapConstants.MAP_PATH_NEW2, MapConstants.MAP_NEW);
+        loadMap(MapConstants.MAP_PATH_PJV, MapConstants.MAP_PJV);
+        loadMap(MapConstants.MAP_PATH_GOLD, MapConstants.MAP_GOLD);
     }
 
     private void getTileImage() {
@@ -57,8 +53,6 @@ public class TileManager {
         setup(9, "danger", false);
         setup(10, "fountain", true);
         setup(11, "drytree", true);
-
-
         setup(12, "entry", false);
         setup(13, "floor", false);
         setup(14, "table", true);
@@ -70,8 +64,6 @@ public class TileManager {
         setup(20, "bonbon2", true);
         setup(21, "bonbon3", true);
         setup(22, "umbrella", false);
-
-
 
     }
 
@@ -150,11 +142,9 @@ public class TileManager {
         int worldCol = 0;
         int worldRow = 0;
 
-
         while(worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
 
             int tileNum = mapTileNum[gp.currentMap][worldCol][worldRow];
-
             int worldX = worldCol * gp.tileSize;
             int worldY = worldRow * gp.tileSize;
             int screenX = worldX - gp.player.worldX + gp.player.screenX;
@@ -177,7 +167,7 @@ public class TileManager {
         }
 
         if (drawPath) {
-            g2.setColor(PATH_COLOR);
+            g2.setColor(UIColors.PATH_COLOR);
 
             for(int i = 0; i < gp.pFinder.pathList.size(); i++) {
                 int worldX = worldCol * gp.tileSize;

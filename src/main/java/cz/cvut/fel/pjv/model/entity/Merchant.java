@@ -60,7 +60,6 @@ public class Merchant extends Entity  {
         inventory.add(new Spike(gp));
         inventory.add(new Helmet_Ger(gp));
         inventory.add(new Helmet(gp));
-
     }
 
     /**
@@ -73,5 +72,4 @@ public class Merchant extends Entity  {
         gp.ui.npc = this;
 
     }
-
 }

@@ -1,12 +1,10 @@
 package cz.cvut.fel.pjv.model.object;
 
+import cz.cvut.fel.pjv.view.GameConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
 import cz.cvut.fel.pjv.model.entity.Entity;
 
 import java.util.logging.Logger;
-
-import static cz.cvut.fel.pjv.model.Sound.SOUND_TWO;
-
 
 public class Heart extends Entity {
 
@@ -46,7 +44,7 @@ public class Heart extends Entity {
      * @return True if the Life Potion was successfully used, false otherwise.
      */
     public boolean use(Entity entity) {
-        gp.playSE(SOUND_TWO);
+        gp.playSE(GameConstants.SOUND_TWO);
         gp.ui.addMessage("Life +" + value) ;
         entity.life += value;
         return true;

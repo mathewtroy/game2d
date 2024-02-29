@@ -3,14 +3,13 @@ package cz.cvut.fel.pjv.model.weapon;
 import cz.cvut.fel.pjv.view.GamePanel;
 import cz.cvut.fel.pjv.model.entity.Entity;
 import cz.cvut.fel.pjv.model.entity.Projectile;
+import cz.cvut.fel.pjv.view.UIColors;
 
 import java.awt.*;
 import java.util.logging.Logger;
 
 public class Bullet extends Projectile {
 
-
-    private static final Color PARTICLE_COLOR = new Color(240,50,0);
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_BULLET = "Missing image of the F";
     public static final String objName = "Bullet";
@@ -78,7 +77,7 @@ public class Bullet extends Projectile {
      * @return The color of the bullet's particles.
      */
     public Color getParticleColor() {
-        return PARTICLE_COLOR;
+        return UIColors.PARTICLE_COLOR;
     }
 
     /**

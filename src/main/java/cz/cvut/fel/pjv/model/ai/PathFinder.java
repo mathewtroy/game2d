@@ -1,10 +1,9 @@
 package cz.cvut.fel.pjv.model.ai;
 
+import cz.cvut.fel.pjv.view.GameConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
 
 import java.util.ArrayList;
-
-import static cz.cvut.fel.pjv.model.CollisionChecker.MAX_COST;
 
 /**
  *  The class is responsible for finding the path from the start node to the target node
@@ -41,11 +40,7 @@ public class PathFinder {
         while((col < gp.maxWorldCol) && (row < gp.maxWorldRow)) {
             node[col][row] = new Node(col,row);
             col++;
-
-            if (col == gp.maxWorldCol) {
-                col = 0;
-                row++;
-            }
+            if (col == gp.maxWorldCol) { col = 0; row++; }
         }
     }
 
@@ -63,13 +58,8 @@ public class PathFinder {
             node[col][row].open = false;
             node[col][row].checked = false;
             node[col][row].solid = false;
-
             col++;
-
-            if (col == gp.maxWorldCol) {
-                col = 0;
-                row++;
-            }
+            if (col == gp.maxWorldCol) { col = 0; row++; }
         }
 
         // Reset other settings
@@ -104,16 +94,13 @@ public class PathFinder {
 
         while(col < gp.maxWorldCol && row < gp.maxWorldRow) {
 
-            // SET SOLID NODE
-
-            // CHECK TILES
+            // Set Solid Mode
+            // Check Tiles
             int tileNum = gp.tileM.mapTileNum[gp.currentMap][col][row];
 
-            if (gp.tileM.tile[tileNum].collision == true) {
-                node[col][row].solid = true;
-            }
+            if (gp.tileM.tile[tileNum].collision == true) { node[col][row].solid = true; }
 
-            // CHECK INTERACTIVE TILES
+            // Check Iterative Tiles
             for (int i = 0; i < gp.iTile[1].length; i++) {
                 if (gp.iTile[gp.currentMap][i] != null &&
                         gp.iTile[gp.currentMap][i].destructible == true) {
@@ -122,15 +109,10 @@ public class PathFinder {
                     node[itCol][itRow].solid = true;
                 }
             }
-            // SET COST
+            // Set COST
             getCost(node[col][row]);
-
             col++;
-
-            if (col == gp.maxWorldCol) {
-                col = 0;
-                row++;
-            }
+            if (col == gp.maxWorldCol) { col = 0; row++; }
         }
     }
 
@@ -171,28 +153,20 @@ public class PathFinder {
             openList.remove(currentNode);
 
             // Open the Up Node
-            if (row - 1 >= 0) {
-                openNode(node[col][row-1]);
-            }
+            if (row - 1 >= 0) { openNode(node[col][row-1]); }
 
             // Open the Left Node
-            if (col - 1 >= 0) {
-                openNode(node[col-1][row]);
-            }
+            if (col - 1 >= 0) { openNode(node[col-1][row]); }
 
             // Open the Down Node
-            if (row + 1 < gp.maxWorldRow) {
-                openNode(node[col][row+1]);
-            }
+            if (row + 1 < gp.maxWorldRow) { openNode(node[col][row+1]); }
 
             // Open the Right Node
-            if (col + 1 < gp.maxWorldCol) {
-                openNode(node[col+1][row]);
-            }
+            if (col + 1 < gp.maxWorldCol) { openNode(node[col+1][row]); }
 
             // Find the best Node
             int bestNodeIdx = 0;
-            int bestNodeCost = MAX_COST;
+            int bestNodeCost = GameConstants.MAX_COST;
 
             for (int i = 0; i < openList.size(); i++) {
 
@@ -204,24 +178,16 @@ public class PathFinder {
                 }
                 // If F cost is equal, check the G cost
                 else if (openList.get(i).fCost == bestNodeCost) {
-                    if (openList.get(i).gCost < openList.get(bestNodeIdx).gCost) {
-                        bestNodeIdx = i;
-                    }
+                    if (openList.get(i).gCost < openList.get(bestNodeIdx).gCost) { bestNodeIdx = i; }
                 }
             }
 
             // If there is no bode in the openList, end the loop
-            if (openList.size() == 0) {
-                break;
-            }
+            if (openList.size() == 0) { break; }
 
             // After the loop, openList[bestNodeIdx] is the next step (=currentNode)
             currentNode = openList.get(bestNodeIdx);
-
-            if (currentNode == goalNode) {
-                goalReached = true;
-                trackThePath();
-            }
+            if (currentNode == goalNode) { goalReached = true; trackThePath(); }
             step++;
         }
         return goalReached;
@@ -252,5 +218,4 @@ public class PathFinder {
             current = current.parent;
         }
     }
-
 }

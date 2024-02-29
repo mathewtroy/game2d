@@ -1,6 +1,7 @@
 package cz.cvut.fel.pjv.model.tile;
 
 import cz.cvut.fel.pjv.view.GamePanel;
+import cz.cvut.fel.pjv.view.UIColors;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -10,7 +11,6 @@ public class Map extends TileManager {
     GamePanel gp;
     protected BufferedImage[] worldMap;
     public boolean miniMapOn = false;
-
 
     /**
      * Manages tiles for the game, initializing tile array, map tile numbers, and loading maps.
@@ -66,7 +66,7 @@ public class Map extends TileManager {
     public void drawFullMapScreen(Graphics2D g2) {
 
         // Background color
-        g2.setColor(Color.black);
+        g2.setColor(UIColors.BLACK);
         g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
 
         // Draw MAP
@@ -86,7 +86,7 @@ public class Map extends TileManager {
         // HINT
         g2.setFont(gp.ui.arial_40.deriveFont(32f));
         // think about another font
-        g2.setColor(Color.white);
+        g2.setColor(UIColors.WHITE);
         g2.drawString("Press M to close", 720, 550);
 
     }

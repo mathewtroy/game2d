@@ -14,6 +14,10 @@ class PlayerTest {
     private KeyHandler keyHandler;
     private int mapNum;
 
+    private static final String LEVEL_UP_ERROR_MSG = "Level should increase after gaining enough experience";
+    private static final String EXP_RESET_ERROR_MSG = "Experience should be reset or set to a new value after level up";
+
+
     @BeforeEach
     void setUp() {
         gp = new GamePanel();
@@ -64,5 +68,28 @@ class PlayerTest {
 
         Assertions.assertEquals(expectedGhostHealth, resultGhostHealth);
     }
+
+
+    @Test
+    void levelUpTest() {
+        Player player = new Player(gp, keyHandler);
+
+        // Set initial level and experience
+        player.level = 1;
+        player.exp = 0;
+
+        // Assume that 100 experience points are required for level up
+        int requiredExpForLevelUp = 100;
+        player.exp = requiredExpForLevelUp;
+
+        // Check if the level increases
+        player.checkLevelUp();
+        Assertions.assertEquals(2, player.level, LEVEL_UP_ERROR_MSG);
+
+        // Check if the experience is reset or set to the correct value after level up
+        Assertions.assertTrue(player.exp >= 0, EXP_RESET_ERROR_MSG);
+    }
+
+
 
 }

@@ -1,12 +1,11 @@
 package cz.cvut.fel.pjv.model.object;
 
+import cz.cvut.fel.pjv.view.GameConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
 import cz.cvut.fel.pjv.model.entity.Entity;
 import cz.cvut.fel.pjv.view.GameState;
 
 import java.util.logging.Logger;
-
-import static cz.cvut.fel.pjv.model.Sound.SOUND_THREE;
 
 public class Potion_Blue extends Entity {
 
@@ -54,7 +53,7 @@ public class Potion_Blue extends Entity {
                 "Mana has been recovered by " + value + "!";
         entity.mana += value;
 
-        gp.playSE(SOUND_THREE);
+        gp.playSE(GameConstants.SOUND_THREE);
 
         return true;
 

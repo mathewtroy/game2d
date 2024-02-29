@@ -1,12 +1,11 @@
 package cz.cvut.fel.pjv.model.object;
 
+import cz.cvut.fel.pjv.view.GameConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
 import cz.cvut.fel.pjv.model.entity.Entity;
 import cz.cvut.fel.pjv.view.GameState;
 
 import java.util.logging.Logger;
-
-import static cz.cvut.fel.pjv.model.Sound.SOUND_THIRTEEN;
 
 public class Chest extends Entity {
 
@@ -86,7 +85,7 @@ public class Chest extends Entity {
      * If the player cannot carry the loot, it displays a message accordingly.
      */
     private void openChest() {
-        gp.playSE(SOUND_THIRTEEN);
+        gp.playSE(GameConstants.SOUND_THIRTEEN);
 
         StringBuilder sb = new StringBuilder();
         sb.append(OPEN_CHEST_MESSAGE).append(loot.name).append("!");

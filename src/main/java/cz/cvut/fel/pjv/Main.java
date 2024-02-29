@@ -1,5 +1,6 @@
 package cz.cvut.fel.pjv;
 
+import cz.cvut.fel.pjv.view.GameConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
 
 import javax.swing.*;
@@ -10,7 +11,7 @@ public class Main {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-        window.setTitle("TANKI 2D Game");
+        window.setTitle(GameConstants.TITLE_NAME);
 
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);

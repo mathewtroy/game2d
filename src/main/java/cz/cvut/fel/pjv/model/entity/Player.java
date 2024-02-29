@@ -3,6 +3,7 @@ package cz.cvut.fel.pjv.model.entity;
 import cz.cvut.fel.pjv.model.object.*;
 import cz.cvut.fel.pjv.model.weapon.Bullet;
 import cz.cvut.fel.pjv.model.weapon.Spike;
+import cz.cvut.fel.pjv.view.GameConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
 import cz.cvut.fel.pjv.controller.KeyHandler;
 import cz.cvut.fel.pjv.view.GameState;
@@ -11,7 +12,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.logging.Logger;
 
-import static cz.cvut.fel.pjv.model.CollisionChecker.MAX_COST;
 import static cz.cvut.fel.pjv.model.Sound.*;
 
 public class Player extends Entity {
@@ -350,7 +350,7 @@ public class Player extends Entity {
      * Starts the player's attack animation.
      */
     private void startAttack() {
-        gp.playSE(SOUND_FIVE);
+        gp.playSE(GameConstants.SOUND_FIVE);
         attacking = true;
         spriteCounter = 0;
     }
@@ -400,7 +400,7 @@ public class Player extends Entity {
             }
 
             shotAvailableCounter = 0;
-            gp.playSE(SOUND_NINE);
+            gp.playSE(GameConstants.SOUND_NINE);
         }
 
         if (shotAvailableCounter < SHOT_AVAILABLE_COUNTER_THRESHOLD) {
@@ -446,7 +446,7 @@ public class Player extends Entity {
         gp.gameState = GameState.GAME_OVER;
         gp.ui.commandNum = -1;
         gp.stopMusic();
-        gp.playSE(SOUND_ELEVEN);
+        gp.playSE(GameConstants.SOUND_ELEVEN);
     }
 
 
@@ -513,7 +513,7 @@ public class Player extends Entity {
      * @param i The index of the object in the game world.
      */
     public void pickUpObject (int i) {
-        if (i != MAX_COST) {
+        if (i != GameConstants.MAX_COST) {
 
             // PICKUP ONLY ITEMS
             if (gp.obj[gp.currentMap][i].type == type_pickupOnly) {
@@ -536,7 +536,7 @@ public class Player extends Entity {
                 String text;
 
                 if (canObtainItem(gp.obj[gp.currentMap][i])) {
-                    gp.playSE(SOUND_ONE);
+                    gp.playSE(GameConstants.SOUND_ONE);
                     text = "Got a " + gp.obj[gp.currentMap][i].getName() + "!";
                 }
                 else {
@@ -559,7 +559,7 @@ public class Player extends Entity {
     public void interactNPC(int i) {
         if (gp.keyH.enterPressed) {
 
-            if (i != MAX_COST) {
+            if (i != GameConstants.MAX_COST) {
 
                 attackCanceled = true;
 
@@ -580,10 +580,10 @@ public class Player extends Entity {
      */
     public void contactEnemy(int i) {
 
-        if (i != MAX_COST) {
+        if (i != GameConstants.MAX_COST) {
 
             if (!invisible && !gp.enemy[gp.currentMap][i].dying) {
-                gp.playSE(SOUND_SIX);
+                gp.playSE(GameConstants.SOUND_SIX);
 
                 int damage = gp.enemy[gp.currentMap][i].attack - defense;
                 if (damage < 0) {
@@ -603,10 +603,10 @@ public class Player extends Entity {
      * @param knockBackPower The knockback power applied to the enemy.
      */
     public void damageEnemy(int i, int attack, int knockBackPower) {
-        if (i != MAX_COST) {
+        if (i != GameConstants.MAX_COST) {
             if (!gp.enemy[gp.currentMap][i].invisible) {
 
-                gp.playSE(SOUND_FIVE);
+                gp.playSE(GameConstants.SOUND_FIVE);
 
                 if (knockBackPower > 0) {
                     knockBack(gp.enemy[gp.currentMap][i], knockBackPower);
@@ -656,7 +656,7 @@ public class Player extends Entity {
      * @param i The index of the interactive tile to damage.
      */
     public void damageInteractiveTile(int i) {
-        if (i != MAX_COST && gp.iTile[gp.currentMap][i].destructible
+        if (i != GameConstants.MAX_COST && gp.iTile[gp.currentMap][i].destructible
                 && gp.iTile[gp.currentMap][i].isCorrectItem(this)
                 && !gp.iTile[gp.currentMap][i].invisible) {
             gp.iTile[gp.currentMap][i].playSE();
@@ -679,7 +679,7 @@ public class Player extends Entity {
      */
     public void damageProjectile(int i) {
 
-        if (i != MAX_COST) {
+        if (i != GameConstants.MAX_COST) {
             Entity projectile = gp.projectile[gp.currentMap][i];
             projectile.alive = false;
             generateParticle(projectile, projectile);
@@ -700,7 +700,7 @@ public class Player extends Entity {
             attack = getAttack();
             defense =getDefense();
 
-            gp.playSE(SOUND_SEVEN);
+            gp.playSE(GameConstants.SOUND_SEVEN);
             gp.gameState = GameState.DIALOGUE;
             gp.ui.currentDialogue = "Congrats, PLAYER!\n" +
                     "You are level " + level + "now!\n" +
@@ -755,7 +755,7 @@ public class Player extends Entity {
      */
     public int searchItemInInventory(String itemName) {
 
-        int itemIndex = MAX_COST;
+        int itemIndex = GameConstants.MAX_COST;
 
         for (int i = 0; i < inventory.size(); i++) {
             if (inventory.get(i).getName().equals(itemName)) {
@@ -784,7 +784,7 @@ public class Player extends Entity {
         if (item.stackable) {
             int index = searchItemInInventory(newItem.getName());
 
-            if (index != MAX_COST) {
+            if (index != GameConstants.MAX_COST) {
                 inventory.get(index).amount++;
                 canObtain = true;
             }
