@@ -1,11 +1,15 @@
 package cz.cvut.fel.pjv.model;
 
+import cz.cvut.fel.pjv.model.armor.HelmetGerman;
 import cz.cvut.fel.pjv.model.enemy.Tank;
 import cz.cvut.fel.pjv.model.entity.Merchant;
 import cz.cvut.fel.pjv.model.entity.OldMan;
 import cz.cvut.fel.pjv.model.enemy.Ghost;
 import cz.cvut.fel.pjv.model.object.*;
+import cz.cvut.fel.pjv.model.refill.Ammunition;
+import cz.cvut.fel.pjv.model.refill.FirstAid;
 import cz.cvut.fel.pjv.model.tile.DryTree;
+import cz.cvut.fel.pjv.model.vitality.Heart;
 import cz.cvut.fel.pjv.model.weapon.Ram;
 import cz.cvut.fel.pjv.view.GamePanel;
 

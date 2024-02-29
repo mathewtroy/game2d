@@ -1,5 +1,7 @@
-package cz.cvut.fel.pjv.model.object;
+package cz.cvut.fel.pjv.model.refill;
 
+import cz.cvut.fel.pjv.model.object.Chest;
+import cz.cvut.fel.pjv.model.object.Key;
 import cz.cvut.fel.pjv.view.GameConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
 import cz.cvut.fel.pjv.model.entity.Entity;

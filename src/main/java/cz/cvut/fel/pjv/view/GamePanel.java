@@ -199,8 +199,6 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D) g;
 
-        long drawStart = 0;
-        if (keyH.checkDrawTime) { drawStart = System.nanoTime(); }
         if (gameState == GameState.TITLE) { ui.draw(g2); } // Title screen
         else if (gameState == GameState.MAP) { map.drawFullMapScreen(g2); } // Map screen
 
@@ -235,27 +233,12 @@ public class GamePanel extends JPanel implements Runnable {
                 if (particleList.get(i) != null) { entityList.add(particleList.get(i)); }
             }
 
-//            // SORT
-//            Collections.sort(entityList, new Comparator<Entity>() {
-//                @Override
-//                public int compare(Entity e1, Entity e2) {
-//                    return Integer.compare(e1.worldY, e2.worldY);
-//                }
-//            });
-
             for (int i = 0; i < entityList.size(); i++) { entityList.get(i).draw(g2); } // Draw Entities
             entityList.clear(); // Empty entity list
             map.drawMiniMap(g2); // Draw Mini map
             ui.draw(g2); // Draw UI
         }
 
-        if (keyH.checkDrawTime) {
-            long drawEnd = System.nanoTime();
-            long passed = drawEnd - drawStart;
-            g2.setColor(UIColors.WHITE);
-            g2.drawString("Draw Time: " + passed, 10, 400);
-            System.out.println("Draw Time: " + passed);
-        }
         g2.dispose();
     }
 

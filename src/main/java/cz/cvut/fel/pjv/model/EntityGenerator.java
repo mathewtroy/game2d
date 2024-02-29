@@ -1,7 +1,13 @@
 package cz.cvut.fel.pjv.model;
 
+import cz.cvut.fel.pjv.model.armor.Helmet;
+import cz.cvut.fel.pjv.model.armor.HelmetGerman;
 import cz.cvut.fel.pjv.model.entity.Entity;
 import cz.cvut.fel.pjv.model.object.*;
+import cz.cvut.fel.pjv.model.refill.Ammunition;
+import cz.cvut.fel.pjv.model.refill.FirstAid;
+import cz.cvut.fel.pjv.model.vitality.Heart;
+import cz.cvut.fel.pjv.model.vitality.Mana;
 import cz.cvut.fel.pjv.model.weapon.Bullet;
 import cz.cvut.fel.pjv.model.weapon.Ram;
 import cz.cvut.fel.pjv.model.weapon.Spike;

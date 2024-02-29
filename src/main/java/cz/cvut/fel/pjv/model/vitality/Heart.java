@@ -1,4 +1,4 @@
-package cz.cvut.fel.pjv.model.object;
+package cz.cvut.fel.pjv.model.vitality;
 
 import cz.cvut.fel.pjv.view.GameConstants;
 import cz.cvut.fel.pjv.view.GamePanel;

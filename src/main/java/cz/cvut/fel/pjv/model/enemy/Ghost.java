@@ -1,9 +1,9 @@
 package cz.cvut.fel.pjv.model.enemy;
 
 import cz.cvut.fel.pjv.controller.MapConstants;
-import cz.cvut.fel.pjv.model.object.Heart;
-import cz.cvut.fel.pjv.model.object.Mana;
-import cz.cvut.fel.pjv.model.object.FirstAid;
+import cz.cvut.fel.pjv.model.vitality.Heart;
+import cz.cvut.fel.pjv.model.vitality.Mana;
+import cz.cvut.fel.pjv.model.refill.FirstAid;
 import cz.cvut.fel.pjv.view.GamePanel;
 import cz.cvut.fel.pjv.model.entity.Entity;
 

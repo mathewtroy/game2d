@@ -2,8 +2,8 @@ package cz.cvut.fel.pjv.view;
 
 import cz.cvut.fel.pjv.model.entity.Entity;
 import cz.cvut.fel.pjv.model.object.CoinGold;
-import cz.cvut.fel.pjv.model.object.Heart;
-import cz.cvut.fel.pjv.model.object.Mana;
+import cz.cvut.fel.pjv.model.vitality.Heart;
+import cz.cvut.fel.pjv.model.vitality.Mana;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

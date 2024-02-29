@@ -12,7 +12,6 @@ public class KeyHandler implements KeyListener {
     GamePanel gp;
 
     public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed;
-    public boolean checkDrawTime = false;
 
     public KeyHandler(GamePanel gp) {
         this.gp = gp;
@@ -126,8 +125,6 @@ public class KeyHandler implements KeyListener {
             if (!gp.map.miniMapOn) { gp.map.miniMapOn = true; }
             else { gp.map.miniMapOn = false; }
         }
-
-        if (code == KeyEvent.VK_T) { checkDrawTime = !checkDrawTime; }
 
         if (code == KeyEvent.VK_E) {
             switch (gp.currentMap) {
