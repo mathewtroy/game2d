@@ -9,6 +9,7 @@ public class Spike extends Entity {
 
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_SPIKE = "Missing image of the SPIKE";
+    private static final String SPIKE_PATH = "/weapon/spike";
     public static final String objName = "Normal Spike";
 
     GamePanel gp;
@@ -32,7 +33,7 @@ public class Spike extends Entity {
      */
     private void setupSpikeImage() {
         try {
-            down1 = setup("/objects/spike", gp.tileSize, gp.tileSize);
+            down1 = setup(SPIKE_PATH, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
             logger.warning(LOGGER_MESSAGE_SPIKE);
         }

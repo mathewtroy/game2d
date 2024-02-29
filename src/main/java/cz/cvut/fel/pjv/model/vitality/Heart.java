@@ -10,9 +10,9 @@ public class Heart extends Entity {
 
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_HEART = "Missing image of the HEART";
-    private static final String HEART_FULL_PATH = "/objects/heart_full";
-    private static final String HEART_HALF_PATH = "/objects/heart_half";
-    private static final String HEART_BLANK_PATH = "/objects/heart_blank";
+    private static final String HEART_FULL_PATH = "/vitality/heart_full";
+    private static final String HEART_HALF_PATH = "/vitality/heart_half";
+    private static final String HEART_BLANK_PATH = "/vitality/heart_blank";
     private static final String LIFE_PLUS_PREFIX = "Life +";
     public static final String objName = "Heart";
 

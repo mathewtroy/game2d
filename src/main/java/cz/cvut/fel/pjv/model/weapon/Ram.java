@@ -9,6 +9,7 @@ public class Ram extends Entity {
 
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_RAM = "Missing image of the RAM";
+    private static final String RAM_PATH = "/weapon/ram";
     public static final String objName = "Normal Ram";
 
     GamePanel gp;
@@ -32,7 +33,7 @@ public class Ram extends Entity {
      */
     private void setupRamImage() {
         try {
-            down1 = setup("/objects/ram", gp.tileSize, gp.tileSize);
+            down1 = setup(RAM_PATH, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
             logger.warning(LOGGER_MESSAGE_RAM);
         }

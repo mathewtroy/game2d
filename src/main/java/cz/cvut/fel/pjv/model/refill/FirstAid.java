@@ -14,7 +14,7 @@ public class FirstAid extends Entity {
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_FIRST_AID = "Missing image of the FIRST AID";
     private static final String FIRST_AID_DESCRIPTION = "[First Aid]\nHeals your life by ";
-    private static final String FIRST_AID_PATH = "/objects/first_aid";
+    private static final String FIRST_AID_PATH = "/refill/first_aid";
     private static final String LIFE_RECOVERY_MESSAGE = "Life has been recovered by ";
     public static final String NEW_LINE = "\n";
     public static final String objName = "First Aid";

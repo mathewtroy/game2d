@@ -12,6 +12,14 @@ public class Bullet extends Projectile {
 
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_BULLET = "Missing image of the F";
+    private static final String BULLET_UP_1_PATH = "/projectiles/bullet_up_1";
+    private static final String BULLET_UP_2_PATH = "/projectiles/bullet_up_2";
+    private static final String BULLET_DOWN_1_PATH = "/projectiles/bullet_down_1";
+    private static final String BULLET_DOWN_2_PATH = "/projectiles/bullet_down_2";
+    private static final String BULLET_LEFT_1_PATH = "/projectiles/bullet_left_1";
+    private static final String BULLET_LEFT_2_PATH = "/projectiles/bullet_left_2";
+    private static final String BULLET_RIGHT_1_PATH = "/projectiles/bullet_right_1";
+    private static final String BULLET_RIGHT_2_PATH = "/projectiles/bullet_right_2";
     public static final String objName = "Bullet";
 
     GamePanel gp;
@@ -35,14 +43,14 @@ public class Bullet extends Projectile {
      */
     public void setupBulletImage() {
         try {
-            up1 = setup("/projectiles/bullet_up_1", gp.tileSize, gp.tileSize);
-            up2 = setup("/projectiles/bullet_up_2", gp.tileSize, gp.tileSize);
-            down1 = setup("/projectiles/bullet_down_1", gp.tileSize, gp.tileSize);
-            down2 = setup("/projectiles/bullet_down_2", gp.tileSize, gp.tileSize);
-            left1 = setup("/projectiles/bullet_left_1", gp.tileSize, gp.tileSize);
-            left2 = setup("/projectiles/bullet_left_2", gp.tileSize, gp.tileSize);
-            right1 = setup("/projectiles/bullet_right_1", gp.tileSize, gp.tileSize);
-            right2 = setup("/projectiles/bullet_right_2", gp.tileSize, gp.tileSize);
+            up1 = setup(BULLET_UP_1_PATH, gp.tileSize, gp.tileSize);
+            up2 = setup(BULLET_UP_2_PATH, gp.tileSize, gp.tileSize);
+            down1 = setup(BULLET_DOWN_1_PATH, gp.tileSize, gp.tileSize);
+            down2 = setup(BULLET_DOWN_2_PATH, gp.tileSize, gp.tileSize);
+            left1 = setup(BULLET_LEFT_1_PATH, gp.tileSize, gp.tileSize);
+            left2 = setup(BULLET_LEFT_2_PATH, gp.tileSize, gp.tileSize);
+            right1 = setup(BULLET_RIGHT_1_PATH, gp.tileSize, gp.tileSize);
+            right2 = setup(BULLET_RIGHT_2_PATH, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
             logger.warning(LOGGER_MESSAGE_BULLET);
         }

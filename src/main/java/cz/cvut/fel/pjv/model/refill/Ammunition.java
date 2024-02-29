@@ -14,7 +14,7 @@ public class Ammunition extends Entity {
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_AMMUNITION = "Missing image of the AMMUNITION";
     private static final String AMMUNITION_DESCRIPTION = "[Ammunition]\nRecover mana by ";
-    private static final String AMMUNITION_IMAGE_PATH = "/objects/ammunition";
+    private static final String AMMUNITION_IMAGE_PATH = "/refill/ammunition";
     private static final String MANA_RECOVERY_MESSAGE = "Mana has been recovered by ";
     public static final String objName = "Ammunition";
 

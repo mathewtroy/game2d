@@ -11,7 +11,7 @@ public class HelmetGerman extends Entity {
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_HELMET_GERMAN = "Missing image of the HELMET GERMAN";
     private static final String NEW_GERMAN_HELMET_DESCRIPTION = "]\nNew German helmet.";
-    private static final String GERMAN_HELMET_PATH = "/objects/helmet_ger";
+    private static final String GERMAN_HELMET_PATH = "/armor/helmet_ger";
     public static final String objName = "German Helmet";
 
     GamePanel gp;

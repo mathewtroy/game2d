@@ -14,6 +14,7 @@ public class Bomb extends Projectile {
     private static final Color PARTICLE_COLOR_OLIVE = new Color(40, 50, 0);
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_BOMB = "Missing image of the Bomb";
+    private static final String BOMB_PATH = "/projectiles/bomb_picture";
     public static final String objName = "Bomb";
 
     public Bomb(GamePanel gp) {
@@ -34,14 +35,14 @@ public class Bomb extends Projectile {
      */
     public void setupBombImage() {
         try {
-            up1 = setup("/projectiles/bomb_picture", gp.tileSize, gp.tileSize);
-            up2 = setup("/projectiles/bomb_picture", gp.tileSize, gp.tileSize);
-            down1 = setup("/projectiles/bomb_picture", gp.tileSize, gp.tileSize);
-            down2 = setup("/projectiles/bomb_picture", gp.tileSize, gp.tileSize);
-            left1 = setup("/projectiles/bomb_picture", gp.tileSize, gp.tileSize);
-            left2 = setup("/projectiles/bomb_picture", gp.tileSize, gp.tileSize);
-            right1 = setup("/projectiles/bomb_picture", gp.tileSize, gp.tileSize);
-            right2 = setup("/projectiles/bomb_picture", gp.tileSize, gp.tileSize);
+            up1 = setup(BOMB_PATH, gp.tileSize, gp.tileSize);
+            up2 = setup(BOMB_PATH, gp.tileSize, gp.tileSize);
+            down1 = setup(BOMB_PATH, gp.tileSize, gp.tileSize);
+            down2 = setup(BOMB_PATH, gp.tileSize, gp.tileSize);
+            left1 = setup(BOMB_PATH, gp.tileSize, gp.tileSize);
+            left2 = setup(BOMB_PATH, gp.tileSize, gp.tileSize);
+            right1 = setup(BOMB_PATH, gp.tileSize, gp.tileSize);
+            right2 = setup(BOMB_PATH, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
             logger.warning(LOGGER_MESSAGE_BOMB);
         }

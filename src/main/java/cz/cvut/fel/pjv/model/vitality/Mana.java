@@ -11,8 +11,8 @@ public class Mana extends Entity {
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_MANA = "Missing image of the MANA";
     private static final String MANA_PLUS_PREFIX = "Mana +";
-    private static final String FULL_BULLET_PATH = "/objects/bullet_full";
-    private static final String BLANK_BULLET_PATH = "/objects/bullet_blank";
+    private static final String FULL_BULLET_PATH = "/vitality/bullet_full";
+    private static final String BLANK_BULLET_PATH = "/vitality/bullet_blank";
     public static final String objName = "Mana Crystal";
 
     GamePanel gp;
