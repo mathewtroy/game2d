@@ -36,10 +36,8 @@ public class Projectile extends Entity {
     public void update() {
         // Check collisions and apply damage if user is the player
         if (user == gp.player) { checkAndDamageEnemy(); }
-
         // Check collisions and apply damage if user is not the player
         if (user != gp.player) { checkAndDamagePlayer(); }
-
         updateProjectilePosition(); // Update projectile's position based on its direction
         decrementLife(); // Decrement the projectile's lifespan
         handleAnimation(); // Handle projectile animation
@@ -50,7 +48,6 @@ public class Projectile extends Entity {
      */
     private void checkAndDamageEnemy() {
         int enemyIndex = gp.cChecker.checkEntity(this, gp.enemy);
-
         if (enemyIndex != GameConstants.MAX_COST) {
             gp.player.damageEnemy(enemyIndex, attack, knockBackPower);
             generateParticle(user.projectile, gp.enemy[gp.currentMap][enemyIndex]);

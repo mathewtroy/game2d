@@ -6,6 +6,40 @@ import cz.cvut.fel.pjv.view.GamePanel;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+
+/**
+ * This class use A* search algorithm
+ *
+ * The provided code implements the A* pathfinding algorithm, a widely used and efficient algorithm for finding
+ * the shortest path between two points on a grid.
+ * The A* algorithm combines features of the best-first search and Dijkstra's algorithm,
+ * ensuring both efficiency and accuracy in reaching the destination.
+ * Key characteristics of the A* algorithm as seen in the code include:
+ *
+ *     Open List: This list contains nodes that have been discovered but not yet explored.
+ *     It acts as a pool of potential candidates for the next step in finding the path.
+ *
+ *     Cost Calculation (G, H, and F costs):
+ *         • G cost represents the movement cost from the starting node to a given node,
+ *         essentially the path length.
+ *
+ *         • H cost, or heuristic cost, estimates the cost to reach the goal from a given node,
+ *         often using the Manhattan or Euclidean distance.
+ *
+ *         • F cost is the sum of G and H, representing the total cost of a path through a given node.
+ *
+ *     Node Selection for Exploration: The algorithm selects the node with the lowest F cost from the open list
+ *     for exploration, guiding the search towards the goal.
+ *
+ *     Termination of Search: The search continues until the goal node is reached or the open list is empty,
+ *     indicating that no path exists.
+ *
+ *
+ * More:
+ * https://en.wikipedia.org/wiki/A*_search_algorithm
+ *
+ */
+
 /**
  *  The class is responsible for finding the path from the start node to the target node
  *

@@ -66,10 +66,8 @@ public class Ghost extends Entity {
         int xDistance = Math.abs(worldX - gp.player.worldX);
         int yDistance = Math.abs(worldY - gp.player.worldY);
         int tileDistance = (xDistance + yDistance) / gp.tileSize;
-
         if (!onPath && tileDistance < Tank.CLOSE_DISTANCE) { handleRandomPathSelection(); }
         if (onPath && tileDistance > Tank.FAR_DISTANCE) { handleRandomPathSelection(); }
-
         if (onPath) {
             int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
             int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
@@ -90,7 +88,6 @@ public class Ghost extends Entity {
      */
     private void handleRandomDirection() {
         actionLockCounter++;
-
         if (actionLockCounter == 120) {
             Random random = new Random();
             int i = random.nextInt(Tank.HIGH_PROBABILITY) + 1; // pick up a number from 1 to 100

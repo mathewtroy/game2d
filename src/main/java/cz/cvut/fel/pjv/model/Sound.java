@@ -64,7 +64,6 @@ public class Sound {
      * @param i The index of the audio file in the soundURL array.
      */
     public void setFile(int i) {
-
         try {
             AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
             clip = AudioSystem.getClip();

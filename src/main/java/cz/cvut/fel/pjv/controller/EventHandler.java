@@ -22,15 +22,11 @@ public class EventHandler {
 
     public EventHandler (GamePanel gp) {
         this.gp = gp;
-
         eventRect = new EventRect[gp.maxMap][gp.maxWorldCol][gp.maxWorldRow];
-
         int map = 0;
         int col = 0;
         int row = 0;
-
         while (map < gp.maxMap && col < gp.maxWorldCol && row < gp.maxWorldRow) {
-
             eventRect[map][col][row] = new EventRect();
             eventRect[map][col][row].x = 26;
             eventRect[map][col][row].y = 24;
@@ -38,17 +34,9 @@ public class EventHandler {
             eventRect[map][col][row].height = 2;
             eventRect[map][col][row].eventRectDefaultX = eventRect[map][col][row].x;
             eventRect[map][col][row].eventRectDefaultY = eventRect[map][col][row].y;
-
             col++;
-
-            if (col == gp.maxWorldCol) {
-                col = 0;
-                row++;
-
-                if (row == gp.maxWorldRow) {
-                    row = 0;
-                    map++;
-                }
+            if (col == gp.maxWorldCol) { col = 0; row++;
+                if (row == gp.maxWorldRow) { row = 0; map++; }
             }
         }
     }
@@ -60,21 +48,16 @@ public class EventHandler {
 
         //  Check if the player character is more than
         //  one tile away from the last event
-
         int xDistance = Math.abs(gp.player.worldX - previousEventX);
         int yDistance = Math.abs(gp.player.worldY - previousEventY);
         int distance = Math.max(xDistance, yDistance);
-        if (distance > gp.tileSize) {
-            canTouchEvent = true;
-        }
+        if (distance > gp.tileSize) { canTouchEvent = true; }
 
         if (canTouchEvent) {
             if (hit(MapConstants.MAP_NEW,29, 23, DIRECTION)) { damagePit(); }
             else if (hit(MapConstants.MAP_NEW,27, 21, DIRECTION)) { damagePit(); }
-
             else if (hit(MapConstants.MAP_NEW,29, 27, DIRECTION)) { teleportIsland(); }
             else if (hit(MapConstants.MAP_NEW,20, 42, DIRECTION)) { teleportFEL(); }
-
             else if (hit(MapConstants.MAP_NEW,25, 24, DIRECTION)) { healingPool();}
 
             /*
@@ -117,25 +100,20 @@ public class EventHandler {
      *
      */
     private boolean hit (int map, int col, int row, String reqDirection) {
-
         boolean hit = false;
-
         if (map == gp.currentMap) {
             gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;
             gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;
             eventRect[map][col][row].x = col*gp.tileSize + eventRect[map][col][row].x;
             eventRect[map][col][row].y = row*gp.tileSize + eventRect[map][col][row].y;
-
             if (gp.player.solidArea.intersects(eventRect[map][col][row])
                     && !eventRect[map][col][row].eventDone) {
-
                 if (gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals(DIRECTION)) {
                     hit = true;
                     previousEventX = gp.player.worldX;
                     previousEventY = gp.player.worldY;
                 }
             }
-
             gp.player.solidArea.x =gp.player.solidAreaDefaultX;
             gp.player.solidArea.y =gp.player.solidAreaDefaultY;
             eventRect[map][col][row].x = eventRect[map][col][row].eventRectDefaultX;
@@ -180,7 +158,6 @@ public class EventHandler {
      * Save the game
      */
     private void healingPool() {
-
         if(gp.keyH.enterPressed) {
             gp.gameState = GameState.DIALOGUE;
             gp.player.attackCanceled = true;
@@ -203,11 +180,9 @@ public class EventHandler {
      */
     private void teleportMap(int map, int col, int row) {
         gp.gameState = GameState.TRANSITION;
-
         tempMap = map;
         tempCol = col;
         tempRow = row;
-
         canTouchEvent = false;
         gp.playSE(GameConstants.SOUND_TWELVE);
     }
@@ -218,7 +193,6 @@ public class EventHandler {
      * @param entity The entity representing the NPC or merchant.
      */
     private void speak(Entity entity) {
-
         if (gp.keyH.enterPressed) {
             gp.gameState = GameState.DIALOGUE;
             gp.player.attackCanceled = true;

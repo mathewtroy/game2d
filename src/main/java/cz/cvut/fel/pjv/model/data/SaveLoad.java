@@ -20,7 +20,6 @@ public class SaveLoad {
     private static final String LOGGER_MESSAGE_SAVE = "NO FILE TO SAVE";
     private static final String LOGGER_MESSAGE_LOAD = "NO FILE TO LOAD";
 
-
     GamePanel gp;
 
     public SaveLoad(GamePanel gp) {
@@ -37,7 +36,6 @@ public class SaveLoad {
      */
     public Entity getObject(String itemName){
         Entity obj = gp.nullEntity;
-
         switch (itemName){
             case"Normal Ram":obj = new Ram(gp); break;
             case"First Aid":obj = new FirstAid(gp); break;
@@ -60,7 +58,6 @@ public class SaveLoad {
 
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("save.dat")));
-
             DataStorage ds = new DataStorage();
 
             // Player stats
@@ -93,18 +90,12 @@ public class SaveLoad {
             ds.mapObjectOpened = new boolean [gp.maxMap][gp.obj[1].length];
 
             for(int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
-
                 for(int i = 0; i < gp.obj[1].length; i++) {
-
-                    if(gp.obj[mapNum][i] == gp.nullEntity){
-                        ds.mapObjectNames[mapNum][i] = "NA";
-                    }
-
+                    if(gp.obj[mapNum][i] == gp.nullEntity){ ds.mapObjectNames[mapNum][i] = "NA"; }
                     else {
                         ds.mapObjectNames[mapNum][i] = gp.obj[mapNum][i].getName();
                         ds.mapObjectWorldX[mapNum][i] = gp.obj[mapNum][i].worldX;
                         ds.mapObjectWorldY[mapNum][i] = gp.obj[mapNum][i].worldY;
-
                         if(gp.obj[mapNum][i].loot != gp.nullEntity) {
                             ds.mapObjectLootNames[mapNum][i] = gp.obj[mapNum][i].loot.getName();
                         }
@@ -112,10 +103,8 @@ public class SaveLoad {
                     }
                 }
             }
-
             // Write the DBS object
             oos.writeObject(ds);
-
         } catch (Exception e) {
             logger.warning(LOGGER_MESSAGE_SAVE);
         }
@@ -127,9 +116,7 @@ public class SaveLoad {
     public void load() {
 
         try {
-
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("save.dat")));
-
             // Read the DataStorage object
             DataStorage ds = (DataStorage)ois.readObject();
 
@@ -155,34 +142,23 @@ public class SaveLoad {
             // Player equipment
             gp.player.currentWeapon = gp.player.inventory.get(ds.currentWeaponSlot);
             gp.player.currentHelmet = gp.player.inventory.get(ds.currentHelmetSlot);
-
             gp.player.getAttack();
             gp.player.getDefense();
             gp.player.getPlayerAttackImage();
 
             // Objects on map
             for(int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
-
                 for(int i = 0; i < gp.obj[1].length; i++){
-
-                    if (ds.mapObjectNames[mapNum][i].equals("NA")){
-                        gp.obj[mapNum][i] = gp.nullEntity;
-                    }
-
+                    if (ds.mapObjectNames[mapNum][i].equals("NA")){ gp.obj[mapNum][i] = gp.nullEntity; }
                     else {
                         gp.obj[mapNum][i] = gp.eGenerator.getObject(ds.mapObjectNames[mapNum][i]);
                         gp.obj[mapNum][i].worldX = ds.mapObjectWorldX[mapNum][i];
                         gp.obj[mapNum][i].worldY = ds.mapObjectWorldY[mapNum][i];
-
                         if (!Objects.equals(ds.mapObjectNames[mapNum][i], "")) {
                             gp.obj[mapNum][i].loot = gp.eGenerator.getObject(ds.mapObjectNames[mapNum][i]);
                         }
-
                         gp.obj[mapNum][i].opened = ds.mapObjectOpened[mapNum][i];
-
-                        if (gp.obj[mapNum][i].opened) {
-                            gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image2;
-                        }
+                        if (gp.obj[mapNum][i].opened) { gp.obj[mapNum][i].down1 = gp.obj[mapNum][i].image2; }
                     }
                 }
             }

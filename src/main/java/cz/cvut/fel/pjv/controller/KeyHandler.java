@@ -25,9 +25,7 @@ public class KeyHandler implements KeyListener {
      * @param e Value of the button on keyboard
      */
     @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
+    public void keyTyped(KeyEvent e) { }
 
     /**
      * Invoked when a key has been pressed.
@@ -38,34 +36,16 @@ public class KeyHandler implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-
         int code = e.getKeyCode();
-
-        // TITLE STATE
+        // States
         if (gp.gameState == GameState.TITLE) { if (gp.ui.titleScreenState == 0) { titleState(code); } }
-
-        // PLAY STATE
         else if (gp.gameState == GameState.PLAY) { playState(code); }
-
-        // PAUSE STATE
         else if (gp.gameState == GameState.PAUSE) { pauseState(code); }
-
-        // DIALOGUE STATE
         else if (gp.gameState == GameState.DIALOGUE) { dialogueState(code); }
-
-        // CHARACTER STATE
         else if (gp.gameState == GameState.CHARACTER) { characterState(code); }
-
-        // OPTION STATE
         else if (gp.gameState == GameState.OPTION) { optionState(code); }
-
-        // GAME OVER STATE
         else if (gp.gameState == GameState.GAME_OVER) { gameOverState(code); }
-
-        // TRADE STATE
         else if (gp.gameState == GameState.TRADE) { tradeState(code); }
-
-        // MAP STATE
         else if (gp.gameState == GameState.MAP) { mapState(code); }
     }
 
@@ -98,7 +78,6 @@ public class KeyHandler implements KeyListener {
                 gp.gameState = GameState.PLAY;
                 gp.playMusic(GameConstants.SOUND_ZERO);
             }
-
             if (gp.ui.commandNum == 2) { System.exit(0); }
         }
     }
@@ -169,10 +148,9 @@ public class KeyHandler implements KeyListener {
      */
     private void optionState(int code) {
         if (code == KeyEvent.VK_R) { gp.gameState = GameState.PLAY; }
-
         else if (code == KeyEvent.VK_ENTER) { enterPressed = true; }
-
         int maxCommandNum = 0;
+
         switch (gp.ui.subState) {
             case 0: maxCommandNum = 4; break;
             case 2: maxCommandNum = 1; break;
@@ -233,17 +211,13 @@ public class KeyHandler implements KeyListener {
 
         if (code == KeyEvent.VK_W) {
             gp.ui.commandNum--;
-            if (gp.ui.commandNum < 0) {
-                gp.ui.commandNum = 1;
-            }
+            if (gp.ui.commandNum < 0) { gp.ui.commandNum = 1; }
             gp.playSE(GameConstants.SOUND_EIGHT);
         }
 
         if (code == KeyEvent.VK_S) {
             gp.ui.commandNum++;
-            if (gp.ui.commandNum > 1) {
-                gp.ui.commandNum = 0;
-            }
+            if (gp.ui.commandNum > 1) { gp.ui.commandNum = 0; }
             gp.playSE(GameConstants.SOUND_EIGHT);
         }
 
@@ -267,40 +241,28 @@ public class KeyHandler implements KeyListener {
      */
     private void tradeState(int code) {
 
-        if (code == KeyEvent.VK_ENTER) {
-            enterPressed = true;
-        }
+        if (code == KeyEvent.VK_ENTER) { enterPressed = true; }
 
         if (gp.ui.subState == 0) {
             if (code == KeyEvent.VK_W) {
                 gp.ui.commandNum--;
-                if (gp.ui.commandNum < 0) {
-                    gp.ui.commandNum = 2;
-                }
+                if (gp.ui.commandNum < 0) { gp.ui.commandNum = 2; }
                 gp.playSE(GameConstants.SOUND_EIGHT);
             }
             if (code == KeyEvent.VK_S) {
                 gp.ui.commandNum++;
-                if (gp.ui.commandNum > 2) {
-                    gp.ui.commandNum = 0;
-                }
+                if (gp.ui.commandNum > 2) { gp.ui.commandNum = 0; }
                 gp.playSE(GameConstants.SOUND_EIGHT);
             }
         }
         if (gp.ui.subState == 1) {
             npcInventory(code);
-
-            if (code == KeyEvent.VK_ESCAPE) {
-                gp.ui.subState = 0;
-            }
+            if (code == KeyEvent.VK_ESCAPE) { gp.ui.subState = 0; }
         }
 
         if (gp.ui.subState == 2) {
             playerInventory(code);
-
-            if (code == KeyEvent.VK_ESCAPE) {
-                gp.ui.subState = 0;
-            }
+            if (code == KeyEvent.VK_ESCAPE) { gp.ui.subState = 0; }
         }
     }
 

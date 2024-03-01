@@ -123,18 +123,15 @@ public class GamePanel extends JPanel implements Runnable {
     public void run() {
         double drawInterval = BILLION_SIZE / frameRate; //  0.01666 seconds
         double nextDrawTime = System.nanoTime() + drawInterval;
-
         while (gameThread != null) {
             update(); // Update
             repaint(); // Draw
-
             try {
                 double remainingTime = nextDrawTime - System.nanoTime();
                 remainingTime = remainingTime / MILLION_SIZE;
                 if (remainingTime < 0) { remainingTime = 0; }
                 Thread.sleep((long) remainingTime);
                 nextDrawTime += drawInterval;
-
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -194,11 +191,8 @@ public class GamePanel extends JPanel implements Runnable {
      * @param g The graphics context used for rendering.
      */
     public void paintComponent (Graphics g) {
-
         super.paintComponent(g);
-
         Graphics2D g2 = (Graphics2D) g;
-
         if (gameState == GameState.TITLE) { ui.draw(g2); } // Title screen
         else if (gameState == GameState.MAP) { map.drawFullMapScreen(g2); } // Map screen
 
@@ -238,10 +232,8 @@ public class GamePanel extends JPanel implements Runnable {
             map.drawMiniMap(g2); // Draw Mini map
             ui.draw(g2); // Draw UI
         }
-
         g2.dispose();
     }
-
 
     /**
      * Plays background music with the specified index.

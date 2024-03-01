@@ -1,5 +1,6 @@
 package cz.cvut.fel.pjv.model.entity;
 
+import cz.cvut.fel.pjv.controller.MapConstants;
 import cz.cvut.fel.pjv.model.armor.Helmet;
 import cz.cvut.fel.pjv.model.armor.HelmetGerman;
 import cz.cvut.fel.pjv.model.object.*;
@@ -15,14 +16,12 @@ public class Merchant extends Entity  {
 
     private static final String DOWN1_IMAGE_MERCHANT_PATH = "/npc/merchant_down_1";
     private static final String DOWN2_IMAGE_MERCHANT_PATH = "/npc/merchant_down_2";
-
     private static final String DIALOGUE_GREETING = "Hey! \nDo you want to trade, Iwan?? ";
     private static final String DIALOGUE_GOODLUCK = "Good luck, Iwan";
 
     public Merchant(GamePanel gp) {
-
         super(gp);
-        direction = "down";
+        direction = MapConstants.DOWN;
         speed = 1;
         getImage();
         setDialogue();
@@ -72,6 +71,5 @@ public class Merchant extends Entity  {
         super.speak();
         gp.gameState = GameState.TRADE;
         gp.ui.npc = this;
-
     }
 }

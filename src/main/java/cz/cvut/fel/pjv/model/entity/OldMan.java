@@ -24,9 +24,8 @@ public class OldMan extends  Entity {
     private static final String DIALOGUE_4 = "Good luck, Iwan";
 
     public OldMan(GamePanel gp) {
-
         super(gp);
-        direction = "down";
+        direction = MapConstants.DOWN;
         speed = 1;
         getImage();
         setDialogue();
@@ -36,12 +35,10 @@ public class OldMan extends  Entity {
      * Loads and sets the images for the old man's different directions.
      */
     private void getImage() {
-
         up1 = setup(UP1_IMAGE_PATH, gp.tileSize, gp.tileSize);
         up2 = setup(UP2_IMAGE_PATH, gp.tileSize, gp.tileSize);
         down1 = setup(DOWN1_IMAGE_PATH, gp.tileSize, gp.tileSize);
         down2 = setup(DOWN2_IMAGE_PATH, gp.tileSize, gp.tileSize);
-
         right1 = setup(RIGHT1_IMAGE_PATH, gp.tileSize, gp.tileSize);
         right2 = setup(RIGHT2_IMAGE_PATH, gp.tileSize, gp.tileSize);
         left1 = setup(LEFT1_IMAGE_PATH, gp.tileSize, gp.tileSize);
@@ -63,7 +60,6 @@ public class OldMan extends  Entity {
      * If not on a predefined path, the old man will randomly change directions after a certain time interval.
      */
     public void setAction() {
-
         if (onPath) {
             int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
             int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
@@ -71,7 +67,6 @@ public class OldMan extends  Entity {
         }
         else {
             actionLockCounter ++;
-
             if (actionLockCounter == 120) {
                 Random random = new Random();
                 int i = random.nextInt(HIGH_PROBABILITY)+1 ; // pick up a number from 1 to 100

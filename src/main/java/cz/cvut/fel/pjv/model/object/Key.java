@@ -19,7 +19,6 @@ public class Key extends Entity {
     public static final String objName = "Key";
     public static final String SQUARE_BRACKET = "[";
 
-
     GamePanel gp;
 
     public Key(GamePanel gp) {

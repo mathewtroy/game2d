@@ -39,7 +39,6 @@ public class UI {
      * @param gp    The GamePanel reference
      */
     public UI(GamePanel gp) {
-
         this.gp = gp;
         arial_40 = new Font(GameConstants.FONT_ARIAL, Font.PLAIN, 40);
         arial_80B = new Font(GameConstants.FONT_ARIAL, Font.BOLD, 80);
@@ -93,24 +92,23 @@ public class UI {
      * Draw the player's life
      */
     private void drawPlayerLife() {
-
         int x = gp.tileSize/2;
         int y = gp.tileSize/2;
         int i = 0;
 
-        // DRAW MAX HEART
+        // Draw max heart
         while (i < gp.player.maxLife/2) {
             g2.drawImage(heart_blank, x, y, null);
             i++;
             x += gp.tileSize;
         }
 
-        // RESET
+        // Reset
         x = gp.tileSize/2;
         y = gp.tileSize/2;
         i = 0;
 
-        // DRAW CURRENT HEART
+        // Draw current heart
         while (i < gp.player.life) {
             g2.drawImage(heart_half, x, y, null);
             i++;
@@ -119,22 +117,20 @@ public class UI {
             x += gp.tileSize;
         }
 
-        // DRAW MAX MANA
+        // Draw max mana
         x = (gp.tileSize/2)-5;
         y = (int)(gp.tileSize*1.5);
         i = 0;
-
         while (i < gp.player.maxMana) {
             g2.drawImage(crystal_blank, x, y, null);
             i++;
             x += 35;
         }
 
-        // DRAW MANA
+        // Draw mana
         x = (gp.tileSize/2)-5;
         y = (int)(gp.tileSize*1.5);
         i = 0;
-
         while (i < gp.player.mana) {
             g2.drawImage(crystal_full, x, y, null);
             i++;
@@ -149,20 +145,15 @@ public class UI {
         int messageX = gp.tileSize;
         int messageY = gp.tileSize;
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 32F));
-
         for (int i = 0; i < message.size(); i++) {
             if (message.get(i) != null) {
-
                 g2.setColor(UIColors.BLACK);
                 g2.drawString(message.get(i), messageX+3, messageY+3); // added shadow message
-
                 g2.setColor(UIColors.WHITE);
                 g2.drawString(message.get(i), messageX, messageY);
-
                 int counter = messageCounter.get(i) + 1;
                 messageCounter.set(i, counter);
                 messageY += 50;
-
                 if (messageCounter.get(i) > 180) {
                     message.remove(i);
                     messageCounter.remove(i);
@@ -233,11 +224,9 @@ public class UI {
         int width = gp.screenWidth - (gp.tileSize*8);
         int height = gp.tileSize*5;
         drawSubWindow(x, y, width, height);
-
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
         x += gp.tileSize;
         y += gp.tileSize;
-
         for (String line : currentDialogue.split(GameConstants.SEPARATOR)) {
             g2.drawString(line, x, y);
             y += 40;
@@ -345,7 +334,6 @@ public class UI {
      * @param cursor A boolean indicating whether to display a cursor in the inventory.
      */
     private void drawInventory(Entity entity, boolean cursor) {
-
         int frameX = 0;
         int frameY = 0;
         int frameWidth = 0;
@@ -406,7 +394,6 @@ public class UI {
             }
 
             slotX += slotSize;
-
             if ( (i == 4) || (i == 9) || (i == 14) ) {
                 slotX = slotXstart;
                 slotY += slotSize;
@@ -439,9 +426,7 @@ public class UI {
             g2.setFont(g2.getFont().deriveFont(28F));
 
             int itemIndex = getItemIndexOnSlot(slotCol, slotRow);
-
             if (itemIndex < entity.inventory.size()) {
-
                 drawSubWindow(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
                 String[] descriptionLines = entity.inventory.get(itemIndex).description.split(GameConstants.SEPARATOR);
                 for (String line : descriptionLines) {
@@ -466,7 +451,6 @@ public class UI {
         int frameHeight = gp.tileSize*10;
 
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
-
         switch (subState) {
             case 0: options_top(frameX, frameY); break;
             case 1: option_control(frameX, frameY); break;
@@ -481,7 +465,6 @@ public class UI {
     private void drawGameOverScreen() {
         g2.setColor(UIColors.BLACK);
         g2.fillRect(0,0, gp.screenWidth, gp.screenHeight);
-
         int x;
         int y;
         String text;
@@ -592,7 +575,6 @@ public class UI {
     private void option_control(int frameX, int frameY) {
         int textX;
         int textY;
-
         String text = GameConstants.CONTROL; // Title
         textX = getXForCenteredText(text);
         textY = frameY + gp.tileSize;
@@ -676,7 +658,6 @@ public class UI {
      * Draw the transition screen
      */
     private void drawTransition() {
-
         counter++;
         g2.setColor(new Color(0,0,0, counter*5));
         g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
@@ -713,7 +694,6 @@ public class UI {
      * Handles player input for menu selection.
      */
     private void tradeSelect() {
-
         drawDialogueScreen();
         int x = gp.tileSize * 15;
         int y = gp.tileSize * 4;
@@ -777,7 +757,6 @@ public class UI {
         // DRAW PRICE WINDOW
         int itemIndex = getItemIndexOnSlot(npcSlotCol, npcSlotRow);
         if (itemIndex < npc.inventory.size()) {
-
             x = (int) (gp.tileSize*5.5);
             y = (int) (gp.tileSize*5.5);
             width = (int) (gp.tileSize*2.5);
@@ -819,7 +798,6 @@ public class UI {
      * and handles player input for selling items.
      */
     private void tradeSell() {
-
         // DRAW PLAYER INVENTORY
         drawInventory(gp.player, true);
         int x;

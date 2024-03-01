@@ -21,7 +21,6 @@ public class Tank extends Entity {
     private static final String TANK_RIGHT_PATH = "/enemy/tank_right";
     private static final String enemyName = "Tank";
 
-
     // Probability Constants
     public static final int LOW_PROBABILITY = 25;
     public static final int MEDIUM_LOW_PROBABILITY = 50;
@@ -128,7 +127,6 @@ public class Tank extends Entity {
         int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
         int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
         searchPath(goalCol, goalRow);
-
         int i = new Random().nextInt(HIGH_PROBABILITY) + 1;
         if (i > SHOT_PROBABILITY && (!projectile.alive) && shotAvailableCounter == SHOT_COUNTER_MAX) {
             shootProjectile();
@@ -140,7 +138,6 @@ public class Tank extends Entity {
      */
     private void handleRandomDirection() {
         actionLockCounter++;
-
         if (actionLockCounter == 120) {
             Random random = new Random();
             int i = random.nextInt(HIGH_PROBABILITY) + 1; // pick up a number from 1 to 100
