@@ -4,6 +4,7 @@ import cz.cvut.fel.pjv.view.GameConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  *  The class is responsible for finding the path from the start node to the target node
@@ -18,6 +19,10 @@ public class PathFinder {
     Node startNode, goalNode, currentNode;
     boolean goalReached = false;
     int step = 0;
+
+    private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
+    private static final String LOGGER_INVALID_INDEX = "Attempted to access an invalid index: ";
+    private static final String LOGGER_OUT_BOUND = "Start or goal node is out of map boundaries.";
 
     public PathFinder(GamePanel gp) {
         this.gp = gp;
@@ -83,11 +88,23 @@ public class PathFinder {
 
         resetNodes();
 
-        // Set Start and Goal node
-        startNode = node[startCol][startRow];
-        currentNode = startNode;
-        goalNode = node[goalCol][goalRow];
-        openList.add(currentNode);
+        if (startCol < 0 || startCol >= gp.maxWorldCol || startRow < 0 || startRow >= gp.maxWorldRow ||
+                goalCol < 0 || goalCol >= gp.maxWorldCol || goalRow < 0 || goalRow >= gp.maxWorldRow) {
+            logger.warning(LOGGER_OUT_BOUND);
+            return;
+        }
+
+        try {
+            // Set Start and Goal node
+            startNode = node[startCol][startRow];
+            currentNode = startNode;
+            goalNode = node[goalCol][goalRow];
+            openList.add(currentNode);
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            logger.warning(LOGGER_INVALID_INDEX + e.getMessage());
+            return;
+        }
 
         int col = 0;
         int row = 0;

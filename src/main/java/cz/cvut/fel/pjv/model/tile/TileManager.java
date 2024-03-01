@@ -18,13 +18,18 @@ import java.util.logging.Logger;
 
 public class TileManager {
 
-
     GamePanel gp;
     private static final String TILE_PATH = "/tiles/";
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_NEGATIVE_NUMBER_MAP_VALUE = "Use positive number!";
     private static final String LOGGER_MAX_NUMBER_MAP_VALUE = "Use positive number till 22";
     private static final String LOGGER_WRONG_MAP_VALUE = "Are you idiot? Use only numbers!!!";
+    private static final String LOGGER_INCORRECT_COLUMNS = "Incorrect number of columns in row ";
+    private static final String LOGGER_EXPECTED = ". Expected ";
+    private static final String LOGGER_BUT_GOT = ", but got ";
+    private static final String LOGGER_DOT = ".";
+    private static final String LOGGER_ERROR_LOADING_MAP = "Error loading map: ";
+
     public Tile[] tile;
     public int[][][] mapTileNum;
     boolean drawPath = true;
@@ -103,27 +108,27 @@ public class TileManager {
             InputStream is = getClass().getResourceAsStream(filePath);
             assert is != null;
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            int col = 0;
             int row = 0;
 
-            while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
-                String line = br.readLine();
+            String line;
+            while ((line = br.readLine()) != null && row < gp.maxWorldRow) {
+                String[] numbers = line.split(" ");
 
-                if (line == null) {
-                    break; // Stop if we reach the end of the file.
+                // Check for the number of elements in a line
+                if (numbers.length != gp.maxWorldCol) {
+                    logger.warning(LOGGER_INCORRECT_COLUMNS + row + LOGGER_EXPECTED
+                            + gp.maxWorldCol + LOGGER_BUT_GOT + numbers.length + LOGGER_DOT);
+                    break; // Stop reading the file to avoid errors due to incorrect format
                 }
 
-                String[] numbers = line.split(" ");
-                while (col < gp.maxWorldCol) {
+                for (int col = 0; col < numbers.length; col++) {
                     try {
                         int num = Integer.parseInt(numbers[col]);
 
                         if (num < 0) {
                             logger.warning(LOGGER_NEGATIVE_NUMBER_MAP_VALUE);
-                            num = 1; // Change value to "wall" if number is negative
-                        }
-
-                        if (num > 22) {
+                            num = 4; // Change value to "wall" if number is negative
+                        } else if (num > 22) {
                             logger.warning(LOGGER_MAX_NUMBER_MAP_VALUE);
                             num = 2; // Change value to "water" if number is larger then 22
                         }
@@ -131,23 +136,17 @@ public class TileManager {
                         mapTileNum[map][col][row] = num;
                     } catch (NumberFormatException e) {
                         logger.warning(LOGGER_WRONG_MAP_VALUE);
-                        mapTileNum[map][col][row] = 6; // If there is an error in the data, use "tree2"
+                        mapTileNum[map][col][row] = 4; // If there is an error in the data, use "tree2"
                     }
-                    col++;
                 }
-                if (col == gp.maxWorldCol) {
-                    col = 0;
-                    row++;
-                }
-
-
+                row++;
             }
             br.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            logger.warning(LOGGER_ERROR_LOADING_MAP + e.getMessage());
         }
     }
+
 
     /**
      * Draws the visible map tiles on the screen, considering player's position for efficient rendering.

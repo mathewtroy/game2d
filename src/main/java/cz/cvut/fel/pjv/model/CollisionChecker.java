@@ -5,9 +5,13 @@ import cz.cvut.fel.pjv.model.entity.Entity;
 import cz.cvut.fel.pjv.view.GameConstants;
 import cz.cvut.fel.pjv.view.GamePanel;
 
+import java.util.logging.Logger;
+
 public class CollisionChecker {
 
     GamePanel gp;
+    private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
+    private static final String LOGGER_OUT_OF_BOUNDARIES = "You are out of the boundaries";
 
     public CollisionChecker(GamePanel gp) {
         this.gp = gp;
@@ -19,48 +23,65 @@ public class CollisionChecker {
      * @param entity The entity for which collision is being checked.
      */
     public void checkTile(Entity entity) {
-        int entityLeftWorldX = entity.worldX + entity.solidArea.x ;
+        int entityLeftWorldX = entity.worldX + entity.solidArea.x;
         int entityRightWorldX = entity.worldX + entity.solidArea.x + entity.solidArea.width;
         int entityTopWorldY = entity.worldY + entity.solidArea.y;
         int entityBottomWorldY = entity.worldY + entity.solidArea.y + entity.solidArea.height;
-        int entityLeftCol = entityLeftWorldX/gp.tileSize;
-        int entityRightCol = entityRightWorldX/gp.tileSize;
-        int entityTopRow = entityTopWorldY/gp.tileSize;
-        int entityBottomRow = entityBottomWorldY/gp.tileSize;
 
-        int tileNum1, tileNum2;
+        int entityLeftCol = entityLeftWorldX / gp.tileSize;
+        int entityRightCol = entityRightWorldX / gp.tileSize;
+        int entityTopRow = entityTopWorldY / gp.tileSize;
+        int entityBottomRow = entityBottomWorldY / gp.tileSize;
 
-        switch (entity.direction) {
-
-            case MapConstants.UP:
-                entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityTopRow];
-                tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityTopRow];
-                if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) { entity.collisionOn = true; }
-                break;
-
-            case MapConstants.DOWN:
-                entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityBottomRow];
-                tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityBottomRow];
-                if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) { entity.collisionOn = true; }
-                break;
-
-            case MapConstants.LEFT:
-                entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityTopRow];
-                tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityBottomRow];
-                if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) { entity.collisionOn = true; }
-                break;
-
-            case MapConstants.RIGHT:
-                entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityTopRow];
-                tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityBottomRow];
-                if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) { entity.collisionOn = true;}
-                break;
+        if(entityLeftCol < 0 || entityRightCol >= gp.maxWorldCol || entityTopRow < 0 || entityBottomRow >= gp.maxWorldRow) {
+            logger.warning(LOGGER_OUT_OF_BOUNDARIES);
+            return; // Cancel method execution to avoid further testing
         }
+
+        int tileNum1 = 0, tileNum2 = 0;
+
+        try {
+            switch (entity.direction) {
+                case MapConstants.UP:
+                    entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
+                    if (entityTopRow < 0) throw new IndexOutOfBoundsException(LOGGER_OUT_OF_BOUNDARIES);
+                    tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityTopRow];
+                    tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityTopRow];
+                    break;
+
+                case MapConstants.DOWN:
+                    entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
+                    if (entityBottomRow >= gp.maxWorldRow) throw new IndexOutOfBoundsException(LOGGER_OUT_OF_BOUNDARIES);
+                    tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityBottomRow];
+                    tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityBottomRow];
+                    break;
+
+                case MapConstants.LEFT:
+                    entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
+                    if (entityLeftCol < 0) throw new IndexOutOfBoundsException(LOGGER_OUT_OF_BOUNDARIES);
+                    tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityTopRow];
+                    tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityLeftCol][entityBottomRow];
+                    break;
+
+                case MapConstants.RIGHT:
+                    entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
+                    if (entityRightCol >= gp.maxWorldCol) throw new IndexOutOfBoundsException(LOGGER_OUT_OF_BOUNDARIES);
+                    tileNum1 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityTopRow];
+                    tileNum2 = gp.tileM.mapTileNum[gp.currentMap][entityRightCol][entityBottomRow];
+                    break;
+            }
+
+            // Run a collision check using tileNum1 and tileNum2
+            if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
+                entity.collisionOn = true;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            logger.warning(e.getMessage());
+            entity.collisionOn = false; // Do not set CollisionOn to true to avoid getting stuck
+        }
+
     }
+
 
     /**
      * Checks for collision between an entity and game objects.
