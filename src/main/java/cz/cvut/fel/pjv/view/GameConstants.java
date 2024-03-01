@@ -1,6 +1,8 @@
 package cz.cvut.fel.pjv.view;
 
-public class GameConstants {// Title
+public class GameConstants {
+
+    // Title
     public static final String TITLE_NAME = "TANKI 2D GAME";
     public static final String TITLE_NEW_GAME = "NEW GAME";
     public static final String TITLE_LOAD_GAME = "LOAD GAME";

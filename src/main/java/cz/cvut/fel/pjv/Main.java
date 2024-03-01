@@ -1,26 +1,28 @@
 package cz.cvut.fel.pjv;
 
 import cz.cvut.fel.pjv.view.GameConstants;
+import cz.cvut.fel.pjv.view.GamePanel;
 
 import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
 
-        //TODO LATER
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle(GameConstants.TITLE_NAME);
 
-
+        GamePanel gamePanel = new GamePanel();
+        window.add(gamePanel);
 
         window.pack();
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
-
+        gamePanel.setupGame();
+        gamePanel.startGameThread();
 
     }
 }
