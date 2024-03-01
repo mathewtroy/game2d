@@ -1,12 +1,14 @@
 package cz.cvut.fel.pjv.model;
 
 import cz.cvut.fel.pjv.view.GameConstants;
+import cz.cvut.fel.pjv.view.GamePanel;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import java.net.URL;
+import java.util.logging.Logger;
 
 public class Sound {
 
@@ -17,6 +19,10 @@ public class Sound {
     private static final int VOLUME_SCALE_THREE = 3;
     private static final int VOLUME_SCALE_FOUR = 4;
     private static final int VOLUME_SCALE_FIVE = 5;
+
+    private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
+    private static final String LOGGER_SUCCESS_LOAD= "Audio file loaded successfully.";
+    private static final String LOGGER_ERROR_LOAD = "Error when loading audio file.";
 
     private Clip clip;
     public URL[] soundURL = new URL[30];
@@ -65,9 +71,10 @@ public class Sound {
             clip.open(ais);
             fc = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             checkVolume();
+            logger.info(LOGGER_SUCCESS_LOAD);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            logger.severe(LOGGER_ERROR_LOAD);
         }
     }
 
