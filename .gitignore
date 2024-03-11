@@ -13,3 +13,6 @@
 
 # Ignore the target folder and its contents
 target/
+
+# ignore docs
+docs/
