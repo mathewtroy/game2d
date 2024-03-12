@@ -39,7 +39,7 @@ public class Ammunition extends Entity {
         try {
             down1 = setup(AMMUNITION_IMAGE_PATH, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
-            logger.warning(LOGGER_MESSAGE_AMMUNITION);
+            logger.warning(LOGGER_MESSAGE_AMMUNITION + e.getMessage());
         }
     }
 

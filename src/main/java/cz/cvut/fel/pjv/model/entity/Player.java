@@ -186,7 +186,7 @@ public class Player extends Entity {
         try {
             getPlayerImage();
         } catch (Exception e){
-            logger.severe(LOGGER_MESSAGE_PLAYER);
+            logger.severe(LOGGER_MESSAGE_PLAYER + e.getMessage());
         }
         // Switch type of the weapon
         if (currentWeapon.type == type_spike) {
@@ -200,7 +200,7 @@ public class Player extends Entity {
                 attackRight1 = setup("/player/hero_attack_right_1", gp.tileSize*2, gp.tileSize);
                 attackRight2 = setup("/player/hero_attack_right_2", gp.tileSize*2, gp.tileSize);
             } catch (Exception e){
-                logger.warning(LOGGER_MESSAGE_PLAYER_SPIKE);
+                logger.warning(LOGGER_MESSAGE_PLAYER_SPIKE + e.getMessage());
             }
         }
 
@@ -215,7 +215,7 @@ public class Player extends Entity {
                 attackRight1 = setup("/player/hero_ram_right_1", gp.tileSize*2, gp.tileSize);
                 attackRight2 = setup("/player/hero_ram_right_2", gp.tileSize*2, gp.tileSize);
             } catch (Exception e){
-                logger.warning(LOGGER_MESSAGE_PLAYER_RAM);
+                logger.warning(LOGGER_MESSAGE_PLAYER_RAM + e.getMessage());
             }
         }
     }

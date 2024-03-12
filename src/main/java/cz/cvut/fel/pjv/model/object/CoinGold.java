@@ -32,7 +32,7 @@ public class CoinGold extends Entity {
         try {
             down1 = setup(GOLD_COIN_PATH, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
-            logger.warning(LOGGER_MESSAGE_COIN);
+            logger.warning(LOGGER_MESSAGE_COIN + ": " + e.getMessage());
         }
     }
 

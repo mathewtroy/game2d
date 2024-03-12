@@ -36,7 +36,7 @@ public class Mana extends Entity {
             image = setup(FULL_BULLET_PATH, gp.tileSize, gp.tileSize);
             image2 = setup(BLANK_BULLET_PATH, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
-            logger.warning(LOGGER_MESSAGE_MANA);
+            logger.warning(LOGGER_MESSAGE_MANA + e.getMessage());
         }
     }
 

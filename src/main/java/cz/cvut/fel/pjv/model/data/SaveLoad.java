@@ -1,5 +1,6 @@
 package cz.cvut.fel.pjv.model.data;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import cz.cvut.fel.pjv.model.armor.Helmet;
 import cz.cvut.fel.pjv.model.armor.HelmetGerman;
 import cz.cvut.fel.pjv.model.object.*;
@@ -52,12 +53,16 @@ public class SaveLoad {
     }
 
     /**
-     * Saves the current game state to a file named "save.dat".
+     * Saves the current game state to a file named "save.json".
      */
     public void save() {
 
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("save.dat")));
+
+            //  Old version of saving
+            //  ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("save.dat")));
+            ObjectMapper objectMapper = new ObjectMapper();
+
             DataStorage ds = new DataStorage();
 
             // Player stats
@@ -103,22 +108,31 @@ public class SaveLoad {
                     }
                 }
             }
-            // Write the DBS object
-            oos.writeObject(ds);
+            //  Write the DBS object
+            //  Old version of saving
+            //  oos.writeObject(ds);
+
+            objectMapper.writeValue(new File("save.json"), ds);
+
         } catch (Exception e) {
             logger.warning(LOGGER_MESSAGE_SAVE);
         }
     }
 
     /**
-     * Loads the game state from the "save.dat" file and updates the game accordingly.
+     * Loads the game state from the "save.json" file and updates the game accordingly.
      */
     public void load() {
 
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("save.dat")));
-            // Read the DataStorage object
-            DataStorage ds = (DataStorage)ois.readObject();
+
+            //  Old version of saving
+            //  ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("save.dat")));
+            //  Read the DataStorage object
+            //  DataStorage ds = (DataStorage)ois.readObject();
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            DataStorage ds = objectMapper.readValue(new File("save.json"), DataStorage.class);
 
             // Player stats
             gp.player.setLevel(ds.level);
@@ -165,7 +179,8 @@ public class SaveLoad {
         }
 
         catch (Exception e) {
-            logger.warning(LOGGER_MESSAGE_LOAD);
+            logger.warning(LOGGER_MESSAGE_LOAD + ": " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

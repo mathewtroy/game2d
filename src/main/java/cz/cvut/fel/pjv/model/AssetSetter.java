@@ -1,5 +1,8 @@
 package cz.cvut.fel.pjv.model;
 
+import cz.cvut.fel.pjv.model.data.LevelData;
+import cz.cvut.fel.pjv.model.data.Position;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import cz.cvut.fel.pjv.model.armor.HelmetGerman;
 import cz.cvut.fel.pjv.model.enemy.Tank;
 import cz.cvut.fel.pjv.model.entity.Merchant;
@@ -13,11 +16,21 @@ import cz.cvut.fel.pjv.model.vitality.Heart;
 import cz.cvut.fel.pjv.model.weapon.Ram;
 import cz.cvut.fel.pjv.view.GamePanel;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Logger;
+
 /**
  * The AssetSetter is responsible for initializing game objects and NPCs on different maps
  *
  */
 public class AssetSetter {
+
+    private static final String LEVEL_FIRST_JSON = "level1data.json";
+    private static final String LEVEL_SECOND_JSON = "level2data.json";
+    private static final String LEVEL_THIRD_JSON = "level3data.json";
+    private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
+    public static final String ERROR_READING_JSON_FILE = "Error reading JSON file: ";
 
     GamePanel gp;
 
@@ -29,219 +42,218 @@ public class AssetSetter {
      * Initializes game objects on the current map
      */
     public void setObject() {
-        int mapNum = 0;
-        int i = 0;
 
-        gp.obj[mapNum][i] = new CoinGold(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*24;
-        gp.obj[mapNum][i].worldY = gp.tileSize*24; // center of the map, grass tile (txt row: 23, txt col: 14)
-        i++;
+        ObjectMapper objectMapper = new ObjectMapper();
 
-        gp.obj[mapNum][i] = new Key(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*24;
-        gp.obj[mapNum][i].worldY = gp.tileSize*8; // corner at the top of forest, grass tile (txt row: 9, txt col: 50)
-        i++;
+        try {
+            int mapNum = 0;
+            int i = 0;
 
-        gp.obj[mapNum][i] = new Ram(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*23;
-        gp.obj[mapNum][i].worldY = gp.tileSize*23; // corner at the top of forest, grass tile (txt row: 24, txt col: 48)
-        i++;
+            LevelData levelData = objectMapper.readValue(new File(LEVEL_FIRST_JSON), LevelData.class);
+            i = initializeCoinGold(levelData, 0, i);
+            i = initializeKey(levelData, 0, i);
+            i = initializeRam(levelData, 0, i);
+            i = initializeHelmetGerman(levelData, 0, i);
+            i = initializeFirstAids(levelData, 0, i);
+            i = initializeAmmunition(levelData, 0, i);
+            i = initializeHearts(levelData, 0, i);
+            i = initializeBoots(levelData, 0, i);
+            i = initializeDoors(levelData, 0, i);
+            i = initializeChest(levelData, 0, i);
 
-        gp.obj[mapNum][i] = new HelmetGerman(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*17;
-        gp.obj[mapNum][i].worldY = gp.tileSize*12; // fel area
-        i++;
+            LevelData levelData2 = objectMapper.readValue(new File(LEVEL_SECOND_JSON), LevelData.class);
+            i = initializeKey(levelData2, 1, i);
 
-        // First Aid and Ammunition
-        gp.obj[mapNum][i] = new FirstAid(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*30;
-        gp.obj[mapNum][i].worldY = gp.tileSize*25; // corner at the top of forest, grass tile (txt row: 26, txt col: 60)
-        i++;
+            LevelData levelData3 = objectMapper.readValue(new File(LEVEL_THIRD_JSON), LevelData.class);
+            i = initializeCoinGold(levelData3, 2, i);
+            i = initializeKey(levelData3, 2, i);
 
-        gp.obj[mapNum][i] = new FirstAid(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*39;
-        gp.obj[mapNum][i].worldY = gp.tileSize*15; // old man area
-        i++;
+        } catch (IOException ex) {
+            logger.warning(ERROR_READING_JSON_FILE + ex.getMessage());
+        }
 
-        gp.obj[mapNum][i] = new Ammunition(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*15;
-        gp.obj[mapNum][i].worldY = gp.tileSize*41; // Island
-        i++;
+    }
 
-        // Heart
-        gp.obj[mapNum][i] = new Heart(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*38;
-        gp.obj[mapNum][i].worldY = gp.tileSize*15; // hp old man
-        i++;
+    private int initializeCoinGold(LevelData levelData, int mapNum, int i) {
+        for (Position coinPosition : levelData.getCoins()) {
+            gp.obj[mapNum][i] = new CoinGold(gp);
+            gp.obj[mapNum][i].worldX = gp.tileSize * coinPosition.getX();
+            gp.obj[mapNum][i].worldY = gp.tileSize * coinPosition.getY();
+            i++;
+        }
+        return i;
+    }
 
-        gp.obj[mapNum][i] = new Heart(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*19;
-        gp.obj[mapNum][i].worldY = gp.tileSize*37; // Island
-        i++;
+    private int initializeKey(LevelData levelData, int mapNum, int i) {
+        for (Position keyPosition : levelData.getKeys()) {
+            gp.obj[mapNum][i] = new Key(gp);
+            gp.obj[mapNum][i].worldX = gp.tileSize * keyPosition.getX();
+            gp.obj[mapNum][i].worldY = gp.tileSize * keyPosition.getY();
+            i++;
+        }
+        return i;
+    }
 
-        // Boots
-        gp.obj[mapNum][i] = new Boots(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*20;
-        gp.obj[mapNum][i].worldY = gp.tileSize*37; // Island
-        i++;
+    private int initializeRam(LevelData levelData, int mapNum, int i) {
+        for (Position ramPosition : levelData.getRams()) {
+            gp.obj[mapNum][i] = new Ram(gp);
+            gp.obj[mapNum][i].worldX = gp.tileSize * ramPosition.getX();
+            gp.obj[mapNum][i].worldY = gp.tileSize * ramPosition.getY();
+            i++;
+        }
+        return i;
+    }
 
-        // Door
-        gp.obj[mapNum][i] = new Door(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*33;
-        gp.obj[mapNum][i].worldY = gp.tileSize*13; // grass tile (txt row: 14, txt col: 68)
-        i++;
+    private int initializeHelmetGerman(LevelData levelData, int mapNum, int i) {
+        for (Position helmetPosition : levelData.getHelmets()) {
+            gp.obj[mapNum][i] = new HelmetGerman(gp);
+            gp.obj[mapNum][i].worldX = gp.tileSize * helmetPosition.getX();
+            gp.obj[mapNum][i].worldY = gp.tileSize * helmetPosition.getY();
+            i++;
+        }
+        return i;
+    }
 
-        gp.obj[mapNum][i] = new Door(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*36;
-        gp.obj[mapNum][i].worldY = gp.tileSize*10; // grass tile (txt row: 11, txt col: 74)
-        i++;
+    private int initializeFirstAids(LevelData levelData, int mapNum, int i) {
+        for (Position position : levelData.getFirstAids()) {
+            gp.obj[mapNum][i] = new FirstAid(gp);
+            gp.obj[mapNum][i].worldX = gp.tileSize * position.getX();
+            gp.obj[mapNum][i].worldY = gp.tileSize * position.getY();
+            i++;
+        }
+        return i;
+    }
 
-        gp.obj[mapNum][i] = new Door(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*38;
-        gp.obj[mapNum][i].worldY = gp.tileSize*13; // grass tile (txt row: 14, txt col: 76)
-        i++;
+    private int initializeAmmunition(LevelData levelData, int mapNum, int i) {
+        for (Position position : levelData.getAmmunitions()) {
+            gp.obj[mapNum][i] = new Ammunition(gp);
+            gp.obj[mapNum][i].worldX = gp.tileSize * position.getX();
+            gp.obj[mapNum][i].worldY = gp.tileSize * position.getY();
+            i++;
+        }
+        return i;
+    }
 
-        // Chest
-        gp.obj[mapNum][i] = new Chest(gp);
-        gp.obj[mapNum][i].setLoot(new Key(gp));
-        gp.obj[mapNum][i].worldX = gp.tileSize*36;
-        gp.obj[mapNum][i].worldY = gp.tileSize*7; // grass tile (txt row: 8, txt col: 74)
-        i++;
+    private int initializeHearts(LevelData levelData, int mapNum, int i) {
+        for (Position position : levelData.getHearts()) {
+            gp.obj[mapNum][i] = new Heart(gp);
+            gp.obj[mapNum][i].worldX = gp.tileSize * position.getX();
+            gp.obj[mapNum][i].worldY = gp.tileSize * position.getY();
+            i++;
+        }
+        return i;
+    }
 
-        // Map PJV
-        mapNum = 1;
-        gp.obj[mapNum][i] = new Key(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*28;
-        gp.obj[mapNum][i].worldY = gp.tileSize*7; // below fel area
-        i++;
+    private int initializeBoots(LevelData levelData, int mapNum, int i) {
+        for (Position position : levelData.getBoots()) {
+            gp.obj[mapNum][i] = new Boots(gp);
+            gp.obj[mapNum][i].worldX = gp.tileSize * position.getX();
+            gp.obj[mapNum][i].worldY = gp.tileSize * position.getY();
+            i++;
+        }
+        return i;
+    }
 
-        // Map Gold
-        mapNum = 2;
-        gp.obj[mapNum][i] = new CoinGold(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*25;
-        gp.obj[mapNum][i].worldY = gp.tileSize*27;
-        i++;
+    private int initializeDoors(LevelData levelData, int mapNum, int i) {
+        for (Position position : levelData.getDoors()) {
+            gp.obj[mapNum][i] = new Door(gp);
+            gp.obj[mapNum][i].worldX = gp.tileSize * position.getX();
+            gp.obj[mapNum][i].worldY = gp.tileSize * position.getY();
+            i++;
+        }
+        return i;
+    }
 
-        gp.obj[mapNum][i] = new CoinGold(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*26;
-        gp.obj[mapNum][i].worldY = gp.tileSize*27;
-        i++;
-
-        gp.obj[mapNum][i] = new CoinGold(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*27;
-        gp.obj[mapNum][i].worldY = gp.tileSize*27;
-        i++;
-
-        gp.obj[mapNum][i] = new CoinGold(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*28;
-        gp.obj[mapNum][i].worldY = gp.tileSize*27;
-        i++;
-
-        gp.obj[mapNum][i] = new Key(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*28;
-        gp.obj[mapNum][i].worldY = gp.tileSize*20;
-        i++;
+    private int initializeChest(LevelData levelData, int mapNum, int i) {
+        for (Position position : levelData.getChests()) {
+            gp.obj[mapNum][i] = new Chest(gp);
+            gp.obj[mapNum][i].worldX = gp.tileSize * position.getX();
+            gp.obj[mapNum][i].worldY = gp.tileSize * position.getY();
+            i++;
+        }
+        return i;
     }
 
     /**
      * Initializes NPCs on the current map
      */
     public void setNPC() {
-        int mapNum = 0;
-        int i = 0;
+        ObjectMapper objectMapper = new ObjectMapper();
+        try { initializeOldmans(objectMapper.readValue(new File(LEVEL_FIRST_JSON), LevelData.class), 0, 0);
+            initializeMerchants(objectMapper.readValue(new File(LEVEL_SECOND_JSON), LevelData.class), 1, 0);
+        } catch (IOException ex) {
+            logger.warning(ERROR_READING_JSON_FILE + ex.getMessage());
+        }
+    }
 
-        // MAP new
-        gp.npc[mapNum][i] = new OldMan(gp);
-        gp.npc[mapNum][i].worldX = gp.tileSize*29;
-        gp.npc[mapNum][i].worldY = gp.tileSize*20; // grass tile (txt row: 21, txt col: 60)
-        i++;
+    private void initializeMerchants(LevelData levelData, int mapNum, int i) {
+        for (Position position : levelData.getMerchants()) {
+            gp.npc[mapNum][i] = new Merchant(gp);
+            gp.npc[mapNum][i].worldX = gp.tileSize * position.getX();
+            gp.npc[mapNum][i].worldY = gp.tileSize * position.getY();
+            i++;
+        }
+    }
 
-        // MAP PJV
-        mapNum = 1;
-        i = 0;
-        gp.npc[mapNum][i] = new Merchant(gp);
-        gp.npc[mapNum][i].worldX = gp.tileSize*12;
-        gp.npc[mapNum][i].worldY = gp.tileSize*8; //
-        i++;
+    private void initializeOldmans(LevelData levelData, int mapNum, int i) {
+        for (Position position : levelData.getOldMans()) {
+            gp.npc[mapNum][i] = new OldMan(gp);
+            gp.npc[mapNum][i].worldX = gp.tileSize * position.getX();
+            gp.npc[mapNum][i].worldY = gp.tileSize * position.getY();
+            i++;
+        }
     }
 
     /**
      * Initializes enemies on the current map
      */
     public void setEnemy() {
-        int mapNum = 0;
-        int i = 0;
-
-        gp.enemy[mapNum][i] = new Tank(gp);
-        gp.enemy[mapNum][i].worldX = gp.tileSize*11;
-        gp.enemy[mapNum][i].worldY = gp.tileSize*21;
-        i++;
-
-        gp.enemy[mapNum][i] = new Tank(gp);
-        gp.enemy[mapNum][i].worldX = gp.tileSize*21;
-        gp.enemy[mapNum][i].worldY = gp.tileSize*21;  // grass tile (txt row: 22, txt col: 44)
-        i++;
-
-        gp.enemy[mapNum][i] = new Tank(gp);
-        gp.enemy[mapNum][i].worldX = gp.tileSize*11;
-        gp.enemy[mapNum][i].worldY = gp.tileSize*31;
-        i++;
-
-        gp.enemy[mapNum][i] = new Tank(gp);
-        gp.enemy[mapNum][i].worldX = gp.tileSize*21;
-        gp.enemy[mapNum][i].worldY = gp.tileSize*31;
-        i++;
-
-        gp.enemy[mapNum][i] = new Tank(gp);
-        gp.enemy[mapNum][i].worldX = gp.tileSize*31;
-        gp.enemy[mapNum][i].worldY = gp.tileSize*31;
-        i++;
-
-        gp.enemy[mapNum][i] = new Tank(gp);
-        gp.enemy[mapNum][i].worldX = gp.tileSize*33;
-        gp.enemy[mapNum][i].worldY = gp.tileSize*24;
-        i++;
-
-        // Map 3
-        mapNum = 2;
-
-        // Ghost
-        gp.enemy[mapNum][i] = new Ghost(gp);
-        gp.enemy[mapNum][i].worldX = gp.tileSize*28;
-        gp.enemy[mapNum][i].worldY = gp.tileSize*26;
-        i++;
-
-        gp.enemy[mapNum][i] = new Ghost(gp);
-        gp.enemy[mapNum][i].worldX = gp.tileSize*20;
-        gp.enemy[mapNum][i].worldY = gp.tileSize*20;
-        i++;
-
-        gp.enemy[mapNum][i] = new Ghost(gp);
-        gp.enemy[mapNum][i].worldX = gp.tileSize*28;
-        gp.enemy[mapNum][i].worldY = gp.tileSize*21;
-        i++;
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            initializeTanks(objectMapper.readValue(new File(LEVEL_FIRST_JSON), LevelData.class), 0, 0);
+            initializeGhosts(objectMapper.readValue(new File(LEVEL_THIRD_JSON), LevelData.class), 2, 0);
+        } catch (IOException ex) { logger.warning(ERROR_READING_JSON_FILE + ex.getMessage()); }
     }
+
+    private void initializeTanks(LevelData levelData, int mapNum, int i) {
+        for (Position tankPosition : levelData.getTanks()) {
+            gp.enemy[mapNum][i] = new Tank(gp);
+            gp.enemy[mapNum][i].worldX = gp.tileSize * tankPosition.getX();
+            gp.enemy[mapNum][i].worldY = gp.tileSize * tankPosition.getY();
+            i++;
+        }
+    }
+
+    private void initializeGhosts(LevelData levelData, int mapNum, int i) {
+        int ghostIndex = 0;
+        for (Position ghostPosition : levelData.getGhosts()) {
+            gp.enemy[mapNum][i] = new Ghost(gp);
+            gp.enemy[mapNum][i].worldX = gp.tileSize * ghostPosition.getX();
+            gp.enemy[mapNum][i].worldY = gp.tileSize * ghostPosition.getY();
+            i++;
+            ghostIndex++;
+        }
+    }
+
 
     /**
      * Initializes interactive tiles on the current map
      */
     public void setInteractiveTile() {
-        int mapNum = 0;
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            LevelData levelData = objectMapper.readValue(new File(LEVEL_FIRST_JSON), LevelData.class);
+            initializeDryTrees(levelData, 0);
+        } catch (IOException ex) {
+            logger.warning(ERROR_READING_JSON_FILE + ex.getMessage());
+        }
+    }
+
+    private void initializeDryTrees(LevelData levelData, int mapNum) {
         int i = 0;
-
-        gp.iTile[mapNum][i] = new DryTree(gp, 27,24); i++;
-        gp.iTile[mapNum][i] = new DryTree(gp,28,24); i++;
-        gp.iTile[mapNum][i] = new DryTree(gp,29,24); i++;
-        gp.iTile[mapNum][i] = new DryTree(gp,30,24); i++;
-        gp.iTile[mapNum][i] = new DryTree(gp,31,24); i++;
-        gp.iTile[mapNum][i] = new DryTree(gp,32,24); i++;
-
-        gp.iTile[mapNum][i] = new DryTree(gp,28,28); i++; // teleport Island tree
-        gp.iTile[mapNum][i] = new DryTree(gp,29,28); i++; // teleport Island tree
-        gp.iTile[mapNum][i] = new DryTree(gp,23,28); i++; // teleport Island tree
-        gp.iTile[mapNum][i] = new DryTree(gp,29,26); i++; // teleport Island tree
-
-        gp.iTile[mapNum][i] = new DryTree(gp,19,42); i++; // teleport FEL tree
-        gp.iTile[mapNum][i] = new DryTree(gp,23,10); i++; // key tree
+        for (Position position : levelData.getDryTrees()) {
+            gp.iTile[mapNum][i] = new DryTree(gp, position.getX(), position.getY());
+            i++;
+        }
     }
 }

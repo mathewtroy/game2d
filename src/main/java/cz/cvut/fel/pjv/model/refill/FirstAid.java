@@ -40,7 +40,7 @@ public class FirstAid extends Entity {
         try {
             down1 = setup(FIRST_AID_PATH, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
-            logger.warning(LOGGER_MESSAGE_FIRST_AID);
+            logger.warning(LOGGER_MESSAGE_FIRST_AID + e.getMessage());
         }
     }
 

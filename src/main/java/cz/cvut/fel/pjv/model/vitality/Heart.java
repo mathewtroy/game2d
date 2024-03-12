@@ -37,7 +37,7 @@ public class Heart extends Entity {
             image2 = setup(HEART_HALF_PATH, gp.tileSize, gp.tileSize);
             image3 = setup(HEART_BLANK_PATH, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
-            logger.warning(LOGGER_MESSAGE_HEART);
+            logger.warning(LOGGER_MESSAGE_HEART + e.getMessage());
         }
     }
 

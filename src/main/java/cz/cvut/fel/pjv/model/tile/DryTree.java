@@ -41,7 +41,7 @@ public class DryTree extends InteractiveTile{
         try {
             down1 = setup(DRY_TREE_PATH, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
-            logger.warning(LOGGER_MESSAGE_DRY_TREE);
+            logger.warning(LOGGER_MESSAGE_DRY_TREE + e.getMessage());
         }
     }
 

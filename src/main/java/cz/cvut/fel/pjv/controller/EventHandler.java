@@ -165,7 +165,7 @@ public class EventHandler {
             gp.ui.currentDialogue = EventMessages.DIALOGUE_HEALING_POOL+EventMessages.DIALOGUE_SAVING;
             gp.player.life = gp.player.maxLife;
             gp.player.mana = gp.player.maxMana;
-            gp.aSetter.setEnemy();
+            //gp.aSetter.setEnemy();
             gp.saveLoad.save();
         }
     }

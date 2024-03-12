@@ -73,7 +73,7 @@ public class Tank extends Entity {
             right1 = setup(TANK_RIGHT_PATH, gp.tileSize, gp.tileSize);
             right2 = setup(TANK_RIGHT_PATH, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
-            logger.warning(LOGGER_MESSAGE_TANK);
+            logger.warning(LOGGER_MESSAGE_TANK+ e.getMessage());
         }
     }
 

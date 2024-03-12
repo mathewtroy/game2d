@@ -32,7 +32,7 @@ public class Boots extends Entity {
         try {
             down1 = setup(BOOTS_PATH, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
-            logger.warning(LOGGER_MESSAGE_BOOTS);
+            logger.warning(LOGGER_MESSAGE_BOOTS + e.getMessage());
         }
     }
 

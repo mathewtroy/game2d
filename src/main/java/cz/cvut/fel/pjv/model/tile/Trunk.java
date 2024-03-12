@@ -12,7 +12,6 @@ public class Trunk extends InteractiveTile {
     private static final String LOGGER_MESSAGE_TRUNK = "Missing image of the TRUNK";
     private static final String TRUNK_IMAGE_PATH = "/tiles/trunk";
 
-
     /**
      * Constructs a Trunk interactive tile.
      *
@@ -23,17 +22,14 @@ public class Trunk extends InteractiveTile {
     public Trunk(GamePanel gp, int col, int row) {
         super(gp, col, row);
         this.gp = gp;
-
         this.worldX = gp.tileSize * col;
         this.worldY = gp.tileSize * row;
-
         solidArea.x = 0;
         solidArea.y = 0;
         solidArea.width = 0;
         solidArea.height = 0;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-
         setupTrunkImage();
     }
 
@@ -41,10 +37,7 @@ public class Trunk extends InteractiveTile {
      * Sets up the image for the Trunk.
      */
     private void setupTrunkImage() {
-        try {
-            down1 = setup(TRUNK_IMAGE_PATH, gp.tileSize, gp.tileSize);
-        } catch (Exception e) {
-            logger.warning(LOGGER_MESSAGE_TRUNK);
-        }
+        try { down1 = setup(TRUNK_IMAGE_PATH, gp.tileSize, gp.tileSize); }
+        catch (Exception e) { logger.warning(LOGGER_MESSAGE_TRUNK + e.getMessage()); }
     }
 }

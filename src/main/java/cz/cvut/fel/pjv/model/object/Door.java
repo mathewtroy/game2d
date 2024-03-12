@@ -37,7 +37,7 @@ public class Door extends Entity {
         try {
             down1 = setup(DOOR_PATH, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
-            logger.warning(LOGGER_MESSAGE_DOOR);
+            logger.warning(LOGGER_MESSAGE_DOOR + e.getMessage());
         }
     }
 

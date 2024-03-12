@@ -28,31 +28,23 @@ public class Map extends TileManager {
      * Creates the world map by assembling tiles from mapTileNum into images.
      */
     public void createWorldMap() {
-
         worldMap = new BufferedImage[gp.maxMap];
         int worldMapWidth = gp.tileSize * gp.maxWorldCol;
         int worldMapHeight = gp.tileSize * gp.maxWorldRow;
 
         for (int i = 0; i < gp.maxMap; i++) {
-
             worldMap[i] = new BufferedImage(worldMapWidth, worldMapHeight, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2 = (Graphics2D) worldMap[i].createGraphics();
             int col = 0;
             int row = 0;
 
             while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
-
                 int tileNum = mapTileNum[i][col][row];
                 int x = gp.tileSize * col;
                 int y = gp.tileSize * row;
-
                 g2.drawImage(tile[tileNum].image, x, y, null);
-
                 col++;
-                if (col == gp.maxWorldCol) {
-                    col = 0;
-                    row++;
-                }
+                if (col == gp.maxWorldCol) { col = 0; row++; }
             }
             g2.dispose();
         }
@@ -64,7 +56,6 @@ public class Map extends TileManager {
      * @param g2 The Graphics2D object used for drawing.
      */
     public void drawFullMapScreen(Graphics2D g2) {
-
         // Background color
         g2.setColor(UIColors.BLACK);
         g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
@@ -88,7 +79,6 @@ public class Map extends TileManager {
         // think about another font
         g2.setColor(UIColors.WHITE);
         g2.drawString(OPEN_CLOSE_MAP, 720, 550);
-
     }
 
     /**
@@ -97,9 +87,7 @@ public class Map extends TileManager {
      * @param g2 The Graphics2D object used for drawing.
      */
     public void drawMiniMap(Graphics2D g2) {
-
         if (!miniMapOn) {
-
             // Draw map
             int width = 200;
             int height = 200;

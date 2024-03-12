@@ -17,7 +17,6 @@ import java.util.logging.Logger;
 
 
 public class TileManager {
-
     GamePanel gp;
     private static final String TILE_PATH = "/tiles/";
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
@@ -29,7 +28,6 @@ public class TileManager {
     private static final String LOGGER_BUT_GOT = ", but got ";
     private static final String LOGGER_DOT = ".";
     private static final String LOGGER_ERROR_LOADING_MAP = "Error loading map: ";
-
     public Tile[] tile;
     public int[][][] mapTileNum;
     boolean drawPath = true;
@@ -84,7 +82,6 @@ public class TileManager {
      */
     public void setup(int index, String imageName, boolean collision) {
         UtilityTool uTool = new UtilityTool();
-
         try {
             tile[index] = new Tile();
             tile[index].image = ImageIO.read(Objects.requireNonNull(getClass().
@@ -92,9 +89,7 @@ public class TileManager {
             tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
             tile[index].collision = collision;
         }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        catch (IOException e) { e.printStackTrace(); }
     }
 
     /**
@@ -173,7 +168,6 @@ public class TileManager {
             }
 
             worldCol++;
-
             if(worldCol == gp.maxWorldCol) {
                 worldCol = 0;
                 worldRow++;

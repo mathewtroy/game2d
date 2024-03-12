@@ -73,7 +73,7 @@ public class Sound {
             logger.info(LOGGER_SUCCESS_LOAD);
         }
         catch (Exception e) {
-            logger.severe(LOGGER_ERROR_LOAD);
+            logger.severe(LOGGER_ERROR_LOAD + e.getMessage());
         }
     }
 

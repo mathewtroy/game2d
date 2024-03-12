@@ -10,7 +10,7 @@ import cz.cvut.fel.pjv.model.entity.Entity;
 import java.util.Random;
 import java.util.logging.Logger;
 
-public class Ghost extends Entity {
+    public class Ghost extends Entity {
 
     private static final Logger logger = Logger.getLogger(GamePanel.class.getName());
     private static final String LOGGER_MESSAGE_GHOST = "Missing image of the GHOST";
@@ -55,7 +55,7 @@ public class Ghost extends Entity {
             right1 = setup(GHOST_PATH_1, gp.tileSize, gp.tileSize);
             right2 = setup(GHOST_PATH_2, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
-            logger.warning(LOGGER_MESSAGE_GHOST);
+            logger.warning(LOGGER_MESSAGE_GHOST + e.getMessage());
         }
     }
 

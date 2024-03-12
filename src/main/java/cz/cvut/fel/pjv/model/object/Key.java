@@ -39,7 +39,7 @@ public class Key extends Entity {
         try {
             down1 = setup(KEY_PATH, gp.tileSize, gp.tileSize);
         } catch (Exception e) {
-            logger.warning(LOGGER_MESSAGE_KEY);
+            logger.warning(LOGGER_MESSAGE_KEY + e.getMessage());
         }
     }
 

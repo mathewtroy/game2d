@@ -16,3 +16,4 @@ target/
 
 # ignore docs
 docs/
+doxy/

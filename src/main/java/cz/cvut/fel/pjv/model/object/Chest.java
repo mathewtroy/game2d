@@ -50,7 +50,7 @@ public class Chest extends Entity {
             image2 = setup(CHEST_OPENED_IMAGE_PATH, gp.tileSize, gp.tileSize);
             down1 = image;
         } catch (Exception e) {
-            logger.warning(LOGGER_MESSAGE_CHEST);
+            logger.warning(LOGGER_MESSAGE_CHEST + e.getMessage());
         }
     }
 
