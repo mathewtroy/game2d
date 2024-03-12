@@ -13,7 +13,6 @@ import cz.cvut.fel.pjv.view.GameState;
 
 public class Merchant extends Entity  {
 
-
     private static final String DOWN1_IMAGE_MERCHANT_PATH = "/npc/merchant_down_1";
     private static final String DOWN2_IMAGE_MERCHANT_PATH = "/npc/merchant_down_2";
     private static final String DIALOGUE_GREETING = "Hey! \nDo you want to trade, Iwan?? ";
