@@ -58,11 +58,9 @@ public class SaveLoad {
     public void save() {
 
         try {
-
             //  Old version of saving
             //  ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("save.dat")));
             ObjectMapper objectMapper = new ObjectMapper();
-
             DataStorage ds = new DataStorage();
 
             // Player stats
@@ -108,12 +106,9 @@ public class SaveLoad {
                     }
                 }
             }
-            //  Write the DBS object
-            //  Old version of saving
-            //  oos.writeObject(ds);
-
+            ds.setKilledTanks(gp.player.getKilledTanks());
+            ds.setKilledGhosts(gp.player.getKilledGhosts());
             objectMapper.writeValue(new File("save.json"), ds);
-
         } catch (Exception e) {
             logger.warning(LOGGER_MESSAGE_SAVE);
         }
@@ -123,14 +118,11 @@ public class SaveLoad {
      * Loads the game state from the "save.json" file and updates the game accordingly.
      */
     public void load() {
-
         try {
-
             //  Old version of saving
             //  ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("save.dat")));
             //  Read the DataStorage object
             //  DataStorage ds = (DataStorage)ois.readObject();
-
             ObjectMapper objectMapper = new ObjectMapper();
             DataStorage ds = objectMapper.readValue(new File("save.json"), DataStorage.class);
 
@@ -176,8 +168,9 @@ public class SaveLoad {
                     }
                 }
             }
+            ds.setKilledTanks(gp.player.getKilledTanks());
+            ds.setKilledGhosts(gp.player.getKilledGhosts());
         }
-
         catch (Exception e) {
             logger.warning(LOGGER_MESSAGE_LOAD + ": " + e.getMessage());
             e.printStackTrace();

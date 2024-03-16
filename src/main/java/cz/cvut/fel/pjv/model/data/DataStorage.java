@@ -36,6 +36,9 @@ public class DataStorage implements Serializable {
     String[][] mapObjectLootNames;
     boolean[][] mapObjectOpened;
 
+    int killedTanks;
+    int killedGhosts;
+
     public DataStorage() {
     }
 
@@ -189,6 +192,22 @@ public class DataStorage implements Serializable {
 
     public void setMapObjectOpened(boolean[][] mapObjectOpened) {
         this.mapObjectOpened = mapObjectOpened;
+    }
+
+    public int getKilledTanks() {
+        return killedTanks;
+    }
+
+    public void setKilledTanks(int killedTanks) {
+        this.killedTanks = killedTanks;
+    }
+
+    public int getKilledGhosts() {
+        return killedGhosts;
+    }
+
+    public void setKilledGhosts(int killedGhosts) {
+        this.killedGhosts = killedGhosts;
     }
 }
 

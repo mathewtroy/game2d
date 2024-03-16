@@ -2,6 +2,8 @@ package cz.cvut.fel.pjv.model.entity;
 
 import cz.cvut.fel.pjv.controller.MapConstants;
 import cz.cvut.fel.pjv.model.armor.Helmet;
+import cz.cvut.fel.pjv.model.enemy.Ghost;
+import cz.cvut.fel.pjv.model.enemy.Tank;
 import cz.cvut.fel.pjv.model.refill.Ammunition;
 import cz.cvut.fel.pjv.model.refill.FirstAid;
 import cz.cvut.fel.pjv.model.weapon.Bullet;
@@ -31,6 +33,8 @@ public class Player extends Entity {
     public final int screenY;
     int standCounter = 0;
     public boolean attackCanceled = false;
+    private int killedTanks = 0;
+    private int killedGhosts = 0;
 
     /**
      * Constructs a new Player object.
@@ -501,6 +505,11 @@ public class Player extends Entity {
                     exp += gp.enemy[gp.currentMap][i].exp;
                     checkLevelUp();
                 }
+                if (gp.enemy[gp.currentMap][i].life <= 0) {
+                    gp.enemy[gp.currentMap][i].dying = true;
+                    if (gp.enemy[gp.currentMap][i] instanceof Tank) { incrementKilledTanks(); }
+                    else if (gp.enemy[gp.currentMap][i] instanceof Ghost) { incrementKilledGhosts(); }
+                }
             }
         }
     }
@@ -716,4 +725,16 @@ public class Player extends Entity {
         // Reset alpha
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f ));
     }
+
+    public int getKilledTanks() { return killedTanks; }
+
+    public void setKilledTanks(int killedTanks) { this.killedTanks = killedTanks; }
+
+    public int getKilledGhosts() { return killedGhosts; }
+
+    public void setKilledGhosts(int killedGhosts) { this.killedGhosts = killedGhosts; }
+
+    public void incrementKilledTanks() { killedTanks++; }
+
+    public void incrementKilledGhosts() { killedGhosts++; }
 }
