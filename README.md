@@ -23,7 +23,7 @@ Herní engine musí být vybaven GUI.
 # :label: Launch
 
 **1.Download the source code of the application from the repository:** <br>
-`git clone https://gitlab.fel.cvut.cz/krossale/java-pro.git`<br>
+`git clone https://github.com/mathewtroy/game2d.git`<br>
 
 **2.Run a command in IntelliJ IDEA to build and package the project:** <br>
 `mvn clean install`<br>
@@ -115,7 +115,7 @@ While working on a semester project, I gained a lot of valuable experience in th
 
 
 ## :label: Wiki
-**[Go to Wiki](https://gitlab.fel.cvut.cz/krossale/java-pro/-/wikis/home)**
+**[Go to Wiki](https://github.com/mathewtroy/game2d/wiki)**
 
 ## :label: Documents
 **[Go to Docs](https://docs.google.com/document/d/1_nWswo61mqfpcLLpSvPrqq7BsWZOZbq6HDDdP99xWVw/)**
